@@ -1,4 +1,4 @@
-#summary Introduction: Image Viewer/Manipulator Project.
+#summary Start of Image Viewer/Manipulator Project for Capstone Fall 2009.
 
 = Introduction =
 
