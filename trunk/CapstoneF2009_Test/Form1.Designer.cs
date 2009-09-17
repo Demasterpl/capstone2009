@@ -46,10 +46,9 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.AdditionalInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.PlaceboButton = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.openPictureButton = new System.Windows.Forms.ToolStripButton();
+            this.saveImageButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -58,9 +57,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(42, 100);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 52);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(508, 418);
+            this.pictureBox1.Size = new System.Drawing.Size(1008, 655);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -75,7 +75,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(848, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1008, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -184,9 +184,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AdditionalInfo});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 600);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 710);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(848, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1008, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -197,55 +197,45 @@
             this.AdditionalInfo.Text = "Additional Info About The Picture";
             this.AdditionalInfo.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
-            // PlaceboButton
-            // 
-            this.PlaceboButton.Location = new System.Drawing.Point(42, 524);
-            this.PlaceboButton.Name = "PlaceboButton";
-            this.PlaceboButton.Size = new System.Drawing.Size(75, 23);
-            this.PlaceboButton.TabIndex = 3;
-            this.PlaceboButton.Text = "I Do Nothing";
-            this.PlaceboButton.UseVisualStyleBackColor = true;
-            this.PlaceboButton.Click += new System.EventHandler(this.button1_Click);
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2});
+            this.openPictureButton,
+            this.saveImageButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(848, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1008, 25);
             this.toolStrip1.TabIndex = 4;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // openPictureButton
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.ToolTipText = "I Open A Picture";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.openPictureButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openPictureButton.Image = ((System.Drawing.Image)(resources.GetObject("openPictureButton.Image")));
+            this.openPictureButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openPictureButton.Name = "openPictureButton";
+            this.openPictureButton.Size = new System.Drawing.Size(23, 22);
+            this.openPictureButton.Text = "toolStripButton1";
+            this.openPictureButton.ToolTipText = "I Open A Picture";
+            this.openPictureButton.Click += new System.EventHandler(this.openPictureButton_Click);
             // 
-            // toolStripButton2
+            // saveImageButton
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton2";
-            this.toolStripButton2.ToolTipText = "I Save Your Photo";
+            this.saveImageButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveImageButton.Image = ((System.Drawing.Image)(resources.GetObject("saveImageButton.Image")));
+            this.saveImageButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveImageButton.Name = "saveImageButton";
+            this.saveImageButton.Size = new System.Drawing.Size(23, 22);
+            this.saveImageButton.Text = "toolStripButton2";
+            this.saveImageButton.ToolTipText = "I Save Your Photo";
+            this.saveImageButton.Click += new System.EventHandler(this.saveImageButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 622);
+            this.ClientSize = new System.Drawing.Size(1008, 732);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.PlaceboButton);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.menuStrip1);
@@ -284,10 +274,9 @@
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tODOAddMoreToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem tODOAddMoreToolStripMenuItem;
-        private System.Windows.Forms.Button PlaceboButton;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton openPictureButton;
+        private System.Windows.Forms.ToolStripButton saveImageButton;
     }
 }
 
