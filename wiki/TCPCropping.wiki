@@ -1,0 +1,1 @@
+http://www.codeproject.com/KB/graphics/CroppingImages.aspx
