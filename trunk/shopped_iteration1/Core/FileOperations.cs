@@ -34,19 +34,37 @@ namespace Core
         {
             var saveFileDialog = new SaveFileDialog
              {
-                 FileName = fileCurrentlyOpen
+                 FileName = fileCurrentlyOpen,
+                 Filter = "JPEG (*.jpeg)|*.jpeg| Bitmap (*.bmp)|*.bmp"
              };
             
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                try
+                //Image to save is JPEG
+                if(saveFileDialog.FilterIndex == 1)
                 {
-                    pictureBox.Image.Save(saveFileDialog.FileName);
-                }
-                catch (Exception exception)
+                    try
+                    {
+                        pictureBox.Image.Save(saveFileDialog.FileName);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception.ToString());
+                    }
+                } 
+                
+                //Image to save is Bitmap
+                if (saveFileDialog.FilterIndex == 2)
                 {
-                    Console.WriteLine(exception.ToString());
+                    try
+                    {
+                        pictureBox.Image.Save(saveFileDialog.FileName);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception.ToString());
+                    }
                 }
             }
         }

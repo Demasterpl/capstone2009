@@ -22,6 +22,12 @@ namespace UI
         private void Form1_Load(object sender, EventArgs e)
         {
             AdditionalInfo.Visible = false;
+            toolsToolStripMenuItem.Enabled = false;
+            editToolStripMenuItem.Enabled = false;
+            viewToolStripMenuItem.Enabled = false;
+            ZoomBox.Enabled = false;
+            saveImageButton.Enabled = false;
+            savePictureToolStripMenuItem.Enabled = false;
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
@@ -52,7 +58,7 @@ namespace UI
             OriginalHeight = PictureBox.Height;
             OriginalWidth = PictureBox.Width;
             OriginalImage = PictureBox.Image;
-            AdditionalInfo.Visible = true;
+            EnableGuiItems();
             SetAdditionalInfo();
         }
 
@@ -70,6 +76,9 @@ namespace UI
             OriginalHeight = PictureBox.Height;
             OriginalWidth = PictureBox.Width;
             OriginalImage = PictureBox.Image;
+
+            EnableGuiItems();
+            SetAdditionalInfo();
 
         }
 
@@ -92,7 +101,23 @@ namespace UI
             PictureBox.Height = OriginalHeight * 2;
             PictureBox.Width = OriginalWidth * 2;
             PictureBox.Image = new Bitmap(OriginalImage, PictureBox.Size);
+
+            OriginalImage = PictureBox.Image;
+            OriginalHeight = OriginalImage.Height;
+            OriginalWidth = OriginalImage.Width;
+
             SetAdditionalInfo();
+        }
+
+        public void EnableGuiItems()
+        {
+            AdditionalInfo.Visible = true;
+            toolsToolStripMenuItem.Enabled = true;
+            editToolStripMenuItem.Enabled = true;
+            viewToolStripMenuItem.Enabled = true;
+            saveImageButton.Enabled = true;
+            ZoomBox.Enabled = true;
+            savePictureToolStripMenuItem.Enabled = true;
         }
 
         public void SetAdditionalInfo()
