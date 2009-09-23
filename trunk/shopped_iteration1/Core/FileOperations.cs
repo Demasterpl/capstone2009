@@ -7,8 +7,6 @@ namespace Core
 {
     public class FileOperations : IFileOperations
     {
-
-
         public string OpenFile(PictureBox pictureBox)
         {
             var openFileDialog = new OpenFileDialog
