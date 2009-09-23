@@ -230,10 +230,13 @@
             // PictureBoxPanel
             // 
             this.PictureBoxPanel.AutoScroll = true;
+            this.PictureBoxPanel.AutoSize = true;
+            this.PictureBoxPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.PictureBoxPanel.Controls.Add(this.PictureBox);
-            this.PictureBoxPanel.Location = new System.Drawing.Point(0, 52);
+            this.PictureBoxPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PictureBoxPanel.Location = new System.Drawing.Point(0, 49);
             this.PictureBoxPanel.Name = "PictureBoxPanel";
-            this.PictureBoxPanel.Size = new System.Drawing.Size(1008, 655);
+            this.PictureBoxPanel.Size = new System.Drawing.Size(1008, 661);
             this.PictureBoxPanel.TabIndex = 5;
             // 
             // PictureBox

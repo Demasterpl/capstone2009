@@ -29,7 +29,6 @@ namespace UI
 
         }
 
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -98,7 +97,7 @@ namespace UI
 
         public void SetAdditionalInfo()
         {
-            AdditionalInfo.Text = string.Format("Height: {0}, Width: {1}", PictureBox.Height, PictureBox.Width);
+            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Name: {2}", PictureBox.Height, PictureBox.Width, System.IO.Path.GetFileName(CurrentFileName));
         }
     }
 }
