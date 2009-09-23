@@ -10,6 +10,9 @@ namespace UI
     public partial class ShoppedGui : Form
     {
         public string CurrentFileName { get; set; }
+        public int OriginalHeight { get; set; }
+        public int OriginalWidth { get; set; }
+        public Image OriginalImage { get; set; }
 
         public ShoppedGui()
         {
@@ -18,7 +21,7 @@ namespace UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            AdditionalInfo.Visible = false;
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
@@ -39,13 +42,19 @@ namespace UI
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+        
         }
 
         private void openPictureButton_Click(object sender, EventArgs e)
         {
             IFileOperations fileOperation = new FileOperations();
             CurrentFileName = fileOperation.OpenFile(PictureBox);
+
+            OriginalHeight = PictureBox.Height;
+            OriginalWidth = PictureBox.Width;
+            OriginalImage = PictureBox.Image;
+            AdditionalInfo.Visible = true;
+            SetAdditionalInfo();
         }
 
         private void saveImageButton_Click(object sender, EventArgs e)
@@ -58,6 +67,11 @@ namespace UI
         {
             IFileOperations fileOperation = new FileOperations();
             fileOperation.OpenFile(PictureBox);
+
+            OriginalHeight = PictureBox.Height;
+            OriginalWidth = PictureBox.Width;
+            OriginalImage = PictureBox.Image;
+
         }
 
         private void savePictureToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,7 +80,25 @@ namespace UI
             fileOperation.SaveFile(PictureBox, CurrentFileName);
         }
 
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            PictureBox.Height = OriginalHeight;
+            PictureBox.Width = OriginalWidth;
+            PictureBox.Image = OriginalImage;
+            SetAdditionalInfo();
+        }
 
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            PictureBox.Height = OriginalHeight * 2;
+            PictureBox.Width = OriginalWidth * 2;
+            PictureBox.Image = new Bitmap(OriginalImage, PictureBox.Size);
+            SetAdditionalInfo();
+        }
 
+        public void SetAdditionalInfo()
+        {
+            AdditionalInfo.Text = string.Format("Height: {0}, Width: {1}", PictureBox.Height, PictureBox.Width);
+        }
     }
 }
