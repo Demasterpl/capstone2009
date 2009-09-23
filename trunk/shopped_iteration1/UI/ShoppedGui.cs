@@ -5,13 +5,13 @@ using System.IO;
 using Core;
 using Core.Interfaces;
 
-namespace CapstoneF2009_Test
+namespace UI
 {
-    public partial class Form1 : Form
+    public partial class ShoppedGui : Form
     {
         public string CurrentFileName { get; set; }
 
-        public Form1()
+        public ShoppedGui()
         {
             InitializeComponent();
         }
