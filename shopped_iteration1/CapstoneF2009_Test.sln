@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "CapstoneF2009_Test\UI.csproj", "{2D56EBD0-2BE5-4D60-9EB1-319FD06893F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{2D56EBD0-2BE5-4D60-9EB1-319FD06893F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{32D87556-CDC2-46F4-8DC5-CFA5EC0B560A}"
 EndProject
