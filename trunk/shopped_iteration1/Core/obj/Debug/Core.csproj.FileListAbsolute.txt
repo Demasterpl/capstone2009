@@ -1,0 +1,5 @@
+C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\Core\bin\Debug\Core.dll
+C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\Core\bin\Debug\Core.pdb
+C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\Core\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\Core\obj\Debug\Core.dll
+C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\Core\obj\Debug\Core.pdb
