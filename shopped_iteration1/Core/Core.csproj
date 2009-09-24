@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileOperations.cs" />
+    <Compile Include="ImageRotate.cs" />
     <Compile Include="Interfaces\IFileOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

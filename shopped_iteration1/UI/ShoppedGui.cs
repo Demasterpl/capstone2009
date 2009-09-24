@@ -124,5 +124,20 @@ namespace UI
         {
             AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Name: {2}", PictureBox.Height, PictureBox.Width, System.IO.Path.GetFileName(CurrentFileName));
         }
+
+        private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var rotateDialog = new RotateDialog();
+            rotateDialog.ShowDialog();
+
+            if (rotateDialog.DialogResult == DialogResult.OK)
+            {
+                var imageRotate = new ImageRotate();
+
+                Image rotatedImage = imageRotate.RotateImageByAngle(PictureBox.Image, rotateDialog.rotateDegrees);
+                PictureBox.Image = new Bitmap(rotatedImage);
+            }
+
+        }
     }
 }

@@ -148,17 +148,17 @@
   <data name="saveImageButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAi1JREFUOE+Vkt1r
-        UnEYx42oYPQnBN13GTLqrwi6iWqssNzM86bZdGKzeVDLMcOBLjdZnebRSvN1m9ZMM5cto6ixRW8kUVN3
-        s7veKOe345l5uuhCH/jye34vz+d54bejVxWMNLYaR2Wifcf22nR7JF/c/nP3a5d417N7T1B24NSN34mn
-        NWxcMWLDbkDNOoQaq0PVokX1EoPqCIWKiUDFqELFMID1obNYv3AG3GIZciUPERB9UsXa/p1Y3SfrWNfv
-        fWwBlNP18NIXbPq92Jy91rGm5t9LgFv5z+jWJhNvJYA/+wn1eh3lcrkjNZNNRF5vA+Qn+a3mQLq1q3dW
-        JcBM+oMY32kFzWodgVcSwDv3rtsCYL35ogVQTjc8sTdQjC1BPewERWv+L0Y4Z7QYNLjQxz7A6MwzCTBx
-        dw0K630xMBQKIZFIIJVKIZPJIJ/Po1AoiH48HgdF0egbmcfFqWUJMH57BafZNBiNDrlcDiRJiioWi8hm
-        syIsGo0iGAyKSU6Ykhj2PP4L4DEmDKR/dAEarQ6lUqkNSCaTCIfD8Pv98Pl8cLvdICkGx40x6FyPJICV
-        ew4FuwBGAKTT6TaA4zh4vV64XC44HA5YLBYQAuCYIQJ6PNsCDASWj2hjP0yeh0IL58HzPOx2O1iWhdPp
-        hM1mg9lshl6vB03TIEgaKusczl1ebP1EdWivfMC/0tvP/SSavVMaMQtBMlALj0URVFsEQeLw4OTXQ6rA
-        t4PK2Zd/ANn8x73FLmjlAAAAAElFTkSuQmCC
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAi9JREFUOE+Vkttr
+        knEYx41gXdifEHRdlyGj/oqgm2isA5bOfE+aTSc2my9qOWY40KXIyuah0jxu05pp5rJlFDW20Ykkaupu
+        dtcqyvnt9dV8b7rQB778nt/h+TwHfnsGFaFoc7d5QsTbDtpryxULPrf9IRbu8HuAvxMP7AuJDp29/Sf5
+        oo6t63psWXWom0dRZzWomdSoXWVQG6dQNRCo6hWo6uTYHL2Azcvn4VuqQCILgAfEntewfnAv1g6Ietat
+        h5/bgMMyTyOy/A3bfje25272LM/CRwFwt/AV/dpM8r0A8Oe+oNFooFKp9KRWsunoRhsgGQrstgbSr924
+        vyYAZjOf+PheK2hVawu+FQDu+Q/9FgDzndcdgMzTdMXfQTq5DOWYHRSt+r8Y7pxRY0TnwDD7GBOzLwXA
+        9IN1SM2P+MBwOIxkMol0Oo1sNotCoYBiscj7iUQCFEVjeHwBVzwrAmDq3irOsRkwKg3y+TxIkuRVKpWQ
+        y+V4WCwWQygU4pMMGVIYcz37BwhgkhvImYlFqNQalMvlLiCVSiESicDv98Pr9cLpdIKkGJzSx6FxPBUA
+        Zt8rSNlFMBwgk8l0AT6fD263Gw6HAzabDSaTCQQHOKmLgp7KdQDy4MpxVfynwfWEa+ESAoEArFYrWJaF
+        3W6HxWKB0WiEVqsFTdMgSBoK8zwuXlvq/ERleL9E7l8dPO37RbR6p1R8FoJkoOQe8yKorgiCxLGRme9H
+        FcGdI7K5N38BmIHIsCCny9kAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

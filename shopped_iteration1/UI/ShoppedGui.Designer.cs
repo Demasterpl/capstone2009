@@ -53,6 +53,7 @@
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.ZoomBox = new System.Windows.Forms.ComboBox();
+            this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -149,7 +150,8 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tODOAddMoreToolStripMenuItem});
+            this.tODOAddMoreToolStripMenuItem,
+            this.rotateToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -160,7 +162,7 @@
             this.toolStripMenuItem2,
             this.toolStripMenuItem3});
             this.tODOAddMoreToolStripMenuItem.Name = "tODOAddMoreToolStripMenuItem";
-            this.tODOAddMoreToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.tODOAddMoreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tODOAddMoreToolStripMenuItem.Text = "Zoom";
             // 
             // toolStripMenuItem2
@@ -274,6 +276,13 @@
             this.ZoomBox.TabIndex = 6;
             this.ZoomBox.Text = "       Zoom";
             // 
+            // rotateToolStripMenuItem
+            // 
+            this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rotateToolStripMenuItem.Text = "Rotate";
+            this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
+            // 
             // ShoppedGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,5 +338,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ComboBox ZoomBox;
+        private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
     }
 }
