@@ -10,15 +10,10 @@ namespace Core
     {
         public Bitmap RotateImageByAngle(Image image, float angle)
         {
-<<<<<<< .mine
+
             if (image == null)
                 throw new ArgumentNullException("image");
-=======
-            Bitmap rotatedImage = new Bitmap(originalImage.Width, originalImage.Height);
-            Graphics g = Graphics.FromImage(rotatedImage);
->>>>>>> .r37
 
-<<<<<<< .mine
             const double pi2 = Math.PI / 2.0;
 
             // Why can't C# allow these to be const, or at least readonly
@@ -178,18 +173,7 @@ namespace Core
             }
 
             return rotatedBmp;
-=======
-            //move rotation point to center of image
-            g.TranslateTransform((float)originalImage.Width / 2, (float)originalImage.Height / 2);
-            //rotate
-            g.RotateTransform(angle);
-            //move image back
-            g.TranslateTransform(-(float)originalImage.Width / 2, -(float)originalImage.Height / 2);
-            //draw passed in image onto graphics object
-            g.DrawImage(originalImage, new Point(0, 0));
-            g.Dispose();
-            return rotatedImage;
->>>>>>> .r37
+
         }
     }
 }
