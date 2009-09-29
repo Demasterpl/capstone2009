@@ -25,7 +25,7 @@ namespace UI
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            rotateDegrees = (float)Convert.ToDouble(RotateTextBox.Text);
+            rotateDegrees = float.Parse(RotateTextBox.Text);
         }
 
     }

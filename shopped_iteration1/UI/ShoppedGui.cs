@@ -135,7 +135,9 @@ namespace UI
                 var imageRotate = new ImageRotate();
 
                 Image rotatedImage = imageRotate.RotateImageByAngle(PictureBox.Image, rotateDialog.rotateDegrees);
+                PictureBox.Refresh();
                 PictureBox.Image = new Bitmap(rotatedImage);
+                PictureBox.Refresh();
             }
 
         }
