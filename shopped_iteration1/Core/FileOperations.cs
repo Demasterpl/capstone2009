@@ -7,18 +7,19 @@ namespace Core
 {
     public class FileOperations : IFileOperations
     {
-        public string OpenFile(PictureBox pictureBox)
+        public string OpenFile(ref Image imageToOpen)
         {
             var openFileDialog = new OpenFileDialog
              {
                  InitialDirectory = "c:\\"
              };
 
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    pictureBox.Image = new Bitmap(openFileDialog.OpenFile());
+                    imageToOpen = new Bitmap(openFileDialog.OpenFile());
                 }
                 catch (Exception ex)
                 {
@@ -30,7 +31,7 @@ namespace Core
             return openFileDialog.FileName;
         }
 
-        public void SaveFile(PictureBox pictureBox, string fileCurrentlyOpen)
+        public void SaveFile(Image imageToSave, string fileCurrentlyOpen)
         {
             var saveFileDialog = new SaveFileDialog
              {
@@ -46,7 +47,7 @@ namespace Core
                 {
                     try
                     {
-                        pictureBox.Image.Save(saveFileDialog.FileName);
+                        imageToSave.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
@@ -59,7 +60,7 @@ namespace Core
                 {
                     try
                     {
-                        pictureBox.Image.Save(saveFileDialog.FileName);
+                        imageToSave.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {

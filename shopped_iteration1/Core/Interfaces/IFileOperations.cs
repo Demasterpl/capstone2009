@@ -1,10 +1,11 @@
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Core.Interfaces
 {
     public interface IFileOperations
     {
-        string OpenFile(PictureBox pictureBox);
-        void SaveFile(PictureBox pictureBox, string fileCurrentlyOpen);
+        string OpenFile(ref Image imageToOpen);
+        void SaveFile(Image imageToSave, string fileCurrentlyOpen);
     }
 }

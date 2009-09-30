@@ -4,15 +4,22 @@ using System.Windows.Forms;
 using System.IO;
 using Core;
 using Core.Interfaces;
+using Core.Images;
 
 namespace UI
 {
     public partial class ShoppedGui : Form
     {
         public string CurrentFileName { get; set; }
-        public int OriginalHeight { get; set; }
-        public int OriginalWidth { get; set; }
-        public Image OriginalImage { get; set; }
+        //public int OriginalHeight { get; set; }
+        //public int OriginalWidth { get; set; }
+        //public Image OriginalImage { get; set; }
+        public CurrentImage CurrentImage;
+        public Image TempImage;
+        public float Zoom;
+        public float DegreesRotated;
+        ImageRotate ImageRotate;
+
 
         public ShoppedGui()
         {
@@ -28,6 +35,10 @@ namespace UI
             ZoomBox.Enabled = false;
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
+
+            Zoom = 1.0f;
+            CurrentImage = new CurrentImage();
+            ImageRotate = new ImageRotate();
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
@@ -52,60 +63,35 @@ namespace UI
 
         private void openPictureButton_Click(object sender, EventArgs e)
         {
-            IFileOperations fileOperation = new FileOperations();
-            CurrentFileName = fileOperation.OpenFile(PictureBox);
-
-            OriginalHeight = PictureBox.Height;
-            OriginalWidth = PictureBox.Width;
-            OriginalImage = PictureBox.Image;
-            EnableGuiItems();
-            SetAdditionalInfo();
+            OpenImage();
         }
 
         private void saveImageButton_Click(object sender, EventArgs e)
         {
             IFileOperations fileOperation = new FileOperations();
-            fileOperation.SaveFile(PictureBox, CurrentFileName);
+            fileOperation.SaveFile(TempImage, CurrentFileName);
         }
 
         private void openPictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IFileOperations fileOperation = new FileOperations();
-            fileOperation.OpenFile(PictureBox);
-
-            OriginalHeight = PictureBox.Height;
-            OriginalWidth = PictureBox.Width;
-            OriginalImage = PictureBox.Image;
-
-            EnableGuiItems();
-            SetAdditionalInfo();
-
+            OpenImage();
         }
 
         private void savePictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             IFileOperations fileOperation = new FileOperations();
-            fileOperation.SaveFile(PictureBox, CurrentFileName);
+            fileOperation.SaveFile(TempImage, CurrentFileName);
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            PictureBox.Height = OriginalHeight;
-            PictureBox.Width = OriginalWidth;
-            PictureBox.Image = OriginalImage;
+            ZoomImage(1.0f);
             SetAdditionalInfo();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            PictureBox.Height = OriginalHeight * 2;
-            PictureBox.Width = OriginalWidth * 2;
-            PictureBox.Image = new Bitmap(OriginalImage, PictureBox.Size);
-
-            OriginalImage = PictureBox.Image;
-            OriginalHeight = OriginalImage.Height;
-            OriginalWidth = OriginalImage.Width;
-
+            ZoomImage(2.0f);
             SetAdditionalInfo();
         }
 
@@ -120,6 +106,48 @@ namespace UI
             savePictureToolStripMenuItem.Enabled = true;
         }
 
+        public void OpenImage()
+        {
+            IFileOperations fileOperation = new FileOperations();
+            CurrentFileName = fileOperation.OpenFile(ref TempImage);
+
+            SetPictureBox(TempImage);
+            SetCurrentImage(TempImage);
+
+            EnableGuiItems();
+            SetAdditionalInfo();
+        }
+
+        public void SetPictureBox(Image image)
+        {
+            PictureBox.Height = image.Height;
+            PictureBox.Width = image.Width;
+            PictureBox.Image = image;
+        }
+
+        public void SetCurrentImage(Image image)
+        {
+            CurrentImage.CurrentHeight = image.Height;
+            CurrentImage.CurrentWidth = image.Width;
+            CurrentImage.DegreesRotated = DegreesRotated;
+            CurrentImage.InitialImage = image;
+        }
+
+        public void ZoomImage(float zoom)
+        {
+            if (zoom == 1.0f)
+            {
+                TempImage = ImageRotate.RotateImageByAngle(CurrentImage.InitialImage, DegreesRotated);
+                SetPictureBox(TempImage);
+            }
+            else
+            {
+                TempImage = new Bitmap(TempImage,(int)(TempImage.Width * zoom), (int)(TempImage.Height * zoom));
+                SetPictureBox(TempImage);
+            }
+            Zoom = zoom;
+       }
+
         public void SetAdditionalInfo()
         {
             AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Name: {2}", PictureBox.Height, PictureBox.Width, System.IO.Path.GetFileName(CurrentFileName));
@@ -132,11 +160,11 @@ namespace UI
 
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
-                var imageRotate = new ImageRotate();
+                DegreesRotated += (rotateDialog.rotateDegrees % 360.0f);
 
-                Image rotatedImage = imageRotate.RotateImageByAngle(PictureBox.Image, rotateDialog.rotateDegrees);
-                PictureBox.Refresh();
-                PictureBox.Image = new Bitmap(rotatedImage);
+                TempImage = ImageRotate.RotateImageByAngle(CurrentImage.InitialImage, DegreesRotated);
+                ZoomImage(Zoom);
+                PictureBox.Image = TempImage;
                 PictureBox.Refresh();
             }
 
