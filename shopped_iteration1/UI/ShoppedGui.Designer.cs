@@ -38,11 +38,8 @@
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tODOAddMoreToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tODOAddMoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -52,8 +49,8 @@
             this.saveImageButton = new System.Windows.Forms.ToolStripButton();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.ZoomBox = new System.Windows.Forms.ComboBox();
-            this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -136,48 +133,26 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tODOAddMoreToolStripMenuItem1});
+            this.zoomImageToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
-            // tODOAddMoreToolStripMenuItem1
-            // 
-            this.tODOAddMoreToolStripMenuItem1.Name = "tODOAddMoreToolStripMenuItem1";
-            this.tODOAddMoreToolStripMenuItem1.Size = new System.Drawing.Size(166, 22);
-            this.tODOAddMoreToolStripMenuItem1.Text = "TODO: Add More";
-            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tODOAddMoreToolStripMenuItem,
-            this.rotateToolStripMenuItem});
+            this.rotateToolStripMenuItem,
+            this.resizeToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
-            // tODOAddMoreToolStripMenuItem
+            // rotateToolStripMenuItem
             // 
-            this.tODOAddMoreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
-            this.tODOAddMoreToolStripMenuItem.Name = "tODOAddMoreToolStripMenuItem";
-            this.tODOAddMoreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.tODOAddMoreToolStripMenuItem.Text = "Zoom";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(102, 22);
-            this.toolStripMenuItem2.Text = "100%";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(102, 22);
-            this.toolStripMenuItem3.Text = "200%";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rotateToolStripMenuItem.Text = "Rotate";
+            this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -265,30 +240,25 @@
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             // 
-            // ZoomBox
+            // zoomImageToolStripMenuItem
             // 
-            this.ZoomBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ZoomBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.ZoomBox.FormattingEnabled = true;
-            this.ZoomBox.Location = new System.Drawing.Point(921, 27);
-            this.ZoomBox.Name = "ZoomBox";
-            this.ZoomBox.Size = new System.Drawing.Size(75, 21);
-            this.ZoomBox.TabIndex = 6;
-            this.ZoomBox.Text = "       Zoom";
+            this.zoomImageToolStripMenuItem.Name = "zoomImageToolStripMenuItem";
+            this.zoomImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zoomImageToolStripMenuItem.Text = "Zoom Image";
+            this.zoomImageToolStripMenuItem.Click += new System.EventHandler(this.zoomImageToolStripMenuItem_Click);
             // 
-            // rotateToolStripMenuItem
+            // resizeToolStripMenuItem
             // 
-            this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rotateToolStripMenuItem.Text = "Rotate";
-            this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
+            this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
+            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resizeToolStripMenuItem.Text = "Resize";
+            this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
             // 
             // ShoppedGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 732);
-            this.Controls.Add(this.ZoomBox);
             this.Controls.Add(this.PictureBoxPanel);
             this.Controls.Add(this.ToolStrip);
             this.Controls.Add(this.statusStrip1);
@@ -328,16 +298,13 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tODOAddMoreToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem tODOAddMoreToolStripMenuItem;
         private System.Windows.Forms.ToolStrip ToolStrip;
         private System.Windows.Forms.ToolStripButton openPictureButton;
         private System.Windows.Forms.ToolStripButton saveImageButton;
         private System.Windows.Forms.Panel PictureBoxPanel;
         private System.Windows.Forms.PictureBox PictureBox;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ComboBox ZoomBox;
         private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
     }
 }
