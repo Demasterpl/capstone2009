@@ -1,0 +1,52 @@
+\hypertarget{class_core_1_1_file_operations}{
+\section{Core.FileOperations Class Reference}
+\label{class_core_1_1_file_operations}\index{Core::FileOperations@{Core::FileOperations}}
+}
+Inheritance diagram for Core.FileOperations::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{class_core_1_1_file_operations}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{class_core_1_1_file_operations_a1f424475b7f385f349d9921186ed4beb}{OpenFile} (ref Image imageToOpen)
+\item 
+void \hyperlink{class_core_1_1_file_operations_a93ad3dfb3b18dc15b2986ae831cc6eed}{SaveFile} (Image imageToSave, string fileCurrentlyOpen)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_core_1_1_file_operations_a1f424475b7f385f349d9921186ed4beb}{
+\index{Core::FileOperations@{Core::FileOperations}!OpenFile@{OpenFile}}
+\index{OpenFile@{OpenFile}!Core::FileOperations@{Core::FileOperations}}
+\subsubsection[{OpenFile}]{\setlength{\rightskip}{0pt plus 5cm}string Core.FileOperations.OpenFile (ref Image {\em imageToOpen})}}
+\label{class_core_1_1_file_operations_a1f424475b7f385f349d9921186ed4beb}
+Opens a file dialog to select an image, then opens the file inside the Shopped main GUI.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em imageToOpen}]This will hold the data of the opened image. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The absolute path and file name of the opened image. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_core_1_1_interfaces_1_1_i_file_operations}{Core.Interfaces.IFileOperations}.\hypertarget{class_core_1_1_file_operations_a93ad3dfb3b18dc15b2986ae831cc6eed}{
+\index{Core::FileOperations@{Core::FileOperations}!SaveFile@{SaveFile}}
+\index{SaveFile@{SaveFile}!Core::FileOperations@{Core::FileOperations}}
+\subsubsection[{SaveFile}]{\setlength{\rightskip}{0pt plus 5cm}void Core.FileOperations.SaveFile (Image {\em imageToSave}, \/  string {\em fileCurrentlyOpen})}}
+\label{class_core_1_1_file_operations_a93ad3dfb3b18dc15b2986ae831cc6eed}
+Opens a save file dialog to save the image that is open in the Shopped main GUI.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em imageToSave}]The image that is currently open in the Shopped main GUI. \item[{\em fileCurrentlyOpen}]The absolute file path to the image that was originally opened in \hyperlink{class_core_1_1_file_operations_a1f424475b7f385f349d9921186ed4beb}{OpenFile()} \end{DoxyParams}
+
+
+Implements \hyperlink{interface_core_1_1_interfaces_1_1_i_file_operations}{Core.Interfaces.IFileOperations}.
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Andy/Desktop/shopped\_\-iteration1/Core/FileOperations.cs\end{DoxyCompactItemize}
