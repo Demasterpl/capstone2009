@@ -8,6 +8,15 @@ namespace Core
 {
     public class ImageRotate
     {
+        /**
+         *  Given a certain angle (in degrees), this method will take an image and rotate
+         *  it by the given angle.
+         *  
+         *  @param image The image to be rotated
+         *  @param angle The angle (in degrees) to rotate the image
+         *  @return The rotated image
+         * 
+         */
         public Bitmap RotateImageByAngle(Image image, float angle)
         {
 
