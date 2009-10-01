@@ -11,9 +11,6 @@ namespace UI
     public partial class ShoppedGui : Form
     {
         public string CurrentFileName { get; set; }
-        //public int OriginalHeight { get; set; }
-        //public int OriginalWidth { get; set; }
-        //public Image OriginalImage { get; set; }
         public CurrentImage CurrentImage;
         public Image TempImage;
         public float Zoom;
@@ -32,7 +29,6 @@ namespace UI
             toolsToolStripMenuItem.Enabled = false;
             editToolStripMenuItem.Enabled = false;
             viewToolStripMenuItem.Enabled = false;
-            ZoomBox.Enabled = false;
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
 
@@ -83,17 +79,6 @@ namespace UI
             fileOperation.SaveFile(TempImage, CurrentFileName);
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            ZoomImage(1.0f);
-            SetAdditionalInfo();
-        }
-
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-            ZoomImage(2.0f);
-            SetAdditionalInfo();
-        }
 
         public void EnableGuiItems()
         {
@@ -102,7 +87,6 @@ namespace UI
             editToolStripMenuItem.Enabled = true;
             viewToolStripMenuItem.Enabled = true;
             saveImageButton.Enabled = true;
-            ZoomBox.Enabled = true;
             savePictureToolStripMenuItem.Enabled = true;
         }
 
@@ -146,7 +130,15 @@ namespace UI
                 SetPictureBox(TempImage);
             }
             Zoom = zoom;
-       }
+        }
+
+        public void ResizeImage(float resize)
+        {
+            TempImage = new Bitmap(TempImage, (int)(TempImage.Width * resize), (int)(TempImage.Height * resize));
+            CurrentImage.InitialImage = TempImage;
+            SetPictureBox(CurrentImage.InitialImage);
+            SetAdditionalInfo();
+        }
 
         public void SetAdditionalInfo()
         {
@@ -168,6 +160,30 @@ namespace UI
                 PictureBox.Refresh();
             }
 
+        }
+
+        private void zoomImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var zoomDialog = new ZoomDialog();
+            zoomDialog.ShowDialog();
+
+            if (zoomDialog.DialogResult == DialogResult.OK)
+            {
+                ZoomImage(zoomDialog.zoomLevel);
+                PictureBox.Refresh();
+            }
+        }
+
+        private void resizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var resizeDialog = new ResizeDialog();
+            resizeDialog.ShowDialog();
+
+            if (resizeDialog.DialogResult == DialogResult.OK)
+            {
+                ResizeImage(resizeDialog.resizeLevel);
+                PictureBox.Refresh();
+            }
         }
     }
 }
