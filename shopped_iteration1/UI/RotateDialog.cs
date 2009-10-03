@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace UI
 {
+    /**
+     * The RotateDialog class displays a small windows form to prompt the user for
+     * an amount to rotate the image loaded into the editor.
+     * 
+     * @param RotateDegrees Contains the amount of rotation (in degrees) the user specifies.
+     */
     public partial class RotateDialog : Form
     {
-        public float rotateDegrees;
+        public float RotateDegrees;
 
         public RotateDialog()
         {
@@ -23,9 +23,12 @@ namespace UI
 
         }
 
+        /**
+         * Once the user hits the "Rotate Image" button, this grabs the value from the dialog box.
+         */
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            rotateDegrees = float.Parse(RotateTextBox.Text);
+            RotateDegrees = float.Parse(RotateTextBox.Text);
         }
 
     }
