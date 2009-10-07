@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileOperations.cs" />
+    <Compile Include="ImageHistory.cs" />
     <Compile Include="ImageRotate.cs" />
     <Compile Include="Images\CurrentImage.cs" />
     <Compile Include="Interfaces\IFileOperations.cs" />

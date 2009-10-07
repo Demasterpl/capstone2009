@@ -38,8 +38,10 @@
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -49,8 +51,6 @@
             this.saveImageButton = new System.Windows.Forms.ToolStripButton();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.zoomImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -119,14 +119,15 @@
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.undoToolStripMenuItem.Text = "Undo";
+            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.redoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
@@ -137,6 +138,13 @@
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
+            // 
+            // zoomImageToolStripMenuItem
+            // 
+            this.zoomImageToolStripMenuItem.Name = "zoomImageToolStripMenuItem";
+            this.zoomImageToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.zoomImageToolStripMenuItem.Text = "Zoom Image";
+            this.zoomImageToolStripMenuItem.Click += new System.EventHandler(this.zoomImageToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -150,9 +158,16 @@
             // rotateToolStripMenuItem
             // 
             this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.rotateToolStripMenuItem.Text = "Rotate";
             this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
+            // 
+            // resizeToolStripMenuItem
+            // 
+            this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
+            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.resizeToolStripMenuItem.Text = "Resize";
+            this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -184,7 +199,6 @@
             this.AdditionalInfo.Name = "AdditionalInfo";
             this.AdditionalInfo.Size = new System.Drawing.Size(185, 17);
             this.AdditionalInfo.Text = "Additional Info About The Picture";
-            this.AdditionalInfo.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
             // ToolStrip
             // 
@@ -239,20 +253,6 @@
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
-            // 
-            // zoomImageToolStripMenuItem
-            // 
-            this.zoomImageToolStripMenuItem.Name = "zoomImageToolStripMenuItem";
-            this.zoomImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.zoomImageToolStripMenuItem.Text = "Zoom Image";
-            this.zoomImageToolStripMenuItem.Click += new System.EventHandler(this.zoomImageToolStripMenuItem_Click);
-            // 
-            // resizeToolStripMenuItem
-            // 
-            this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resizeToolStripMenuItem.Text = "Resize";
-            this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
             // 
             // ShoppedGui
             // 
