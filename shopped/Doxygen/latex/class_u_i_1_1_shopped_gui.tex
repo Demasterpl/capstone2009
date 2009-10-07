@@ -1,0 +1,123 @@
+\hypertarget{class_u_i_1_1_shopped_gui}{
+\section{UI::ShoppedGui Class Reference}
+\label{class_u_i_1_1_shopped_gui}\index{UI::ShoppedGui@{UI::ShoppedGui}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_a190bba777e57891c8042b86afbba83c6}{EnableGuiItems} ()
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_a3a27f074b7b204b1df148921a0dcc20c}{OpenImage} ()
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_a61ba32572b328bdc7f6e835eff9eb946}{SetPictureBox} (Image image)
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_ae6c209174dca46445f9e83ba41180a62}{SetCurrentImage} (Image image)
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_ad0f2c5e2eb63419a49622ab3faa2d347}{ZoomImage} (float zoom)
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_af17943aa92b2c904e67d2e73dc355fdd}{ResizeImage} (float resize)
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_a292a827437d7f2098c13bc1a735a569e}{SetAdditionalInfo} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_u_i_1_1_shopped_gui_aa371e321a437bfe0f1960887f8847ef7}{
+\hyperlink{class_core_1_1_images_1_1_current_image}{CurrentImage} {\bfseries CurrentImage}}
+\label{class_u_i_1_1_shopped_gui_aa371e321a437bfe0f1960887f8847ef7}
+
+\item 
+\hypertarget{class_u_i_1_1_shopped_gui_aadc5f172bf787d2806b58f409ea1baa4}{
+Image {\bfseries TempImage}}
+\label{class_u_i_1_1_shopped_gui_aadc5f172bf787d2806b58f409ea1baa4}
+
+\item 
+\hypertarget{class_u_i_1_1_shopped_gui_ac0538f96458d3d1ac50584bc099b4364}{
+float {\bfseries Zoom}}
+\label{class_u_i_1_1_shopped_gui_ac0538f96458d3d1ac50584bc099b4364}
+
+\item 
+\hypertarget{class_u_i_1_1_shopped_gui_a2a513c98200e582ded9d4c39ca84dd42}{
+float {\bfseries DegreesRotated}}
+\label{class_u_i_1_1_shopped_gui_a2a513c98200e582ded9d4c39ca84dd42}
+
+\item 
+\hypertarget{class_u_i_1_1_shopped_gui_a66832ec4b07ebce5fa05dae4fdef77c0}{
+\hyperlink{class_core_1_1_image_rotate}{ImageRotate} {\bfseries ImageRotate}}
+\label{class_u_i_1_1_shopped_gui_a66832ec4b07ebce5fa05dae4fdef77c0}
+
+\item 
+\hypertarget{class_u_i_1_1_shopped_gui_a101b0752bd6986a43ddc1718e7026165}{
+\hyperlink{interface_core_1_1_interfaces_1_1_i_file_operations}{IFileOperations} {\bfseries FileOperation}}
+\label{class_u_i_1_1_shopped_gui_a101b0752bd6986a43ddc1718e7026165}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_u_i_1_1_shopped_gui_a923261775125641cd9ec68f19f1343bf}{
+string {\bfseries CurrentFileName}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}}
+\label{class_u_i_1_1_shopped_gui_a923261775125641cd9ec68f19f1343bf}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The class that loads, runs and handles events of the Shopped main GUI. 
+\begin{DoxyParams}{Parameters}
+\item[{\em CurrentFileName}]The absolute path to the image file loaded. \item[{\em CurrentImage}]Holds the state of the current image in the GUI. \item[{\em TempImage}]Holds temporary states of the image in the GUI (i.e. zoom). \item[{\em Zoom}]How much the image is zoomed in the GUI (1.0 == 100\%). \item[{\em DegreesRotated}]Holds the value for how much the image is rotated in the GUI (in degrees). \item[{\em ImageRotate}]Instance of ImageRotate class to handle rotating the image. \item[{\em FileOperation}]Instance of FileOperation class to handle opening/saving the image. \end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_u_i_1_1_shopped_gui_a190bba777e57891c8042b86afbba83c6}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!EnableGuiItems@{EnableGuiItems}}
+\index{EnableGuiItems@{EnableGuiItems}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{EnableGuiItems}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::EnableGuiItems ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a190bba777e57891c8042b86afbba83c6}
+Called upon once an image is loaded from file, this enables the features/options that can now be used. \hypertarget{class_u_i_1_1_shopped_gui_a3a27f074b7b204b1df148921a0dcc20c}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!OpenImage@{OpenImage}}
+\index{OpenImage@{OpenImage}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{OpenImage}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::OpenImage ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a3a27f074b7b204b1df148921a0dcc20c}
+Uses FileOperation instance to prompt user to open an image file. Sets the image in the editor once image is opened. \hypertarget{class_u_i_1_1_shopped_gui_af17943aa92b2c904e67d2e73dc355fdd}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!ResizeImage@{ResizeImage}}
+\index{ResizeImage@{ResizeImage}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{ResizeImage}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::ResizeImage (float {\em resize})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_af17943aa92b2c904e67d2e73dc355fdd}
+Resizes the image in the Shopped GUI to the specified resize level. 
+\begin{DoxyParams}{Parameters}
+\item[{\em resize}]The amount to resize the image to. \end{DoxyParams}
+\hypertarget{class_u_i_1_1_shopped_gui_a292a827437d7f2098c13bc1a735a569e}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!SetAdditionalInfo@{SetAdditionalInfo}}
+\index{SetAdditionalInfo@{SetAdditionalInfo}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{SetAdditionalInfo}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::SetAdditionalInfo ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a292a827437d7f2098c13bc1a735a569e}
+Sets the information about the PictureBox image that is located at the bottom of the Shopped GUI. Information includes height, width and the name of the image. \hypertarget{class_u_i_1_1_shopped_gui_ae6c209174dca46445f9e83ba41180a62}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!SetCurrentImage@{SetCurrentImage}}
+\index{SetCurrentImage@{SetCurrentImage}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{SetCurrentImage}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::SetCurrentImage (Image {\em image})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_ae6c209174dca46445f9e83ba41180a62}
+Sets the CurrentImage object with the values of the parameter. 
+\begin{DoxyParams}{Parameters}
+\item[{\em image}]The image to set CurrentImage to. \end{DoxyParams}
+\hypertarget{class_u_i_1_1_shopped_gui_a61ba32572b328bdc7f6e835eff9eb946}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!SetPictureBox@{SetPictureBox}}
+\index{SetPictureBox@{SetPictureBox}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{SetPictureBox}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::SetPictureBox (Image {\em image})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a61ba32572b328bdc7f6e835eff9eb946}
+Sets the PictureBox to the image passed to this method. 
+\begin{DoxyParams}{Parameters}
+\item[{\em image}]The image to set the PictureBox to. \end{DoxyParams}
+\hypertarget{class_u_i_1_1_shopped_gui_ad0f2c5e2eb63419a49622ab3faa2d347}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!ZoomImage@{ZoomImage}}
+\index{ZoomImage@{ZoomImage}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{ZoomImage}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::ZoomImage (float {\em zoom})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_ad0f2c5e2eb63419a49622ab3faa2d347}
+Zooms the image in the Shopped GUI to the specified zoom level. 
+\begin{DoxyParams}{Parameters}
+\item[{\em zoom}]The amount of zoom to use on the image (1.0f == 100\%). \end{DoxyParams}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+C:/Users/Andy/Documents/Visual Studio 2008/Projects/capstone2009/shopped\_\-iteration1/UI/ShoppedGui.cs\end{DoxyCompactItemize}
