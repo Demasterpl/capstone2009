@@ -26,6 +26,7 @@ namespace UI
         public float DegreesRotated;
         public ImageRotate ImageRotate;
         public IFileOperations FileOperation;
+        public ImageHistory ImageHistory; 
 
 
 
@@ -44,6 +45,8 @@ namespace UI
             toolsToolStripMenuItem.Enabled = false;
             editToolStripMenuItem.Enabled = false;
             viewToolStripMenuItem.Enabled = false;
+            redoToolStripMenuItem.Enabled = false;
+            undoToolStripMenuItem.Enabled = false;
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
 
@@ -51,12 +54,10 @@ namespace UI
             CurrentImage = new CurrentImage();
             ImageRotate = new ImageRotate();
             FileOperation = new FileOperations();
+            ImageHistory = new ImageHistory();
         }
 
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
 
-        }
 
         /**
          * Handles the event of clicking File->Exit menu item. Exits the program.
@@ -75,13 +76,6 @@ namespace UI
             MessageBox.Show("Developed Fall 2009 at Kent State University\nGroup 4\n\n\nGreg Beca\nAndy Vanek\nDaniel Sheaffer","About Us");
         }
 
-        /**
-         * Not implemented yet. For milestone 2.
-         */
-        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         /**
          * Handles the event of clicking "Open Image" icon.
@@ -153,6 +147,16 @@ namespace UI
             PictureBox.Height = image.Height;
             PictureBox.Width = image.Width;
             PictureBox.Image = image;
+            AddImageToImageHistory(PictureBox.Image);
+            SetUndoAndRedo();
+        }
+
+        public void SetPictureBoxOnUndoOrRedo(Image image)
+        {
+            PictureBox.Height = image.Height;
+            PictureBox.Width = image.Width;
+            PictureBox.Image = image;
+            SetUndoAndRedo();
         }
 
         /**
@@ -223,7 +227,7 @@ namespace UI
 
                 TempImage = ImageRotate.RotateImageByAngle(CurrentImage.InitialImage, DegreesRotated);
                 ZoomImage(Zoom);
-                PictureBox.Image = TempImage;
+                //SetPictureBox(TempImage);
                 PictureBox.Refresh();
             }
         }
@@ -258,6 +262,47 @@ namespace UI
                 ResizeImage(resizeDialog.ResizeLevel);
                 PictureBox.Refresh();
             }
+        }
+
+        private void AddImageToImageHistory(Image image)
+        {
+            ImageHistory.AddImageToImageHistory(image);
+        }
+
+        private void SetUndoAndRedo()
+        {
+            int count = ImageHistory.GetNumberOfImagesInHistory();
+            int revision = ImageHistory.GetCurrentRevision();
+
+            //for redo
+            if (revision >= 0 && revision != (count - 1))
+            {
+                redoToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                redoToolStripMenuItem.Enabled = false;
+            }
+
+            //for undo
+            if (count > 1 && revision > 0)
+            {
+                undoToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                undoToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetPictureBoxOnUndoOrRedo(ImageHistory.Undo());
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetPictureBoxOnUndoOrRedo(ImageHistory.Redo());
         }
     }
 }
