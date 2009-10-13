@@ -10,7 +10,7 @@ namespace Core.Interfaces
      */
     public interface IFileOperations
     {
-        string OpenFile(ref Image imageToOpen);
+        string OpenFile();
         void SaveFile(Image imageToSave, string fileCurrentlyOpen);
     }
 }

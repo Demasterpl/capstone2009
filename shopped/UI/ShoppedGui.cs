@@ -19,15 +19,6 @@ namespace UI
      */
     public partial class ShoppedGui : Form
     {
-        public string CurrentFileName { get; set; }
-        public CurrentImage CurrentImage;
-        public Image TempImage;
-        public float Zoom;
-        public float DegreesRotated;
-        public ImageRotate ImageRotate;
-        public IFileOperations FileOperation;
-        public ImageHistory ImageHistory; 
-
 
 
         public ShoppedGui()
@@ -50,11 +41,11 @@ namespace UI
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
 
-            Zoom = 1.0f;
-            CurrentImage = new CurrentImage();
-            ImageRotate = new ImageRotate();
-            FileOperation = new FileOperations();
-            ImageHistory = new ImageHistory();
+            ShoppedGuiHelper.Zoom = 1.0f;
+            ShoppedGuiHelper.CurrentImage = new CurrentImage();
+            ShoppedGuiHelper.ImageRotate = new ImageRotate();
+            ShoppedGuiHelper.FileOperation = new FileOperations();
+            ShoppedGuiHelper.ImageHistory = new ImageHistory();
         }
 
 
@@ -90,7 +81,7 @@ namespace UI
          */
         private void saveImageButton_Click(object sender, EventArgs e)
         {
-            FileOperation.SaveFile(TempImage, CurrentFileName);
+            ShoppedGuiHelper.FileOperation.SaveFile(ShoppedGuiHelper.TempImage, ShoppedGuiHelper.CurrentFileName);
         }
 
         /**
@@ -106,7 +97,7 @@ namespace UI
          */
         private void savePictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileOperation.SaveFile(TempImage, CurrentFileName);
+            ShoppedGuiHelper.FileOperation.SaveFile(ShoppedGuiHelper.TempImage, ShoppedGuiHelper.CurrentFileName);
         }
 
         /**
@@ -129,10 +120,10 @@ namespace UI
          */
         public void OpenImage()
         {
-            CurrentFileName = FileOperation.OpenFile(ref TempImage);
+            ShoppedGuiHelper.CurrentFileName = ShoppedGuiHelper.FileOperation.OpenFile();
 
-            SetPictureBox(TempImage);
-            SetCurrentImage(TempImage);
+            SetPictureBox(ShoppedGuiHelper.TempImage);
+            SetCurrentImage(ShoppedGuiHelper.TempImage);
 
             EnableGuiItems();
             SetAdditionalInfo();
@@ -165,10 +156,10 @@ namespace UI
          */
         public void SetCurrentImage(Image image)
         {
-            CurrentImage.CurrentHeight = image.Height;
-            CurrentImage.CurrentWidth = image.Width;
-            CurrentImage.DegreesRotated = DegreesRotated;
-            CurrentImage.InitialImage = image;
+            ShoppedGuiHelper.CurrentImage.CurrentHeight = image.Height;
+            ShoppedGuiHelper.CurrentImage.CurrentWidth = image.Width;
+            ShoppedGuiHelper.CurrentImage.DegreesRotated = ShoppedGuiHelper.DegreesRotated;
+            ShoppedGuiHelper.CurrentImage.InitialImage = image;
         }
 
         /**
@@ -179,15 +170,16 @@ namespace UI
         {
             if (zoom == 1.0f)
             {
-                TempImage = ImageRotate.RotateImageByAngle(CurrentImage.InitialImage, DegreesRotated);
-                SetPictureBox(TempImage);
+                ShoppedGuiHelper.TempImage = ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.InitialImage, ShoppedGuiHelper.DegreesRotated);
+                SetPictureBox(ShoppedGuiHelper.TempImage);
             }
             else
             {
-                TempImage = new Bitmap(TempImage,(int)(TempImage.Width * zoom), (int)(TempImage.Height * zoom));
-                SetPictureBox(TempImage);
+                ShoppedGuiHelper.TempImage = new Bitmap(ShoppedGuiHelper.TempImage, 
+                    (int)(ShoppedGuiHelper.TempImage.Width * zoom), (int)(ShoppedGuiHelper.TempImage.Height * zoom));
+                SetPictureBox(ShoppedGuiHelper.TempImage);
             }
-            Zoom = zoom;
+            ShoppedGuiHelper.Zoom = zoom;
         }
 
         /**
@@ -196,9 +188,10 @@ namespace UI
          */
         public void ResizeImage(float resize)
         {
-            TempImage = new Bitmap(TempImage, (int)(TempImage.Width * resize), (int)(TempImage.Height * resize));
-            CurrentImage.InitialImage = TempImage;
-            SetPictureBox(CurrentImage.InitialImage);
+            ShoppedGuiHelper.TempImage = new Bitmap(ShoppedGuiHelper.TempImage, (int)(ShoppedGuiHelper.TempImage.Width * resize), 
+                (int)(ShoppedGuiHelper.TempImage.Height * resize));
+            ShoppedGuiHelper.CurrentImage.InitialImage = ShoppedGuiHelper.TempImage;
+            SetPictureBox(ShoppedGuiHelper.CurrentImage.InitialImage);
             SetAdditionalInfo();
         }
 
@@ -208,8 +201,8 @@ namespace UI
          */
         public void SetAdditionalInfo()
         {
-            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Name: {2}", 
-                PictureBox.Height, PictureBox.Width, System.IO.Path.GetFileName(CurrentFileName));
+            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Name: {2}",
+                PictureBox.Height, PictureBox.Width, System.IO.Path.GetFileName(ShoppedGuiHelper.CurrentFileName));
         }
 
         /**
@@ -223,10 +216,10 @@ namespace UI
 
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
-                DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
+                ShoppedGuiHelper.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
 
-                TempImage = ImageRotate.RotateImageByAngle(CurrentImage.InitialImage, DegreesRotated);
-                ZoomImage(Zoom);
+                ShoppedGuiHelper.TempImage = ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.InitialImage, ShoppedGuiHelper.DegreesRotated);
+                ZoomImage(ShoppedGuiHelper.Zoom);
                 //SetPictureBox(TempImage);
                 PictureBox.Refresh();
             }
@@ -266,13 +259,13 @@ namespace UI
 
         private void AddImageToImageHistory(Image image)
         {
-            ImageHistory.AddImageToImageHistory(image);
+            ShoppedGuiHelper.ImageHistory.AddImageToImageHistory(image);
         }
 
         private void SetUndoAndRedo()
         {
-            int count = ImageHistory.GetNumberOfImagesInHistory();
-            int revision = ImageHistory.GetCurrentRevision();
+            int count = ShoppedGuiHelper.ImageHistory.GetNumberOfImagesInHistory();
+            int revision = ShoppedGuiHelper.ImageHistory.GetCurrentRevision();
 
             //for redo
             if (revision >= 0 && revision != (count - 1))
@@ -297,12 +290,12 @@ namespace UI
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(ImageHistory.Undo());
+            SetPictureBoxOnUndoOrRedo(ShoppedGuiHelper.ImageHistory.Undo());
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(ImageHistory.Redo());
+            SetPictureBoxOnUndoOrRedo(ShoppedGuiHelper.ImageHistory.Redo());
         }
     }
 }

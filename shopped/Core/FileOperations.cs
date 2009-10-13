@@ -13,7 +13,7 @@ namespace Core
          *  @param imageToOpen This will hold the data of the opened image.
          *  @return The absolute path and file name of the opened image.
          */
-        public string OpenFile(ref Image imageToOpen)
+        public string OpenFile()
         {
             var openFileDialog = new OpenFileDialog
              {
@@ -25,7 +25,7 @@ namespace Core
             {
                 try
                 {
-                    imageToOpen = new Bitmap(openFileDialog.OpenFile());
+                    ShoppedGuiHelper.TempImage = new Bitmap(openFileDialog.OpenFile());
                 }
                 catch (Exception ex)
                 {
