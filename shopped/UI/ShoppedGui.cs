@@ -46,6 +46,8 @@ namespace UI
             ShoppedGuiHelper.ImageRotate = new ImageRotate();
             ShoppedGuiHelper.FileOperation = new FileOperations();
             ShoppedGuiHelper.ImageHistory = new ImageHistory();
+            ShoppedGuiHelper.ImageZoom = new ImageZoom();
+            ShoppedGuiHelper.ImageResize = new ImageResize();
         }
 
 
@@ -81,7 +83,7 @@ namespace UI
          */
         private void saveImageButton_Click(object sender, EventArgs e)
         {
-            ShoppedGuiHelper.FileOperation.SaveFile(ShoppedGuiHelper.TempImage, ShoppedGuiHelper.CurrentFileName);
+            ShoppedGuiHelper.FileOperation.SaveFile();
         }
 
         /**
@@ -97,7 +99,7 @@ namespace UI
          */
         private void savePictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShoppedGuiHelper.FileOperation.SaveFile(ShoppedGuiHelper.TempImage, ShoppedGuiHelper.CurrentFileName);
+            ShoppedGuiHelper.FileOperation.SaveFile();
         }
 
         /**
@@ -123,7 +125,7 @@ namespace UI
             ShoppedGuiHelper.CurrentFileName = ShoppedGuiHelper.FileOperation.OpenFile();
 
             SetPictureBox(ShoppedGuiHelper.TempImage);
-            SetCurrentImage(ShoppedGuiHelper.TempImage);
+            ShoppedGuiHelper.CurrentImage.SetCurrentImage();
 
             EnableGuiItems();
             SetAdditionalInfo();
@@ -138,7 +140,7 @@ namespace UI
             PictureBox.Height = image.Height;
             PictureBox.Width = image.Width;
             PictureBox.Image = image;
-            AddImageToImageHistory(PictureBox.Image);
+            ShoppedGuiHelper.ImageHistory.AddImageToImageHistory(PictureBox.Image);
             SetUndoAndRedo();
         }
 
@@ -148,51 +150,6 @@ namespace UI
             PictureBox.Width = image.Width;
             PictureBox.Image = image;
             SetUndoAndRedo();
-        }
-
-        /**
-         * Sets the CurrentImage object with the values of the parameter.
-         * @param image The image to set CurrentImage to.
-         */
-        public void SetCurrentImage(Image image)
-        {
-            ShoppedGuiHelper.CurrentImage.CurrentHeight = image.Height;
-            ShoppedGuiHelper.CurrentImage.CurrentWidth = image.Width;
-            ShoppedGuiHelper.CurrentImage.DegreesRotated = ShoppedGuiHelper.DegreesRotated;
-            ShoppedGuiHelper.CurrentImage.InitialImage = image;
-        }
-
-        /**
-         * Zooms the image in the Shopped GUI to the specified zoom level.
-         * @param zoom The amount of zoom to use on the image (1.0f == 100%).
-         */
-        public void ZoomImage(float zoom)
-        {
-            if (zoom == 1.0f)
-            {
-                ShoppedGuiHelper.TempImage = ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.InitialImage, ShoppedGuiHelper.DegreesRotated);
-                SetPictureBox(ShoppedGuiHelper.TempImage);
-            }
-            else
-            {
-                ShoppedGuiHelper.TempImage = new Bitmap(ShoppedGuiHelper.TempImage, 
-                    (int)(ShoppedGuiHelper.TempImage.Width * zoom), (int)(ShoppedGuiHelper.TempImage.Height * zoom));
-                SetPictureBox(ShoppedGuiHelper.TempImage);
-            }
-            ShoppedGuiHelper.Zoom = zoom;
-        }
-
-        /**
-         * Resizes the image in the Shopped GUI to the specified resize level.
-         * @param resize The amount to resize the image to.
-         */
-        public void ResizeImage(float resize)
-        {
-            ShoppedGuiHelper.TempImage = new Bitmap(ShoppedGuiHelper.TempImage, (int)(ShoppedGuiHelper.TempImage.Width * resize), 
-                (int)(ShoppedGuiHelper.TempImage.Height * resize));
-            ShoppedGuiHelper.CurrentImage.InitialImage = ShoppedGuiHelper.TempImage;
-            SetPictureBox(ShoppedGuiHelper.CurrentImage.InitialImage);
-            SetAdditionalInfo();
         }
 
         /**
@@ -217,10 +174,11 @@ namespace UI
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
                 ShoppedGuiHelper.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
+                ShoppedGuiHelper.DegreesRotated %= 360.0f;
 
                 ShoppedGuiHelper.TempImage = ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.InitialImage, ShoppedGuiHelper.DegreesRotated);
-                ZoomImage(ShoppedGuiHelper.Zoom);
-                //SetPictureBox(TempImage);
+                ShoppedGuiHelper.ImageZoom.ZoomImage(ShoppedGuiHelper.Zoom);
+                SetPictureBox(ShoppedGuiHelper.TempImage);
                 PictureBox.Refresh();
             }
         }
@@ -236,10 +194,11 @@ namespace UI
 
             if (zoomDialog.DialogResult == DialogResult.OK)
             {
-                ZoomImage(zoomDialog.ZoomLevel);
+                ShoppedGuiHelper.ImageZoom.ZoomImage(zoomDialog.ZoomLevel);
+                SetPictureBox(ShoppedGuiHelper.TempImage);
                 PictureBox.Refresh();
             }
-        }
+        }      
 
         /**
          * Handles the event of clicking the Tools->Resize menu item. Displays the ResizeDialog windows form,
@@ -252,14 +211,11 @@ namespace UI
 
             if (resizeDialog.DialogResult == DialogResult.OK)
             {
-                ResizeImage(resizeDialog.ResizeLevel);
+                ShoppedGuiHelper.ImageResize.ResizeImage(resizeDialog.ResizeLevel);
+                SetPictureBox(ShoppedGuiHelper.CurrentImage.InitialImage);
+                SetAdditionalInfo();
                 PictureBox.Refresh();
             }
-        }
-
-        private void AddImageToImageHistory(Image image)
-        {
-            ShoppedGuiHelper.ImageHistory.AddImageToImageHistory(image);
         }
 
         private void SetUndoAndRedo()

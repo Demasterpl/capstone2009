@@ -43,11 +43,11 @@ namespace Core
          *  @param imageToSave The image that is currently open in the Shopped main GUI.
          *  @param fileCurrentlyOpen The absolute file path to the image that was originally opened in OpenFile()
          */
-        public void SaveFile(Image imageToSave, string fileCurrentlyOpen)
+        public void SaveFile()
         {
             var saveFileDialog = new SaveFileDialog
              {
-                 FileName = fileCurrentlyOpen,
+                 FileName = ShoppedGuiHelper.CurrentFileName,
                  Filter = "JPEG (*.jpeg)|*.jpeg| Bitmap (*.bmp)|*.bmp"
              };
             
@@ -59,7 +59,7 @@ namespace Core
                 {
                     try
                     {
-                        imageToSave.Save(saveFileDialog.FileName);
+                        ShoppedGuiHelper.TempImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
@@ -72,7 +72,7 @@ namespace Core
                 {
                     try
                     {
-                        imageToSave.Save(saveFileDialog.FileName);
+                        ShoppedGuiHelper.TempImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
