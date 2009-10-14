@@ -30,5 +30,17 @@ namespace Core.Images
             DegreesRotated = degreesRotated;
             InitialImage = currentImage;
         }
+
+        /**
+         * Sets the CurrentImage object with the values of the parameter.
+         * @param image The image to set CurrentImage to.
+         */
+        public void SetCurrentImage()
+        {
+            ShoppedGuiHelper.CurrentImage.CurrentHeight = ShoppedGuiHelper.TempImage.Height;
+            ShoppedGuiHelper.CurrentImage.CurrentWidth = ShoppedGuiHelper.TempImage.Width;
+            ShoppedGuiHelper.CurrentImage.DegreesRotated = ShoppedGuiHelper.DegreesRotated;
+            ShoppedGuiHelper.CurrentImage.InitialImage = ShoppedGuiHelper.TempImage;
+        }
     }
 }

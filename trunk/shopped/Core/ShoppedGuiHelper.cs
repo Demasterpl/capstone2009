@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using Core.Images;
 using Core.Interfaces;
+using Core;
 
 namespace Core
 {
@@ -18,5 +19,7 @@ namespace Core
         public static ImageRotate ImageRotate { get; set; }
         public static IFileOperations FileOperation { get; set; }
         public static ImageHistory ImageHistory { get; set; }
+        public static ImageZoom ImageZoom { get; set; }
+        public static ImageResize ImageResize { get; set; }
     }
 }

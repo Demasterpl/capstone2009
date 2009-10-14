@@ -11,6 +11,6 @@ namespace Core.Interfaces
     public interface IFileOperations
     {
         string OpenFile();
-        void SaveFile(Image imageToSave, string fileCurrentlyOpen);
+        void SaveFile();
     }
 }
