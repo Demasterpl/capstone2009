@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using Core;
 
 namespace UI
 {
     /**
-     * The ResizeDialog class displays a small windows form to prompt the user for
+     * The ResizeDialog class displays a small dialog box to prompt the user for
      * an amount to resize the image loaded into the editor.
      * 
      * @param ResizeLevel Contains the amount of resize the user specifies.
@@ -16,6 +17,16 @@ namespace UI
         public ResizeDialog()
         {
             InitializeComponent();
+
+            //Warn user that image will be rezoomed to 100%
+            if (ShoppedGuiHelper.CurrentImage.ZoomLevel != 1.0f)
+            {
+                ZoomWarningLabel.Visible = true;
+            }
+            else
+            {
+                ZoomWarningLabel.Visible = false;
+            }
         }
 
         /**

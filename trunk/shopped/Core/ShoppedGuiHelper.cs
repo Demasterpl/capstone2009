@@ -9,13 +9,13 @@ using Core;
 
 namespace Core
 {
+    /**
+     * A class that contains the initialized objects of the classes in Core.
+     */
     public static class ShoppedGuiHelper
     {
         public static string CurrentFileName { get; set; }
-        public static CurrentImage CurrentImage { get; set; }
-        public static Image TempImage { get; set; }
-        public static float Zoom { get; set; }
-        public static float DegreesRotated { get; set; }
+        public static PictureBoxImage CurrentImage { get; set; }
         public static ImageRotate ImageRotate { get; set; }
         public static IFileOperations FileOperation { get; set; }
         public static ImageHistory ImageHistory { get; set; }

@@ -6,25 +6,23 @@ namespace Core
     public class ImageRotate
     {
         /**
-         *  Given a certain angle (in degrees), this method will take an image and rotate
+         *  Given a certain angle (in degrees), this method will take the CurrentImage object and rotate
          *  it by the given angle.
          *  
-         *  @param image The image to be rotated
          *  @param angle The angle (in degrees) to rotate the image
-         *  @return The rotated image
          */
-        public Bitmap RotateImageByAngle(Image image, float angle)
+        public void RotateImageByAngle(float angle)
         {
 
-            if (image == null)
+            if (ShoppedGuiHelper.CurrentImage.CurrentImage == null)
             {
                 throw new ArgumentNullException("image");
             }
 
             const double pi2 = Math.PI / 2.0;
 
-            var oldWidth = image.Width;
-            var oldHeight = image.Height;
+            var oldWidth = ShoppedGuiHelper.CurrentImage.CurrentImage.Width;
+            var oldHeight = ShoppedGuiHelper.CurrentImage.CurrentImage.Height;
 
             // Convert degrees to radians
             var theta = angle * Math.PI / 180.0;
@@ -120,10 +118,12 @@ namespace Core
 										 };
                 }
 
-                g.DrawImage(image, points);
+                g.DrawImage(ShoppedGuiHelper.CurrentImage.CurrentImage, points);
             }
 
-            return rotatedBmp;
+            ShoppedGuiHelper.CurrentImage.CurrentImage = rotatedBmp;
+            ShoppedGuiHelper.CurrentImage.CurrentHeight = rotatedBmp.Height;
+            ShoppedGuiHelper.CurrentImage.CurrentWidth = rotatedBmp.Width;
         }
     }
 }

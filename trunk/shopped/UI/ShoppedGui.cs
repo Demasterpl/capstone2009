@@ -41,8 +41,7 @@ namespace UI
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
 
-            ShoppedGuiHelper.Zoom = 1.0f;
-            ShoppedGuiHelper.CurrentImage = new CurrentImage();
+            ShoppedGuiHelper.CurrentImage = new PictureBoxImage();
             ShoppedGuiHelper.ImageRotate = new ImageRotate();
             ShoppedGuiHelper.FileOperation = new FileOperations();
             ShoppedGuiHelper.ImageHistory = new ImageHistory();
@@ -124,8 +123,8 @@ namespace UI
         {
             ShoppedGuiHelper.CurrentFileName = ShoppedGuiHelper.FileOperation.OpenFile();
 
-            SetPictureBox(ShoppedGuiHelper.TempImage);
-            ShoppedGuiHelper.CurrentImage.SetCurrentImage();
+            UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, "Open image");
+            ShoppedGuiHelper.CurrentImage.InitializeCurrentImage();
 
             EnableGuiItems();
             SetAdditionalInfo();
@@ -135,12 +134,13 @@ namespace UI
          * Sets the PictureBox to the image passed to this method.
          * @param image The image to set the PictureBox to.
          */
-        public void SetPictureBox(Image image)
+        public void UpdatePictureBoxInfo(Image image, string operation)
         {
             PictureBox.Height = image.Height;
             PictureBox.Width = image.Width;
             PictureBox.Image = image;
-            ShoppedGuiHelper.ImageHistory.AddImageToImageHistory(PictureBox.Image);
+            ShoppedGuiHelper.ImageHistory.AddImageToImageHistory(PictureBox.Image, operation);
+            SetAdditionalInfo();
             SetUndoAndRedo();
         }
 
@@ -158,8 +158,11 @@ namespace UI
          */
         public void SetAdditionalInfo()
         {
-            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Name: {2}",
-                PictureBox.Height, PictureBox.Width, System.IO.Path.GetFileName(ShoppedGuiHelper.CurrentFileName));
+            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3}",
+                ShoppedGuiHelper.CurrentImage.UnzoomedHeight, 
+                ShoppedGuiHelper.CurrentImage.UnzoomedWidth, 
+                ShoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f, 
+                System.IO.Path.GetFileName(ShoppedGuiHelper.CurrentFileName));
         }
 
         /**
@@ -173,12 +176,13 @@ namespace UI
 
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
-                ShoppedGuiHelper.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
-                ShoppedGuiHelper.DegreesRotated %= 360.0f;
+                ShoppedGuiHelper.CurrentImage.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
+                ShoppedGuiHelper.CurrentImage.DegreesRotated %= 360.0f;
 
-                ShoppedGuiHelper.TempImage = ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.InitialImage, ShoppedGuiHelper.DegreesRotated);
-                ShoppedGuiHelper.ImageZoom.ZoomImage(ShoppedGuiHelper.Zoom);
-                SetPictureBox(ShoppedGuiHelper.TempImage);
+                ShoppedGuiHelper.ImageZoom.ZoomImage(1.0f);
+
+                ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.DegreesRotated);
+                UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
                 PictureBox.Refresh();
             }
         }
@@ -195,7 +199,7 @@ namespace UI
             if (zoomDialog.DialogResult == DialogResult.OK)
             {
                 ShoppedGuiHelper.ImageZoom.ZoomImage(zoomDialog.ZoomLevel);
-                SetPictureBox(ShoppedGuiHelper.TempImage);
+                UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
                 PictureBox.Refresh();
             }
         }      
@@ -212,8 +216,7 @@ namespace UI
             if (resizeDialog.DialogResult == DialogResult.OK)
             {
                 ShoppedGuiHelper.ImageResize.ResizeImage(resizeDialog.ResizeLevel);
-                SetPictureBox(ShoppedGuiHelper.CurrentImage.InitialImage);
-                SetAdditionalInfo();
+                UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
                 PictureBox.Refresh();
             }
         }
@@ -227,20 +230,26 @@ namespace UI
             if (revision >= 0 && revision != (count - 1))
             {
                 redoToolStripMenuItem.Enabled = true;
+                redoToolStripMenuItem.ToolTipText = 
+                    ShoppedGuiHelper.ImageHistory.ImageRevisions[revision + 1].OperationPerformed;
             }
             else
             {
                 redoToolStripMenuItem.Enabled = false;
+                redoToolStripMenuItem.ToolTipText = null;
             }
 
             //for undo
             if (count > 1 && revision > 0)
             {
                 undoToolStripMenuItem.Enabled = true;
+                undoToolStripMenuItem.ToolTipText =
+                    ShoppedGuiHelper.ImageHistory.ImageRevisions[revision].OperationPerformed;
             }
             else
             {
                 undoToolStripMenuItem.Enabled = false;
+                undoToolStripMenuItem.ToolTipText = null;
             }
         }
 
