@@ -69,6 +69,7 @@
             this.Controls.Add(this.ZoomTextBox);
             this.Controls.Add(this.label1);
             this.Name = "ZoomDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ZoomDialog";
             this.ResumeLayout(false);
             this.PerformLayout();

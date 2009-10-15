@@ -80,6 +80,7 @@
             this.Controls.Add(this.ResizeButton);
             this.Controls.Add(this.label1);
             this.Name = "ResizeDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ResizeDialog";
             this.ResumeLayout(false);
             this.PerformLayout();
