@@ -9,9 +9,6 @@ namespace Core
     {
         /**  
          *  Opens a file dialog to select an image, then opens the file inside the Shopped main GUI.
-         *  
-         *  @param imageToOpen This will hold the data of the opened image.
-         *  @return The absolute path and file name of the opened image.
          */
         public string OpenFile()
         {
@@ -25,7 +22,7 @@ namespace Core
             {
                 try
                 {
-                    ShoppedGuiHelper.TempImage = new Bitmap(openFileDialog.OpenFile());
+                    ShoppedGuiHelper.CurrentImage.CurrentImage = new Bitmap(openFileDialog.OpenFile());
                 }
                 catch (Exception ex)
                 {
@@ -39,9 +36,6 @@ namespace Core
 
         /**  
          *  Opens a save file dialog to save the image that is open in the Shopped main GUI.
-         *  
-         *  @param imageToSave The image that is currently open in the Shopped main GUI.
-         *  @param fileCurrentlyOpen The absolute file path to the image that was originally opened in OpenFile()
          */
         public void SaveFile()
         {
@@ -59,7 +53,7 @@ namespace Core
                 {
                     try
                     {
-                        ShoppedGuiHelper.TempImage.Save(saveFileDialog.FileName);
+                        ShoppedGuiHelper.CurrentImage.CurrentImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
@@ -72,7 +66,7 @@ namespace Core
                 {
                     try
                     {
-                        ShoppedGuiHelper.TempImage.Save(saveFileDialog.FileName);
+                        ShoppedGuiHelper.CurrentImage.CurrentImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {

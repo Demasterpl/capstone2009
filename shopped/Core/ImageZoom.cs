@@ -14,16 +14,22 @@ namespace Core
          */
         public void ZoomImage(float zoom)
         {
+            //Reset current image to 100% zoom
+            ShoppedGuiHelper.CurrentImage.CurrentImage = ShoppedGuiHelper.CurrentImage.UnzoomedImage;
+            ShoppedGuiHelper.CurrentImage.ZoomLevel = zoom;
+            
             if (zoom == 1.0f)
             {
-                ShoppedGuiHelper.TempImage = ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.InitialImage, ShoppedGuiHelper.DegreesRotated);
+                return;
             }
             else
             {
-                ShoppedGuiHelper.TempImage = new Bitmap(ShoppedGuiHelper.TempImage,
-                    (int)(ShoppedGuiHelper.TempImage.Width * zoom), (int)(ShoppedGuiHelper.TempImage.Height * zoom));
+                ShoppedGuiHelper.CurrentImage.CurrentImage = new Bitmap(
+                    ShoppedGuiHelper.CurrentImage.CurrentImage,
+                    (int)(ShoppedGuiHelper.CurrentImage.CurrentImage.Width * zoom),
+                    (int)(ShoppedGuiHelper.CurrentImage.CurrentImage.Height * zoom));
+                    ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.DegreesRotated);
             }
-            ShoppedGuiHelper.Zoom = zoom;
         }
     }
 }

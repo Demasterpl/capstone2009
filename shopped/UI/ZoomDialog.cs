@@ -4,7 +4,7 @@ using System.Windows.Forms;
 namespace UI
 {
     /**
-     * The ZoomDialog class displays a small windows form to prompt the user for
+     * The ZoomDialog class displays a small dialog box to prompt the user for
      * an amount to zoom the image loaded into the editor.
      * 
      * @param ZoomLevel Contains the amount of zoom the user specifies.

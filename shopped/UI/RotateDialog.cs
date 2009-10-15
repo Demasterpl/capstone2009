@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using Core;
 
 namespace UI
 {
     /**
-     * The RotateDialog class displays a small windows form to prompt the user for
+     * The RotateDialog class displays a small dialog box to prompt the user for
      * an amount to rotate the image loaded into the editor.
      * 
      * @param RotateDegrees Contains the amount of rotation (in degrees) the user specifies.
@@ -16,6 +17,17 @@ namespace UI
         public RotateDialog()
         {
             InitializeComponent();
+
+            //Warn user that zoom level will be reset to 100%
+            if (ShoppedGuiHelper.CurrentImage.ZoomLevel != 1.0f)
+            {
+                ZoomWarningLabel.Visible = true;
+            }
+            else
+            {
+                ZoomWarningLabel.Visible = false;
+            }
+
         }
 
         private void RotateDialog_Load(object sender, EventArgs e)

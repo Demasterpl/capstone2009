@@ -31,6 +31,7 @@
             this.RotateTextBox = new System.Windows.Forms.TextBox();
             this.SubmitButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.ZoomWarningLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // RotateTextBox
@@ -43,7 +44,7 @@
             // SubmitButton
             // 
             this.SubmitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.SubmitButton.Location = new System.Drawing.Point(53, 103);
+            this.SubmitButton.Location = new System.Drawing.Point(53, 92);
             this.SubmitButton.Name = "SubmitButton";
             this.SubmitButton.Size = new System.Drawing.Size(110, 28);
             this.SubmitButton.TabIndex = 1;
@@ -60,11 +61,21 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Rotate (Degrees)";
             // 
+            // ZoomWarningLabel
+            // 
+            this.ZoomWarningLabel.AutoSize = true;
+            this.ZoomWarningLabel.Location = new System.Drawing.Point(23, 135);
+            this.ZoomWarningLabel.Name = "ZoomWarningLabel";
+            this.ZoomWarningLabel.Size = new System.Drawing.Size(173, 13);
+            this.ZoomWarningLabel.TabIndex = 3;
+            this.ZoomWarningLabel.Text = "Note: This will zoom image to 100%";
+            // 
             // RotateDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(219, 157);
+            this.Controls.Add(this.ZoomWarningLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.RotateTextBox);
@@ -81,6 +92,7 @@
         private System.Windows.Forms.TextBox RotateTextBox;
         private System.Windows.Forms.Button SubmitButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ZoomWarningLabel;
 
     }
 }
