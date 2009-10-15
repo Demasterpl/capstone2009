@@ -80,6 +80,7 @@
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.RotateTextBox);
             this.Name = "RotateDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Rotate Image";
             this.Load += new System.EventHandler(this.RotateDialog_Load);
             this.ResumeLayout(false);
