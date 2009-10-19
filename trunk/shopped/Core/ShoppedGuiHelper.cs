@@ -21,5 +21,6 @@ namespace Core
         public static ImageHistory ImageHistory { get; set; }
         public static ImageZoom ImageZoom { get; set; }
         public static ImageResize ImageResize { get; set; }
+        public static Grayscale Grayscale { get; set; }
     }
 }

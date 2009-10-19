@@ -40,6 +40,7 @@ namespace UI
             undoToolStripMenuItem.Enabled = false;
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
+            grayscaleToolStripMenuItem.Enabled = false;
 
             ShoppedGuiHelper.CurrentImage = new PictureBoxImage();
             ShoppedGuiHelper.ImageRotate = new ImageRotate();
@@ -47,6 +48,7 @@ namespace UI
             ShoppedGuiHelper.ImageHistory = new ImageHistory();
             ShoppedGuiHelper.ImageZoom = new ImageZoom();
             ShoppedGuiHelper.ImageResize = new ImageResize();
+            ShoppedGuiHelper.Grayscale = new Grayscale();
         }
 
 
@@ -113,6 +115,7 @@ namespace UI
             viewToolStripMenuItem.Enabled = true;
             saveImageButton.Enabled = true;
             savePictureToolStripMenuItem.Enabled = true;
+            grayscaleToolStripMenuItem.Enabled = true;
         }
 
         /**
@@ -261,6 +264,12 @@ namespace UI
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPictureBoxOnUndoOrRedo(ShoppedGuiHelper.ImageHistory.Redo());
+        }
+
+        private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShoppedGuiHelper.Grayscale.MakeGrayscale();
+            UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Converte Grayscale"));
         }
     }
 }

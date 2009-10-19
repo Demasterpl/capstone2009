@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileOperations.cs" />
+    <Compile Include="Grayscale.cs" />
     <Compile Include="ImageHistory.cs" />
     <Compile Include="ImageHistoryItem.cs" />
     <Compile Include="ImageResize.cs" />
