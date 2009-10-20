@@ -269,7 +269,7 @@ namespace UI
         private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShoppedGuiHelper.Grayscale.MakeGrayscale();
-            UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Converte Grayscale"));
+            UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
         }
     }
 }
