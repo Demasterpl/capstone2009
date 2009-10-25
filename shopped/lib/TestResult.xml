@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="..\Tests\bin\Debug\Tests.dll" total="2" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-10-22" time="13:46:37">
-  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4016" os-version="Microsoft Windows NT 6.0.6002 Service Pack 2" platform="Win32NT" cwd="C:\Users\student\Desktop\shopped\lib" machine-name="LAB240" user="student" user-domain="LAB240" />
+<test-results name="C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\shopped\Tests\Tests.csproj" total="2" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-10-25" time="02:01:56">
+  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\shopped\lib" machine-name="GENESIS" user="Andy" user-domain="Genesis" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="..\Tests\bin\Debug\Tests.dll" executed="True" success="True" time="0.078" asserts="0">
+  <test-suite name="C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\shopped\Tests\Tests.csproj" executed="True" success="True" time="0.130" asserts="0">
     <results>
-      <test-suite name="Tests" executed="True" success="True" time="0.078" asserts="0">
+      <test-suite name="C:\Users\Andy\Documents\Visual Studio 2008\Projects\capstone2009\shopped\Tests\bin\Debug\Tests.dll" executed="True" success="True" time="0.112" asserts="0">
         <results>
-          <test-suite name="PictureBoxImageTester" executed="True" success="True" time="0.078" asserts="0">
+          <test-suite name="Tests" executed="True" success="True" time="0.109" asserts="0">
             <results>
-              <test-case name="Tests.PictureBoxImageTester.CanCreate" executed="True" success="True" time="0.047" asserts="0" />
-              <test-case name="Tests.PictureBoxImageTester.CanSetPictureBoxImageProperties" executed="True" success="True" time="0.000" asserts="7" />
+              <test-suite name="PictureBoxImageTester" executed="True" success="True" time="0.107" asserts="0">
+                <results>
+                  <test-case name="Tests.PictureBoxImageTester.CanCreate" executed="True" success="True" time="0.038" asserts="0" />
+                  <test-case name="Tests.PictureBoxImageTester.CanSetPictureBoxImageProperties" executed="True" success="True" time="0.041" asserts="7" />
+                </results>
+              </test-suite>
             </results>
           </test-suite>
         </results>
