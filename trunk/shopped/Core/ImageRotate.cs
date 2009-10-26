@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using Core.Images;
 
 namespace Core
 {
@@ -11,18 +12,18 @@ namespace Core
          *  
          *  @param angle The angle (in degrees) to rotate the image
          */
-        public void RotateImageByAngle(float angle)
+        public PictureBoxImage RotateImageByAngle(PictureBoxImage pictureBoxImage, float angle)
         {
 
-            if (ShoppedGuiHelper.CurrentImage.CurrentImage == null)
+            if (pictureBoxImage == null)
             {
                 throw new ArgumentNullException("image");
             }
 
             const double pi2 = Math.PI / 2.0;
 
-            var oldWidth = ShoppedGuiHelper.CurrentImage.CurrentImage.Width;
-            var oldHeight = ShoppedGuiHelper.CurrentImage.CurrentImage.Height;
+            var oldWidth = pictureBoxImage.CurrentImage.Width;
+            var oldHeight = pictureBoxImage.CurrentImage.Height;
 
             // Convert degrees to radians
             var theta = angle * Math.PI / 180.0;
@@ -118,12 +119,22 @@ namespace Core
 										 };
                 }
 
-                g.DrawImage(ShoppedGuiHelper.CurrentImage.CurrentImage, points);
+                g.DrawImage(pictureBoxImage.CurrentImage, points);
             }
 
-            ShoppedGuiHelper.CurrentImage.CurrentImage = rotatedBmp;
-            ShoppedGuiHelper.CurrentImage.CurrentHeight = rotatedBmp.Height;
-            ShoppedGuiHelper.CurrentImage.CurrentWidth = rotatedBmp.Width;
+
+            pictureBoxImage.CurrentImage = rotatedBmp;
+            pictureBoxImage.CurrentHeight = rotatedBmp.Height;
+            pictureBoxImage.CurrentWidth = rotatedBmp.Width;
+            pictureBoxImage.DegreesRotated = angle;
+
+            if (pictureBoxImage.ZoomLevel == 1.0f)
+            {
+                pictureBoxImage.UnzoomedHeight = rotatedBmp.Height;
+                pictureBoxImage.UnzoomedWidth = rotatedBmp.Width;
+            }
+
+            return pictureBoxImage;
         }
     }
 }

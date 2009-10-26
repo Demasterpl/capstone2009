@@ -39,6 +39,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -49,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImageResizeTester.cs" />
+    <Compile Include="ImageRotateTester.cs" />
+    <Compile Include="ImageZoomTester.cs" />
     <Compile Include="PictureBoxImageTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
