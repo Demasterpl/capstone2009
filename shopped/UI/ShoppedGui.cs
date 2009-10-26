@@ -182,9 +182,10 @@ namespace UI
                 ShoppedGuiHelper.CurrentImage.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
                 ShoppedGuiHelper.CurrentImage.DegreesRotated %= 360.0f;
 
-                ShoppedGuiHelper.ImageZoom.ZoomImage(1.0f);
+                ShoppedGuiHelper.CurrentImage = ShoppedGuiHelper.ImageZoom.ZoomImage(ShoppedGuiHelper.CurrentImage, 1.0f);
 
-                ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage.DegreesRotated);
+                ShoppedGuiHelper.CurrentImage = 
+                    ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage, ShoppedGuiHelper.CurrentImage.DegreesRotated);
                 UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
                 PictureBox.Refresh();
             }
@@ -201,7 +202,7 @@ namespace UI
 
             if (zoomDialog.DialogResult == DialogResult.OK)
             {
-                ShoppedGuiHelper.ImageZoom.ZoomImage(zoomDialog.ZoomLevel);
+                ShoppedGuiHelper.CurrentImage = ShoppedGuiHelper.ImageZoom.ZoomImage(ShoppedGuiHelper.CurrentImage, zoomDialog.ZoomLevel);
                 UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
                 PictureBox.Refresh();
             }
@@ -218,7 +219,7 @@ namespace UI
 
             if (resizeDialog.DialogResult == DialogResult.OK)
             {
-                ShoppedGuiHelper.ImageResize.ResizeImage(resizeDialog.ResizeLevel);
+                ShoppedGuiHelper.CurrentImage = ShoppedGuiHelper.ImageResize.ResizeImage(ShoppedGuiHelper.CurrentImage, resizeDialog.ResizeLevel);
                 UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
                 PictureBox.Refresh();
             }

@@ -44,7 +44,6 @@ namespace Tests
             Assert.AreEqual(RESIZE, image.ResizeLevel);
             Assert.AreEqual(ZOOM, image.ZoomLevel);
             Assert.AreEqual(ROTATE, image.DegreesRotated);
-
         }
     }
 }
