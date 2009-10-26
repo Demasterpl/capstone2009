@@ -19,11 +19,13 @@ namespace UI
      */
     public partial class ShoppedGui : Form
     {
-
+        private ShoppedGuiHelper _shoppedGuiHelper;
 
         public ShoppedGui()
         {
             InitializeComponent();
+
+            _shoppedGuiHelper = new ShoppedGuiHelper();
         }
 
         /**
@@ -41,14 +43,6 @@ namespace UI
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
             grayscaleToolStripMenuItem.Enabled = false;
-
-            ShoppedGuiHelper.CurrentImage = new PictureBoxImage();
-            ShoppedGuiHelper.ImageRotate = new ImageRotate();
-            ShoppedGuiHelper.FileOperation = new FileOperations();
-            ShoppedGuiHelper.ImageHistory = new ImageHistory();
-            ShoppedGuiHelper.ImageZoom = new ImageZoom();
-            ShoppedGuiHelper.ImageResize = new ImageResize();
-            ShoppedGuiHelper.Grayscale = new Grayscale();
         }
 
 
@@ -84,7 +78,7 @@ namespace UI
          */
         private void saveImageButton_Click(object sender, EventArgs e)
         {
-            ShoppedGuiHelper.FileOperation.SaveFile();
+            _shoppedGuiHelper.FileOperation.SaveFile(_shoppedGuiHelper.CurrentImage);
         }
 
         /**
@@ -100,7 +94,7 @@ namespace UI
          */
         private void savePictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShoppedGuiHelper.FileOperation.SaveFile();
+            _shoppedGuiHelper.FileOperation.SaveFile(_shoppedGuiHelper.CurrentImage);
         }
 
         /**
@@ -124,10 +118,10 @@ namespace UI
          */
         public void OpenImage()
         {
-            ShoppedGuiHelper.CurrentFileName = ShoppedGuiHelper.FileOperation.OpenFile();
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.FileOperation.OpenFile(_shoppedGuiHelper.CurrentImage);
 
-            UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, "Open image");
-            ShoppedGuiHelper.CurrentImage.InitializeCurrentImage();
+            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, "Open image");
+            _shoppedGuiHelper.CurrentImage.InitializeCurrentImage();
 
             EnableGuiItems();
             SetAdditionalInfo();
@@ -142,7 +136,7 @@ namespace UI
             PictureBox.Height = image.Height;
             PictureBox.Width = image.Width;
             PictureBox.Image = image;
-            ShoppedGuiHelper.ImageHistory.AddImageToImageHistory(PictureBox.Image, operation);
+            _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(PictureBox.Image, operation);
             SetAdditionalInfo();
             SetUndoAndRedo();
         }
@@ -162,10 +156,10 @@ namespace UI
         public void SetAdditionalInfo()
         {
             AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3}",
-                ShoppedGuiHelper.CurrentImage.UnzoomedHeight, 
-                ShoppedGuiHelper.CurrentImage.UnzoomedWidth, 
-                ShoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f, 
-                System.IO.Path.GetFileName(ShoppedGuiHelper.CurrentFileName));
+                PictureBox.Height,
+                PictureBox.Width,
+                _shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f,
+                System.IO.Path.GetFileName(_shoppedGuiHelper.CurrentImage.FileName));
         }
 
         /**
@@ -174,19 +168,19 @@ namespace UI
          */
         private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var rotateDialog = new RotateDialog();
+            var rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             rotateDialog.ShowDialog();
 
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
-                ShoppedGuiHelper.CurrentImage.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
-                ShoppedGuiHelper.CurrentImage.DegreesRotated %= 360.0f;
+                _shoppedGuiHelper.CurrentImage.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
+                _shoppedGuiHelper.CurrentImage.DegreesRotated %= 360.0f;
 
-                ShoppedGuiHelper.CurrentImage = ShoppedGuiHelper.ImageZoom.ZoomImage(ShoppedGuiHelper.CurrentImage, 1.0f);
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, 1.0f);
 
-                ShoppedGuiHelper.CurrentImage = 
-                    ShoppedGuiHelper.ImageRotate.RotateImageByAngle(ShoppedGuiHelper.CurrentImage, ShoppedGuiHelper.CurrentImage.DegreesRotated);
-                UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
+                _shoppedGuiHelper.CurrentImage =
+                    _shoppedGuiHelper.ImageRotate.RotateImageByAngle(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.CurrentImage.DegreesRotated);
+                UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
                 PictureBox.Refresh();
             }
         }
@@ -202,8 +196,8 @@ namespace UI
 
             if (zoomDialog.DialogResult == DialogResult.OK)
             {
-                ShoppedGuiHelper.CurrentImage = ShoppedGuiHelper.ImageZoom.ZoomImage(ShoppedGuiHelper.CurrentImage, zoomDialog.ZoomLevel);
-                UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, zoomDialog.ZoomLevel);
+                UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
                 PictureBox.Refresh();
             }
         }      
@@ -214,28 +208,28 @@ namespace UI
          */
         private void resizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var resizeDialog = new ResizeDialog();
+            var resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             resizeDialog.ShowDialog();
 
             if (resizeDialog.DialogResult == DialogResult.OK)
             {
-                ShoppedGuiHelper.CurrentImage = ShoppedGuiHelper.ImageResize.ResizeImage(ShoppedGuiHelper.CurrentImage, resizeDialog.ResizeLevel);
-                UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageResize.ResizeImage(_shoppedGuiHelper.CurrentImage, resizeDialog.ResizeLevel);
+                UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
                 PictureBox.Refresh();
             }
         }
 
         private void SetUndoAndRedo()
         {
-            int count = ShoppedGuiHelper.ImageHistory.GetNumberOfImagesInHistory();
-            int revision = ShoppedGuiHelper.ImageHistory.GetCurrentRevision();
+            int count = _shoppedGuiHelper.ImageHistory.GetNumberOfImagesInHistory();
+            int revision = _shoppedGuiHelper.ImageHistory.GetCurrentRevision();
 
             //for redo
             if (revision >= 0 && revision != (count - 1))
             {
                 redoToolStripMenuItem.Enabled = true;
-                redoToolStripMenuItem.ToolTipText = 
-                    ShoppedGuiHelper.ImageHistory.ImageRevisions[revision + 1].OperationPerformed;
+                redoToolStripMenuItem.ToolTipText =
+                    _shoppedGuiHelper.ImageHistory.ImageRevisions[revision + 1].OperationPerformed;
             }
             else
             {
@@ -248,7 +242,7 @@ namespace UI
             {
                 undoToolStripMenuItem.Enabled = true;
                 undoToolStripMenuItem.ToolTipText =
-                    ShoppedGuiHelper.ImageHistory.ImageRevisions[revision].OperationPerformed;
+                    _shoppedGuiHelper.ImageHistory.ImageRevisions[revision].OperationPerformed;
             }
             else
             {
@@ -259,18 +253,18 @@ namespace UI
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(ShoppedGuiHelper.ImageHistory.Undo());
+            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
         }
 
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(ShoppedGuiHelper.ImageHistory.Redo());
+            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
         }
 
         private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShoppedGuiHelper.Grayscale.MakeGrayscale();
-            UpdatePictureBoxInfo(ShoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
         }
     }
 }

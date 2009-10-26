@@ -20,6 +20,7 @@ namespace Core.Images
      */
     public class PictureBoxImage
     {
+        public string FileName { get; set; }
         public int CurrentHeight { get; set; }
         public int CurrentWidth { get; set; }
         public int UnzoomedHeight { get; set; }
