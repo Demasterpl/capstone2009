@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
+using Core.Images;
 namespace Core
 {
     public class Grayscale
     {
-        public void MakeGrayscale()
+        public PictureBoxImage MakeGrayscale(PictureBoxImage pictureBoxImage)
         {
-            var GrayscaleBmp = new Bitmap(ShoppedGuiHelper.CurrentImage.CurrentImage.Width, ShoppedGuiHelper.CurrentImage.CurrentImage.Height);
+            var GrayscaleBmp = new Bitmap(pictureBoxImage.CurrentImage.Width, pictureBoxImage.CurrentImage.Height);
             Graphics g = Graphics.FromImage(GrayscaleBmp);
 
             ColorMatrix colorMatrix = new ColorMatrix(
@@ -25,15 +26,15 @@ namespace Core
 
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
-            g.DrawImage(ShoppedGuiHelper.CurrentImage.CurrentImage,
-                new Rectangle(0, 0, ShoppedGuiHelper.CurrentImage.CurrentImage.Width, ShoppedGuiHelper.CurrentImage.CurrentImage.Height),
-                    0, 0, ShoppedGuiHelper.CurrentImage.CurrentImage.Width, ShoppedGuiHelper.CurrentImage.CurrentImage.Height,
+            g.DrawImage(pictureBoxImage.CurrentImage,
+                new Rectangle(0, 0, pictureBoxImage.CurrentImage.Width, pictureBoxImage.CurrentImage.Height),
+                    0, 0, pictureBoxImage.CurrentImage.Width, pictureBoxImage.CurrentImage.Height,
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            ShoppedGuiHelper.CurrentImage.CurrentImage = GrayscaleBmp;
+            pictureBoxImage.CurrentImage = GrayscaleBmp;
 
-            
+            return pictureBoxImage;
         }
     }
 }

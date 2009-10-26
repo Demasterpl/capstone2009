@@ -14,12 +14,12 @@ namespace UI
     {
         public float ResizeLevel;
 
-        public ResizeDialog()
+        public ResizeDialog(float zoomLevel)
         {
             InitializeComponent();
 
             //Warn user that image will be rezoomed to 100%
-            if (ShoppedGuiHelper.CurrentImage.ZoomLevel != 1.0f)
+            if (zoomLevel != 1.0f)
             {
                 ZoomWarningLabel.Visible = true;
             }

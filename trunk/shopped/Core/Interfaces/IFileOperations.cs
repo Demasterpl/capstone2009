@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using System.Drawing;
+using Core.Images;
 
 namespace Core.Interfaces
 {
@@ -10,7 +11,7 @@ namespace Core.Interfaces
      */
     public interface IFileOperations
     {
-        string OpenFile();
-        void SaveFile();
+        PictureBoxImage OpenFile(PictureBoxImage pictureBoxImage);
+        void SaveFile(PictureBoxImage pictureBoxImage);
     }
 }

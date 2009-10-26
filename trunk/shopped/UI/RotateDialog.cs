@@ -14,12 +14,12 @@ namespace UI
     {
         public float RotateDegrees;
 
-        public RotateDialog()
+        public RotateDialog(float zoomLevel)
         {
             InitializeComponent();
 
             //Warn user that zoom level will be reset to 100%
-            if (ShoppedGuiHelper.CurrentImage.ZoomLevel != 1.0f)
+            if (zoomLevel != 1.0f)
             {
                 ZoomWarningLabel.Visible = true;
             }

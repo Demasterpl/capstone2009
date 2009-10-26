@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Core.Interfaces;
+using Core.Images;
 
 namespace Core
 {
@@ -10,7 +11,7 @@ namespace Core
         /**  
          *  Opens a file dialog to select an image, then opens the file inside the Shopped main GUI.
          */
-        public string OpenFile()
+        public PictureBoxImage OpenFile(PictureBoxImage pictureBoxImage)
         {
             var openFileDialog = new OpenFileDialog
              {
@@ -22,7 +23,8 @@ namespace Core
             {
                 try
                 {
-                    ShoppedGuiHelper.CurrentImage.CurrentImage = new Bitmap(openFileDialog.OpenFile());
+                    pictureBoxImage.CurrentImage = new Bitmap(openFileDialog.OpenFile());
+                    pictureBoxImage.FileName = openFileDialog.FileName;
                 }
                 catch (Exception ex)
                 {
@@ -31,17 +33,17 @@ namespace Core
 
             }
 
-            return openFileDialog.FileName;
+            return pictureBoxImage;
         }
 
         /**  
          *  Opens a save file dialog to save the image that is open in the Shopped main GUI.
          */
-        public void SaveFile()
+        public void SaveFile(PictureBoxImage pictureBoxImage)
         {
             var saveFileDialog = new SaveFileDialog
              {
-                 FileName = ShoppedGuiHelper.CurrentFileName,
+                 FileName = pictureBoxImage.FileName,
                  Filter = "JPEG (*.jpeg)|*.jpeg| Bitmap (*.bmp)|*.bmp"
              };
             
@@ -53,7 +55,7 @@ namespace Core
                 {
                     try
                     {
-                        ShoppedGuiHelper.CurrentImage.CurrentImage.Save(saveFileDialog.FileName);
+                        pictureBoxImage.CurrentImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
@@ -66,7 +68,7 @@ namespace Core
                 {
                     try
                     {
-                        ShoppedGuiHelper.CurrentImage.CurrentImage.Save(saveFileDialog.FileName);
+                        pictureBoxImage.CurrentImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
