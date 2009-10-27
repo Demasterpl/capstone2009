@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using Core.Images;
 
 namespace Core
 {
@@ -27,7 +28,7 @@ namespace Core
          * @param image The image to add to the list
          * @param operation A string detailing what operation was just performed
          */
-        public void AddImageToImageHistory(Image image, string operation)
+        public void AddImageToImageHistory(PictureBoxImage image, string operation)
         {
             ImageRevisions.Add(new ImageHistoryItem { Image = image, OperationPerformed = operation });
             ++CurrentRevision;
@@ -37,7 +38,7 @@ namespace Core
          * Attempts an undo operation by checking if an object exists before the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
-        public Image Undo()
+        public PictureBoxImage Undo()
         {
             try
             {
@@ -59,7 +60,7 @@ namespace Core
          * Attempts a redo operation by checking if an object exists after the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
-        public Image Redo()
+        public PictureBoxImage Redo()
         {
             try
             {

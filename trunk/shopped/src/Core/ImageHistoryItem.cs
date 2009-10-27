@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using Core.Images;
 
 namespace Core
 {
@@ -11,7 +12,7 @@ namespace Core
      */
     public class ImageHistoryItem
     {
-        public Image Image { get; set; }
+        public PictureBoxImage Image { get; set; }
         public string OperationPerformed { get; set; }
     }
 }

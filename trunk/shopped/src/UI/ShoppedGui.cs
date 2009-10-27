@@ -130,7 +130,7 @@ namespace UI
             PictureBox.Height = image.Height;
             PictureBox.Width = image.Width;
             PictureBox.Image = image;
-            _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(PictureBox.Image, operation);
+            _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(_shoppedGuiHelper.CurrentImage, operation);
             SetAdditionalInfo();
             SetUndoAndRedo();
         }
@@ -143,11 +143,11 @@ namespace UI
          * 
          * @param image The image from the ImageHistory class.
          */
-        public void SetPictureBoxOnUndoOrRedo(Image image)
+        public void SetPictureBoxOnUndoOrRedo(PictureBoxImage image)
         {
-            PictureBox.Height = image.Height;
-            PictureBox.Width = image.Width;
-            PictureBox.Image = image;
+            PictureBox.Height = image.CurrentHeight;
+            PictureBox.Width = image.CurrentWidth;
+            PictureBox.Image = image.CurrentImage;
             SetUndoAndRedo();
         }
 
