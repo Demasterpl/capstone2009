@@ -9,6 +9,13 @@ namespace Core
 {
     public class Grayscale
     {
+
+        /**
+         * A filter that will make an Image object grayscale.
+         * 
+         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
+         * @return A PictureBoxImage object with the appropriate properties set by this method.
+         */
         public PictureBoxImage MakeGrayscale(PictureBoxImage pictureBoxImage)
         {
             var GrayscaleBmp = new Bitmap(pictureBoxImage.CurrentImage.Width, pictureBoxImage.CurrentImage.Height);

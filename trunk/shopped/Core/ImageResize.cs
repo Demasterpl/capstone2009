@@ -20,7 +20,10 @@ namespace Core
 
         /**
          * Resizes the image in the Shopped GUI to the specified resize level.
+         * 
          * @param resize The amount to resize the image to.
+         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
+         * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
         public PictureBoxImage ResizeImage(PictureBoxImage pictureBoxImage, float resize)
         {

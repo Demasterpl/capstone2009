@@ -5,6 +5,8 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{class_core_1_1_image_history_afd0731bf62c251559970493943977486}{ImageHistory} ()
+\item 
 void \hyperlink{class_core_1_1_image_history_a6631d7fefea3a1a28fc6dcdf887daf37}{AddImageToImageHistory} (Image image, string operation)
 \item 
 Image \hyperlink{class_core_1_1_image_history_ade2a92df5f5525b0e3951b45b2f3434e}{Undo} ()
@@ -18,25 +20,29 @@ int \hyperlink{class_core_1_1_image_history_a421e672ff9f20e10a03bf989cff4442e}{G
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_core_1_1_image_history_abb81d12e0bcf3f1f0e79c797f38cc6f2}{
-List$<$ \hyperlink{class_core_1_1_image_history_item}{ImageHistoryItem} $>$ {\bfseries ImageRevisions}}
-\label{class_core_1_1_image_history_abb81d12e0bcf3f1f0e79c797f38cc6f2}
-
+List$<$ \hyperlink{class_core_1_1_image_history_item}{ImageHistoryItem} $>$ \hyperlink{class_core_1_1_image_history_abb81d12e0bcf3f1f0e79c797f38cc6f2}{ImageRevisions}
 \end{DoxyCompactItemize}
 \subsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_core_1_1_image_history_a1a695f64608fc10b95bce32634092f3c}{
-int {\bfseries CurrentRevision}}
-\label{class_core_1_1_image_history_a1a695f64608fc10b95bce32634092f3c}
-
+int \hyperlink{class_core_1_1_image_history_a1a695f64608fc10b95bce32634092f3c}{CurrentRevision}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Manages the list of ImageHistoryItems (to do undo and redo) as well as carry out the undo and redo operations. 
+Manages the list of ImageHistoryItems (to do undo and redo) as well as carry out the undo and redo operations.
+
+
 \begin{DoxyParams}{Parameters}
 \item[{\em ImageRevisions}]A list of \hyperlink{class_core_1_1_image_history_item}{ImageHistoryItem} objects (which contain an Image object and a string detailing the operation). \end{DoxyParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_core_1_1_image_history_afd0731bf62c251559970493943977486}{
+\index{Core::ImageHistory@{Core::ImageHistory}!ImageHistory@{ImageHistory}}
+\index{ImageHistory@{ImageHistory}!Core::ImageHistory@{Core::ImageHistory}}
+\subsubsection[{ImageHistory}]{\setlength{\rightskip}{0pt plus 5cm}Core::ImageHistory::ImageHistory ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_core_1_1_image_history_afd0731bf62c251559970493943977486}
 
 
 \subsection{Member Function Documentation}
@@ -76,6 +82,19 @@ Attempts a redo operation by checking if an object exists after the CurrentRevis
 \label{class_core_1_1_image_history_ade2a92df5f5525b0e3951b45b2f3434e}
 Attempts an undo operation by checking if an object exists before the CurrentRevision iterator, then returning that \hyperlink{class_core_1_1_image_history_item}{ImageHistoryItem} node if it does exist. 
 
+\subsection{Member Data Documentation}
+\hypertarget{class_core_1_1_image_history_a1a695f64608fc10b95bce32634092f3c}{
+\index{Core::ImageHistory@{Core::ImageHistory}!CurrentRevision@{CurrentRevision}}
+\index{CurrentRevision@{CurrentRevision}!Core::ImageHistory@{Core::ImageHistory}}
+\subsubsection[{CurrentRevision}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Core::ImageHistory::CurrentRevision}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{class_core_1_1_image_history_a1a695f64608fc10b95bce32634092f3c}
+\hypertarget{class_core_1_1_image_history_abb81d12e0bcf3f1f0e79c797f38cc6f2}{
+\index{Core::ImageHistory@{Core::ImageHistory}!ImageRevisions@{ImageRevisions}}
+\index{ImageRevisions@{ImageRevisions}!Core::ImageHistory@{Core::ImageHistory}}
+\subsubsection[{ImageRevisions}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf ImageHistoryItem}$>$ {\bf Core::ImageHistory::ImageRevisions}}}
+\label{class_core_1_1_image_history_abb81d12e0bcf3f1f0e79c797f38cc6f2}
+
+
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-C:/Users/Andy/Documents/Visual Studio 2008/Projects/capstone2009/shopped/Core/ImageHistory.cs\end{DoxyCompactItemize}
+C:/Users/Andy/Documents/Visual Studio 2008/Projects/capstone2009/shopped/Core/\hyperlink{_image_history_8cs}{ImageHistory.cs}\end{DoxyCompactItemize}

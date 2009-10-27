@@ -14,6 +14,11 @@ namespace UI
     {
         public float ResizeLevel;
 
+        /**
+         * A constructor for ResizeDialog
+         * 
+         * @param zoomLevel The amount of zoom of the current image in Shopped GUI
+         */
         public ResizeDialog(float zoomLevel)
         {
             InitializeComponent();

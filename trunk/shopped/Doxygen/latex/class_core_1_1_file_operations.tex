@@ -11,29 +11,42 @@ Inheritance diagram for Core::FileOperations::\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-string \hyperlink{class_core_1_1_file_operations_a993401dfb5fb996bcd3188dab38d18d7}{OpenFile} ()
+\hyperlink{class_core_1_1_images_1_1_picture_box_image}{PictureBoxImage} \hyperlink{class_core_1_1_file_operations_a108130b2bd87d432c0fbbb4f6a42c662}{OpenFile} (\hyperlink{class_core_1_1_images_1_1_picture_box_image}{PictureBoxImage} pictureBoxImage)
 \item 
-void \hyperlink{class_core_1_1_file_operations_a4cabf77d73d7c51a6a97f9f49af1dfb6}{SaveFile} ()
+void \hyperlink{class_core_1_1_file_operations_a0fc5427e96d79e70c6409ec22e70abba}{SaveFile} (\hyperlink{class_core_1_1_images_1_1_picture_box_image}{PictureBoxImage} pictureBoxImage)
 \end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_core_1_1_file_operations_a993401dfb5fb996bcd3188dab38d18d7}{
+\hypertarget{class_core_1_1_file_operations_a108130b2bd87d432c0fbbb4f6a42c662}{
 \index{Core::FileOperations@{Core::FileOperations}!OpenFile@{OpenFile}}
 \index{OpenFile@{OpenFile}!Core::FileOperations@{Core::FileOperations}}
-\subsubsection[{OpenFile}]{\setlength{\rightskip}{0pt plus 5cm}string Core::FileOperations::OpenFile ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{class_core_1_1_file_operations_a993401dfb5fb996bcd3188dab38d18d7}
-Opens a file dialog to select an image, then opens the file inside the Shopped main GUI. 
+\subsubsection[{OpenFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PictureBoxImage} Core::FileOperations::OpenFile ({\bf PictureBoxImage} {\em pictureBoxImage})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_core_1_1_file_operations_a108130b2bd87d432c0fbbb4f6a42c662}
+Opens a file dialog to select an image, then opens the file inside the Shopped main GUI.
 
-Implements \hyperlink{interface_core_1_1_interfaces_1_1_i_file_operations}{Core::Interfaces::IFileOperations}.\hypertarget{class_core_1_1_file_operations_a4cabf77d73d7c51a6a97f9f49af1dfb6}{
+
+\begin{DoxyParams}{Parameters}
+\item[{\em pictureBoxImage}]The PictureBoxImage object in the current context of Shopped GUI \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A PictureBoxImage object with the appropriate properties set by this method. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interface_core_1_1_interfaces_1_1_i_file_operations_a373c3e1cc40a59b65e77cf9551463419}{Core::Interfaces::IFileOperations}.\hypertarget{class_core_1_1_file_operations_a0fc5427e96d79e70c6409ec22e70abba}{
 \index{Core::FileOperations@{Core::FileOperations}!SaveFile@{SaveFile}}
 \index{SaveFile@{SaveFile}!Core::FileOperations@{Core::FileOperations}}
-\subsubsection[{SaveFile}]{\setlength{\rightskip}{0pt plus 5cm}void Core::FileOperations::SaveFile ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
-\label{class_core_1_1_file_operations_a4cabf77d73d7c51a6a97f9f49af1dfb6}
-Opens a save file dialog to save the image that is open in the Shopped main GUI. 
+\subsubsection[{SaveFile}]{\setlength{\rightskip}{0pt plus 5cm}void Core::FileOperations::SaveFile ({\bf PictureBoxImage} {\em pictureBoxImage})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_core_1_1_file_operations_a0fc5427e96d79e70c6409ec22e70abba}
+Opens a save file dialog to save the image that is open in the Shopped main GUI.
 
-Implements \hyperlink{interface_core_1_1_interfaces_1_1_i_file_operations}{Core::Interfaces::IFileOperations}.
+
+\begin{DoxyParams}{Parameters}
+\item[{\em pictureBoxImage}]The PictureBoxImage object in the current context of Shopped GUI \end{DoxyParams}
+
+
+Implements \hyperlink{interface_core_1_1_interfaces_1_1_i_file_operations_a254301628fd3053115f557626aa71f14}{Core::Interfaces::IFileOperations}.
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-C:/Users/Andy/Documents/Visual Studio 2008/Projects/capstone2009/shopped/Core/FileOperations.cs\end{DoxyCompactItemize}
+C:/Users/Andy/Documents/Visual Studio 2008/Projects/capstone2009/shopped/Core/\hyperlink{_file_operations_8cs}{FileOperations.cs}\end{DoxyCompactItemize}

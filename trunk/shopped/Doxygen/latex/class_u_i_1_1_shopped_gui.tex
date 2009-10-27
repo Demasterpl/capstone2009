@@ -5,16 +5,15 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\hyperlink{class_u_i_1_1_shopped_gui_a3aa57a391c2005ffafa61ff34be5d4b6}{ShoppedGui} ()
+\item 
 void \hyperlink{class_u_i_1_1_shopped_gui_a190bba777e57891c8042b86afbba83c6}{EnableGuiItems} ()
 \item 
 void \hyperlink{class_u_i_1_1_shopped_gui_a3a27f074b7b204b1df148921a0dcc20c}{OpenImage} ()
 \item 
 void \hyperlink{class_u_i_1_1_shopped_gui_a7e94e570fc92b635f64b1e540c2c86cd}{UpdatePictureBoxInfo} (Image image, string operation)
 \item 
-\hypertarget{class_u_i_1_1_shopped_gui_a9771176182b68022bc433aba6e42395f}{
-void {\bfseries SetPictureBoxOnUndoOrRedo} (Image image)}
-\label{class_u_i_1_1_shopped_gui_a9771176182b68022bc433aba6e42395f}
-
+void \hyperlink{class_u_i_1_1_shopped_gui_a9771176182b68022bc433aba6e42395f}{SetPictureBoxOnUndoOrRedo} (Image image)
 \item 
 void \hyperlink{class_u_i_1_1_shopped_gui_a292a827437d7f2098c13bc1a735a569e}{SetAdditionalInfo} ()
 \end{DoxyCompactItemize}
@@ -41,27 +40,35 @@ void \hyperlink{class_u_i_1_1_shopped_gui_a5f99b03c74d01734153873d6c35fbdf3}{zoo
 \item 
 void \hyperlink{class_u_i_1_1_shopped_gui_a05e2b57477f10f88b1ee06b6b5aa4d86}{resizeToolStripMenuItem\_\-Click} (object sender, EventArgs e)
 \item 
-\hypertarget{class_u_i_1_1_shopped_gui_a99e47a8b843bf190a7a0e3f8b3f5abb9}{
-void {\bfseries SetUndoAndRedo} ()}
-\label{class_u_i_1_1_shopped_gui_a99e47a8b843bf190a7a0e3f8b3f5abb9}
-
+void \hyperlink{class_u_i_1_1_shopped_gui_a99e47a8b843bf190a7a0e3f8b3f5abb9}{SetUndoAndRedo} ()
 \item 
-\hypertarget{class_u_i_1_1_shopped_gui_a167624483eae61dcbe7de755ad0549a5}{
-void {\bfseries undoToolStripMenuItem\_\-Click} (object sender, EventArgs e)}
-\label{class_u_i_1_1_shopped_gui_a167624483eae61dcbe7de755ad0549a5}
-
+void \hyperlink{class_u_i_1_1_shopped_gui_a167624483eae61dcbe7de755ad0549a5}{undoToolStripMenuItem\_\-Click} (object sender, EventArgs e)
 \item 
-\hypertarget{class_u_i_1_1_shopped_gui_a5828d5deddf5b8453e01db469a1a6f83}{
-void {\bfseries redoToolStripMenuItem\_\-Click} (object sender, EventArgs e)}
-\label{class_u_i_1_1_shopped_gui_a5828d5deddf5b8453e01db469a1a6f83}
-
+void \hyperlink{class_u_i_1_1_shopped_gui_a5828d5deddf5b8453e01db469a1a6f83}{redoToolStripMenuItem\_\-Click} (object sender, EventArgs e)
+\item 
+void \hyperlink{class_u_i_1_1_shopped_gui_a9bfb029eb21eb1c7c4fddcee35d1d9fc}{grayscaleToolStripMenuItem\_\-Click} (object sender, EventArgs e)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_core_1_1_shopped_gui_helper}{ShoppedGuiHelper} \hyperlink{class_u_i_1_1_shopped_gui_a19139212d3779912c914ee07e2365cf6}{\_\-shoppedGuiHelper}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-The class that loads, runs and handles events of the Shopped main GUI. 
+The class that loads, runs and handles events of the Shopped main GUI.
+
+
 \begin{DoxyParams}{Parameters}
-\item[{\em CurrentFileName}]The absolute path to the image file loaded. \item[{\em CurrentImage}]Holds the state of the current image in the GUI. \item[{\em TempImage}]Holds temporary states of the image in the GUI (i.e. zoom). \item[{\em Zoom}]How much the image is zoomed in the GUI (1.0 == 100\%). \item[{\em DegreesRotated}]Holds the value for how much the image is rotated in the GUI (in degrees). \item[{\em ImageRotate}]Instance of ImageRotate class to handle rotating the image. \item[{\em FileOperation}]Instance of FileOperation class to handle opening/saving the image. \end{DoxyParams}
+\item[{\em \_\-shoppedGuiHelper}]An instance of the ShoppedGuiHelper class. \end{DoxyParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_u_i_1_1_shopped_gui_a3aa57a391c2005ffafa61ff34be5d4b6}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!ShoppedGui@{ShoppedGui}}
+\index{ShoppedGui@{ShoppedGui}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{ShoppedGui}]{\setlength{\rightskip}{0pt plus 5cm}UI::ShoppedGui::ShoppedGui ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a3aa57a391c2005ffafa61ff34be5d4b6}
 
 
 \subsection{Member Function Documentation}
@@ -85,7 +92,12 @@ Handles the event of clicking File-\/$>$Exit menu item. Exits the program. \hype
 \index{Form1\_\-Load@{Form1\_\-Load}!UI::ShoppedGui@{UI::ShoppedGui}}
 \subsubsection[{Form1\_\-Load}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::Form1\_\-Load (object {\em sender}, \/  EventArgs {\em e})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}
 \label{class_u_i_1_1_shopped_gui_ad9bcb5a3a89de53a6ef580bd806fae26}
-Initial loading of the Shopped program. Disables certain features/options that should not be available until an image is loaded into the program. \hypertarget{class_u_i_1_1_shopped_gui_a3a27f074b7b204b1df148921a0dcc20c}{
+Initial loading of the Shopped program. Disables certain features/options that should not be available until an image is loaded into the program. \hypertarget{class_u_i_1_1_shopped_gui_a9bfb029eb21eb1c7c4fddcee35d1d9fc}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!grayscaleToolStripMenuItem\_\-Click@{grayscaleToolStripMenuItem\_\-Click}}
+\index{grayscaleToolStripMenuItem\_\-Click@{grayscaleToolStripMenuItem\_\-Click}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{grayscaleToolStripMenuItem\_\-Click}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::grayscaleToolStripMenuItem\_\-Click (object {\em sender}, \/  EventArgs {\em e})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a9bfb029eb21eb1c7c4fddcee35d1d9fc}
+Handles the event of clicking the Tools-\/$>$Grayscale menu item. \hypertarget{class_u_i_1_1_shopped_gui_a3a27f074b7b204b1df148921a0dcc20c}{
 \index{UI::ShoppedGui@{UI::ShoppedGui}!OpenImage@{OpenImage}}
 \index{OpenImage@{OpenImage}!UI::ShoppedGui@{UI::ShoppedGui}}
 \subsubsection[{OpenImage}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::OpenImage ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
@@ -100,7 +112,12 @@ Handles the event of clicking \char`\"{}Open Image\char`\"{} icon. \hypertarget{
 \index{openPictureToolStripMenuItem\_\-Click@{openPictureToolStripMenuItem\_\-Click}!UI::ShoppedGui@{UI::ShoppedGui}}
 \subsubsection[{openPictureToolStripMenuItem\_\-Click}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::openPictureToolStripMenuItem\_\-Click (object {\em sender}, \/  EventArgs {\em e})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}
 \label{class_u_i_1_1_shopped_gui_a059988dec5a74fcc82ee2eb503d49118}
-Handles the event of clicking File-\/$>$Open Picture menu item. \hypertarget{class_u_i_1_1_shopped_gui_a05e2b57477f10f88b1ee06b6b5aa4d86}{
+Handles the event of clicking File-\/$>$Open Picture menu item. \hypertarget{class_u_i_1_1_shopped_gui_a5828d5deddf5b8453e01db469a1a6f83}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!redoToolStripMenuItem\_\-Click@{redoToolStripMenuItem\_\-Click}}
+\index{redoToolStripMenuItem\_\-Click@{redoToolStripMenuItem\_\-Click}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{redoToolStripMenuItem\_\-Click}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::redoToolStripMenuItem\_\-Click (object {\em sender}, \/  EventArgs {\em e})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a5828d5deddf5b8453e01db469a1a6f83}
+Handles the event of clicking the Edit-\/$>$Redo menu item. \hypertarget{class_u_i_1_1_shopped_gui_a05e2b57477f10f88b1ee06b6b5aa4d86}{
 \index{UI::ShoppedGui@{UI::ShoppedGui}!resizeToolStripMenuItem\_\-Click@{resizeToolStripMenuItem\_\-Click}}
 \index{resizeToolStripMenuItem\_\-Click@{resizeToolStripMenuItem\_\-Click}!UI::ShoppedGui@{UI::ShoppedGui}}
 \subsubsection[{resizeToolStripMenuItem\_\-Click}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::resizeToolStripMenuItem\_\-Click (object {\em sender}, \/  EventArgs {\em e})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}
@@ -125,14 +142,38 @@ Handles the event of clicking File-\/$>$Save Picture menu item. \hypertarget{cla
 \index{SetAdditionalInfo@{SetAdditionalInfo}!UI::ShoppedGui@{UI::ShoppedGui}}
 \subsubsection[{SetAdditionalInfo}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::SetAdditionalInfo ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{class_u_i_1_1_shopped_gui_a292a827437d7f2098c13bc1a735a569e}
-Sets the information about the PictureBox image that is located at the bottom of the Shopped GUI. Information includes height, width and the name of the image. \hypertarget{class_u_i_1_1_shopped_gui_a7e94e570fc92b635f64b1e540c2c86cd}{
+Sets the information about the PictureBox image that is located at the bottom of the Shopped GUI. Information includes height, width and the name of the image. \hypertarget{class_u_i_1_1_shopped_gui_a9771176182b68022bc433aba6e42395f}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!SetPictureBoxOnUndoOrRedo@{SetPictureBoxOnUndoOrRedo}}
+\index{SetPictureBoxOnUndoOrRedo@{SetPictureBoxOnUndoOrRedo}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{SetPictureBoxOnUndoOrRedo}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::SetPictureBoxOnUndoOrRedo (Image {\em image})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a9771176182b68022bc433aba6e42395f}
+Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently displayed) to that Image object.
+
+TODO: Change Image object to PictureBoxImage object.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em image}]The image from the ImageHistory class. \end{DoxyParams}
+\hypertarget{class_u_i_1_1_shopped_gui_a99e47a8b843bf190a7a0e3f8b3f5abb9}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!SetUndoAndRedo@{SetUndoAndRedo}}
+\index{SetUndoAndRedo@{SetUndoAndRedo}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{SetUndoAndRedo}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::SetUndoAndRedo ()\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a99e47a8b843bf190a7a0e3f8b3f5abb9}
+Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo buttons and menu items in the GUI. This will also set the tooltip text for the undo/redo GUI items. \hypertarget{class_u_i_1_1_shopped_gui_a167624483eae61dcbe7de755ad0549a5}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!undoToolStripMenuItem\_\-Click@{undoToolStripMenuItem\_\-Click}}
+\index{undoToolStripMenuItem\_\-Click@{undoToolStripMenuItem\_\-Click}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{undoToolStripMenuItem\_\-Click}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::undoToolStripMenuItem\_\-Click (object {\em sender}, \/  EventArgs {\em e})\hspace{0.3cm}{\ttfamily  \mbox{[}inline, private\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a167624483eae61dcbe7de755ad0549a5}
+Handles the event of clicking the Edit-\/$>$Undo menu item. \hypertarget{class_u_i_1_1_shopped_gui_a7e94e570fc92b635f64b1e540c2c86cd}{
 \index{UI::ShoppedGui@{UI::ShoppedGui}!UpdatePictureBoxInfo@{UpdatePictureBoxInfo}}
 \index{UpdatePictureBoxInfo@{UpdatePictureBoxInfo}!UI::ShoppedGui@{UI::ShoppedGui}}
 \subsubsection[{UpdatePictureBoxInfo}]{\setlength{\rightskip}{0pt plus 5cm}void UI::ShoppedGui::UpdatePictureBoxInfo (Image {\em image}, \/  string {\em operation})\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}
 \label{class_u_i_1_1_shopped_gui_a7e94e570fc92b635f64b1e540c2c86cd}
-Sets the PictureBox to the image passed to this method. 
+Sets the PictureBox to the image passed to this method.
+
+
 \begin{DoxyParams}{Parameters}
-\item[{\em image}]The image to set the PictureBox to. \end{DoxyParams}
+\item[{\em image}]The image to set the PictureBox to. \item[{\em operation}]A brief description of the operation just performed to the Shopped GUI image. \end{DoxyParams}
 \hypertarget{class_u_i_1_1_shopped_gui_a5f99b03c74d01734153873d6c35fbdf3}{
 \index{UI::ShoppedGui@{UI::ShoppedGui}!zoomImageToolStripMenuItem\_\-Click@{zoomImageToolStripMenuItem\_\-Click}}
 \index{zoomImageToolStripMenuItem\_\-Click@{zoomImageToolStripMenuItem\_\-Click}!UI::ShoppedGui@{UI::ShoppedGui}}
@@ -140,6 +181,14 @@ Sets the PictureBox to the image passed to this method.
 \label{class_u_i_1_1_shopped_gui_a5f99b03c74d01734153873d6c35fbdf3}
 Handles the event of clicking the View-\/$>$Zoom Image menu item. Displays the \hyperlink{class_u_i_1_1_zoom_dialog}{ZoomDialog} windows form, obtains the value to zoom from the form, then zooms the image according to the zoom value. 
 
+\subsection{Member Data Documentation}
+\hypertarget{class_u_i_1_1_shopped_gui_a19139212d3779912c914ee07e2365cf6}{
+\index{UI::ShoppedGui@{UI::ShoppedGui}!\_\-shoppedGuiHelper@{\_\-shoppedGuiHelper}}
+\index{\_\-shoppedGuiHelper@{\_\-shoppedGuiHelper}!UI::ShoppedGui@{UI::ShoppedGui}}
+\subsubsection[{\_\-shoppedGuiHelper}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ShoppedGuiHelper} {\bf UI::ShoppedGui::\_\-shoppedGuiHelper}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{class_u_i_1_1_shopped_gui_a19139212d3779912c914ee07e2365cf6}
+
+
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-C:/Users/Andy/Documents/Visual Studio 2008/Projects/capstone2009/shopped/UI/ShoppedGui.cs\end{DoxyCompactItemize}
+C:/Users/Andy/Documents/Visual Studio 2008/Projects/capstone2009/shopped/UI/\hyperlink{_shopped_gui_8cs}{ShoppedGui.cs}\end{DoxyCompactItemize}

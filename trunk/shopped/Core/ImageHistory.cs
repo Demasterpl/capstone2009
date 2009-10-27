@@ -8,6 +8,7 @@ namespace Core
 {
     /**
      * Manages the list of ImageHistoryItems (to do undo and redo) as well as carry out the undo and redo operations.
+     * 
      * @param ImageRevisions A list of ImageHistoryItem objects (which contain an Image object and a string detailing the operation).
      */
     public class ImageHistory

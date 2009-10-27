@@ -18,7 +18,10 @@ namespace Core
 
         /**
          * Zooms the image in the Shopped GUI to the specified zoom level.
+         * 
          * @param zoom The amount of zoom to use on the image (1.0f == 100%).
+         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
+         * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
         public PictureBoxImage ZoomImage(PictureBoxImage pictureBoxImage, float zoom)
         {

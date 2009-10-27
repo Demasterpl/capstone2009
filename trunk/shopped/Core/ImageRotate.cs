@@ -11,6 +11,8 @@ namespace Core
          *  it by the given angle.
          *  
          *  @param angle The angle (in degrees) to rotate the image
+         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
+         * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
         public PictureBoxImage RotateImageByAngle(PictureBoxImage pictureBoxImage, float angle)
         {
