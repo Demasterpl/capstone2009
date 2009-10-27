@@ -10,6 +10,7 @@ namespace Core.Images
      * Holds the current state of the image in the Shopped GUI. Anytime the loaded image is modified
      * (i.e. rotated, resized, etc.), this object gets updated to reflect the modification.
      * 
+     * @param FileName Contains the name of the opened image file
      * @param CurrentHeight Contains the height of the loaded image.
      * @param CurrentWidth Contains the width of the loaded image.
      * @param UnzoomedHeight Contains the height of the image in its unzoomed (100%) form.

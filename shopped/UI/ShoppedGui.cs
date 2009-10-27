@@ -9,13 +9,8 @@ namespace UI
 {
     /**
      * The class that loads, runs and handles events of the Shopped main GUI.
-     * @param CurrentFileName The absolute path to the image file loaded.
-     * @param CurrentImage Holds the state of the current image in the GUI.
-     * @param TempImage Holds temporary states of the image in the GUI (i.e. zoom).
-     * @param Zoom How much the image is zoomed in the GUI (1.0 == 100%).
-     * @param DegreesRotated Holds the value for how much the image is rotated in the GUI (in degrees).
-     * @param ImageRotate Instance of ImageRotate class to handle rotating the image.
-     * @param FileOperation Instance of FileOperation class to handle opening/saving the image.
+     * 
+     * @param _shoppedGuiHelper An instance of the ShoppedGuiHelper class.
      */
     public partial class ShoppedGui : Form
     {
@@ -45,8 +40,6 @@ namespace UI
             grayscaleToolStripMenuItem.Enabled = false;
         }
 
-
-
         /**
          * Handles the event of clicking File->Exit menu item. Exits the program.
          */
@@ -63,7 +56,6 @@ namespace UI
         {
             MessageBox.Show("Developed Fall 2009 at Kent State University\nGroup 4\n\n\nGreg Beca\nAndy Vanek\nDaniel Sheaffer","About Us");
         }
-
 
         /**
          * Handles the event of clicking "Open Image" icon.
@@ -129,7 +121,9 @@ namespace UI
 
         /**
          * Sets the PictureBox to the image passed to this method.
+         * 
          * @param image The image to set the PictureBox to.
+         * @param operation A brief description of the operation just performed to the Shopped GUI image.
          */
         public void UpdatePictureBoxInfo(Image image, string operation)
         {
@@ -141,6 +135,14 @@ namespace UI
             SetUndoAndRedo();
         }
 
+        /**
+         * Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently
+         * displayed) to that Image object.
+         * 
+         * TODO: Change Image object to PictureBoxImage object.
+         * 
+         * @param image The image from the ImageHistory class.
+         */
         public void SetPictureBoxOnUndoOrRedo(Image image)
         {
             PictureBox.Height = image.Height;
@@ -219,6 +221,10 @@ namespace UI
             }
         }
 
+        /**
+         * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo
+         * buttons and menu items in the GUI. This will also set the tooltip text for the undo/redo GUI items.
+         */
         private void SetUndoAndRedo()
         {
             int count = _shoppedGuiHelper.ImageHistory.GetNumberOfImagesInHistory();
@@ -251,16 +257,25 @@ namespace UI
             }
         }
 
+        /**
+         * Handles the event of clicking the Edit->Undo menu item.
+         */
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
         }
 
+        /**
+         * Handles the event of clicking the Edit->Redo menu item.
+         */
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
         }
 
+        /**
+         * Handles the event of clicking the Tools->Grayscale menu item.
+         */
         private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);

@@ -10,6 +10,9 @@ namespace Core
     {
         /**  
          *  Opens a file dialog to select an image, then opens the file inside the Shopped main GUI.
+         *  
+         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
+         * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
         public PictureBoxImage OpenFile(PictureBoxImage pictureBoxImage)
         {
@@ -38,6 +41,8 @@ namespace Core
 
         /**  
          *  Opens a save file dialog to save the image that is open in the Shopped main GUI.
+         *  
+         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          */
         public void SaveFile(PictureBoxImage pictureBoxImage)
         {

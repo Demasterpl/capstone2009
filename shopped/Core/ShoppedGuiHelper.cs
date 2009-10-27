@@ -10,7 +10,8 @@ using Core;
 namespace Core
 {
     /**
-     * A class that contains the initialized objects of the classes in Core.
+     * A class that contains the initialized objects of the classes in Core. This is a "poor man's"
+     * implementation of Inverion of Control. If time, convert this to an appropriate IoC container.
      */
     public class ShoppedGuiHelper
     {

@@ -13,7 +13,12 @@ namespace UI
     public partial class RotateDialog : Form
     {
         public float RotateDegrees;
-
+        
+        /**
+         * A constructor for RotateDialog
+         * 
+         * @param zoomLevel The amount of zoom of the current image in Shopped GUI
+         */
         public RotateDialog(float zoomLevel)
         {
             InitializeComponent();
