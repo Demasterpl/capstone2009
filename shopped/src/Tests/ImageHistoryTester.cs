@@ -148,39 +148,6 @@ namespace Tests
         }
 
         [Test]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void UndoOnEmptyImageHistoryCausesException()
-        {
-            _imageHistory.Undo();
-        }
-
-        [Test]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void TooManyUndosCausesException()
-        {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
-            _imageHistory.Undo();
-            _imageHistory.Undo();
-        }
-
-        [Test]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void RedoOnEmptyImageHistoryCausesException()
-        {
-            _imageHistory.Redo();
-        }
-
-        [Test]
-        [ExpectedException(typeof(IndexOutOfRangeException))]
-        public void TooManyRedosCausesException()
-        {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
-            _imageHistory.Undo();
-            _imageHistory.Redo();
-            _imageHistory.Redo();
-        }
-
-        [Test]
         public void GetCurrentRevisionIsNegativeOneOnEmptyImageHistory()
         {
             Assert.AreEqual(-1, _imageHistory.GetCurrentRevision());
@@ -202,6 +169,63 @@ namespace Tests
             _imageHistory.Redo();
 
             Assert.AreEqual(0, _imageHistory.GetCurrentRevision());
+        }
+
+        [Test]
+        public void UndoIsNotPossibleOnEmptyImageHistory()
+        {
+            var isPossible = _imageHistory.UndoIsPossible();
+
+            Assert.AreEqual(false, isPossible);
+        }
+
+        [Test]
+        public void UndoIsPossibleOnImageHistoryWithOneImage()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            var isPossible = _imageHistory.UndoIsPossible();
+
+            Assert.AreEqual(true, isPossible);
+        }
+
+        [Test]
+        public void UndoIsNotPossibleOnImageHistoryWhenIteratorAtLowerBound()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.Undo();
+            var isPossible = _imageHistory.UndoIsPossible();
+
+            Assert.AreEqual(false, isPossible);
+        }
+
+        [Test]
+        public void RedoIsNotPossibleOnEmptyImageHistory()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            var isPossible = _imageHistory.RedoIsPossible();
+
+            Assert.AreEqual(false, isPossible);
+        }
+
+        [Test]
+        public void RedoIsPossibleOnImageHistoryWithOneImageAndIteratorIsBeforeIt()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.Undo();
+
+            var isPossible = _imageHistory.RedoIsPossible();
+
+            Assert.AreEqual(true, isPossible);
+        }
+
+        [Test]
+        public void RedoIsNotPossibleOnImageHistoryWhenIteratorAtRightBound()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+
+            var isPossible = _imageHistory.RedoIsPossible();
+
+            Assert.AreEqual(false, isPossible);
         }
     }
 }

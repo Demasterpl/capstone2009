@@ -227,34 +227,14 @@ namespace UI
          */
         private void SetUndoAndRedo()
         {
-            int count = _shoppedGuiHelper.ImageHistory.GetNumberOfImagesInHistory();
-            int revision = _shoppedGuiHelper.ImageHistory.GetCurrentRevision();
+            redoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.RedoIsPossible();
+            redoToolStripMenuItem.ToolTipText =
+                    _shoppedGuiHelper.ImageHistory.GetRedoToolTip();
+      
 
-            //for redo
-            if (revision >= 0 && revision != (count - 1))
-            {
-                redoToolStripMenuItem.Enabled = true;
-                redoToolStripMenuItem.ToolTipText =
-                    _shoppedGuiHelper.ImageHistory.ImageRevisions[revision + 1].OperationPerformed;
-            }
-            else
-            {
-                redoToolStripMenuItem.Enabled = false;
-                redoToolStripMenuItem.ToolTipText = null;
-            }
-
-            //for undo
-            if (count > 1 && revision > 0)
-            {
-                undoToolStripMenuItem.Enabled = true;
-                undoToolStripMenuItem.ToolTipText =
-                    _shoppedGuiHelper.ImageHistory.ImageRevisions[revision].OperationPerformed;
-            }
-            else
-            {
-                undoToolStripMenuItem.Enabled = false;
-                undoToolStripMenuItem.ToolTipText = null;
-            }
+            undoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.UndoIsPossible();
+            undoToolStripMenuItem.ToolTipText =
+                _shoppedGuiHelper.ImageHistory.GetUndoToolTip();
         }
 
         /**
