@@ -49,6 +49,17 @@ namespace Tests
         }
 
         [Test]
+        public void DescriptionGivenToImageHistoryItemIsSetProperly()
+        {
+            const string message = "Testing Image";
+            var pictureBoxImage = new PictureBoxImage();
+
+            _imageHistory.AddImageToImageHistory(pictureBoxImage, message);
+
+            Assert.AreEqual(message, _imageHistory.ImageRevisions.First().OperationPerformed);
+        }
+
+        [Test]
         public void ImageAddedToImageHistoryIsIdenticalToPictureBoxImage()
         {
             int currentHeight = 800;
@@ -58,14 +69,14 @@ namespace Tests
             float resizelevel = 1.0f;
 
 
-            var pictureBoxImage = new PictureBoxImage 
-                {
-                    CurrentImage = image, 
-                    CurrentHeight = currentHeight, 
-                    CurrentWidth = currentWidth,
-                    ZoomLevel = zoomLevel,
-                    ResizeLevel = resizelevel,
-                };
+            var pictureBoxImage = new PictureBoxImage
+            {
+                CurrentImage = image,
+                CurrentHeight = currentHeight,
+                CurrentWidth = currentWidth,
+                ZoomLevel = zoomLevel,
+                ResizeLevel = resizelevel,
+            };
 
             _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
 
@@ -74,6 +85,123 @@ namespace Tests
             Assert.AreEqual(image, _imageHistory.ImageRevisions.First().Image.CurrentImage);
             Assert.AreEqual(zoomLevel, _imageHistory.ImageRevisions.First().Image.ZoomLevel);
             Assert.AreEqual(resizelevel, _imageHistory.ImageRevisions.First().Image.ResizeLevel);
+        }
+
+
+        [Test]
+        public void ImageReturnedByImageHistoryUndoIsIdenticalToOriginal()
+        {
+            int currentHeight = 800;
+            int currentWidth = 600;
+            Image image = new Bitmap(currentWidth, currentHeight);
+            float zoomLevel = 1.0f;
+            float resizelevel = 1.0f;
+
+
+            var pictureBoxImage = new PictureBoxImage
+            {
+                CurrentImage = image,
+                CurrentHeight = currentHeight,
+                CurrentWidth = currentWidth,
+                ZoomLevel = zoomLevel,
+                ResizeLevel = resizelevel,
+            };
+
+            _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
+            var undoImage = _imageHistory.Undo();
+
+            Assert.AreEqual(currentHeight, undoImage.CurrentHeight);
+            Assert.AreEqual(currentWidth, undoImage.CurrentWidth);
+            Assert.AreEqual(image, undoImage.CurrentImage);
+            Assert.AreEqual(zoomLevel, undoImage.ZoomLevel);
+            Assert.AreEqual(resizelevel, undoImage.ResizeLevel);
+        }
+
+        [Test]
+        public void ImageReturnedByImageHistoryUndoThenRedoIsIdenticalToCurrent()
+        {
+            int currentHeight = 800;
+            int currentWidth = 600;
+            Image image = new Bitmap(currentWidth, currentHeight);
+            float zoomLevel = 1.0f;
+            float resizelevel = 1.0f;
+
+
+            var pictureBoxImage = new PictureBoxImage
+            {
+                CurrentImage = image,
+                CurrentHeight = currentHeight,
+                CurrentWidth = currentWidth,
+                ZoomLevel = zoomLevel,
+                ResizeLevel = resizelevel,
+            };
+
+            _imageHistory.AddImageToImageHistory(pictureBoxImage, "Image we're testing");
+            _imageHistory.Undo();
+            var redoImage = _imageHistory.Redo();
+
+            Assert.AreEqual(currentHeight, redoImage.CurrentHeight);
+            Assert.AreEqual(currentWidth, redoImage.CurrentWidth);
+            Assert.AreEqual(image, redoImage.CurrentImage);
+            Assert.AreEqual(zoomLevel, redoImage.ZoomLevel);
+            Assert.AreEqual(resizelevel, redoImage.ResizeLevel);
+        }
+
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void UndoOnEmptyImageHistoryCausesException()
+        {
+            _imageHistory.Undo();
+        }
+
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TooManyUndosCausesException()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.Undo();
+            _imageHistory.Undo();
+        }
+
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void RedoOnEmptyImageHistoryCausesException()
+        {
+            _imageHistory.Redo();
+        }
+
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TooManyRedosCausesException()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.Undo();
+            _imageHistory.Redo();
+            _imageHistory.Redo();
+        }
+
+        [Test]
+        public void GetCurrentRevisionIsNegativeOneOnEmptyImageHistory()
+        {
+            Assert.AreEqual(-1, _imageHistory.GetCurrentRevision());
+        }
+
+        [Test]
+        public void GetCurrentRevisionIsZeroAtFirstImageAdded()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+
+            Assert.AreEqual(0, _imageHistory.GetCurrentRevision());
+        }
+
+        [Test]
+        public void GetCurrentRevisionIsZeroAfterUndoThenRedo()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.Undo();
+            _imageHistory.Redo();
+
+            Assert.AreEqual(0, _imageHistory.GetCurrentRevision());
         }
     }
 }
