@@ -40,15 +40,11 @@ namespace Core
          */
         public PictureBoxImage Undo()
         {
-            try
+            if (UndoIsPossible())
             {
                 return ImageRevisions[CurrentRevision--].Image;
             }
-            catch
-            {
-                throw new IndexOutOfRangeException(string.Format("ImageHistory index is invalid. CurrentRevision: {0}, Size: {1}", CurrentRevision, ImageRevisions.Count()));
-            }
-
+            return null;
         }
 
         /**
@@ -57,14 +53,11 @@ namespace Core
          */
         public PictureBoxImage Redo()
         {
-            try
+            if (RedoIsPossible())
             {
                 return ImageRevisions[++CurrentRevision].Image;
             }
-            catch
-            {
-                throw new IndexOutOfRangeException(string.Format("ImageHistory index is invalid. CurrentRevision: {0}, Size: {1}", CurrentRevision, ImageRevisions.Count()));
-            }
+            return null;
         }
 
         /**
@@ -83,6 +76,53 @@ namespace Core
         public int GetCurrentRevision()
         {
             return CurrentRevision;
+        }
+
+        /**
+         * Returns whether or not there exists an image to redo in the history.
+         * @return bool Whether or not ImageHistory can perform a redo
+         */
+        public bool RedoIsPossible()
+        {
+            return GetNumberOfImagesInHistory() > 0 && GetCurrentRevision() != (GetNumberOfImagesInHistory() - 1);
+        }
+
+        /**
+         * Returns whether or not there exists an image to undo to in the history.
+         * 
+         * @return bool Whether or not ImageHistory can perform a undo.
+         */
+        public bool UndoIsPossible()
+        {
+            return GetNumberOfImagesInHistory() >= 1 && GetCurrentRevision() >= 0;
+        }
+
+        /**
+         * Returns the tooltip for the next item in the history.
+         * 
+         * @return string The tooltip for the next item.
+         */
+        public string GetRedoToolTip()
+        {
+            if (RedoIsPossible())
+            {
+                return ImageRevisions[GetCurrentRevision() + 1].OperationPerformed;
+            }
+            return string.Empty;
+        }
+
+        /**
+         * Returns the tooltip for the previous item in the history.
+         * 
+         * @return string The tooltip for the previous item.
+         */
+        public string GetUndoToolTip()
+        {
+            if (UndoIsPossible())
+            {
+                return ImageRevisions[GetCurrentRevision()].OperationPerformed;
+            }
+            return string.Empty;
         }
     }
 }
