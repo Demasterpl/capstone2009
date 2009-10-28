@@ -42,12 +42,7 @@ namespace Core
         {
             try
             {
-                if (CurrentRevision > 0)
-                {
-                    --CurrentRevision;
-                }
-
-                return ImageRevisions[CurrentRevision].Image;
+                return ImageRevisions[CurrentRevision--].Image;
             }
             catch
             {
@@ -64,12 +59,7 @@ namespace Core
         {
             try
             {
-                if (CurrentRevision >= 0 && CurrentRevision < ImageRevisions.Count())
-                {
-                    ++CurrentRevision;
-                }
-
-                return ImageRevisions[CurrentRevision].Image;
+                return ImageRevisions[++CurrentRevision].Image;
             }
             catch
             {
