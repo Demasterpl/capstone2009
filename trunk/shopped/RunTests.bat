@@ -1,2 +1,2 @@
-lib\nunit-console-x86.exe src\Tests\Tests.csproj
+lib\NUnit\nunit-console-x86.exe src\Tests\Tests.csproj
 pause
