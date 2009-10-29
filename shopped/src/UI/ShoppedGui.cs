@@ -37,7 +37,7 @@ namespace UI
             undoToolStripMenuItem.Enabled = false;
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
-            grayscaleToolStripMenuItem.Enabled = false;
+            grayscaleToolStripMenuItem1.Enabled = false;
         }
 
         /**
@@ -101,7 +101,7 @@ namespace UI
             viewToolStripMenuItem.Enabled = true;
             saveImageButton.Enabled = true;
             savePictureToolStripMenuItem.Enabled = true;
-            grayscaleToolStripMenuItem.Enabled = true;
+            grayscaleToolStripMenuItem1.Enabled = true;
         }
 
         /**
@@ -256,7 +256,13 @@ namespace UI
         /**
          * Handles the event of clicking the Tools->Grayscale menu item.
          */
-        private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
+       /* private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
+        }*/
+
+        private void grayscaleToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
