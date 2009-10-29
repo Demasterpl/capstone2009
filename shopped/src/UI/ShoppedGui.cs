@@ -38,6 +38,7 @@ namespace UI
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
             grayscaleToolStripMenuItem1.Enabled = false;
+            sepiaToolStripMenuItem.Enabled = false;
         }
 
         /**
@@ -102,6 +103,7 @@ namespace UI
             saveImageButton.Enabled = true;
             savePictureToolStripMenuItem.Enabled = true;
             grayscaleToolStripMenuItem1.Enabled = true;
+            sepiaToolStripMenuItem.Enabled = true;
         }
 
         /**
@@ -256,16 +258,21 @@ namespace UI
         /**
          * Handles the event of clicking the Tools->Grayscale menu item.
          */
-       /* private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
-            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
-        }*/
 
-        private void grayscaleToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
+        }
+ 
+        /**
+        * Handles the event of clicking the Tools->Sepia menu item.
+        */
+
+        private void sepiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepia(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Sepia"));
         }
     }
 }

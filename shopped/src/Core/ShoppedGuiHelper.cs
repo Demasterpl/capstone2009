@@ -22,14 +22,15 @@ namespace Core
         public ImageZoom ImageZoom { get; set; }
         public ImageResize ImageResize { get; set; }
         public Grayscale Grayscale { get; set; }
+        public Sepia Sepia { get; set; }
 
         public ShoppedGuiHelper()
-            : this(new PictureBoxImage(), new ImageRotate(), new FileOperations(), new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale())
+            : this(new PictureBoxImage(), new ImageRotate(), new FileOperations(), new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia())
         { }
 
         public ShoppedGuiHelper(PictureBoxImage pictureBoxImage, 
             ImageRotate imageRotate, FileOperations fileOperation, ImageHistory imageHistory, 
-            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale)
+            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia)
         {
             CurrentImage = pictureBoxImage;
             ImageRotate = imageRotate;
@@ -38,6 +39,7 @@ namespace Core
             ImageZoom = imageZoom;
             ImageResize = imageResize;
             Grayscale = grayscale;
+            Sepia = sepia;
         }
     }
 }
