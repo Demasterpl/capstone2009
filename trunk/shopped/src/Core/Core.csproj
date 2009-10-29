@@ -59,6 +59,7 @@
     <Compile Include="ImageZoom.cs" />
     <Compile Include="Interfaces\IFileOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sepia.cs" />
     <Compile Include="ShoppedGuiHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
