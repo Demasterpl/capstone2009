@@ -11,7 +11,7 @@ namespace Core.Interfaces
      */
     public interface IFileOperations
     {
-        PictureBoxImage OpenFile(PictureBoxImage pictureBoxImage);
+        PictureBoxImage OpenFile();
         void SaveFile(PictureBoxImage pictureBoxImage);
     }
 }
