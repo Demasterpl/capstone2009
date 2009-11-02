@@ -127,8 +127,6 @@ namespace UI
          */
         public void UpdatePictureBoxInfo(string operation)
         {
-            PictureBox.Height = _shoppedGuiHelper.CurrentImage.CurrentImage.Height;
-            PictureBox.Width = _shoppedGuiHelper.CurrentImage.CurrentImage.Width;
             PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
             _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(_shoppedGuiHelper.CurrentImage, operation);
             SetAdditionalInfo();
@@ -146,9 +144,8 @@ namespace UI
         public void SetPictureBoxOnUndoOrRedo(PictureBoxImage image)
         {
             Console.WriteLine("Image being set to PictureBox: " + image.ToString());
-            PictureBox.Height = image.CurrentHeight;
-            PictureBox.Width = image.CurrentWidth;
             PictureBox.Image = image.CurrentImage;
+            SetAdditionalInfo();
             SetUndoAndRedo();
         }
 

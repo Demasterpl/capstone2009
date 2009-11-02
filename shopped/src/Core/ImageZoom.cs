@@ -36,8 +36,6 @@ namespace Core
             }
             else
             {
-                //Rotate unzoomed image back to 
-                newPictureBoxImage = _imageRotate.RotateImageByAngle(newPictureBoxImage, newPictureBoxImage.DegreesRotated);
                 newPictureBoxImage.UnzoomedHeight = newPictureBoxImage.CurrentHeight;
                 newPictureBoxImage.UnzoomedWidth = newPictureBoxImage.CurrentWidth;
 
