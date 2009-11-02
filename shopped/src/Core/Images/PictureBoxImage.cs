@@ -34,15 +34,34 @@ namespace Core.Images
 
         public PictureBoxImage() { }
 
-
-        public void InitializeCurrentImage()
+        public PictureBoxImage(string fileName, int height, int width, Image image)
         {
-            CurrentHeight = UnzoomedHeight = CurrentImage.Height;
-            CurrentWidth = UnzoomedWidth = CurrentImage.Width;
+            FileName = fileName;
+            CurrentHeight = UnzoomedHeight = height;
+            CurrentWidth = UnzoomedWidth = width;
             DegreesRotated = 0.0f;
-
-            UnzoomedImage = CurrentImage;
             ZoomLevel = ResizeLevel = 1.0f;
+            CurrentImage = UnzoomedImage = image;
+        }
+
+        public PictureBoxImage(PictureBoxImage original)
+        {
+                CurrentHeight = original.CurrentHeight;
+                CurrentImage = original.CurrentImage;
+                CurrentWidth = original.CurrentWidth;
+                DegreesRotated = original.DegreesRotated;
+                FileName = original.FileName;
+                ResizeLevel = original.ResizeLevel;
+                UnzoomedHeight = original.UnzoomedHeight;
+                UnzoomedImage = original.UnzoomedImage;
+                UnzoomedWidth = original.UnzoomedWidth;
+                ZoomLevel = original.ZoomLevel;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Height = {0} | Width = {1} | Rotate = {2} | Zoom = {3} | Resize = {4}"
+                , CurrentHeight, CurrentWidth, DegreesRotated, ZoomLevel, ResizeLevel);
         }
     }
 }

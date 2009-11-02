@@ -112,13 +112,11 @@ namespace UI
          */
         public void OpenImage()
         {
-            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.FileOperation.OpenFile(_shoppedGuiHelper.CurrentImage);
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.FileOperation.OpenFile();
 
-            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, "Open image");
-            _shoppedGuiHelper.CurrentImage.InitializeCurrentImage();
+            UpdatePictureBoxInfo("Open image");
 
             EnableGuiItems();
-            SetAdditionalInfo();
         }
 
         /**
@@ -127,11 +125,11 @@ namespace UI
          * @param image The image to set the PictureBox to.
          * @param operation A brief description of the operation just performed to the Shopped GUI image.
          */
-        public void UpdatePictureBoxInfo(Image image, string operation)
+        public void UpdatePictureBoxInfo(string operation)
         {
-            PictureBox.Height = image.Height;
-            PictureBox.Width = image.Width;
-            PictureBox.Image = image;
+            PictureBox.Height = _shoppedGuiHelper.CurrentImage.CurrentImage.Height;
+            PictureBox.Width = _shoppedGuiHelper.CurrentImage.CurrentImage.Width;
+            PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
             _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(_shoppedGuiHelper.CurrentImage, operation);
             SetAdditionalInfo();
             SetUndoAndRedo();
@@ -147,6 +145,7 @@ namespace UI
          */
         public void SetPictureBoxOnUndoOrRedo(PictureBoxImage image)
         {
+            Console.WriteLine("Image being set to PictureBox: " + image.ToString());
             PictureBox.Height = image.CurrentHeight;
             PictureBox.Width = image.CurrentWidth;
             PictureBox.Image = image.CurrentImage;
@@ -163,7 +162,7 @@ namespace UI
                 PictureBox.Height,
                 PictureBox.Width,
                 _shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f,
-                System.IO.Path.GetFileName(_shoppedGuiHelper.CurrentImage.FileName));
+                _shoppedGuiHelper.CurrentImage.FileName);
         }
 
         /**
@@ -184,7 +183,7 @@ namespace UI
 
                 _shoppedGuiHelper.CurrentImage =
                     _shoppedGuiHelper.ImageRotate.RotateImageByAngle(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.CurrentImage.DegreesRotated);
-                UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
+                UpdatePictureBoxInfo(string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
                 PictureBox.Refresh();
             }
         }
@@ -201,7 +200,7 @@ namespace UI
             if (zoomDialog.DialogResult == DialogResult.OK)
             {
                 _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, zoomDialog.ZoomLevel);
-                UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
+                UpdatePictureBoxInfo(string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
                 PictureBox.Refresh();
             }
         }      
@@ -218,7 +217,7 @@ namespace UI
             if (resizeDialog.DialogResult == DialogResult.OK)
             {
                 _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageResize.ResizeImage(_shoppedGuiHelper.CurrentImage, resizeDialog.ResizeLevel);
-                UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
+                UpdatePictureBoxInfo(string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
                 PictureBox.Refresh();
             }
         }
@@ -262,7 +261,7 @@ namespace UI
         private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
-            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Grayscale"));
+            UpdatePictureBoxInfo(string.Format("Convert Grayscale"));
         }
  
         /**
@@ -272,7 +271,7 @@ namespace UI
         private void sepiaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepia(_shoppedGuiHelper.CurrentImage);
-            UpdatePictureBoxInfo(_shoppedGuiHelper.CurrentImage.CurrentImage, string.Format("Convert Sepia"));
+            UpdatePictureBoxInfo(string.Format("Convert Sepia"));
         }
     }
 }

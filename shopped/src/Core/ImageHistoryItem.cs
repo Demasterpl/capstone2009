@@ -14,5 +14,14 @@ namespace Core
     {
         public PictureBoxImage Image { get; set; }
         public string OperationPerformed { get; set; }
+
+        public ImageHistoryItem()
+        { }
+
+        public ImageHistoryItem(PictureBoxImage image, string operation)
+        {
+            Image = image;
+            OperationPerformed = operation;
+        }
     }
 }

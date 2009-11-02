@@ -16,16 +16,17 @@ namespace Core
          */
         public PictureBoxImage RotateImageByAngle(PictureBoxImage pictureBoxImage, float angle)
         {
-
             if (pictureBoxImage == null)
             {
                 throw new ArgumentNullException("image");
             }
 
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+
             const double pi2 = Math.PI / 2.0;
 
-            var oldWidth = pictureBoxImage.CurrentImage.Width;
-            var oldHeight = pictureBoxImage.CurrentImage.Height;
+            var oldWidth = newPictureBoxImage.CurrentImage.Width;
+            var oldHeight = newPictureBoxImage.CurrentImage.Height;
 
             // Convert degrees to radians
             var theta = angle * Math.PI / 180.0;
@@ -121,22 +122,21 @@ namespace Core
 										 };
                 }
 
-                g.DrawImage(pictureBoxImage.CurrentImage, points);
+                g.DrawImage(newPictureBoxImage.CurrentImage, points);
             }
 
+            newPictureBoxImage.CurrentImage = rotatedBmp;
+            newPictureBoxImage.CurrentWidth = rotatedBmp.Width;
+            newPictureBoxImage.CurrentHeight = rotatedBmp.Height;
+            newPictureBoxImage.DegreesRotated = angle;
 
-            pictureBoxImage.CurrentImage = rotatedBmp;
-            pictureBoxImage.CurrentHeight = rotatedBmp.Height;
-            pictureBoxImage.CurrentWidth = rotatedBmp.Width;
-            pictureBoxImage.DegreesRotated = angle;
-
-            if (pictureBoxImage.ZoomLevel == 1.0f)
+            if (newPictureBoxImage.ZoomLevel == 1.0f)
             {
-                pictureBoxImage.UnzoomedHeight = rotatedBmp.Height;
-                pictureBoxImage.UnzoomedWidth = rotatedBmp.Width;
+                newPictureBoxImage.UnzoomedHeight = rotatedBmp.Height;
+                newPictureBoxImage.UnzoomedWidth = rotatedBmp.Width;
             }
 
-            return pictureBoxImage;
+            return newPictureBoxImage;
         }
     }
 }

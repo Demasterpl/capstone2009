@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using Core.Images;
+using NLog;
 
 namespace Core
 {
@@ -16,6 +17,7 @@ namespace Core
     {
         public List<ImageHistoryItem> ImageRevisions;
         private int CurrentRevision;
+        private static Logger _logger = LogManager.GetCurrentClassLogger(); 
 
         public ImageHistory()
         {
@@ -30,9 +32,11 @@ namespace Core
          */
         public void AddImageToImageHistory(PictureBoxImage image, string operation)
         {
-            ImageRevisions.Add(new ImageHistoryItem { Image = image, OperationPerformed = operation });
-            ++CurrentRevision;
-        }
+            var historyItem = new ImageHistoryItem(image, operation);
+            CurrentRevision += 1;
+            ImageRevisions.Insert(CurrentRevision, historyItem);
+            _logger.Debug("Adding image to history: " + image.ToString() + ", CurRev = " + CurrentRevision + "HistSize = " + ImageRevisions.Count());
+       }
 
         /**
          * Attempts an undo operation by checking if an object exists before the CurrentRevision iterator, then returning that
@@ -42,8 +46,12 @@ namespace Core
         {
             if (UndoIsPossible())
             {
-                return ImageRevisions[CurrentRevision--].Image;
+                CurrentRevision -= 1;
+                _logger.Debug("Performing undo: " + ImageRevisions[CurrentRevision].Image.ToString() 
+                    + ", CurRev = " + CurrentRevision + "HistSize = " + ImageRevisions.Count());
+                return ImageRevisions[CurrentRevision].Image;
             }
+
             return null;
         }
 
@@ -53,10 +61,15 @@ namespace Core
          */
         public PictureBoxImage Redo()
         {
+
             if (RedoIsPossible())
             {
-                return ImageRevisions[++CurrentRevision].Image;
+                CurrentRevision += 1;
+                _logger.Debug("Performing redo: " + ImageRevisions[CurrentRevision].Image.ToString() 
+                    + ", CurRev = " + CurrentRevision + "HistSize = " + ImageRevisions.Count());
+                return ImageRevisions[CurrentRevision].Image;
             }
+
             return null;
         }
 
@@ -84,7 +97,7 @@ namespace Core
          */
         public bool RedoIsPossible()
         {
-            return GetNumberOfImagesInHistory() > 0 && GetCurrentRevision() != (GetNumberOfImagesInHistory() - 1);
+            return GetCurrentRevision() > -1 && GetCurrentRevision() < GetNumberOfImagesInHistory() - 1 && GetNumberOfImagesInHistory() > 1;
         }
 
         /**
@@ -94,7 +107,7 @@ namespace Core
          */
         public bool UndoIsPossible()
         {
-            return GetNumberOfImagesInHistory() >= 1 && GetCurrentRevision() >= 0;
+            return GetCurrentRevision() > 0 && GetNumberOfImagesInHistory() > 0;
         }
 
         /**
@@ -106,9 +119,10 @@ namespace Core
         {
             if (RedoIsPossible())
             {
-                return ImageRevisions[GetCurrentRevision() + 1].OperationPerformed;
+                return ImageRevisions[CurrentRevision + 1].OperationPerformed;
             }
-            return string.Empty;
+
+            return null;
         }
 
         /**
@@ -120,9 +134,10 @@ namespace Core
         {
             if (UndoIsPossible())
             {
-                return ImageRevisions[GetCurrentRevision()].OperationPerformed;
+                return ImageRevisions[CurrentRevision - 1].OperationPerformed;
             }
-            return string.Empty;
+
+            return null;
         }
     }
 }
