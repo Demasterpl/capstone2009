@@ -1,1 +1,0 @@
-src\Shopped.sln
