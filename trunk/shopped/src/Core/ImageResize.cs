@@ -27,30 +27,34 @@ namespace Core
          */
         public PictureBoxImage ResizeImage(PictureBoxImage pictureBoxImage, float resize)
         {
-            _imageZoom.ZoomImage(pictureBoxImage, 1.0f);
-            pictureBoxImage.ResizeLevel = resize;
+            //new up a PictureBoxImage
+            PictureBoxImage _newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+
+            _imageZoom.ZoomImage(_newPictureBoxImage, 1.0f);
+            _newPictureBoxImage.ResizeLevel = resize;
 
             if (resize == 1.0f)
             {
-                return pictureBoxImage;
+                return _newPictureBoxImage;
             }
             else
             {
+                //Calculate new height and width
+                var newWidth = (int)(_newPictureBoxImage.CurrentImage.Width * resize);
+                var newHeight = (int)(_newPictureBoxImage.CurrentImage.Height * resize);
+
                 //Set unzoomed image to new image
-                pictureBoxImage.UnzoomedImage = pictureBoxImage.CurrentImage = new Bitmap(
-                    pictureBoxImage.CurrentImage,
-                    (int)(pictureBoxImage.CurrentImage.Width * resize),
-                    (int)(pictureBoxImage.CurrentImage.Height * resize));
+                _newPictureBoxImage.UnzoomedImage = _newPictureBoxImage.CurrentImage = 
+                    new Bitmap(_newPictureBoxImage.CurrentImage, newWidth, newHeight);
+                _newPictureBoxImage.CurrentWidth = _newPictureBoxImage.UnzoomedWidth = newWidth;
+                _newPictureBoxImage.CurrentHeight = _newPictureBoxImage.UnzoomedHeight = newHeight;
+
 
                 //Set image back to its original rotation
-                _imageRotate.RotateImageByAngle
-                    (pictureBoxImage, pictureBoxImage.DegreesRotated);
+                //_imageRotate.RotateImageByAngle
+                //    (_newPictureBoxImage, _newPictureBoxImage.DegreesRotated);
 
-                //Set Height and Width of current image
-                pictureBoxImage.CurrentHeight = pictureBoxImage.UnzoomedHeight = pictureBoxImage.CurrentImage.Height;
-                pictureBoxImage.CurrentWidth = pictureBoxImage.UnzoomedWidth = pictureBoxImage.CurrentImage.Width;
-
-                return pictureBoxImage;
+                return _newPictureBoxImage;
             }
         }
     }

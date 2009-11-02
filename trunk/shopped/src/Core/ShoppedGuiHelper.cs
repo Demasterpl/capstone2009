@@ -25,7 +25,8 @@ namespace Core
         public Sepia Sepia { get; set; }
 
         public ShoppedGuiHelper()
-            : this(new PictureBoxImage(), new ImageRotate(), new FileOperations(), new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia())
+            : this(new PictureBoxImage(), new ImageRotate(), new FileOperations(), 
+            new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia())
         { }
 
         public ShoppedGuiHelper(PictureBoxImage pictureBoxImage, 

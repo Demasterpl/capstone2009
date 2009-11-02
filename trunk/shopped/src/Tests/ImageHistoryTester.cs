@@ -108,6 +108,7 @@ namespace Tests
             };
 
             _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy Image so I can Undo");
             var undoImage = _imageHistory.Undo();
 
             Assert.AreEqual(currentHeight, undoImage.CurrentHeight);
@@ -136,6 +137,7 @@ namespace Tests
                 ResizeLevel = resizelevel,
             };
 
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
             _imageHistory.AddImageToImageHistory(pictureBoxImage, "Image we're testing");
             _imageHistory.Undo();
             var redoImage = _imageHistory.Redo();
@@ -180,8 +182,9 @@ namespace Tests
         }
 
         [Test]
-        public void UndoIsPossibleOnImageHistoryWithOneImage()
+        public void UndoIsPossibleOnImageHistoryWithTwoImagesInHistory()
         {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
             var isPossible = _imageHistory.UndoIsPossible();
 
@@ -208,8 +211,9 @@ namespace Tests
         }
 
         [Test]
-        public void RedoIsPossibleOnImageHistoryWithOneImageAndIteratorIsBeforeIt()
+        public void RedoIsPossibleOnImageHistoryWhenIteratorIsBeforeLastImageInHistory()
         {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
             _imageHistory.Undo();
 

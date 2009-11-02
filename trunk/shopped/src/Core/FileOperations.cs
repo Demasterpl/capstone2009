@@ -14,7 +14,7 @@ namespace Core
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
-        public PictureBoxImage OpenFile(PictureBoxImage pictureBoxImage)
+        public PictureBoxImage OpenFile()
         {
             var openFileDialog = new OpenFileDialog
              {
@@ -26,8 +26,9 @@ namespace Core
             {
                 try
                 {
-                    pictureBoxImage.CurrentImage = new Bitmap(openFileDialog.OpenFile());
-                    pictureBoxImage.FileName = openFileDialog.FileName;
+                    Image openedImage = new Bitmap(openFileDialog.OpenFile());
+                    var pictureBoxImage = new PictureBoxImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);            
+                    return pictureBoxImage;
                 }
                 catch (Exception ex)
                 {
@@ -35,8 +36,7 @@ namespace Core
                 }
 
             }
-
-            return pictureBoxImage;
+            return null;
         }
 
         /**  
