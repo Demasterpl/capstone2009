@@ -39,6 +39,7 @@ namespace UI
             savePictureToolStripMenuItem.Enabled = false;
             grayscaleToolStripMenuItem1.Enabled = false;
             sepiaToolStripMenuItem.Enabled = false;
+            brightnessToolStripMenuItem.Enabled = false;
         }
 
         /**
@@ -104,6 +105,7 @@ namespace UI
             savePictureToolStripMenuItem.Enabled = true;
             grayscaleToolStripMenuItem1.Enabled = true;
             sepiaToolStripMenuItem.Enabled = true;
+            brightnessToolStripMenuItem.Enabled = true;
         }
 
         /**
@@ -280,6 +282,19 @@ namespace UI
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Invert.InvertColors(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Invert Colors"));
+        }
+
+        private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var brightnessDialog = new BrightnessDialog();
+            brightnessDialog.ShowDialog();
+
+            if (brightnessDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Brightness.AdjustBrightness(_shoppedGuiHelper.CurrentImage, brightnessDialog.BrightnessLevel);
+                UpdatePictureBoxInfo(string.Format("Brightness {0}%", brightnessDialog.BrightnessLevel));
+                PictureBox.Refresh();
+            }
         }
     }
 }
