@@ -231,5 +231,21 @@ namespace Tests
 
             Assert.AreEqual(false, isPossible);
         }
+
+        [Test]
+        public void OperationPerformedOnMiddleOfImageHistoryListRemovesImagesAfter()
+        {
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "First Image");
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Second Image");
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Third Image");
+
+            _imageHistory.Undo();
+            _imageHistory.Undo();
+            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Middle operation");
+
+            Assert.AreEqual(1, _imageHistory.GetCurrentRevision());
+            Assert.AreEqual(2, _imageHistory.GetNumberOfImagesInHistory());
+
+        }
     }
 }
