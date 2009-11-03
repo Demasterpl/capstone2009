@@ -113,6 +113,7 @@ namespace UI
         public void OpenImage()
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.FileOperation.OpenFile();
+            _shoppedGuiHelper.ImageHistory = new ImageHistory();
 
             UpdatePictureBoxInfo("Open image");
 

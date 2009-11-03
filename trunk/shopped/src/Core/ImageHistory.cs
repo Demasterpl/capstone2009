@@ -32,11 +32,17 @@ namespace Core
          */
         public void AddImageToImageHistory(PictureBoxImage image, string operation)
         {
-            var historyItem = new ImageHistoryItem(image, operation);
+            //CurrentRevision is somewhere in middle of list, need to delete items beyond current image
+            if (RedoIsPossible())
+            {
+                ImageRevisions = ImageRevisions.Take(CurrentRevision + 1).ToList();
+            }
+
+            ImageRevisions.Add(new ImageHistoryItem(image, operation));
+
             CurrentRevision += 1;
-            ImageRevisions.Insert(CurrentRevision, historyItem);
             _logger.Debug("Adding image to history: " + image.ToString() + ", CurRev = " + CurrentRevision + "HistSize = " + ImageRevisions.Count());
-       }
+        }
 
         /**
          * Attempts an undo operation by checking if an object exists before the CurrentRevision iterator, then returning that
