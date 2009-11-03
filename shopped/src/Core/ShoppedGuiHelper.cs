@@ -24,15 +24,16 @@ namespace Core
         public Grayscale Grayscale { get; set; }
         public Sepia Sepia { get; set; }
         public Invert Invert { get; set; }
+        public Brightness Brightness { get; set; }
 
         public ShoppedGuiHelper()
             : this(new PictureBoxImage(), new ImageRotate(), new FileOperations(), 
-            new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia(), new Invert())
+            new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia(), new Invert(), new Brightness())
         { }
 
         public ShoppedGuiHelper(PictureBoxImage pictureBoxImage, 
             ImageRotate imageRotate, FileOperations fileOperation, ImageHistory imageHistory, 
-            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, Invert invert)
+            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, Invert invert, Brightness brightness)
         {
             CurrentImage = pictureBoxImage;
             ImageRotate = imageRotate;
@@ -43,7 +44,7 @@ namespace Core
             Grayscale = grayscale;
             Sepia = sepia;
             Invert = invert;
-            
+            Brightness = brightness;
             
         }
     }

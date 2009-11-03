@@ -29,6 +29,7 @@ namespace Core.Images
         public float DegreesRotated { get; set; }
         public float ZoomLevel { get; set; }
         public float ResizeLevel { get; set; }
+        public int BrightnessLevel { get; set; }
         public Image CurrentImage { get; set; }
         public Image UnzoomedImage { get; set; }
 
