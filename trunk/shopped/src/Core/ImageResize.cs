@@ -28,33 +28,33 @@ namespace Core
         public PictureBoxImage ResizeImage(PictureBoxImage pictureBoxImage, float resize)
         {
             //new up a PictureBoxImage
-            PictureBoxImage _newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
-            _imageZoom.ZoomImage(_newPictureBoxImage, 1.0f);
-            _newPictureBoxImage.ResizeLevel = resize;
+            _imageZoom.ZoomImage(newPictureBoxImage, 1.0f);
+            newPictureBoxImage.ResizeLevel = resize;
 
             if (resize == 1.0f)
             {
-                return _newPictureBoxImage;
+                return newPictureBoxImage;
             }
             else
             {
                 //Calculate new height and width
-                var newWidth = (int)(_newPictureBoxImage.CurrentImage.Width * resize);
-                var newHeight = (int)(_newPictureBoxImage.CurrentImage.Height * resize);
+                var newWidth = (int) (newPictureBoxImage.CurrentImage.Width*resize);
+                var newHeight = (int) (newPictureBoxImage.CurrentImage.Height*resize);
 
                 //Set unzoomed image to new image
-                _newPictureBoxImage.UnzoomedImage = _newPictureBoxImage.CurrentImage = 
-                    new Bitmap(_newPictureBoxImage.CurrentImage, newWidth, newHeight);
-                _newPictureBoxImage.CurrentWidth = _newPictureBoxImage.UnzoomedWidth = newWidth;
-                _newPictureBoxImage.CurrentHeight = _newPictureBoxImage.UnzoomedHeight = newHeight;
+                newPictureBoxImage.UnzoomedImage = newPictureBoxImage.CurrentImage =
+                                                   new Bitmap(newPictureBoxImage.CurrentImage, newWidth, newHeight);
+                newPictureBoxImage.CurrentWidth = newPictureBoxImage.UnzoomedWidth = newWidth;
+                newPictureBoxImage.CurrentHeight = newPictureBoxImage.UnzoomedHeight = newHeight;
 
 
                 //Set image back to its original rotation
                 //_imageRotate.RotateImageByAngle
                 //    (_newPictureBoxImage, _newPictureBoxImage.DegreesRotated);
 
-                return _newPictureBoxImage;
+                return newPictureBoxImage;
             }
         }
     }

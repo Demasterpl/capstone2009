@@ -18,7 +18,8 @@ namespace Core
          */
         public PictureBoxImage MakeSepia(PictureBoxImage pictureBoxImage)
         {
-            var SepiaBmp = new Bitmap(pictureBoxImage.CurrentImage.Width, pictureBoxImage.CurrentImage.Height);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            var SepiaBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
             Graphics g = Graphics.FromImage(SepiaBmp);
 
             ColorMatrix colorMatrix = new ColorMatrix(
@@ -33,15 +34,15 @@ namespace Core
 
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
-            g.DrawImage(pictureBoxImage.CurrentImage,
-                new Rectangle(0, 0, pictureBoxImage.CurrentImage.Width, pictureBoxImage.CurrentImage.Height),
-                    0, 0, pictureBoxImage.CurrentImage.Width, pictureBoxImage.CurrentImage.Height,
+            g.DrawImage(newPictureBoxImage.CurrentImage,
+                new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),
+                    0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height,
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            pictureBoxImage.CurrentImage = SepiaBmp;
+            newPictureBoxImage.CurrentImage = SepiaBmp;
 
-            return pictureBoxImage;
+            return newPictureBoxImage;
         }
     }
 }

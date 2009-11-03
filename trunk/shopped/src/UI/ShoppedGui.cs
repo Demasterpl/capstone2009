@@ -271,5 +271,15 @@ namespace UI
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepia(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Convert Sepia"));
         }
+
+        /**
+        * Handles the event of clicking the Tools->Invert menu item.
+        */
+
+        private void invertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Invert.InvertColors(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(string.Format("Invert Colors"));
+        }
     }
 }

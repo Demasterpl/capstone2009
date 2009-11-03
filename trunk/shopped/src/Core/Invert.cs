@@ -7,32 +7,31 @@ using System.Drawing.Imaging;
 using Core.Images;
 namespace Core
 {
-    public class Grayscale
+    public class Invert
     {
 
         /**
-         * A filter that will make an Image object grayscale.
+         * A filter that will invert the colors of an Image Object.
          * 
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
-        public PictureBoxImage MakeGrayscale(PictureBoxImage pictureBoxImage)
+        public PictureBoxImage InvertColors(PictureBoxImage pictureBoxImage)
         {
             PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
-            var GrayscaleBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            Graphics g = Graphics.FromImage(GrayscaleBmp);
+            var InvertedBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(InvertedBmp);
 
             ColorMatrix colorMatrix = new ColorMatrix(
                 new float[][]
-                {
-                    new float[] {.3f, .3f, .3f, 0, 0},
-                    new float[] {.59f, .59f, .59f, 0, 0},
-                    new float[] {.11f, .11f, .11f, 0, 0},
-                    new float[] {0, 0, 0, 1, 0},
-                    new float[] {0, 0, 0, 0, 1}
-                });
-
+                    {
+                        new float[] {-1, 0, 0, 0, 0},
+                        new float[] {0, -1, 0, 0, 0},
+                        new float[] {0, 0, -1, 0, 0},
+                        new float[] {0, 0, 0, 1, 0},
+                        new float[] {1, 1, 1, 0, 1}
+                    });
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
             g.DrawImage(newPictureBoxImage.CurrentImage,
@@ -41,7 +40,7 @@ namespace Core
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = GrayscaleBmp;
+            newPictureBoxImage.CurrentImage = InvertedBmp;
 
             return newPictureBoxImage;
         }
