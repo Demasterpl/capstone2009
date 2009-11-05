@@ -9,6 +9,7 @@ namespace UI
      * 
      * @param ZoomLevel Contains the amount of zoom the user specifies.
      */
+
     public partial class ZoomDialog : Form
     {
         public float ZoomLevel;
@@ -21,6 +22,7 @@ namespace UI
         /**
          * Once the user hits the "Zoom Image" button, this grabs the value from the dialog box.
          */
+
         private void ZoomButton_Click(object sender, EventArgs e)
         {
             ZoomLevel = float.Parse(ZoomTextBox.Text) / 100.0f;

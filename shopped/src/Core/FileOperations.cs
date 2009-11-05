@@ -14,6 +14,7 @@ namespace Core
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
+
         public PictureBoxImage OpenFile()
         {
             var openFileDialog = new OpenFileDialog
@@ -44,6 +45,7 @@ namespace Core
          *  
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          */
+
         public void SaveFile(PictureBoxImage pictureBoxImage)
         {
             var saveFileDialog = new SaveFileDialog

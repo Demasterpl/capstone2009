@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
 using Core;
-using Core.Interfaces;
 using Core.Images;
 
 namespace UI
@@ -12,6 +10,7 @@ namespace UI
      * 
      * @param _shoppedGuiHelper An instance of the ShoppedGuiHelper class.
      */
+
     public partial class ShoppedGui : Form
     {
         private ShoppedGuiHelper _shoppedGuiHelper;
@@ -27,6 +26,7 @@ namespace UI
          * Initial loading of the Shopped program. Disables certain features/options
          * that should not be available until an image is loaded into the program.
          */
+
         private void Form1_Load(object sender, EventArgs e)
         {
             AdditionalInfo.Visible = false;
@@ -45,6 +45,7 @@ namespace UI
         /**
          * Handles the event of clicking File->Exit menu item. Exits the program.
          */
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -54,6 +55,7 @@ namespace UI
          * Handles the event of clicking Help->About menu item. Displays message box
          * containing information about Shopped (developer names, program info).
          */
+
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Developed Fall 2009 at Kent State University\nGroup 4\n\n\nGreg Beca\nAndy Vanek\nDaniel Sheaffer","About Us");
@@ -62,6 +64,7 @@ namespace UI
         /**
          * Handles the event of clicking "Open Image" icon.
          */
+
         private void openPictureButton_Click(object sender, EventArgs e)
         {
             OpenImage();
@@ -70,6 +73,7 @@ namespace UI
         /**
          * Handles the event of clicking "Save Image" icon.
          */
+
         private void saveImageButton_Click(object sender, EventArgs e)
         {
             _shoppedGuiHelper.FileOperation.SaveFile(_shoppedGuiHelper.CurrentImage);
@@ -78,6 +82,7 @@ namespace UI
         /**
          * Handles the event of clicking File->Open Picture menu item.
          */
+
         private void openPictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenImage();
@@ -86,6 +91,7 @@ namespace UI
         /**
          * Handles the event of clicking File->Save Picture menu item.
          */
+
         private void savePictureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _shoppedGuiHelper.FileOperation.SaveFile(_shoppedGuiHelper.CurrentImage);
@@ -95,6 +101,7 @@ namespace UI
          * Called upon once an image is loaded from file, this enables the features/options
          * that can now be used.
          */
+
         public void EnableGuiItems()
         {
             AdditionalInfo.Visible = true;
@@ -112,6 +119,7 @@ namespace UI
          * Uses FileOperation instance to prompt user to open an image file.
          * Sets the image in the editor once image is opened.
          */
+
         public void OpenImage()
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.FileOperation.OpenFile();
@@ -128,6 +136,7 @@ namespace UI
          * @param image The image to set the PictureBox to.
          * @param operation A brief description of the operation just performed to the Shopped GUI image.
          */
+
         public void UpdatePictureBoxInfo(string operation)
         {
             PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
@@ -144,6 +153,7 @@ namespace UI
          * 
          * @param image The image from the ImageHistory class.
          */
+
         public void SetPictureBoxOnUndoOrRedo(PictureBoxImage image)
         {
             Console.WriteLine("Image being set to PictureBox: " + image.ToString());
@@ -156,6 +166,7 @@ namespace UI
          * Sets the information about the PictureBox image that is located at the bottom of the Shopped GUI.
          * Information includes height, width and the name of the image.
          */
+
         public void SetAdditionalInfo()
         {
             AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3}",
@@ -169,6 +180,7 @@ namespace UI
          * Handles the event of clicking the Tools->Rotate menu item. Displays the RotateDialog windows form,
          * obtains the value to rotate from the form, then rotates the image according to the rotate value.
          */
+
         private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
@@ -192,6 +204,7 @@ namespace UI
          * Handles the event of clicking the View->Zoom Image menu item. Displays the ZoomDialog windows form,
          * obtains the value to zoom from the form, then zooms the image according to the zoom value.
          */
+
         private void zoomImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var zoomDialog = new ZoomDialog();
@@ -209,6 +222,7 @@ namespace UI
          * Handles the event of clicking the Tools->Resize menu item. Displays the ResizeDialog windows form,
          * obtains the value to resize from the form, then resizes the image according to the resize value.
          */
+
         private void resizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
@@ -226,6 +240,7 @@ namespace UI
          * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo
          * buttons and menu items in the GUI. This will also set the tooltip text for the undo/redo GUI items.
          */
+
         private void SetUndoAndRedo()
         {
             redoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.RedoIsPossible();
@@ -241,6 +256,7 @@ namespace UI
         /**
          * Handles the event of clicking the Edit->Undo menu item.
          */
+
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
@@ -249,6 +265,7 @@ namespace UI
         /**
          * Handles the event of clicking the Edit->Redo menu item.
          */
+
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
@@ -284,6 +301,10 @@ namespace UI
             UpdatePictureBoxInfo(string.Format("Invert Colors"));
         }
 
+        /**
+        * Handles the event of clicking the Tools->Brightness menu item.
+        */
+
         private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var brightnessDialog = new BrightnessDialog();
@@ -295,6 +316,24 @@ namespace UI
                 UpdatePictureBoxInfo(string.Format("Brightness {0}%", brightnessDialog.BrightnessLevel));
                 PictureBox.Refresh();
             }
+        }
+
+        /**
+        * Handles the event of clicking the Tools->Contrast menu item.
+        */
+
+        private void contrastToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var contrastDialog = new ContrastDialog();
+            contrastDialog.ShowDialog();
+
+            if (contrastDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Contrast.AdjustContrast(_shoppedGuiHelper.CurrentImage, contrastDialog.ContrastLevel);
+                UpdatePictureBoxInfo(string.Format("Contrast {0}%", contrastDialog.ContrastLevel));
+                PictureBox.Refresh();
+            }
+
         }
     }
 }

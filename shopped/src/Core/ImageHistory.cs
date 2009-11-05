@@ -13,16 +13,17 @@ namespace Core
      * 
      * @param ImageRevisions A list of ImageHistoryItem objects (which contain an Image object and a string detailing the operation).
      */
+
     public class ImageHistory
     {
         public List<ImageHistoryItem> ImageRevisions;
-        private int CurrentRevision;
+        private int _currentRevision;
         private static Logger _logger = LogManager.GetCurrentClassLogger(); 
 
         public ImageHistory()
         {
             ImageRevisions = new List<ImageHistoryItem>();
-            CurrentRevision = -1;
+            _currentRevision = -1;
         }
 
         /**
@@ -30,32 +31,34 @@ namespace Core
          * @param image The image to add to the list
          * @param operation A string detailing what operation was just performed
          */
+
         public void AddImageToImageHistory(PictureBoxImage image, string operation)
         {
-            //CurrentRevision is somewhere in middle of list, need to delete items beyond current image
+            //_currentRevision is somewhere in middle of list, need to delete items beyond current image
             if (RedoIsPossible())
             {
-                ImageRevisions = ImageRevisions.Take(CurrentRevision + 1).ToList();
+                ImageRevisions = ImageRevisions.Take(_currentRevision + 1).ToList();
             }
 
             ImageRevisions.Add(new ImageHistoryItem(image, operation));
 
-            CurrentRevision += 1;
-            _logger.Debug("Adding image to history: " + image.ToString() + ", CurRev = " + CurrentRevision + "HistSize = " + ImageRevisions.Count());
+            _currentRevision += 1;
+            _logger.Debug("Adding image to history: " + image.ToString() + ", CurRev = " + _currentRevision + "HistSize = " + ImageRevisions.Count());
         }
 
         /**
          * Attempts an undo operation by checking if an object exists before the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
+
         public PictureBoxImage Undo()
         {
             if (UndoIsPossible())
             {
-                CurrentRevision -= 1;
-                _logger.Debug("Performing undo: " + ImageRevisions[CurrentRevision].Image.ToString() 
-                    + ", CurRev = " + CurrentRevision + "HistSize = " + ImageRevisions.Count());
-                return ImageRevisions[CurrentRevision].Image;
+                _currentRevision -= 1;
+                _logger.Debug("Performing undo: " + ImageRevisions[_currentRevision].Image.ToString() 
+                    + ", CurRev = " + _currentRevision + "HistSize = " + ImageRevisions.Count());
+                return ImageRevisions[_currentRevision].Image;
             }
 
             return null;
@@ -65,15 +68,16 @@ namespace Core
          * Attempts a redo operation by checking if an object exists after the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
+
         public PictureBoxImage Redo()
         {
 
             if (RedoIsPossible())
             {
-                CurrentRevision += 1;
-                _logger.Debug("Performing redo: " + ImageRevisions[CurrentRevision].Image.ToString() 
-                    + ", CurRev = " + CurrentRevision + "HistSize = " + ImageRevisions.Count());
-                return ImageRevisions[CurrentRevision].Image;
+                _currentRevision += 1;
+                _logger.Debug("Performing redo: " + ImageRevisions[_currentRevision].Image.ToString() 
+                    + ", CurRev = " + _currentRevision + "HistSize = " + ImageRevisions.Count());
+                return ImageRevisions[_currentRevision].Image;
             }
 
             return null;
@@ -83,6 +87,7 @@ namespace Core
          * Returns the number of ImageHistoryItem objects on the ImageRevisions list.
          * @return ImageRevisions.Count() The current number of items in the list.
          */
+
         public int GetNumberOfImagesInHistory()
         {
             return ImageRevisions.Count();
@@ -92,15 +97,17 @@ namespace Core
          * Returns the value of the iterator (essentially where we are in the ImageRevisions list).
          * @return CurrentRevision The value of the iterator for the list.
          */
+
         public int GetCurrentRevision()
         {
-            return CurrentRevision;
+            return _currentRevision;
         }
 
         /**
          * Returns whether or not there exists an image to redo in the history.
          * @return bool Whether or not ImageHistory can perform a redo
          */
+
         public bool RedoIsPossible()
         {
             return GetCurrentRevision() > -1 && GetCurrentRevision() < GetNumberOfImagesInHistory() - 1 && GetNumberOfImagesInHistory() > 1;
@@ -111,6 +118,7 @@ namespace Core
          * 
          * @return bool Whether or not ImageHistory can perform a undo.
          */
+
         public bool UndoIsPossible()
         {
             return GetCurrentRevision() > 0 && GetNumberOfImagesInHistory() > 0;
@@ -121,11 +129,12 @@ namespace Core
          * 
          * @return string The tooltip for the next item.
          */
+
         public string GetRedoToolTip()
         {
             if (RedoIsPossible())
             {
-                return ImageRevisions[CurrentRevision + 1].OperationPerformed;
+                return ImageRevisions[_currentRevision + 1].OperationPerformed;
             }
 
             return null;
@@ -136,14 +145,10 @@ namespace Core
          * 
          * @return string The tooltip for the previous item.
          */
+
         public string GetUndoToolTip()
         {
-            if (UndoIsPossible())
-            {
-                return ImageRevisions[CurrentRevision - 1].OperationPerformed;
-            }
-
-            return null;
+            return UndoIsPossible() ? ImageRevisions[_currentRevision - 1].OperationPerformed : null;
         }
     }
 }

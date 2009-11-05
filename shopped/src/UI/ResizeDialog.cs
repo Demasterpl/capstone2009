@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Core;
 
 namespace UI
 {
@@ -19,6 +18,7 @@ namespace UI
          * 
          * @param zoomLevel The amount of zoom of the current image in Shopped GUI
          */
+
         public ResizeDialog(float zoomLevel)
         {
             InitializeComponent();
@@ -37,6 +37,7 @@ namespace UI
         /**
          * Once the user hits the "Resize Image" button, this grabs the value from the dialog box.
          */
+
         private void ResizeButton_Click(object sender, EventArgs e)
         {
             ResizeLevel = float.Parse(ResizeTextBox.Text) / 100.0f;

@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
-using Core.Images;
+﻿using Core.Images;
 using Core.Interfaces;
-using Core;
 
 namespace Core
 {
@@ -13,6 +7,7 @@ namespace Core
      * A class that contains the initialized objects of the classes in Core. This is a "poor man's"
      * implementation of Inverion of Control. If time, convert this to an appropriate IoC container.
      */
+
     public class ShoppedGuiHelper
     {
         public PictureBoxImage CurrentImage { get; set; }
@@ -25,15 +20,16 @@ namespace Core
         public Sepia Sepia { get; set; }
         public Invert Invert { get; set; }
         public Brightness Brightness { get; set; }
+        public Contrast Contrast { get; set; }
 
         public ShoppedGuiHelper()
             : this(new PictureBoxImage(), new ImageRotate(), new FileOperations(), 
-            new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia(), new Invert(), new Brightness())
+            new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia(), new Invert(), new Brightness(), new Contrast())
         { }
 
         public ShoppedGuiHelper(PictureBoxImage pictureBoxImage, 
             ImageRotate imageRotate, FileOperations fileOperation, ImageHistory imageHistory, 
-            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, Invert invert, Brightness brightness)
+            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, Invert invert, Brightness brightness, Contrast contrast)
         {
             CurrentImage = pictureBoxImage;
             ImageRotate = imageRotate;
@@ -45,7 +41,7 @@ namespace Core
             Sepia = sepia;
             Invert = invert;
             Brightness = brightness;
-            
+            Contrast = contrast;         
         }
     }
 }
