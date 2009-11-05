@@ -14,6 +14,7 @@ namespace Core
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
+
         public PictureBoxImage RotateImageByAngle(PictureBoxImage pictureBoxImage, float angle)
         {
             if (pictureBoxImage == null)
@@ -21,20 +22,20 @@ namespace Core
                 throw new ArgumentNullException("image");
             }
 
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
-            const double pi2 = Math.PI / 2.0;
+            const double pi2 = Math.PI/2.0;
 
             var oldWidth = newPictureBoxImage.CurrentImage.Width;
             var oldHeight = newPictureBoxImage.CurrentImage.Height;
 
             // Convert degrees to radians
-            var theta = angle * Math.PI / 180.0;
+            var theta = angle*Math.PI/180.0;
             var lockedTheta = theta;
 
             // Ensure theta is now [0, 2pi)
             while (lockedTheta < 0.0)
-                lockedTheta += 2 * Math.PI;
+                lockedTheta += 2*Math.PI;
 
             double adjacentTop, oppositeTop;
             double adjacentBottom, oppositeBottom;
@@ -43,29 +44,30 @@ namespace Core
             // on how much rotation is being done to the bitmap.
             //   Refer to the first paragraph in the explaination above for 
             //   reasons why.
+
             if ((lockedTheta >= 0.0 && lockedTheta < pi2) ||
                 (lockedTheta >= Math.PI && lockedTheta < (Math.PI + pi2)))
             {
-                adjacentTop = Math.Abs(Math.Cos(lockedTheta)) * oldWidth;
-                oppositeTop = Math.Abs(Math.Sin(lockedTheta)) * oldWidth;
+                adjacentTop = Math.Abs(Math.Cos(lockedTheta))*oldWidth;
+                oppositeTop = Math.Abs(Math.Sin(lockedTheta))*oldWidth;
 
-                adjacentBottom = Math.Abs(Math.Cos(lockedTheta)) * oldHeight;
-                oppositeBottom = Math.Abs(Math.Sin(lockedTheta)) * oldHeight;
+                adjacentBottom = Math.Abs(Math.Cos(lockedTheta))*oldHeight;
+                oppositeBottom = Math.Abs(Math.Sin(lockedTheta))*oldHeight;
             }
             else
             {
-                adjacentTop = Math.Abs(Math.Sin(lockedTheta)) * oldHeight;
-                oppositeTop = Math.Abs(Math.Cos(lockedTheta)) * oldHeight;
+                adjacentTop = Math.Abs(Math.Sin(lockedTheta))*oldHeight;
+                oppositeTop = Math.Abs(Math.Cos(lockedTheta))*oldHeight;
 
-                adjacentBottom = Math.Abs(Math.Sin(lockedTheta)) * oldWidth;
-                oppositeBottom = Math.Abs(Math.Cos(lockedTheta)) * oldWidth;
+                adjacentBottom = Math.Abs(Math.Sin(lockedTheta))*oldWidth;
+                oppositeBottom = Math.Abs(Math.Cos(lockedTheta))*oldWidth;
             }
 
             var newWidth = adjacentTop + oppositeBottom;
             var newHeight = adjacentBottom + oppositeTop;
 
-            var nWidth = (int)Math.Ceiling(newWidth);
-            var nHeight = (int)Math.Ceiling(newHeight);
+            var nWidth = (int) Math.Ceiling(newWidth);
+            var nHeight = (int) Math.Ceiling(newHeight);
 
             var rotatedBmp = new Bitmap(nWidth, nHeight);
 
@@ -88,38 +90,42 @@ namespace Core
                  * then the bitmap we are drawing on WOULDN'T be the bounding box
                  * as required.
                  */
+
                 if (lockedTheta >= 0.0 && lockedTheta < pi2)
                 {
-                    points = new[] { 
-											 new Point( (int) oppositeBottom, 0 ), 
-											 new Point( nWidth, (int) oppositeTop ),
-											 new Point( 0, (int) adjacentBottom )
-										 };
-
+                    points = new[]
+                                 {
+                                     new Point((int) oppositeBottom, 0),
+                                     new Point(nWidth, (int) oppositeTop),
+                                     new Point(0, (int) adjacentBottom)
+                                 };
                 }
                 else if (lockedTheta >= pi2 && lockedTheta < Math.PI)
                 {
-                    points = new[] { 
-											 new Point( nWidth, (int) oppositeTop ),
-											 new Point( (int) adjacentTop, nHeight ),
-											 new Point( (int) oppositeBottom, 0 )						 
-										 };
+                    points = new[]
+                                 {
+                                     new Point(nWidth, (int) oppositeTop),
+                                     new Point((int) adjacentTop, nHeight),
+                                     new Point((int) oppositeBottom, 0)
+                                 };
                 }
                 else if (lockedTheta >= Math.PI && lockedTheta < (Math.PI + pi2))
                 {
-                    points = new[] { 
-											 new Point( (int) adjacentTop, nHeight ), 
-											 new Point( 0, (int) adjacentBottom ),
-											 new Point( nWidth, (int) oppositeTop )
-										 };
+                    points = new[]
+                                 {
+                                     new Point((int) adjacentTop, nHeight),
+                                     new Point(0, (int) adjacentBottom),
+                                     new Point(nWidth, (int) oppositeTop)
+                                 };
                 }
                 else
                 {
-                    points = new[] { 
-											 new Point( 0, (int) adjacentBottom ), 
-											 new Point( (int) oppositeBottom, 0 ),
-											 new Point( (int) adjacentTop, nHeight )		
-										 };
+                    points = new[]
+                                 {
+                                     new Point(0, (int) adjacentBottom),
+                                     new Point((int) oppositeBottom, 0),
+                                     new Point((int) adjacentTop, nHeight)
+                                 };
                 }
 
                 g.DrawImage(newPictureBoxImage.CurrentImage, points);

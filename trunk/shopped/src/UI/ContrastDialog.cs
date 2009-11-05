@@ -3,15 +3,15 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class BrightnessDialog : Form
+    public partial class ContrastDialog : Form
     {
-        public float BrightnessLevel;
+        public float ContrastLevel;
 
         /**
-         * A constructor for BrignessDialog
+         * A constructor for ContrastDialog
          */
 
-        public BrightnessDialog()
+        public ContrastDialog()
         {
             InitializeComponent();
         }
@@ -22,7 +22,7 @@ namespace UI
 
         private void AcceptButton_Click(object sender, EventArgs e)
         {
-            BrightnessLevel = float.Parse(BrightnessTextBox.Text);
+            ContrastLevel = float.Parse(ContrastTextBox.Text);
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using Core.Images;
+
 namespace Core
 {
     public class Invert
@@ -16,15 +13,16 @@ namespace Core
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
+
         public PictureBoxImage InvertColors(PictureBoxImage pictureBoxImage)
         {
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
-            var InvertedBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            Graphics g = Graphics.FromImage(InvertedBmp);
+            var invertedBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            var g = Graphics.FromImage(invertedBmp);
 
-            ColorMatrix colorMatrix = new ColorMatrix(
-                new float[][]
+            var colorMatrix = new ColorMatrix(
+                new[]
                     {
                         new float[] {-1, 0, 0, 0, 0},
                         new float[] {0, -1, 0, 0, 0},
@@ -32,7 +30,8 @@ namespace Core
                         new float[] {0, 0, 0, 1, 0},
                         new float[] {1, 1, 1, 0, 1}
                     });
-            ImageAttributes attributes = new ImageAttributes();
+
+            var attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
             g.DrawImage(newPictureBoxImage.CurrentImage,
                 new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),
@@ -40,7 +39,7 @@ namespace Core
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = InvertedBmp;
+            newPictureBoxImage.CurrentImage = invertedBmp;
 
             return newPictureBoxImage;
         }

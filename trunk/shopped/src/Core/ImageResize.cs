@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using Core.Images;
 
 namespace Core
@@ -25,10 +21,11 @@ namespace Core
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
+
         public PictureBoxImage ResizeImage(PictureBoxImage pictureBoxImage, float resize)
         {
             //new up a PictureBoxImage
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
             _imageZoom.ZoomImage(newPictureBoxImage, 1.0f);
             newPictureBoxImage.ResizeLevel = resize;
@@ -37,25 +34,22 @@ namespace Core
             {
                 return newPictureBoxImage;
             }
-            else
-            {
-                //Calculate new height and width
-                var newWidth = (int) (newPictureBoxImage.CurrentImage.Width*resize);
-                var newHeight = (int) (newPictureBoxImage.CurrentImage.Height*resize);
 
-                //Set unzoomed image to new image
-                newPictureBoxImage.UnzoomedImage = newPictureBoxImage.CurrentImage =
-                                                   new Bitmap(newPictureBoxImage.CurrentImage, newWidth, newHeight);
-                newPictureBoxImage.CurrentWidth = newPictureBoxImage.UnzoomedWidth = newWidth;
-                newPictureBoxImage.CurrentHeight = newPictureBoxImage.UnzoomedHeight = newHeight;
+            //Calculate new height and width
+            var newWidth = (int) (newPictureBoxImage.CurrentImage.Width*resize);
+            var newHeight = (int) (newPictureBoxImage.CurrentImage.Height*resize);
 
+            //Set unzoomed image to new image
+            newPictureBoxImage.UnzoomedImage = newPictureBoxImage.CurrentImage =
+                                               new Bitmap(newPictureBoxImage.CurrentImage, newWidth, newHeight);
+            newPictureBoxImage.CurrentWidth = newPictureBoxImage.UnzoomedWidth = newWidth;
+            newPictureBoxImage.CurrentHeight = newPictureBoxImage.UnzoomedHeight = newHeight;
 
-                //Set image back to its original rotation
-                //_imageRotate.RotateImageByAngle
-                //    (_newPictureBoxImage, _newPictureBoxImage.DegreesRotated);
+            //Set image back to its original rotation
+            //_imageRotate.RotateImageByAngle
+            //    (_newPictureBoxImage, _newPictureBoxImage.DegreesRotated);
 
-                return newPictureBoxImage;
-            }
+            return newPictureBoxImage;
         }
     }
 }

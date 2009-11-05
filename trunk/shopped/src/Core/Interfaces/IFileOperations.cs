@@ -1,5 +1,3 @@
-using System.Windows.Forms;
-using System.Drawing;
 using Core.Images;
 
 namespace Core.Interfaces
@@ -9,6 +7,7 @@ namespace Core.Interfaces
      * The interface contains two methods, OpenFile and SaveFile.
      * 
      */
+
     public interface IFileOperations
     {
         PictureBoxImage OpenFile();

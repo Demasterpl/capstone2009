@@ -1,8 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace Core.Images
 {
@@ -19,6 +15,7 @@ namespace Core.Images
      * @param CurrentImage Image object that holds the actual Image object.
      * @param UnzoomedImage Image object that holds the unzoomed version of CurrentImage
      */
+
     public class PictureBoxImage
     {
         public string FileName { get; set; }

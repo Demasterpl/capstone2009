@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
 using Core.Images;
 namespace Core
@@ -16,13 +12,14 @@ namespace Core
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
+
         public PictureBoxImage MakeSepia(PictureBoxImage pictureBoxImage)
         {
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-            var SepiaBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            Graphics g = Graphics.FromImage(SepiaBmp);
+            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            var sepiaBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            var g = Graphics.FromImage(sepiaBmp);
 
-            ColorMatrix colorMatrix = new ColorMatrix(
+            var colorMatrix = new ColorMatrix( 
                 new float[][]
                 {
                     new float[] {.393f, .349f, .272f, 0, 0},
@@ -32,7 +29,7 @@ namespace Core
                     new float[] {0, 0, 0, 0, 1}
                 });
 
-            ImageAttributes attributes = new ImageAttributes();
+            var attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
             g.DrawImage(newPictureBoxImage.CurrentImage,
                 new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),
@@ -40,7 +37,7 @@ namespace Core
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = SepiaBmp;
+            newPictureBoxImage.CurrentImage = sepiaBmp;
 
             return newPictureBoxImage;
         }
