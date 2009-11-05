@@ -335,5 +335,70 @@ namespace UI
             }
 
         }
+
+        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            var zoomDialog = new ZoomDialog();
+            zoomDialog.ShowDialog();
+
+            if (zoomDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, zoomDialog.ZoomLevel);
+                UpdatePictureBoxInfo(string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
+                PictureBox.Refresh();
+            }
+        }
+
+        private void MenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            var rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
+            rotateDialog.ShowDialog();
+
+            if (rotateDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.CurrentImage.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
+                _shoppedGuiHelper.CurrentImage.DegreesRotated %= 360.0f;
+
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, 1.0f);
+
+                _shoppedGuiHelper.CurrentImage =
+                    _shoppedGuiHelper.ImageRotate.RotateImageByAngle(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.CurrentImage.DegreesRotated);
+                UpdatePictureBoxInfo(string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
+                PictureBox.Refresh();
+            }
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            var resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
+            resizeDialog.ShowDialog();
+
+            if (resizeDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageResize.ResizeImage(_shoppedGuiHelper.CurrentImage, resizeDialog.ResizeLevel);
+                UpdatePictureBoxInfo(string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
+                PictureBox.Refresh();
+            }
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
+        }
     }
 }
