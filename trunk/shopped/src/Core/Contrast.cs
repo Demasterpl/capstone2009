@@ -19,7 +19,7 @@ namespace Core
         public static T Clamp<T>(T value, T max, T min)
             where T : System.IComparable<T>
          {
-            var result = value;
+            T result = value;
             if (value.CompareTo(max) > 0)
                 result = max;
             if (value.CompareTo(min) < 0)
@@ -37,12 +37,12 @@ namespace Core
         public PictureBoxImage AdjustContrast(PictureBoxImage pictureBoxImage, float contrastLevel)
 
         {
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
             contrastLevel = (100.0f + contrastLevel)/100.0f;
             contrastLevel *= contrastLevel;
-            var contrastBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            var g = Graphics.FromImage(contrastBmp);
+            Bitmap contrastBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(contrastBmp);
 
             g.DrawImage(newPictureBoxImage.CurrentImage,
                         new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width,
@@ -51,14 +51,14 @@ namespace Core
                                       newPictureBoxImage.CurrentImage.Height), GraphicsUnit.Pixel);
             g.Dispose();
 
-            for (var x = 0; x < newPictureBoxImage.CurrentImage.Width; ++x)
+            for (int x = 0; x < newPictureBoxImage.CurrentImage.Width; ++x)
             {
-                for (var y = 0; y < newPictureBoxImage.CurrentImage.Height; ++y)
+                for (int y = 0; y < newPictureBoxImage.CurrentImage.Height; ++y)
                 {
-                    var pixel = contrastBmp.GetPixel(x, y);
-                    var red = pixel.R/255.0f;
-                    var green = pixel.G/255.0f;
-                    var blue = pixel.B/255.0f;
+                    Color pixel = contrastBmp.GetPixel(x, y);
+                    float red = pixel.R/255.0f;
+                    float green = pixel.G/255.0f;
+                    float blue = pixel.B/255.0f;
                     red = (((red - 0.5f)*contrastLevel) + 0.5f)*255.0f;
                     green = (((green - 0.5f)*contrastLevel) + 0.5f)*255.0f;
                     blue = (((blue - 0.5f)*contrastLevel) + 0.5f)*255.0f;

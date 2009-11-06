@@ -22,16 +22,16 @@ namespace Core
                 throw new ArgumentNullException("image");
             }
 
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
             const double pi2 = Math.PI/2.0;
 
-            var oldWidth = newPictureBoxImage.CurrentImage.Width;
-            var oldHeight = newPictureBoxImage.CurrentImage.Height;
+            int oldWidth = newPictureBoxImage.CurrentImage.Width;
+            int oldHeight = newPictureBoxImage.CurrentImage.Height;
 
             // Convert degrees to radians
-            var theta = angle*Math.PI/180.0;
-            var lockedTheta = theta;
+            double theta = angle*Math.PI/180.0;
+            double lockedTheta = theta;
 
             // Ensure theta is now [0, 2pi)
             while (lockedTheta < 0.0)
@@ -63,15 +63,15 @@ namespace Core
                 oppositeBottom = Math.Abs(Math.Cos(lockedTheta))*oldWidth;
             }
 
-            var newWidth = adjacentTop + oppositeBottom;
-            var newHeight = adjacentBottom + oppositeTop;
+            double newWidth = adjacentTop + oppositeBottom;
+            double newHeight = adjacentBottom + oppositeTop;
 
-            var nWidth = (int) Math.Ceiling(newWidth);
-            var nHeight = (int) Math.Ceiling(newHeight);
+            int nWidth = (int) Math.Ceiling(newWidth);
+            int nHeight = (int) Math.Ceiling(newHeight);
 
-            var rotatedBmp = new Bitmap(nWidth, nHeight);
+            Bitmap rotatedBmp = new Bitmap(nWidth, nHeight);
 
-            using (var g = Graphics.FromImage(rotatedBmp))
+            using (Graphics g = Graphics.FromImage(rotatedBmp))
             {
                 // This array will be used to pass in the three points that 
                 // make up the rotated image

@@ -25,7 +25,7 @@ namespace Core
         public PictureBoxImage ResizeImage(PictureBoxImage pictureBoxImage, float resize)
         {
             //new up a PictureBoxImage
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
             _imageZoom.ZoomImage(newPictureBoxImage, 1.0f);
             newPictureBoxImage.ResizeLevel = resize;
@@ -36,8 +36,8 @@ namespace Core
             }
 
             //Calculate new height and width
-            var newWidth = (int) (newPictureBoxImage.CurrentImage.Width*resize);
-            var newHeight = (int) (newPictureBoxImage.CurrentImage.Height*resize);
+            int newWidth = (int) (newPictureBoxImage.CurrentImage.Width*resize);
+            int newHeight = (int) (newPictureBoxImage.CurrentImage.Height*resize);
 
             //Set unzoomed image to new image
             newPictureBoxImage.UnzoomedImage = newPictureBoxImage.CurrentImage =

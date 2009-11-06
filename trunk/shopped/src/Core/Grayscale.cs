@@ -16,12 +16,12 @@ namespace Core
 
         public PictureBoxImage MakeGrayscale(PictureBoxImage pictureBoxImage)
         {
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
-            var grayscaleBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            var g = Graphics.FromImage(grayscaleBmp);
+            Bitmap grayscaleBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(grayscaleBmp);
 
-            var colorMatrix = new ColorMatrix(
+            ColorMatrix colorMatrix = new ColorMatrix(
                 new[]
                     {
                     new float[] {.3f, .3f, .3f, 0, 0},
@@ -31,7 +31,7 @@ namespace Core
                     new float[] {0, 0, 0, 0, 1}
                 });
 
-            var attributes = new ImageAttributes();
+            ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
             g.DrawImage(newPictureBoxImage.CurrentImage,
                 new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),

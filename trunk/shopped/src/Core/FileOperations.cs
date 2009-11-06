@@ -17,7 +17,7 @@ namespace Core
 
         public PictureBoxImage OpenFile()
         {
-            var openFileDialog = new OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
              {
                  InitialDirectory = "c:\\"
              };
@@ -28,7 +28,7 @@ namespace Core
                 try
                 {
                     Image openedImage = new Bitmap(openFileDialog.OpenFile());
-                    var pictureBoxImage = new PictureBoxImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);            
+                    PictureBoxImage pictureBoxImage = new PictureBoxImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);            
                     return pictureBoxImage;
                 }
                 catch (Exception ex)
@@ -48,7 +48,7 @@ namespace Core
 
         public void SaveFile(PictureBoxImage pictureBoxImage)
         {
-            var saveFileDialog = new SaveFileDialog
+            SaveFileDialog saveFileDialog = new SaveFileDialog
              {
                  FileName = pictureBoxImage.FileName,
                  Filter = "JPEG (*.jpeg)|*.jpeg| Bitmap (*.bmp)|*.bmp"

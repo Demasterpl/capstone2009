@@ -22,7 +22,7 @@ namespace Core
 
         public PictureBoxImage ZoomImage(PictureBoxImage pictureBoxImage, float zoom)
         {
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
             //Reset current image to 100% zoom
             newPictureBoxImage.CurrentImage = newPictureBoxImage.UnzoomedImage;
