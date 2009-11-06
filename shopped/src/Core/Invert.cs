@@ -16,12 +16,12 @@ namespace Core
 
         public PictureBoxImage InvertColors(PictureBoxImage pictureBoxImage)
         {
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
-            var invertedBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            var g = Graphics.FromImage(invertedBmp);
+            Bitmap invertedBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(invertedBmp);
 
-            var colorMatrix = new ColorMatrix(
+            ColorMatrix colorMatrix = new ColorMatrix(
                 new[]
                     {
                         new float[] {-1, 0, 0, 0, 0},
@@ -31,7 +31,7 @@ namespace Core
                         new float[] {1, 1, 1, 0, 1}
                     });
 
-            var attributes = new ImageAttributes();
+            ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
             g.DrawImage(newPictureBoxImage.CurrentImage,
                 new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),

@@ -15,11 +15,11 @@ namespace Core
 
         public PictureBoxImage MakeSepia(PictureBoxImage pictureBoxImage)
         {
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-            var sepiaBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            var g = Graphics.FromImage(sepiaBmp);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            Bitmap sepiaBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(sepiaBmp);
 
-            var colorMatrix = new ColorMatrix( 
+            ColorMatrix colorMatrix = new ColorMatrix( 
                 new float[][]
                 {
                     new float[] {.393f, .349f, .272f, 0, 0},
@@ -29,7 +29,7 @@ namespace Core
                     new float[] {0, 0, 0, 0, 1}
                 });
 
-            var attributes = new ImageAttributes();
+            ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
             g.DrawImage(newPictureBoxImage.CurrentImage,
                 new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),

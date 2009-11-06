@@ -15,12 +15,12 @@ namespace Core
 
         public PictureBoxImage AdjustBrightness(PictureBoxImage pictureBoxImage, float brightnessLevel)
         {
-            var newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-            var finalValue = (float)brightnessLevel / 255.0f;
-            var brightnessBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            var g = Graphics.FromImage(brightnessBmp);
+            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            float finalValue = (float)brightnessLevel / 255.0f;
+            Bitmap brightnessBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(brightnessBmp);
 
-            var colorMatrix = new ColorMatrix(
+            ColorMatrix colorMatrix = new ColorMatrix(
                 new[]
                     {
                     new float[] {1, 0, 0, 0, 0},
@@ -30,7 +30,7 @@ namespace Core
                     new float[] {finalValue, finalValue, finalValue, 1, 1}
                 });
 
-            var attributes = new ImageAttributes();
+            ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
             g.DrawImage(newPictureBoxImage.CurrentImage,
                 new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),
