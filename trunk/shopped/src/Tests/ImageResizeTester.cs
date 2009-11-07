@@ -12,10 +12,10 @@ namespace Tests
         public void ResizingImageBy200PercentDoublesSizeOfPicture()
         {
             const float RESIZELEVEL = 2.0f;
-            var image = new Bitmap(800, 600);
+            Bitmap image = new Bitmap(800, 600);
 
-            var imageResize = new ImageResize();
-            var pictureBoxImage = new PictureBoxImage
+            ImageResize imageResize = new ImageResize();
+            PictureBoxImage pictureBoxImage = new PictureBoxImage
             {
                 CurrentHeight = image.Height,
                 CurrentWidth = image.Width,
@@ -43,10 +43,10 @@ namespace Tests
         public void UnzoomedImageHasSamePropertiesAsCurrentImageAfterResize()
         {
             const float RESIZELEVEL = 2.0f;
-            var image = new Bitmap(800, 600);
+            Bitmap image = new Bitmap(800, 600);
 
-            var imageResize = new ImageResize();
-            var pictureBoxImage = new PictureBoxImage
+            ImageResize imageResize = new ImageResize();
+            PictureBoxImage pictureBoxImage = new PictureBoxImage
             {
                 CurrentHeight = image.Height,
                 CurrentWidth = image.Width,
