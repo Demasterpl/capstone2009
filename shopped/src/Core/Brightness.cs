@@ -16,7 +16,7 @@ namespace Core
         public PictureBoxImage AdjustBrightness(PictureBoxImage pictureBoxImage, float brightnessLevel)
         {
             PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-            float finalValue = (float)brightnessLevel / 255.0f;
+            float finalValue = brightnessLevel / 255.0f;
             Bitmap brightnessBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
             Graphics g = Graphics.FromImage(brightnessBmp);
 

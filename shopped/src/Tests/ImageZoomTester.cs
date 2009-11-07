@@ -12,10 +12,10 @@ namespace Tests
         public void ZoomingImageBy200PercentDoublesImageSize()
         {
             const float ZOOMLEVEL = 2.0f;
-            var image = new Bitmap(800, 600);
+            Bitmap image = new Bitmap(800, 600);
 
-            var imageZoom = new ImageZoom();
-            var pictureBoxImage = new PictureBoxImage
+            ImageZoom imageZoom = new ImageZoom();
+            PictureBoxImage pictureBoxImage = new PictureBoxImage
             {
                 CurrentHeight = image.Height,
                 CurrentWidth = image.Width,
@@ -43,10 +43,10 @@ namespace Tests
         public void UnzoomedImageRetainsOriginalPropertiesAfterZoom()
         {
             const float RESIZELEVEL = 2.0f;
-            var image = new Bitmap(800, 600);
+            Bitmap image = new Bitmap(800, 600);
 
-            var imageZoom = new ImageZoom();
-            var pictureBoxImage = new PictureBoxImage
+            ImageZoom imageZoom = new ImageZoom();
+            PictureBoxImage pictureBoxImage = new PictureBoxImage
             {
                 CurrentHeight = image.Height,
                 CurrentWidth = image.Width,

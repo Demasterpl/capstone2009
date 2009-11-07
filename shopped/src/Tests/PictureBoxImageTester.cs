@@ -22,7 +22,7 @@ namespace Tests
             const float RESIZE = .56f;
 
 
-            var image = new PictureBoxImage
+            PictureBoxImage image = new PictureBoxImage
             {
                 CurrentHeight = HEIGHT,
                 CurrentWidth = WIDTH,

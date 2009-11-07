@@ -38,7 +38,7 @@ namespace Tests
         [Test]
         public void CanAddImageToImageHistory()
         {
-            var pictureBoxImage = new PictureBoxImage();
+            PictureBoxImage pictureBoxImage = new PictureBoxImage();
 
             _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
 
@@ -49,7 +49,7 @@ namespace Tests
         public void DescriptionGivenToImageHistoryItemIsSetProperly()
         {
             const string message = "Testing Image";
-            var pictureBoxImage = new PictureBoxImage();
+            PictureBoxImage pictureBoxImage = new PictureBoxImage();
 
             _imageHistory.AddImageToImageHistory(pictureBoxImage, message);
 
@@ -66,7 +66,7 @@ namespace Tests
             float resizelevel = 1.0f;
 
 
-            var pictureBoxImage = new PictureBoxImage
+            PictureBoxImage pictureBoxImage = new PictureBoxImage
             {
                 CurrentImage = image,
                 CurrentHeight = currentHeight,
@@ -95,7 +95,7 @@ namespace Tests
             float resizelevel = 1.0f;
 
 
-            var pictureBoxImage = new PictureBoxImage
+            PictureBoxImage pictureBoxImage = new PictureBoxImage
             {
                 CurrentImage = image,
                 CurrentHeight = currentHeight,
@@ -106,7 +106,7 @@ namespace Tests
 
             _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy Image so I can Undo");
-            var undoImage = _imageHistory.Undo();
+            PictureBoxImage undoImage = _imageHistory.Undo();
 
             Assert.AreEqual(currentHeight, undoImage.CurrentHeight);
             Assert.AreEqual(currentWidth, undoImage.CurrentWidth);
@@ -125,7 +125,7 @@ namespace Tests
             float resizelevel = 1.0f;
 
 
-            var pictureBoxImage = new PictureBoxImage
+            PictureBoxImage pictureBoxImage = new PictureBoxImage
             {
                 CurrentImage = image,
                 CurrentHeight = currentHeight,
@@ -137,7 +137,7 @@ namespace Tests
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
             _imageHistory.AddImageToImageHistory(pictureBoxImage, "Image we're testing");
             _imageHistory.Undo();
-            var redoImage = _imageHistory.Redo();
+            PictureBoxImage redoImage = _imageHistory.Redo();
 
             Assert.AreEqual(currentHeight, redoImage.CurrentHeight);
             Assert.AreEqual(currentWidth, redoImage.CurrentWidth);
@@ -173,7 +173,7 @@ namespace Tests
         [Test]
         public void UndoIsNotPossibleOnEmptyImageHistory()
         {
-            var isPossible = _imageHistory.UndoIsPossible();
+            bool isPossible = _imageHistory.UndoIsPossible();
 
             Assert.AreEqual(false, isPossible);
         }
@@ -183,7 +183,7 @@ namespace Tests
         {
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
-            var isPossible = _imageHistory.UndoIsPossible();
+            bool isPossible = _imageHistory.UndoIsPossible();
 
             Assert.AreEqual(true, isPossible);
         }
@@ -193,7 +193,7 @@ namespace Tests
         {
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
             _imageHistory.Undo();
-            var isPossible = _imageHistory.UndoIsPossible();
+            bool isPossible = _imageHistory.UndoIsPossible();
 
             Assert.AreEqual(false, isPossible);
         }
@@ -202,7 +202,7 @@ namespace Tests
         public void RedoIsNotPossibleOnEmptyImageHistory()
         {
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
-            var isPossible = _imageHistory.RedoIsPossible();
+            bool isPossible = _imageHistory.RedoIsPossible();
 
             Assert.AreEqual(false, isPossible);
         }
@@ -214,7 +214,7 @@ namespace Tests
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
             _imageHistory.Undo();
 
-            var isPossible = _imageHistory.RedoIsPossible();
+            bool isPossible = _imageHistory.RedoIsPossible();
 
             Assert.AreEqual(true, isPossible);
         }
@@ -224,7 +224,7 @@ namespace Tests
         {
             _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
 
-            var isPossible = _imageHistory.RedoIsPossible();
+            bool isPossible = _imageHistory.RedoIsPossible();
 
             Assert.AreEqual(false, isPossible);
         }

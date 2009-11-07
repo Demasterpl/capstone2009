@@ -12,10 +12,10 @@ namespace Tests
         public void RotateImageSetsPictureBoxImagePropertiesToNewRotatedValues()
         {
             const float ROTATEDEG = 90.0f;
-            var image = new Bitmap(800, 600);
+            Bitmap image = new Bitmap(800, 600);
 
-            var imageRotate = new ImageRotate();
-            var pictureBoxImage = new PictureBoxImage 
+            ImageRotate imageRotate = new ImageRotate();
+            PictureBoxImage pictureBoxImage = new PictureBoxImage 
             {
                 CurrentHeight = image.Height,
                 CurrentWidth = image.Width, 

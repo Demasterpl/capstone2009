@@ -27,7 +27,7 @@ namespace Core
             {
                 try
                 {
-                    Image openedImage = new Bitmap(openFileDialog.OpenFile());
+                    var openedImage = new Bitmap(openFileDialog.OpenFile());
                     PictureBoxImage pictureBoxImage = new PictureBoxImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);            
                     return pictureBoxImage;
                 }

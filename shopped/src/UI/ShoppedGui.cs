@@ -183,7 +183,7 @@ namespace UI
 
         private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
+            RotateDialog rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             rotateDialog.ShowDialog();
 
             if (rotateDialog.DialogResult == DialogResult.OK)
@@ -207,7 +207,7 @@ namespace UI
 
         private void zoomImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var zoomDialog = new ZoomDialog();
+            ZoomDialog zoomDialog = new ZoomDialog();
             zoomDialog.ShowDialog();
 
             if (zoomDialog.DialogResult == DialogResult.OK)
@@ -225,7 +225,7 @@ namespace UI
 
         private void resizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
+            ResizeDialog resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             resizeDialog.ShowDialog();
 
             if (resizeDialog.DialogResult == DialogResult.OK)
@@ -307,7 +307,7 @@ namespace UI
 
         private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var brightnessDialog = new BrightnessDialog();
+            BrightnessDialog brightnessDialog = new BrightnessDialog();
             brightnessDialog.ShowDialog();
 
             if (brightnessDialog.DialogResult == DialogResult.OK)
@@ -324,7 +324,7 @@ namespace UI
 
         private void contrastToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var contrastDialog = new ContrastDialog();
+            ContrastDialog contrastDialog = new ContrastDialog();
             contrastDialog.ShowDialog();
 
             if (contrastDialog.DialogResult == DialogResult.OK)
@@ -343,7 +343,7 @@ namespace UI
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            var zoomDialog = new ZoomDialog();
+            ZoomDialog zoomDialog = new ZoomDialog();
             zoomDialog.ShowDialog();
 
             if (zoomDialog.DialogResult == DialogResult.OK)
@@ -361,7 +361,7 @@ namespace UI
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            var rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
+            RotateDialog rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             rotateDialog.ShowDialog();
 
             if (rotateDialog.DialogResult == DialogResult.OK)
@@ -380,7 +380,7 @@ namespace UI
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            var resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
+            ResizeDialog resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             resizeDialog.ShowDialog();
 
             if (resizeDialog.DialogResult == DialogResult.OK)
