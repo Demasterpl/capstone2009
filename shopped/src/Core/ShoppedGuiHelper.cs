@@ -1,5 +1,7 @@
 ﻿using Core.Images;
+using Core.Filters;
 using Core.Interfaces;
+using Core.Manipulators;
 
 namespace Core
 {
@@ -48,10 +50,7 @@ namespace Core
 
         public void RotateImage(float angle)
         {
-            CurrentImage.DegreesRotated += (angle % 360.0f);
-            CurrentImage.DegreesRotated %= 360.0f;
-
-            //PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage((Image)PictureBox.Image, 1.0f) as Image;
+            angle %= 360.0f;
 
             CurrentImage = ImageRotate.RotateImageByAngle(CurrentImage, angle);
         }

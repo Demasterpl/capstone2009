@@ -9,11 +9,8 @@ namespace Core.Images
      * @param FileName Contains the name of the opened image file
      * @param CurrentHeight Contains the height of the loaded image.
      * @param CurrentWidth Contains the width of the loaded image.
-     * @param UnzoomedHeight Contains the height of the image in its unzoomed (100%) form.
-     * @param UnzoomedWidth Contains the width of the loaded image in its unzoomed (100%) form.
      * @param DegreesRotated Contains how many degrees the image is currently rotated.
      * @param CurrentImage Image object that holds the actual Image object.
-     * @param UnzoomedImage Image object that holds the unzoomed version of CurrentImage
      */
 
     public class PictureBoxImage
@@ -21,25 +18,22 @@ namespace Core.Images
         public string FileName { get; set; }
         public int CurrentHeight { get; set; }
         public int CurrentWidth { get; set; }
-        public int UnzoomedHeight { get; set; }
-        public int UnzoomedWidth { get; set;}
         public float DegreesRotated { get; set; }
         public float ZoomLevel { get; set; }
         public float ResizeLevel { get; set; }
         public int BrightnessLevel { get; set; }
         public Image CurrentImage { get; set; }
-        public Image UnzoomedImage { get; set; }
 
         public PictureBoxImage() { }
 
         public PictureBoxImage(string fileName, int height, int width, Image image)
         {
             FileName = fileName;
-            CurrentHeight = UnzoomedHeight = height;
-            CurrentWidth = UnzoomedWidth = width;
+            CurrentHeight = height;
+            CurrentWidth = width;
             DegreesRotated = 0.0f;
             ZoomLevel = ResizeLevel = 1.0f;
-            CurrentImage = UnzoomedImage = image;
+            CurrentImage = image;
         }
 
         public PictureBoxImage(PictureBoxImage original)
@@ -50,9 +44,6 @@ namespace Core.Images
                 DegreesRotated = original.DegreesRotated;
                 FileName = original.FileName;
                 ResizeLevel = original.ResizeLevel;
-                UnzoomedHeight = original.UnzoomedHeight;
-                UnzoomedImage = original.UnzoomedImage;
-                UnzoomedWidth = original.UnzoomedWidth;
                 ZoomLevel = original.ZoomLevel;
         }
 

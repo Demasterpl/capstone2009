@@ -1,7 +1,4 @@
 ﻿using NUnit.Framework;
-using Core;
-using Core.Images;
-using System.Drawing;
 
 namespace Tests
 {

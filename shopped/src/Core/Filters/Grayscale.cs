@@ -1,33 +1,34 @@
 ﻿using System.Drawing;
-using Core.Images;
 using System.Drawing.Imaging;
+using Core.Images;
 
-namespace Core
+namespace Core.Filters
 {
-    public class Brightness
+    public class Grayscale
     {
-       /**
-         * A filter that will change the brightness of an image.
+
+        /**
+         * A filter that will make an Image object grayscale.
          * 
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
 
-        public PictureBoxImage AdjustBrightness(PictureBoxImage pictureBoxImage, float brightnessLevel)
+        public PictureBoxImage MakeGrayscale(PictureBoxImage pictureBoxImage)
         {
             PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-            float finalValue = brightnessLevel / 255.0f;
-            Bitmap brightnessBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            Graphics g = Graphics.FromImage(brightnessBmp);
+
+            Bitmap grayscaleBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(grayscaleBmp);
 
             ColorMatrix colorMatrix = new ColorMatrix(
                 new[]
                     {
-                    new float[] {1, 0, 0, 0, 0},
-                    new float[] {0, 1, 0, 0, 0},
-                    new float[] {0, 0, 1, 0, 0},
+                    new float[] {.3f, .3f, .3f, 0, 0},
+                    new float[] {.59f, .59f, .59f, 0, 0},
+                    new float[] {.11f, .11f, .11f, 0, 0},
                     new float[] {0, 0, 0, 1, 0},
-                    new float[] {finalValue, finalValue, finalValue, 1, 1}
+                    new float[] {0, 0, 0, 0, 1}
                 });
 
             ImageAttributes attributes = new ImageAttributes();
@@ -38,7 +39,7 @@ namespace Core
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = brightnessBmp;
+            newPictureBoxImage.CurrentImage = grayscaleBmp;
 
             return newPictureBoxImage;
         }

@@ -1,33 +1,35 @@
 ﻿using System.Drawing;
 using System.Drawing.Imaging;
 using Core.Images;
-namespace Core
+
+namespace Core.Filters
 {
-    public class Sepia
+    public class Invert
     {
 
         /**
-         * A filter that will make an Image object sepia.
+         * A filter that will invert the colors of an Image Object.
          * 
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
 
-        public PictureBoxImage MakeSepia(PictureBoxImage pictureBoxImage)
+        public PictureBoxImage InvertColors(PictureBoxImage pictureBoxImage)
         {
             PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-            Bitmap sepiaBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            Graphics g = Graphics.FromImage(sepiaBmp);
 
-            ColorMatrix colorMatrix = new ColorMatrix( 
-                new float[][]
-                {
-                    new float[] {.393f, .349f, .272f, 0, 0},
-                    new float[] {0.769f, 0.686f, 0.534f, 0, 0},
-                    new float[] {0.189f, 0.168f, 0.131f, 0, 0},
-                    new float[] {0, 0, 0, 1, 0},
-                    new float[] {0, 0, 0, 0, 1}
-                });
+            Bitmap invertedBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(invertedBmp);
+
+            ColorMatrix colorMatrix = new ColorMatrix(
+                new[]
+                    {
+                        new float[] {-1, 0, 0, 0, 0},
+                        new float[] {0, -1, 0, 0, 0},
+                        new float[] {0, 0, -1, 0, 0},
+                        new float[] {0, 0, 0, 1, 0},
+                        new float[] {1, 1, 1, 0, 1}
+                    });
 
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
@@ -37,7 +39,7 @@ namespace Core
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = sepiaBmp;
+            newPictureBoxImage.CurrentImage = invertedBmp;
 
             return newPictureBoxImage;
         }

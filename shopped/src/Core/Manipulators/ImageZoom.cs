@@ -1,8 +1,6 @@
-﻿using Core.Images;
-using System.Windows.Forms;
-using System.Drawing;
+﻿using System.Drawing;
 
-namespace Core
+namespace Core.Manipulators
 {
     public class ImageZoom
     {
