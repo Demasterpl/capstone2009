@@ -27,7 +27,7 @@ namespace Core
             //new up a PictureBoxImage
             PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
 
-            _imageZoom.ZoomImage(newPictureBoxImage, 1.0f);
+            //_imageZoom.ZoomImage(newPictureBoxImage, 1.0f);
             newPictureBoxImage.ResizeLevel = resize;
 
             if (resize == 1.0f)

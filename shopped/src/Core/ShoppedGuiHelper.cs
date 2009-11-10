@@ -43,5 +43,32 @@ namespace Core
             Brightness = brightness;
             Contrast = contrast;         
         }
+
+
+
+        public void RotateImage(float angle)
+        {
+            CurrentImage.DegreesRotated += (angle % 360.0f);
+            CurrentImage.DegreesRotated %= 360.0f;
+
+            //PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage((Image)PictureBox.Image, 1.0f) as Image;
+
+            CurrentImage = ImageRotate.RotateImageByAngle(CurrentImage, angle);
+        }
+
+        public void ResizeImage(float amount)
+        {
+            CurrentImage = ImageResize.ResizeImage(CurrentImage, amount);
+        }
+
+        public void AdjustContrast(float amount)
+        {
+            CurrentImage = Contrast.AdjustContrast(CurrentImage, amount);
+        }
+
+        public void AdjustBrightness(float amount)
+        {
+            CurrentImage = Brightness.AdjustBrightness(CurrentImage, amount);
+        }
     }
 }
