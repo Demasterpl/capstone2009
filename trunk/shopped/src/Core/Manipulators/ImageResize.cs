@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Core.Images;
 
-namespace Core
+namespace Core.Manipulators
 {
     public class ImageResize
     {
@@ -40,10 +40,8 @@ namespace Core
             int newHeight = (int) (newPictureBoxImage.CurrentImage.Height*resize);
 
             //Set unzoomed image to new image
-            newPictureBoxImage.UnzoomedImage = newPictureBoxImage.CurrentImage =
-                                               new Bitmap(newPictureBoxImage.CurrentImage, newWidth, newHeight);
-            newPictureBoxImage.CurrentWidth = newPictureBoxImage.UnzoomedWidth = newWidth;
-            newPictureBoxImage.CurrentHeight = newPictureBoxImage.UnzoomedHeight = newHeight;
+            newPictureBoxImage.CurrentWidth = newWidth;
+            newPictureBoxImage.CurrentHeight = newHeight;
 
             //Set image back to its original rotation
             //_imageRotate.RotateImageByAngle

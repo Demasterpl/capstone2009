@@ -26,8 +26,6 @@ namespace Tests
             {
                 CurrentHeight = HEIGHT,
                 CurrentWidth = WIDTH,
-                UnzoomedHeight = HEIGHT,
-                UnzoomedWidth = WIDTH,
                 ResizeLevel = RESIZE,
                 ZoomLevel = ZOOM,
                 DegreesRotated = ROTATE,
@@ -35,8 +33,6 @@ namespace Tests
 
             Assert.AreEqual(HEIGHT, image.CurrentHeight);
             Assert.AreEqual(WIDTH, image.CurrentWidth);
-            Assert.AreEqual(HEIGHT, image.UnzoomedHeight);
-            Assert.AreEqual(WIDTH, image.UnzoomedWidth);
             Assert.AreEqual(RESIZE, image.ResizeLevel);
             Assert.AreEqual(ZOOM, image.ZoomLevel);
             Assert.AreEqual(ROTATE, image.DegreesRotated);

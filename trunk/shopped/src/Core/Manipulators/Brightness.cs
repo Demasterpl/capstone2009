@@ -1,35 +1,34 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 using Core.Images;
+using System.Drawing.Imaging;
 
-namespace Core
+namespace Core.Manipulators
 {
-    public class Invert
+    public class Brightness
     {
-
-        /**
-         * A filter that will invert the colors of an Image Object.
+       /**
+         * A filter that will change the brightness of an image.
          * 
          * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
 
-        public PictureBoxImage InvertColors(PictureBoxImage pictureBoxImage)
+        public PictureBoxImage AdjustBrightness(PictureBoxImage pictureBoxImage, float brightnessLevel)
         {
             PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-
-            Bitmap invertedBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
-            Graphics g = Graphics.FromImage(invertedBmp);
+            float finalValue = brightnessLevel / 255.0f;
+            Bitmap brightnessBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(brightnessBmp);
 
             ColorMatrix colorMatrix = new ColorMatrix(
                 new[]
                     {
-                        new float[] {-1, 0, 0, 0, 0},
-                        new float[] {0, -1, 0, 0, 0},
-                        new float[] {0, 0, -1, 0, 0},
-                        new float[] {0, 0, 0, 1, 0},
-                        new float[] {1, 1, 1, 0, 1}
-                    });
+                    new float[] {1, 0, 0, 0, 0},
+                    new float[] {0, 1, 0, 0, 0},
+                    new float[] {0, 0, 1, 0, 0},
+                    new float[] {0, 0, 0, 1, 0},
+                    new float[] {finalValue, finalValue, finalValue, 1, 1}
+                });
 
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
@@ -39,7 +38,7 @@ namespace Core
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = invertedBmp;
+            newPictureBoxImage.CurrentImage = brightnessBmp;
 
             return newPictureBoxImage;
         }

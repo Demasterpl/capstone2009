@@ -2,7 +2,7 @@
 using System.Drawing;
 using Core.Images;
 
-namespace Core
+namespace Core.Manipulators
 {
     public class ImageRotate
     {
@@ -134,7 +134,7 @@ namespace Core
             newPictureBoxImage.CurrentImage = rotatedBmp;
             newPictureBoxImage.CurrentWidth = rotatedBmp.Width;
             newPictureBoxImage.CurrentHeight = rotatedBmp.Height;
-            //newPictureBoxImage.DegreesRotated = angle;
+            newPictureBoxImage.DegreesRotated = angle;
 
             //if (newPictureBoxImage.ZoomLevel == 1.0f)
             //{

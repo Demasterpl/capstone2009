@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Core.Images;
 
-namespace Core
+namespace Core.Manipulators
 {
 
 
