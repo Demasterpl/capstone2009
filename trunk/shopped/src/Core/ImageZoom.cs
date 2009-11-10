@@ -1,5 +1,6 @@
-﻿using System.Drawing;
-using Core.Images;
+﻿using Core.Images;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace Core
 {
@@ -20,30 +21,17 @@ namespace Core
          * @return A PictureBoxImage object with the appropriate properties set by this method.
          */
 
-        public PictureBoxImage ZoomImage(PictureBoxImage pictureBoxImage, float zoom)
+        public Image ZoomImage(Image pictureBox, float zoom)
         {
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-
-            //Reset current image to 100% zoom
-            newPictureBoxImage.CurrentImage = newPictureBoxImage.UnzoomedImage;
-            newPictureBoxImage.ZoomLevel = zoom;
-
             if (zoom == 1.0f)
             {
-                return pictureBoxImage;
+                return new Bitmap(pictureBox);
             }
-            newPictureBoxImage.UnzoomedHeight = newPictureBoxImage.CurrentHeight;
-            newPictureBoxImage.UnzoomedWidth = newPictureBoxImage.CurrentWidth;
+            pictureBox = new Bitmap(pictureBox, 
+                (int)(pictureBox.Width * zoom),
+                (int)(pictureBox.Height * zoom));
 
-            newPictureBoxImage.CurrentImage = new Bitmap(
-               newPictureBoxImage.CurrentImage,
-                (int)(newPictureBoxImage.CurrentImage.Width * zoom),
-                (int)(newPictureBoxImage.CurrentImage.Height * zoom));
-
-            newPictureBoxImage.CurrentHeight = newPictureBoxImage.CurrentImage.Height;
-            newPictureBoxImage.CurrentWidth = newPictureBoxImage.CurrentImage.Width;
-
-            return newPictureBoxImage;          
+            return pictureBox;          
         }
     }
 }

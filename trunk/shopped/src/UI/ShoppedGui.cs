@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using Core;
 using Core.Images;
+using System.Drawing;
+using NLog;
 
 namespace UI
 {
@@ -14,6 +16,7 @@ namespace UI
     public partial class ShoppedGui : Form
     {
         private ShoppedGuiHelper _shoppedGuiHelper;
+        private static Logger _logger = LogManager.GetCurrentClassLogger(); 
 
         public ShoppedGui()
         {
@@ -40,6 +43,12 @@ namespace UI
             grayscaleToolStripMenuItem1.Enabled = false;
             sepiaToolStripMenuItem.Enabled = false;
             brightnessToolStripMenuItem.Enabled = false;
+            FilterToolStripButton.Enabled = false;
+            UndoToolStripButton.Enabled = false;
+            RedoToolStripButton.Enabled = false;
+            ResizeToolStripButton.Enabled = false;
+            RotateToolStripButton.Enabled = false;
+            ZoomToolStripButton.Enabled = false;
         }
 
         /**
@@ -113,68 +122,16 @@ namespace UI
             grayscaleToolStripMenuItem1.Enabled = true;
             sepiaToolStripMenuItem.Enabled = true;
             brightnessToolStripMenuItem.Enabled = true;
+            FilterToolStripButton.Enabled = true;
+            UndoToolStripButton.Enabled = true;
+            RedoToolStripButton.Enabled = true;
+            ResizeToolStripButton.Enabled = true;
+            RotateToolStripButton.Enabled = true;
+            ZoomToolStripButton.Enabled = true;
         }
 
-        /**
-         * Uses FileOperation instance to prompt user to open an image file.
-         * Sets the image in the editor once image is opened.
-         */
 
-        public void OpenImage()
-        {
-            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.FileOperation.OpenFile();
-            _shoppedGuiHelper.ImageHistory = new ImageHistory();
 
-            UpdatePictureBoxInfo("Open image");
-
-            EnableGuiItems();
-        }
-
-        /**
-         * Sets the PictureBox to the image passed to this method.
-         * 
-         * @param image The image to set the PictureBox to.
-         * @param operation A brief description of the operation just performed to the Shopped GUI image.
-         */
-
-        public void UpdatePictureBoxInfo(string operation)
-        {
-            PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
-            _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(_shoppedGuiHelper.CurrentImage, operation);
-            SetAdditionalInfo();
-            SetUndoAndRedo();
-        }
-
-        /**
-         * Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently
-         * displayed) to that Image object.
-         * 
-         * TODO: Change Image object to PictureBoxImage object.
-         * 
-         * @param image The image from the ImageHistory class.
-         */
-
-        public void SetPictureBoxOnUndoOrRedo(PictureBoxImage image)
-        {
-            Console.WriteLine("Image being set to PictureBox: " + image.ToString());
-            PictureBox.Image = image.CurrentImage;
-            SetAdditionalInfo();
-            SetUndoAndRedo();
-        }
-
-        /**
-         * Sets the information about the PictureBox image that is located at the bottom of the Shopped GUI.
-         * Information includes height, width and the name of the image.
-         */
-
-        public void SetAdditionalInfo()
-        {
-            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3}",
-                PictureBox.Height,
-                PictureBox.Width,
-                _shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f,
-                _shoppedGuiHelper.CurrentImage.FileName);
-        }
 
         /**
          * Handles the event of clicking the Tools->Rotate menu item. Displays the RotateDialog windows form,
@@ -183,21 +140,7 @@ namespace UI
 
         private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RotateDialog rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
-            rotateDialog.ShowDialog();
-
-            if (rotateDialog.DialogResult == DialogResult.OK)
-            {
-                _shoppedGuiHelper.CurrentImage.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
-                _shoppedGuiHelper.CurrentImage.DegreesRotated %= 360.0f;
-
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, 1.0f);
-
-                _shoppedGuiHelper.CurrentImage =
-                    _shoppedGuiHelper.ImageRotate.RotateImageByAngle(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.CurrentImage.DegreesRotated);
-                UpdatePictureBoxInfo(string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
-                PictureBox.Refresh();
-            }
+            RotateImage();
         }
 
         /**
@@ -207,16 +150,8 @@ namespace UI
 
         private void zoomImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ZoomDialog zoomDialog = new ZoomDialog();
-            zoomDialog.ShowDialog();
-
-            if (zoomDialog.DialogResult == DialogResult.OK)
-            {
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, zoomDialog.ZoomLevel);
-                UpdatePictureBoxInfo(string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
-                PictureBox.Refresh();
-            }
-        }      
+            ZoomImage();
+        }
 
         /**
          * Handles the event of clicking the Tools->Resize menu item. Displays the ResizeDialog windows form,
@@ -225,32 +160,7 @@ namespace UI
 
         private void resizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ResizeDialog resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
-            resizeDialog.ShowDialog();
-
-            if (resizeDialog.DialogResult == DialogResult.OK)
-            {
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageResize.ResizeImage(_shoppedGuiHelper.CurrentImage, resizeDialog.ResizeLevel);
-                UpdatePictureBoxInfo(string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
-                PictureBox.Refresh();
-            }
-        }
-
-        /**
-         * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo
-         * buttons and menu items in the GUI. This will also set the tooltip text for the undo/redo GUI items.
-         */
-
-        private void SetUndoAndRedo()
-        {
-            redoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.RedoIsPossible();
-            redoToolStripMenuItem.ToolTipText =
-                    _shoppedGuiHelper.ImageHistory.GetRedoToolTip();
-      
-
-            undoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.UndoIsPossible();
-            undoToolStripMenuItem.ToolTipText =
-                _shoppedGuiHelper.ImageHistory.GetUndoToolTip();
+            ResizeImage();
         }
 
         /**
@@ -307,15 +217,7 @@ namespace UI
 
         private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BrightnessDialog brightnessDialog = new BrightnessDialog();
-            brightnessDialog.ShowDialog();
-
-            if (brightnessDialog.DialogResult == DialogResult.OK)
-            {
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Brightness.AdjustBrightness(_shoppedGuiHelper.CurrentImage, brightnessDialog.BrightnessLevel);
-                UpdatePictureBoxInfo(string.Format("Brightness {0}%", brightnessDialog.BrightnessLevel));
-                PictureBox.Refresh();
-            }
+            AdjustBrightness();
         }
 
         /**
@@ -324,81 +226,180 @@ namespace UI
 
         private void contrastToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ContrastDialog contrastDialog = new ContrastDialog();
-            contrastDialog.ShowDialog();
-
-            if (contrastDialog.DialogResult == DialogResult.OK)
-            {
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Contrast.AdjustContrast(_shoppedGuiHelper.CurrentImage, contrastDialog.ContrastLevel);
-                UpdatePictureBoxInfo(string.Format("Contrast {0}%", contrastDialog.ContrastLevel));
-                PictureBox.Refresh();
-            }
-
+            AdjustContrast();
         }
 
-        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        private void ZoomToolStripButton_Click(object sender, EventArgs e)
         {
-
+            ZoomImage();
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e)
+        private void ResizeToolStripButton_Click(object sender, EventArgs e)
         {
-            ZoomDialog zoomDialog = new ZoomDialog();
-            zoomDialog.ShowDialog();
-
-            if (zoomDialog.DialogResult == DialogResult.OK)
-            {
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, zoomDialog.ZoomLevel);
-                UpdatePictureBoxInfo(string.Format("Zoom {0}%", zoomDialog.ZoomLevel * 100.0f));
-                PictureBox.Refresh();
-            }
+            ResizeImage();
         }
 
-        private void MenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void UndoToolStripButton_Click(object sender, EventArgs e)
         {
-
+            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void RedoToolStripButton_Click(object sender, EventArgs e)
+        {
+            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
+        }
+
+        private void RotateToolStripButton_Click(object sender, EventArgs e)
+        {
+            RotateImage();
+        }
+
+        private void RotateImage()
         {
             RotateDialog rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             rotateDialog.ShowDialog();
 
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
-                _shoppedGuiHelper.CurrentImage.DegreesRotated += (rotateDialog.RotateDegrees % 360.0f);
-                _shoppedGuiHelper.CurrentImage.DegreesRotated %= 360.0f;
+                _shoppedGuiHelper.RotateImage(rotateDialog.RotateDegrees);
 
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage, 1.0f);
-
-                _shoppedGuiHelper.CurrentImage =
-                    _shoppedGuiHelper.ImageRotate.RotateImageByAngle(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.CurrentImage.DegreesRotated);
                 UpdatePictureBoxInfo(string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
                 PictureBox.Refresh();
             }
         }
 
-        private void toolStripButton5_Click(object sender, EventArgs e)
+        private void ZoomImage()
+        {
+            ZoomDialog zoomDialog = new ZoomDialog();
+            zoomDialog.ShowDialog();
+
+            if (zoomDialog.DialogResult == DialogResult.OK)
+            {
+                PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage((Image)PictureBox.Image, zoomDialog.ZoomLevel) as Image;
+                _shoppedGuiHelper.CurrentImage.ZoomLevel = zoomDialog.ZoomLevel;
+                PictureBox.Refresh();
+            }
+        }
+
+        private void ResizeImage()
         {
             ResizeDialog resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
             resizeDialog.ShowDialog();
 
             if (resizeDialog.DialogResult == DialogResult.OK)
             {
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageResize.ResizeImage(_shoppedGuiHelper.CurrentImage, resizeDialog.ResizeLevel);
+                _shoppedGuiHelper.ResizeImage(resizeDialog.ResizeLevel);
                 UpdatePictureBoxInfo(string.Format("Resize {0}%", resizeDialog.ResizeLevel * 100.0f));
                 PictureBox.Refresh();
             }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void AdjustContrast()
         {
-            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
+            ContrastDialog contrastDialog = new ContrastDialog();
+            contrastDialog.ShowDialog();
+
+            if (contrastDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.AdjustContrast(contrastDialog.ContrastLevel);
+                UpdatePictureBoxInfo(string.Format("Contrast {0}%", contrastDialog.ContrastLevel));
+                PictureBox.Refresh();
+            }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void AdjustBrightness()
         {
-            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
+            BrightnessDialog brightnessDialog = new BrightnessDialog();
+            brightnessDialog.ShowDialog();
+
+            if (brightnessDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.AdjustBrightness(brightnessDialog.BrightnessLevel);
+                UpdatePictureBoxInfo(string.Format("Brightness {0}%", brightnessDialog.BrightnessLevel));
+                PictureBox.Refresh();
+            }
+        }
+
+        /**
+         * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo
+         * buttons and menu items in the GUI. This will also set the tooltip text for the undo/redo GUI items.
+         */
+        private void SetUndoAndRedo()
+        {
+            redoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.RedoIsPossible();
+            redoToolStripMenuItem.ToolTipText =
+                    _shoppedGuiHelper.ImageHistory.GetRedoToolTip();
+
+
+            undoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.UndoIsPossible();
+            undoToolStripMenuItem.ToolTipText =
+                _shoppedGuiHelper.ImageHistory.GetUndoToolTip();
+        }
+
+        /**
+         * Sets the information about the PictureBox image that is located at the bottom of the Shopped GUI.
+         * Information includes height, width and the name of the image.
+         */
+
+        public void SetAdditionalInfo()
+        {
+            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3}",
+                PictureBox.Height,
+                PictureBox.Width,
+                _shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f,
+                _shoppedGuiHelper.CurrentImage.FileName);
+        }
+
+
+        /**
+         * Uses FileOperation instance to prompt user to open an image file.
+         * Sets the image in the editor once image is opened.
+         */
+
+        public void OpenImage()
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.FileOperation.OpenFile();
+
+            if (_shoppedGuiHelper.CurrentImage != null)
+            {
+                _shoppedGuiHelper.ImageHistory = new ImageHistory();
+
+                UpdatePictureBoxInfo("Open image");
+
+                EnableGuiItems();
+            }
+        }
+
+        /**
+         * Sets the PictureBox to the image passed to this method.
+         * 
+         * @param image The image to set the PictureBox to.
+         * @param operation A brief description of the operation just performed to the Shopped GUI image.
+         */
+
+        public void UpdatePictureBoxInfo(string operation)
+        {
+            PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
+            _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(_shoppedGuiHelper.CurrentImage, operation);
+            SetAdditionalInfo();
+            SetUndoAndRedo();
+        }
+
+        /**
+         * Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently
+         * displayed) to that Image object.
+         * 
+         * TODO: Change Image object to PictureBoxImage object.
+         * 
+         * @param image The image from the ImageHistory class.
+         */
+
+        public void SetPictureBoxOnUndoOrRedo(PictureBoxImage image)
+        {
+            _logger.Debug("Image being set to PictureBox: " + image.ToString());
+            PictureBox.Image = image.CurrentImage;
+            SetAdditionalInfo();
+            SetUndoAndRedo();
         }
     }
 }

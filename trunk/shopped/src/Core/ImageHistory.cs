@@ -40,7 +40,7 @@ namespace Core
             ImageRevisions.Add(new ImageHistoryItem(image, operation));
 
             _currentRevision += 1;
-            _logger.Debug("Adding image to history: " + image.ToString() + ", CurRev = " + _currentRevision + "HistSize = " + ImageRevisions.Count());
+            _logger.Debug("Adding image to history: " + image.ToString() + ", CurRev = " + _currentRevision + ", HistSize = " + ImageRevisions.Count());
         }
 
         /**
