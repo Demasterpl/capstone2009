@@ -174,6 +174,14 @@ namespace UI
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Convert Grayscale"));
         }
+
+        /**
+         * Handles the event of the cursor moving around on the PictureBox.
+         */
+        private void PictureBox_MouseMove(object sender, EventArgs e)
+        {
+            SetAdditionalInfo();
+        }
  
         /**
         * Handles the event of clicking the Tools->Sepia menu item.
@@ -357,11 +365,39 @@ namespace UI
          */
         public void SetAdditionalInfo()
         {
-            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3}",
+            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3} | Color: {4}",
                 PictureBox.Height,
                 PictureBox.Width,
                 _shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f,
-                _shoppedGuiHelper.CurrentImage.FileName);
+                _shoppedGuiHelper.CurrentImage.FileName,
+                GetPixelColor());
+
+        }
+
+        /**
+         * Takes the cursor's current position on the image and attempts to get the color of that pixel.
+         * 
+         * @return The hexadecimal representation of the pixel's color.
+         */
+        private string GetPixelColor()
+        {
+            if (PictureBox.Image != null)
+            {
+                var xCoordinate = MousePosition.X;
+                var yCoordinate = MousePosition.Y;
+
+                if (xCoordinate < PictureBox.Image.Width - 1 && yCoordinate < PictureBox.Image.Height - 1)
+                {
+                    var redHue = Convert.ToString(new Bitmap(PictureBox.Image).GetPixel(xCoordinate, yCoordinate).R, 16);
+                    var greenHue = Convert.ToString(new Bitmap(PictureBox.Image).GetPixel(xCoordinate, yCoordinate).G, 16);
+                    var blueHue = Convert.ToString(new Bitmap(PictureBox.Image).GetPixel(xCoordinate, yCoordinate).B, 16);
+
+                    //var color = Color.FromArgb(redHue, greenHue, blueHue);
+
+                   return redHue.ToUpper() + greenHue.ToUpper() + blueHue.ToUpper();
+                }
+            }
+            return "";
         }
 
 

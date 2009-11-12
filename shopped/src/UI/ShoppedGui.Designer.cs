@@ -428,12 +428,14 @@
             // 
             // PictureBox
             // 
+            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
             this.PictureBox.Location = new System.Drawing.Point(3, 0);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(1005, 649);
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
+            this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             // 
             // ShoppedGui
             // 
