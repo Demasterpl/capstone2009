@@ -2,6 +2,8 @@
 using Core.Filters;
 using Core.Interfaces;
 using Core.Manipulators;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Core
 {
@@ -23,15 +25,18 @@ namespace Core
         public Invert Invert { get; set; }
         public Brightness Brightness { get; set; }
         public Contrast Contrast { get; set; }
+        public ImageDraw ImageDraw { get; set; }
 
         public ShoppedGuiHelper()
             : this(new PictureBoxImage(), new ImageRotate(), new FileOperations(), 
-            new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), new Sepia(), new Invert(), new Brightness(), new Contrast())
+            new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), 
+            new Sepia(), new Invert(), new Brightness(), new Contrast(), new ImageDraw())
         { }
 
         public ShoppedGuiHelper(PictureBoxImage pictureBoxImage, 
             ImageRotate imageRotate, FileOperations fileOperation, ImageHistory imageHistory, 
-            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, Invert invert, Brightness brightness, Contrast contrast)
+            ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, 
+            Invert invert, Brightness brightness, Contrast contrast, ImageDraw imageDraw)
         {
             CurrentImage = pictureBoxImage;
             ImageRotate = imageRotate;
@@ -43,10 +48,9 @@ namespace Core
             Sepia = sepia;
             Invert = invert;
             Brightness = brightness;
-            Contrast = contrast;         
+            Contrast = contrast;
+            ImageDraw = imageDraw;
         }
-
-
 
         public void RotateImage(float angle)
         {
@@ -68,6 +72,18 @@ namespace Core
         public void AdjustBrightness(float amount)
         {
             CurrentImage = Brightness.AdjustBrightness(CurrentImage, amount);
+        }
+
+        /**
+         * 
+         */
+        public void CommitDrawingToCurrentImage(Image image)
+        {
+            if (image != null && !image.Equals(CurrentImage.CurrentImage))
+            {
+                CurrentImage = new PictureBoxImage(CurrentImage.FileName, image.Height, image.Width, image);
+                ImageHistory.AddImageToImageHistory(CurrentImage, "Draw");
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace UI
     public partial class ShoppedGui : Form
     {
         private ShoppedGuiHelper _shoppedGuiHelper;
-        private static Logger _logger = LogManager.GetCurrentClassLogger(); 
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
 
         public ShoppedGui()
         {
@@ -155,7 +155,7 @@ namespace UI
          */
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
+            SetPictureBoxOnUndo();
         }
 
         /**
@@ -163,7 +163,7 @@ namespace UI
          */
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
+            SetPictureBoxOnRedo();
         }
 
         /**
@@ -178,11 +178,29 @@ namespace UI
         /**
          * Handles the event of the cursor moving around on the PictureBox.
          */
-        private void PictureBox_MouseMove(object sender, EventArgs e)
+        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
+            DrawOnPictureBox(e);
             SetAdditionalInfo();
         }
- 
+
+        /**
+         * Handles the event of the the mouse button being pressed down on the PictureBox.
+         */
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            //DrawOnPictureBox(e, _shoppedGuiHelper.LineThickness);
+        }
+
+        /**
+         * Handles the event of the the mouse button being pressed down on the PictureBox.
+         */
+        private void PictureBox_MouseUp(object sender, EventArgs e)
+        {
+                _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
+        }
+
+
         /**
         * Handles the event of clicking the Tools->Sepia menu item.
         */
@@ -238,7 +256,7 @@ namespace UI
         */
         private void UndoToolStripButton_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Undo());
+            SetPictureBoxOnUndo();
         }
 
         /**
@@ -246,7 +264,7 @@ namespace UI
         */
         private void RedoToolStripButton_Click(object sender, EventArgs e)
         {
-            SetPictureBoxOnUndoOrRedo(_shoppedGuiHelper.ImageHistory.Redo());
+            SetPictureBoxOnRedo();
         }
 
         /**
@@ -365,13 +383,19 @@ namespace UI
          */
         public void SetAdditionalInfo()
         {
-            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3} | Color: {4}",
+            AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3} | Color: {4} | (x,y): {5}",
                 PictureBox.Height,
                 PictureBox.Width,
                 _shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f,
                 _shoppedGuiHelper.CurrentImage.FileName,
-                GetPixelColor());
+                GetPixelColor(),
+                GetCoordinates());
 
+        }
+
+        private string GetCoordinates()
+        {
+            return "(" + MousePosition.X + "," + MousePosition.Y + ")";
         }
 
         /**
@@ -436,14 +460,43 @@ namespace UI
          * Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently
          * displayed) to that Image object.
          * 
-         * @param image The image from the ImageHistory class.
          */
-        public void SetPictureBoxOnUndoOrRedo(PictureBoxImage image)
+        public void SetPictureBoxOnUndo()
         {
-            _logger.Debug("Image being set to PictureBox: " + image.ToString());
-            PictureBox.Image = image.CurrentImage;
+            _shoppedGuiHelper.CurrentImage = new PictureBoxImage(_shoppedGuiHelper.ImageHistory.Undo());
+            _logger.Debug("Image being set to PictureBox: " + _shoppedGuiHelper.CurrentImage.ToString());
+            PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
             SetAdditionalInfo();
             SetUndoAndRedo();
+        }
+
+        /**
+         * Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently
+         * displayed) to that Image object.
+         * 
+         */
+        public void SetPictureBoxOnRedo()
+        {
+            _shoppedGuiHelper.CurrentImage = new PictureBoxImage(_shoppedGuiHelper.ImageHistory.Redo());
+            _logger.Debug("Image being set to PictureBox: " + _shoppedGuiHelper.CurrentImage.ToString());
+            PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
+            SetAdditionalInfo();
+            SetUndoAndRedo();
+        }
+
+        /**
+         * Calls upon ImageDraw class to draw on the current PictureBox
+         * 
+         * @param mouse Contains the current status of the mouse.
+         */
+        private void DrawOnPictureBox(MouseEventArgs mouse)
+        {
+            if (PictureBox.Image != null)
+            {
+                PictureBox.Image = _shoppedGuiHelper.ImageDraw.DrawOnImage(PictureBox.Image, mouse);
+                SetUndoAndRedo();
+                PictureBox.Refresh();
+            }
         }
     }
 }

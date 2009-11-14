@@ -436,6 +436,8 @@
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
+            this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
+            this.PictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseUp);
             // 
             // ShoppedGui
             // 
