@@ -59,6 +59,7 @@
     <Compile Include="Filters\Grayscale.cs" />
     <Compile Include="ImageHistory.cs" />
     <Compile Include="ImageHistoryItem.cs" />
+    <Compile Include="Manipulators\ImageDraw.cs" />
     <Compile Include="Manipulators\ImageResize.cs" />
     <Compile Include="Manipulators\ImageRotate.cs" />
     <Compile Include="Images\PictureBoxImage.cs" />
