@@ -28,7 +28,6 @@ namespace Core
          * @param image The image to add to the list
          * @param operation A string detailing what operation was just performed
          */
-
         public void AddImageToImageHistory(PictureBoxImage image, string operation)
         {
             //_currentRevision is somewhere in middle of list, need to delete items beyond current image

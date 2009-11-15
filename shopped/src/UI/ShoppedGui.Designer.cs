@@ -68,9 +68,9 @@
             this.brightnessToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contrastToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.invertToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.DrawToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.DrawToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -416,6 +416,17 @@
             this.invertToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
             this.invertToolStripMenuItem1.Text = "Invert";
             // 
+            // DrawToolStripButton
+            // 
+            this.DrawToolStripButton.CheckOnClick = true;
+            this.DrawToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DrawToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DrawToolStripButton.Image")));
+            this.DrawToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DrawToolStripButton.Name = "DrawToolStripButton";
+            this.DrawToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.DrawToolStripButton.Text = "Enable Drawing";
+            this.DrawToolStripButton.Click += new System.EventHandler(this.DrawToolStripButton_Click);
+            // 
             // PictureBoxPanel
             // 
             this.PictureBoxPanel.AutoScroll = true;
@@ -438,18 +449,6 @@
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
-            this.PictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseUp);
-            // 
-            // DrawToolStripButton
-            // 
-            this.DrawToolStripButton.CheckOnClick = true;
-            this.DrawToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DrawToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DrawToolStripButton.Image")));
-            this.DrawToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DrawToolStripButton.Name = "DrawToolStripButton";
-            this.DrawToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.DrawToolStripButton.Text = "Enable/Disable Drawing";
-            this.DrawToolStripButton.Click += new System.EventHandler(this.DrawToolStripButton_Click);
             // 
             // ShoppedGui
             // 
