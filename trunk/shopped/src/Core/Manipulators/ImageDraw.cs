@@ -7,6 +7,14 @@ using System.Windows.Forms;
 
 namespace Core.Manipulators
 {
+    /**
+     * Handles all the drawing functionality.
+     * 
+     * @param LineColor The color of the line to be drawn.
+     * @param LineThickness How wide the line to be drawn will be.
+     * @param LineShape The shape of the line (i.e. rounded, square, etc.)
+     * @param Enabled Holds whether or not the drawing functionality is enabled.
+     */
     public class ImageDraw
     {
         public Color LineColor { get; set; }
@@ -75,6 +83,9 @@ namespace Core.Manipulators
             return image;
         }
 
+        /**
+         * Called upon when the Draw button is clicked in the GUI and sets the Enabled property accordingly.
+         */
         public void ToggleEnabledState()
         {
             if (Enabled == true)

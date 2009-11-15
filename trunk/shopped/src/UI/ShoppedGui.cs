@@ -390,6 +390,11 @@ namespace UI
 
         }
 
+        /**
+         * Gets the current coordinates of the mouse in the PictureBox and returns them as an ordered pair.
+         * 
+         * @return A string representation of the coordinates as an ordered pair.
+         */
         private string GetCoordinates()
         {
             return "(" + MousePosition.X + "," + MousePosition.Y + ")";
@@ -420,7 +425,6 @@ namespace UI
             }
             return "";
         }
-
 
         /**
          * Uses FileOperation instance to prompt user to open an image file.
@@ -496,6 +500,10 @@ namespace UI
             }
         }
 
+        /**
+         * Handles the event of the Draw button being clicked in the GUI. Sets the tooltip text according
+         * to the current toggle state and sets the toggle state.
+         */
         private void DrawToolStripButton_Click(object sender, EventArgs e)
         {
             if (DrawToolStripButton.Checked == true)
