@@ -9,11 +9,17 @@ namespace Core.Manipulators
 {
     public class ImageDraw
     {
+        public Color LineColor { get; set; }
         public int LineThickness { get; set; }
+        public string LineShape { get; set; }
+        public bool Enabled { get; set; }
 
         public ImageDraw()
         {
+            LineColor = Color.Black;
             LineThickness = 25;
+            LineShape = "square";
+            Enabled = false;
         }
 
         /**
@@ -27,30 +33,58 @@ namespace Core.Manipulators
          */
         public Image DrawOnImage(Image image, MouseEventArgs mouse)
         {
-            var tempImage = new Bitmap(image);
 
-            if (mouse.Button == MouseButtons.Left)
-            {
+            if (mouse.Button == MouseButtons.Left && Enabled == true)
+            {            
+                var tempImage = new Bitmap(image);
+                var g = Graphics.FromImage(tempImage);
+
                 var x = mouse.X;
                 var y = mouse.Y;
                 var centerLine = LineThickness / 2;
 
-                for (int i = x - centerLine; i <= x + centerLine; ++i)
+                var upperLeftX = x - centerLine;
+                var upperLeftY = y - centerLine;
+
+                switch (LineShape)
                 {
-                    for (int j = y - centerLine; j <= y + centerLine; ++j)
-                    {
-                        try
-                        {
-                            tempImage.SetPixel(i, j, Color.Red);
-                        }
-                        catch
-                        {
-                            //gulp - IndexOutOfBounds Exception
-                        }
-                    }
+                    case "square":
+                        g.FillRectangle(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
+                        break;
+                    case "circle":
+                        break;
                 }
+
+                //for (int i = x - centerLine; i <= x + centerLine; ++i)
+                //{
+                //    for (int j = y - centerLine; j <= y + centerLine; ++j)
+                //    {
+                //        try
+                //        {
+                //            tempImage.SetPixel(i, j, LineColor);
+                //        }
+                //        catch
+                //        {
+                //            //gulp - IndexOutOfBounds Exception (person is drawing near picture bound)
+                //        }
+                //    }
+                //}            
+                return tempImage;
             }
-            return tempImage;
+
+            return image;
+        }
+
+        public void ToggleEnabledState()
+        {
+            if (Enabled == true)
+            {
+                Enabled = false;
+            }
+            else
+            {
+                Enabled = true;
+            }
         }
     }
 }

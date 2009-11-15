@@ -75,7 +75,10 @@ namespace Core
         }
 
         /**
+         * Called after a drawing event occurred in the gui. Checks if the image is different
+         * from the CurrentImage and adds it to history if it is.
          * 
+         * @param image The current image being displayed in the gui.
          */
         public void CommitDrawingToCurrentImage(Image image)
         {

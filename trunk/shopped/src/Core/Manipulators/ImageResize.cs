@@ -42,7 +42,7 @@ namespace Core.Manipulators
             //Set unzoomed image to new image
             newPictureBoxImage.CurrentWidth = newWidth;
             newPictureBoxImage.CurrentHeight = newHeight;
-
+            newPictureBoxImage.CurrentImage = new Bitmap(newPictureBoxImage.CurrentImage, new Size(newWidth, newHeight));
             //Set image back to its original rotation
             //_imageRotate.RotateImageByAngle
             //    (_newPictureBoxImage, _newPictureBoxImage.DegreesRotated);

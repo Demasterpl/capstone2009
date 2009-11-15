@@ -49,6 +49,7 @@ namespace UI
             ResizeToolStripButton.Enabled = false;
             RotateToolStripButton.Enabled = false;
             ZoomToolStripButton.Enabled = false;
+            DrawToolStripButton.Enabled = false;
         }
 
         /**
@@ -121,6 +122,7 @@ namespace UI
             ResizeToolStripButton.Enabled = true;
             RotateToolStripButton.Enabled = true;
             ZoomToolStripButton.Enabled = true;
+            DrawToolStripButton.Enabled = true;
         }
 
         /**
@@ -187,17 +189,10 @@ namespace UI
         /**
          * Handles the event of the the mouse button being pressed down on the PictureBox.
          */
-        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            //DrawOnPictureBox(e, _shoppedGuiHelper.LineThickness);
-        }
-
-        /**
-         * Handles the event of the the mouse button being pressed down on the PictureBox.
-         */
         private void PictureBox_MouseUp(object sender, EventArgs e)
         {
-                _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
+            _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
+            SetUndoAndRedo();
         }
 
 
@@ -368,11 +363,13 @@ namespace UI
         private void SetUndoAndRedo()
         {
             redoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.RedoIsPossible();
+            RedoToolStripButton.Enabled = _shoppedGuiHelper.ImageHistory.RedoIsPossible();
             redoToolStripMenuItem.ToolTipText =
                     _shoppedGuiHelper.ImageHistory.GetRedoToolTip();
 
 
             undoToolStripMenuItem.Enabled = _shoppedGuiHelper.ImageHistory.UndoIsPossible();
+            UndoToolStripButton.Enabled = _shoppedGuiHelper.ImageHistory.UndoIsPossible();
             undoToolStripMenuItem.ToolTipText =
                 _shoppedGuiHelper.ImageHistory.GetUndoToolTip();
         }
@@ -497,6 +494,19 @@ namespace UI
                 SetUndoAndRedo();
                 PictureBox.Refresh();
             }
+        }
+
+        private void DrawToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (DrawToolStripButton.Checked == true)
+            {
+                DrawToolStripButton.Text = "Disable Drawing";
+            }
+            else
+            {
+                DrawToolStripButton.Text = "Enable Drawing";
+            }
+            _shoppedGuiHelper.ImageDraw.ToggleEnabledState();
         }
     }
 }
