@@ -24,6 +24,10 @@ namespace UI
             InitializeComponent();
 
             _shoppedGuiHelper = new ShoppedGuiHelper();
+
+            //Adding mouse event handlers
+            PictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(PictureBox_MouseUp);
+            PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(PictureBox_MouseMove);
         }
 
         /**
