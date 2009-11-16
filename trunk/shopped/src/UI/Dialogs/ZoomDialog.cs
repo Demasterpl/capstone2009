@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace UI
+namespace UI.Dialogs
 {
     /**
      * The ZoomDialog class displays a small dialog box to prompt the user for

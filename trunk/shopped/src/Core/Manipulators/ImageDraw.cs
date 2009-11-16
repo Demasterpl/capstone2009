@@ -14,20 +14,50 @@ namespace Core.Manipulators
      * @param LineThickness How wide the line to be drawn will be.
      * @param LineShape The shape of the line (i.e. rounded, square, etc.)
      * @param Enabled Holds whether or not the drawing functionality is enabled.
+     * @param _lineShapeTypes The private backing field for LineShapeTypes (can be set).
+     * @param LineShapeTypes The public-facing list of possible line shapes (read-only).
      */
     public class ImageDraw
     {
         public Color LineColor { get; set; }
         public int LineThickness { get; set; }
-        public string LineShape { get; set; }
+        public string CurrentLineShape { get; set; }
         public bool Enabled { get; set; }
 
-        public ImageDraw()
+        // Want the public-facing List to be read-only, so we need private backing field here.
+        private List<string> _lineShapeTypes { get; set; }
+        public List<string> LineShapeTypes 
+        { 
+            get
+            {
+                return _lineShapeTypes;
+            } 
+        }
+
+        /**
+         * Default constructor that uses default values.
+         */
+        public ImageDraw() : this(Color.Black, 25, new List<String> {"Square", "Rounded"}, "Square", false)
+        { }
+
+        /**
+         * Constructor that takes in an ImageDraw object as a parameter.
+         */
+        public ImageDraw(ImageDraw imageDraw) 
+            : this(imageDraw.LineColor, imageDraw.LineThickness, imageDraw.LineShapeTypes, 
+                    imageDraw.CurrentLineShape, imageDraw.Enabled)
+        { }
+
+        /**
+         * The constructor that is called on by all others in ImageDraw, this sets the properties values.
+         */
+        public ImageDraw(Color lineColor, int lineThickness, List<string> lineShapes, string lineShape, bool enabled)
         {
-            LineColor = Color.Black;
-            LineThickness = 25;
-            LineShape = "square";
-            Enabled = false;
+            LineColor = lineColor;
+            LineThickness = lineThickness;
+            _lineShapeTypes = lineShapes;
+            CurrentLineShape = lineShape;
+            Enabled = enabled;
         }
 
         /**
@@ -54,29 +84,16 @@ namespace Core.Manipulators
                 var upperLeftX = x - centerLine;
                 var upperLeftY = y - centerLine;
 
-                switch (LineShape)
+                switch (CurrentLineShape)
                 {
-                    case "square":
+                    case "Square":
                         g.FillRectangle(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
                         break;
-                    case "circle":
+                    case "Rounded":
+                        g.FillEllipse(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
                         break;
                 }
 
-                //for (int i = x - centerLine; i <= x + centerLine; ++i)
-                //{
-                //    for (int j = y - centerLine; j <= y + centerLine; ++j)
-                //    {
-                //        try
-                //        {
-                //            tempImage.SetPixel(i, j, LineColor);
-                //        }
-                //        catch
-                //        {
-                //            //gulp - IndexOutOfBounds Exception (person is drawing near picture bound)
-                //        }
-                //    }
-                //}            
                 return tempImage;
             }
 

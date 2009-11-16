@@ -69,28 +69,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BrightnessDialog.cs">
+    <Compile Include="Dialogs\BrightnessDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BrightnessDialog.Designer.cs">
+    <Compile Include="Dialogs\BrightnessDialog.Designer.cs">
       <DependentUpon>BrightnessDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContrastDialog.cs">
+    <Compile Include="Dialogs\ContrastDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ContrastDialog.Designer.cs">
+    <Compile Include="Dialogs\ContrastDialog.Designer.cs">
       <DependentUpon>ContrastDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ResizeDialog.cs">
+    <Compile Include="Dialogs\DrawingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ResizeDialog.Designer.cs">
+    <Compile Include="Dialogs\DrawingDialog.Designer.cs">
+      <DependentUpon>DrawingDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\ResizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ResizeDialog.Designer.cs">
       <DependentUpon>ResizeDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="RotateDialog.cs">
+    <Compile Include="Dialogs\RotateDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RotateDialog.Designer.cs">
+    <Compile Include="Dialogs\RotateDialog.Designer.cs">
       <DependentUpon>RotateDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ShoppedGui.cs">
@@ -101,17 +107,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BrightnessDialog.resx">
+    <EmbeddedResource Include="Dialogs\BrightnessDialog.resx">
       <DependentUpon>BrightnessDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContrastDialog.resx">
+    <EmbeddedResource Include="Dialogs\ContrastDialog.resx">
       <DependentUpon>ContrastDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ResizeDialog.resx">
+    <EmbeddedResource Include="Dialogs\DrawingDialog.resx">
+      <DependentUpon>DrawingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ResizeDialog.resx">
       <DependentUpon>ResizeDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RotateDialog.resx">
+    <EmbeddedResource Include="Dialogs\RotateDialog.resx">
       <DependentUpon>RotateDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -124,7 +133,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ZoomDialog.resx">
+    <EmbeddedResource Include="Dialogs\ZoomDialog.resx">
       <DependentUpon>ZoomDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -136,6 +145,8 @@
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Properties\DataSources\Core.Manipulators.ImageDraw.datasource" />
+    <None Include="Properties\DataSources\Core.Manipulators.ImageDraw1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -145,10 +156,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ZoomDialog.cs">
+    <Compile Include="Dialogs\ZoomDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ZoomDialog.Designer.cs">
+    <Compile Include="Dialogs\ZoomDialog.Designer.cs">
       <DependentUpon>ZoomDialog.cs</DependentUpon>
     </Compile>
   </ItemGroup>
