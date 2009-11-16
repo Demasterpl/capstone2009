@@ -4,6 +4,8 @@ using Core;
 using Core.Images;
 using System.Drawing;
 using NLog;
+using UI.Dialogs;
+using Core.Manipulators;
 
 namespace UI
 {
@@ -361,6 +363,38 @@ namespace UI
         }
 
         /**
+         * Handles the event of the user selecting "Drawing" from the Tools menu. Opens up a 
+         * DrawingDialog and sets the values to ImageDraw object accordingly.
+         */
+        private void drawingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DrawingDialog drawingDialog = new DrawingDialog(new ImageDraw(_shoppedGuiHelper.ImageDraw));
+            drawingDialog.ShowDialog();
+
+            if (drawingDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.ImageDraw = drawingDialog.ImageDraw;
+            }
+        }
+
+        /**
+         * Handles the event of the Draw button being clicked in the GUI. Sets the tooltip text according
+         * to the current toggle state and sets the toggle state.
+         */
+        private void DrawToolStripButton_Click(object sender, EventArgs e)
+        {
+            if (DrawToolStripButton.Checked == true)
+            {
+                DrawToolStripButton.Text = "Disable Drawing";
+            }
+            else
+            {
+                DrawToolStripButton.Text = "Enable Drawing";
+            }
+            _shoppedGuiHelper.ImageDraw.ToggleEnabledState();
+        }
+
+        /**
          * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo
          * buttons and menu items in the GUI. This will also set the tooltip text for the undo/redo GUI items.
          */
@@ -502,23 +536,6 @@ namespace UI
                 SetUndoAndRedo();
                 PictureBox.Refresh();
             }
-        }
-
-        /**
-         * Handles the event of the Draw button being clicked in the GUI. Sets the tooltip text according
-         * to the current toggle state and sets the toggle state.
-         */
-        private void DrawToolStripButton_Click(object sender, EventArgs e)
-        {
-            if (DrawToolStripButton.Checked == true)
-            {
-                DrawToolStripButton.Text = "Disable Drawing";
-            }
-            else
-            {
-                DrawToolStripButton.Text = "Enable Drawing";
-            }
-            _shoppedGuiHelper.ImageDraw.ToggleEnabledState();
         }
     }
 }

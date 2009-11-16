@@ -1,4 +1,4 @@
-﻿namespace UI
+﻿namespace UI.Dialogs
 {
     partial class BrightnessDialog
     {

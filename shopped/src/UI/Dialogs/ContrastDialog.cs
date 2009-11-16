@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace UI
+namespace UI.Dialogs
 {
     public partial class ContrastDialog : Form
     {
