@@ -4,11 +4,8 @@ namespace Core.Manipulators
 {
     public class ImageZoom
     {
-        private readonly ImageRotate _imageRotate;
-
         public ImageZoom()
         {
-            _imageRotate = new ImageRotate();
         }
 
         /**
@@ -21,10 +18,6 @@ namespace Core.Manipulators
 
         public Image ZoomImage(Image pictureBox, float zoom)
         {
-            if (zoom == 1.0f)
-            {
-                return new Bitmap(pictureBox);
-            }
             pictureBox = new Bitmap(pictureBox, 
                 (int)(pictureBox.Width * zoom),
                 (int)(pictureBox.Height * zoom));

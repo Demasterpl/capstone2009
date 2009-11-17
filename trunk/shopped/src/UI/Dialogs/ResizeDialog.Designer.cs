@@ -57,6 +57,7 @@
             // ResizeTextBox
             // 
             this.ResizeTextBox.Location = new System.Drawing.Point(125, 36);
+            this.ResizeTextBox.MaxLength = 3;
             this.ResizeTextBox.Name = "ResizeTextBox";
             this.ResizeTextBox.Size = new System.Drawing.Size(100, 20);
             this.ResizeTextBox.TabIndex = 2;
