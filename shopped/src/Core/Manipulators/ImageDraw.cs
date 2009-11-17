@@ -23,6 +23,8 @@ namespace Core.Manipulators
         public int LineThickness { get; set; }
         public string CurrentLineShape { get; set; }
         public bool Enabled { get; set; }
+        public Point InitialPoint { get; set; }
+        public Point DestinationPoint { get; set; }
 
         // Want the public-facing List to be read-only, so we need private backing field here.
         private List<string> _lineShapeTypes { get; set; }
@@ -37,7 +39,7 @@ namespace Core.Manipulators
         /**
          * Default constructor that uses default values.
          */
-        public ImageDraw() : this(Color.Black, 25, new List<String> {"Square", "Rounded"}, "Square", false)
+        public ImageDraw() : this(Color.Black, 25, new List<String> {"Square", "Rounded", "Line"}, "Square", false)
         { }
 
         /**
@@ -69,7 +71,7 @@ namespace Core.Manipulators
          * 
          * @return The new image that has been drawn on.
          */
-        public Image DrawOnImage(Image image, MouseEventArgs mouse)
+        public Image DrawShapeOnImage(Image image, MouseEventArgs mouse)
         {
 
             if (mouse.Button == MouseButtons.Left && Enabled == true)
@@ -92,6 +94,10 @@ namespace Core.Manipulators
                     case "Rounded":
                         g.FillEllipse(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
                         break;
+                    case "Line":
+                        g.DrawLine(new Pen(LineColor), InitialPoint, DestinationPoint);
+                        break;
+
                 }
 
                 return tempImage;
@@ -99,6 +105,8 @@ namespace Core.Manipulators
 
             return image;
         }
+
+
 
         /**
          * Called upon when the Draw button is clicked in the GUI and sets the Enabled property accordingly.
@@ -113,6 +121,16 @@ namespace Core.Manipulators
             {
                 Enabled = true;
             }
+        }
+
+        public void SetInitialPoint(int xCoordinate, int yCoordinate)
+        {
+            InitialPoint = new Point(xCoordinate, yCoordinate);
+        }
+
+        public void SetDestinationPoint(int xCoordinate, int yCoordinate)
+        {
+            DestinationPoint = new Point(xCoordinate, yCoordinate);
         }
     }
 }
