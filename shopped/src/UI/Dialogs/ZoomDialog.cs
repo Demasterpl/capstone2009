@@ -26,6 +26,17 @@ namespace UI.Dialogs
         private void ZoomButton_Click(object sender, EventArgs e)
         {
             ZoomLevel = float.Parse(ZoomTextBox.Text) / 100.0f;
+
+            if (!IsValidZoomLevel())
+            {
+                MessageBox.Show("Zoom level must be positive, greater than 5% and less than 200%");
+                DialogResult = DialogResult.Retry;
+            }
+        }
+
+        private bool IsValidZoomLevel()
+        {
+            return ZoomLevel > 0.05f && ZoomLevel < 2.0f;
         }
     }
 }

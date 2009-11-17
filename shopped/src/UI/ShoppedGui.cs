@@ -193,8 +193,9 @@ namespace UI
             if (PictureBox.Image != null && _shoppedGuiHelper.ImageDraw.CurrentLineShape == "Line")
             {
                 DrawOnPictureBox(e);
-                SetAdditionalInfo();
             }
+                
+            SetAdditionalInfo();
         }
 
         /**
@@ -202,9 +203,12 @@ namespace UI
          */
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            DrawOnPictureBox(e);
-            _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
-            SetUndoAndRedo();
+            if (_shoppedGuiHelper.ImageDraw.Enabled == true)
+            {
+                DrawOnPictureBox(e);
+                _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
+                SetUndoAndRedo();
+            }
         }
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
@@ -215,7 +219,10 @@ namespace UI
 
         private void PictureBox_MouseWheelScroll(object sender, MouseEventArgs e)
         {
-            ZoomImageOnScroll(e.Delta);
+            if (PictureBox.Image != null)
+            {
+                ZoomImageOnScroll(e.Delta);
+            }
         }
 
         /**
@@ -317,12 +324,16 @@ namespace UI
         private void ZoomImage()
         {
             ZoomDialog zoomDialog = new ZoomDialog();
-            zoomDialog.ShowDialog();
+            do
+            {
+                zoomDialog.ShowDialog();
+            } while (zoomDialog.DialogResult == DialogResult.Retry);
 
             if (zoomDialog.DialogResult == DialogResult.OK)
-            {
-                PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage((Image)PictureBox.Image, zoomDialog.ZoomLevel) as Image;
+            {                
+                PictureBox.Image = _shoppedGuiHelper.ZoomImage((Image)PictureBox.Image, zoomDialog.ZoomLevel) as Image;
                 _shoppedGuiHelper.CurrentImage.ZoomLevel = zoomDialog.ZoomLevel;
+                SetAdditionalInfo();
                 PictureBox.Refresh();
             }
         }
@@ -333,16 +344,16 @@ namespace UI
             {
                 if (mouseWheelDelta < 0)
                 {
-                    _shoppedGuiHelper.CurrentImage.ZoomLevel -= .05f;
+                    _shoppedGuiHelper.CurrentImage.SetZoomLevel(-.05f);
                 }
                 if (mouseWheelDelta > 0)
                 {
-                    _shoppedGuiHelper.CurrentImage.ZoomLevel += .05f;
+                    _shoppedGuiHelper.CurrentImage.SetZoomLevel(.05f);
                 }
 
                 using(var tempImage = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage))
                 {
-                    PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage(tempImage, _shoppedGuiHelper.CurrentImage.ZoomLevel);
+                    PictureBox.Image = _shoppedGuiHelper.ZoomImage(tempImage, _shoppedGuiHelper.CurrentImage.ZoomLevel);
                     PictureBox.Refresh();
                     SetAdditionalInfo();
                 }
@@ -356,7 +367,11 @@ namespace UI
         private void ResizeImage()
         {
             ResizeDialog resizeDialog = new ResizeDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
-            resizeDialog.ShowDialog();
+
+            do
+            {
+                resizeDialog.ShowDialog();
+            } while (resizeDialog.DialogResult == DialogResult.Retry);
 
             if (resizeDialog.DialogResult == DialogResult.OK)
             {
@@ -457,9 +472,9 @@ namespace UI
         public void SetAdditionalInfo()
         {
             AdditionalInfo.Text = string.Format("Height: {0} | Width: {1} | Zoom Level: {2}% | Name: {3} | Color: {4} | (x,y): {5}",
-                PictureBox.Height,
-                PictureBox.Width,
-                _shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f,
+                _shoppedGuiHelper.CurrentImage.CurrentHeight,
+                _shoppedGuiHelper.CurrentImage.CurrentWidth,
+                Math.Round((_shoppedGuiHelper.CurrentImage.ZoomLevel * 100.0f), 1),
                 _shoppedGuiHelper.CurrentImage.FileName,
                 GetPixelColor(),
                 GetCoordinates());

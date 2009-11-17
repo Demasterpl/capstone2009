@@ -30,11 +30,6 @@ namespace Core.Manipulators
             //_imageZoom.ZoomImage(newPictureBoxImage, 1.0f);
             newPictureBoxImage.ResizeLevel = resize;
 
-            if (resize == 1.0f)
-            {
-                return newPictureBoxImage;
-            }
-
             //Calculate new height and width
             int newWidth = (int) (newPictureBoxImage.CurrentImage.Width*resize);
             int newHeight = (int) (newPictureBoxImage.CurrentImage.Height*resize);

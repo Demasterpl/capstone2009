@@ -41,6 +41,16 @@ namespace UI.Dialogs
         private void ResizeButton_Click(object sender, EventArgs e)
         {
             ResizeLevel = float.Parse(ResizeTextBox.Text) / 100.0f;
+            if (!IsValidResizeLevel())
+            {
+                MessageBox.Show("Resize level must be positive, greater than 5% and less than 200%");
+                DialogResult = DialogResult.Retry;
+            }
+        }
+
+        private bool IsValidResizeLevel()
+        {
+            return ResizeLevel > 0.05f && ResizeLevel < 2.0f;
         }
     }
 }

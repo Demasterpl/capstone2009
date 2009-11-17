@@ -45,6 +45,7 @@
             // ZoomTextBox
             // 
             this.ZoomTextBox.Location = new System.Drawing.Point(122, 27);
+            this.ZoomTextBox.MaxLength = 3;
             this.ZoomTextBox.Name = "ZoomTextBox";
             this.ZoomTextBox.Size = new System.Drawing.Size(100, 20);
             this.ZoomTextBox.TabIndex = 1;

@@ -47,6 +47,14 @@ namespace Core.Images
                 ZoomLevel = original.ZoomLevel;
         }
 
+        public void SetZoomLevel(float zoomDelta)
+        {
+            if (ZoomLevel + zoomDelta > .05f && ZoomLevel + zoomDelta < 2.0f)
+            {
+                ZoomLevel += zoomDelta;
+            }
+        }
+
         public override string ToString()
         {
             return string.Format("Height = {0} | Width = {1} | Rotate = {2} | Zoom = {3} | Resize = {4}"

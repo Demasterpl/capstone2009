@@ -56,12 +56,26 @@ namespace Core
         {
             angle %= 360.0f;
 
+            if (angle == 0.0f)
+            {
+                return;
+            }
+
+            ZoomImage(CurrentImage.CurrentImage, 1.0f);
+
             CurrentImage = ImageRotate.RotateImageByAngle(CurrentImage, angle);
         }
 
-        public void ResizeImage(float amount)
+        public void ResizeImage(float resizeLevel)
         {
-            CurrentImage = ImageResize.ResizeImage(CurrentImage, amount);
+            if (resizeLevel == 1.0f)
+            {
+                return;
+            }
+
+            ZoomImage(CurrentImage.CurrentImage, 1.0f);
+
+            CurrentImage = ImageResize.ResizeImage(CurrentImage, resizeLevel);
         }
 
         public void AdjustContrast(float amount)
@@ -85,8 +99,21 @@ namespace Core
             if (image != null && !image.Equals(CurrentImage.CurrentImage))
             {
                 CurrentImage = new PictureBoxImage(CurrentImage.FileName, image.Height, image.Width, image);
+                ImageZoom.ZoomImage(CurrentImage.CurrentImage, 1.0f);
                 ImageHistory.AddImageToImageHistory(CurrentImage, "Draw");
             }
+        }
+
+        public Image ZoomImage(Image image, float zoomLevel)
+        {            
+            CurrentImage.ZoomLevel = zoomLevel;
+
+            if (zoomLevel == 1.0f)
+            {
+                return CurrentImage.CurrentImage;
+            }
+
+            return ImageZoom.ZoomImage(image, zoomLevel);
         }
     }
 }
