@@ -340,9 +340,12 @@ namespace UI
                     _shoppedGuiHelper.CurrentImage.ZoomLevel += .05f;
                 }
 
-                PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage(PictureBox.Image, _shoppedGuiHelper.CurrentImage.ZoomLevel);
-                PictureBox.Refresh();
-                SetAdditionalInfo();
+                using(var tempImage = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage))
+                {
+                    PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage(tempImage, _shoppedGuiHelper.CurrentImage.ZoomLevel);
+                    PictureBox.Refresh();
+                    SetAdditionalInfo();
+                }
             }
         }
 
