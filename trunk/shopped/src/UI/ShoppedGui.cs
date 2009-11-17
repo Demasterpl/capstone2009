@@ -29,6 +29,7 @@ namespace UI
 
             //Adding mouse event handlers
             PictureBox.MouseUp += new MouseEventHandler(PictureBox_MouseUp);
+            PictureBox.MouseDown += new MouseEventHandler(PictureBox_MouseDown);
             PictureBox.MouseMove += new MouseEventHandler(PictureBox_MouseMove);
             this.MouseWheel += new MouseEventHandler(PictureBox_MouseWheelScroll);
         }
@@ -189,7 +190,7 @@ namespace UI
          */
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (PictureBox.Image != null)
+            if (PictureBox.Image != null && _shoppedGuiHelper.ImageDraw.CurrentLineShape == "Line")
             {
                 DrawOnPictureBox(e);
                 SetAdditionalInfo();
@@ -199,10 +200,17 @@ namespace UI
         /**
          * Handles the event of the the mouse button being pressed down on the PictureBox.
          */
-        private void PictureBox_MouseUp(object sender, EventArgs e)
+        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
+            DrawOnPictureBox(e);
             _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
             SetUndoAndRedo();
+        }
+
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            _shoppedGuiHelper.ImageDraw.SetInitialPoint(e.X, e.Y);
+            
         }
 
         private void PictureBox_MouseWheelScroll(object sender, MouseEventArgs e)
@@ -332,7 +340,7 @@ namespace UI
                     _shoppedGuiHelper.CurrentImage.ZoomLevel += .05f;
                 }
 
-                PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage.CurrentImage, _shoppedGuiHelper.CurrentImage.ZoomLevel);
+                PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage(PictureBox.Image, _shoppedGuiHelper.CurrentImage.ZoomLevel);
                 PictureBox.Refresh();
                 SetAdditionalInfo();
             }
@@ -556,9 +564,11 @@ namespace UI
          */
         private void DrawOnPictureBox(MouseEventArgs mouse)
         {
-            if (PictureBox.Image != null)
+            if (PictureBox.Image != null && mouse.Button == MouseButtons.Left)
             {
-                PictureBox.Image = _shoppedGuiHelper.ImageDraw.DrawOnImage(PictureBox.Image, mouse);
+                _shoppedGuiHelper.ImageDraw.SetDestinationPoint(mouse.X, mouse.Y);
+                PictureBox.Image = _shoppedGuiHelper.ImageDraw.DrawShapeOnImage(PictureBox.Image, mouse);
+                _shoppedGuiHelper.ImageDraw.SetInitialPoint(_shoppedGuiHelper.ImageDraw.DestinationPoint.X, _shoppedGuiHelper.ImageDraw.DestinationPoint.Y);
                 SetUndoAndRedo();
                 PictureBox.Refresh();
             }
