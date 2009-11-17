@@ -77,30 +77,31 @@ namespace Core.Manipulators
             if (mouse.Button == MouseButtons.Left && Enabled == true)
             {            
                 var tempImage = new Bitmap(image);
-                var g = Graphics.FromImage(tempImage);
-
-                var x = mouse.X;
-                var y = mouse.Y;
-                var centerLine = LineThickness / 2;
-
-                var upperLeftX = x - centerLine;
-                var upperLeftY = y - centerLine;
-
-                switch (CurrentLineShape)
+                using (var g = Graphics.FromImage(tempImage))
                 {
-                    case "Square":
-                        g.FillRectangle(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
-                        break;
-                    case "Rounded":
-                        g.FillEllipse(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
-                        break;
-                    case "Line":
-                        g.DrawLine(new Pen(LineColor), InitialPoint, DestinationPoint);
-                        break;
+                    var x = mouse.X;
+                    var y = mouse.Y;
+                    var centerLine = LineThickness / 2;
 
+                    var upperLeftX = x - centerLine;
+                    var upperLeftY = y - centerLine;
+
+                    switch (CurrentLineShape)
+                    {
+                        case "Square":
+                            g.FillRectangle(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
+                            break;
+                        case "Rounded":
+                            g.FillEllipse(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
+                            break;
+                        case "Line":
+                            g.DrawLine(new Pen(LineColor), InitialPoint, DestinationPoint);
+                            break;
+
+                    }
+
+                    return tempImage;
                 }
-
-                return tempImage;
             }
 
             return image;
