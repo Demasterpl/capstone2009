@@ -21,7 +21,7 @@ namespace Core.Manipulators
 
         public Image ZoomImage(Image pictureBox, float zoom)
         {
-            if (zoom == 1.0f)
+            if (zoom == 1.0f || zoom < 0.01f || zoom > 999.0f)
             {
                 return new Bitmap(pictureBox);
             }

@@ -28,8 +28,9 @@ namespace UI
             _shoppedGuiHelper = new ShoppedGuiHelper();
 
             //Adding mouse event handlers
-            PictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(PictureBox_MouseUp);
-            PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(PictureBox_MouseMove);
+            PictureBox.MouseUp += new MouseEventHandler(PictureBox_MouseUp);
+            PictureBox.MouseMove += new MouseEventHandler(PictureBox_MouseMove);
+            this.MouseWheel += new MouseEventHandler(PictureBox_MouseWheelScroll);
         }
 
         /**
@@ -188,8 +189,11 @@ namespace UI
          */
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            DrawOnPictureBox(e);
-            SetAdditionalInfo();
+            if (PictureBox.Image != null)
+            {
+                DrawOnPictureBox(e);
+                SetAdditionalInfo();
+            }
         }
 
         /**
@@ -201,6 +205,10 @@ namespace UI
             SetUndoAndRedo();
         }
 
+        private void PictureBox_MouseWheelScroll(object sender, MouseEventArgs e)
+        {
+            ZoomImageOnScroll(e.Delta);
+        }
 
         /**
         * Handles the event of clicking the Tools->Sepia menu item.
@@ -308,6 +316,25 @@ namespace UI
                 PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage((Image)PictureBox.Image, zoomDialog.ZoomLevel) as Image;
                 _shoppedGuiHelper.CurrentImage.ZoomLevel = zoomDialog.ZoomLevel;
                 PictureBox.Refresh();
+            }
+        }
+
+        private void ZoomImageOnScroll(int mouseWheelDelta)
+        {
+            if (PictureBox.Image != null)
+            {
+                if (mouseWheelDelta < 0)
+                {
+                    _shoppedGuiHelper.CurrentImage.ZoomLevel -= .05f;
+                }
+                if (mouseWheelDelta > 0)
+                {
+                    _shoppedGuiHelper.CurrentImage.ZoomLevel += .05f;
+                }
+
+                PictureBox.Image = _shoppedGuiHelper.ImageZoom.ZoomImage(_shoppedGuiHelper.CurrentImage.CurrentImage, _shoppedGuiHelper.CurrentImage.ZoomLevel);
+                PictureBox.Refresh();
+                SetAdditionalInfo();
             }
         }
 
@@ -425,7 +452,6 @@ namespace UI
                 _shoppedGuiHelper.CurrentImage.FileName,
                 GetPixelColor(),
                 GetCoordinates());
-
         }
 
         /**

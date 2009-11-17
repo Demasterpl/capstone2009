@@ -143,6 +143,7 @@
             this.Controls.Add(this.lineColorButton);
             this.Controls.Add(this.lineColorLabel);
             this.Name = "DrawingDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DrawingDialog";
             ((System.ComponentModel.ISupportInitialize)(this.imageDrawBindingSource)).EndInit();
             this.ResumeLayout(false);
