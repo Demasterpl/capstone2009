@@ -46,6 +46,7 @@ namespace UI.Dialogs
         private void lineColorButton_Click(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
+            colorDialog.FullOpen = true;
             colorDialog.ShowDialog();
 
             ImageDraw.LineColor = colorDialog.Color;

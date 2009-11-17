@@ -10,7 +10,6 @@ namespace Core
      * 
      * @param ImageRevisions A list of ImageHistoryItem objects (which contain an Image object and a string detailing the operation).
      */
-
     public class ImageHistory
     {
         public List<ImageHistoryItem> ImageRevisions;
@@ -46,7 +45,6 @@ namespace Core
          * Attempts an undo operation by checking if an object exists before the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
-
         public PictureBoxImage Undo()
         {
             if (UndoIsPossible())
@@ -64,7 +62,6 @@ namespace Core
          * Attempts a redo operation by checking if an object exists after the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
-
         public PictureBoxImage Redo()
         {
 
@@ -83,7 +80,6 @@ namespace Core
          * Returns the number of ImageHistoryItem objects on the ImageRevisions list.
          * @return ImageRevisions.Count() The current number of items in the list.
          */
-
         public int GetNumberOfImagesInHistory()
         {
             return ImageRevisions.Count();
@@ -93,7 +89,6 @@ namespace Core
          * Returns the value of the iterator (essentially where we are in the ImageRevisions list).
          * @return CurrentRevision The value of the iterator for the list.
          */
-
         public int GetCurrentRevision()
         {
             return _currentRevision;
@@ -103,7 +98,6 @@ namespace Core
          * Returns whether or not there exists an image to redo in the history.
          * @return bool Whether or not ImageHistory can perform a redo
          */
-
         public bool RedoIsPossible()
         {
             return GetCurrentRevision() > -1 && GetCurrentRevision() < GetNumberOfImagesInHistory() - 1 && GetNumberOfImagesInHistory() > 1;
@@ -114,7 +108,6 @@ namespace Core
          * 
          * @return bool Whether or not ImageHistory can perform a undo.
          */
-
         public bool UndoIsPossible()
         {
             return GetCurrentRevision() > 0 && GetNumberOfImagesInHistory() > 0;
@@ -125,7 +118,6 @@ namespace Core
          * 
          * @return string The tooltip for the next item.
          */
-
         public string GetRedoToolTip()
         {
             if (RedoIsPossible())
@@ -141,7 +133,6 @@ namespace Core
          * 
          * @return string The tooltip for the previous item.
          */
-
         public string GetUndoToolTip()
         {
             return UndoIsPossible() ? ImageRevisions[_currentRevision - 1].OperationPerformed : null;
