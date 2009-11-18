@@ -35,10 +35,10 @@
             this.lineThicknessTextBox = new System.Windows.Forms.TextBox();
             this.lineStyleLabel = new System.Windows.Forms.Label();
             this.lineStyleComboBox = new System.Windows.Forms.ComboBox();
-            this.imageDrawBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.colorTextBox = new System.Windows.Forms.TextBox();
+            this.imageDrawBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.imageDrawBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,9 +66,9 @@
             this.lineThicknessLabel.AutoSize = true;
             this.lineThicknessLabel.Location = new System.Drawing.Point(12, 115);
             this.lineThicknessLabel.Name = "lineThicknessLabel";
-            this.lineThicknessLabel.Size = new System.Drawing.Size(114, 13);
+            this.lineThicknessLabel.Size = new System.Drawing.Size(122, 13);
             this.lineThicknessLabel.TabIndex = 2;
-            this.lineThicknessLabel.Text = "Line Thickness (pixels)";
+            this.lineThicknessLabel.Text = "Size / Thickness (pixels)";
             // 
             // lineThicknessTextBox
             // 
@@ -82,9 +82,9 @@
             this.lineStyleLabel.AutoSize = true;
             this.lineStyleLabel.Location = new System.Drawing.Point(14, 171);
             this.lineStyleLabel.Name = "lineStyleLabel";
-            this.lineStyleLabel.Size = new System.Drawing.Size(53, 13);
+            this.lineStyleLabel.Size = new System.Drawing.Size(69, 13);
             this.lineStyleLabel.TabIndex = 4;
-            this.lineStyleLabel.Text = "Line Style";
+            this.lineStyleLabel.Text = "Draw Pattern";
             // 
             // lineStyleComboBox
             // 
@@ -94,10 +94,6 @@
             this.lineStyleComboBox.Size = new System.Drawing.Size(117, 21);
             this.lineStyleComboBox.TabIndex = 5;
             this.lineStyleComboBox.SelectedIndexChanged += new System.EventHandler(this.lineStyleComboBox_SelectedIndexChanged);
-            // 
-            // imageDrawBindingSource
-            // 
-            this.imageDrawBindingSource.DataSource = typeof(Core.Manipulators.ImageDraw);
             // 
             // okButton
             // 
@@ -127,6 +123,10 @@
             this.colorTextBox.ReadOnly = true;
             this.colorTextBox.Size = new System.Drawing.Size(117, 20);
             this.colorTextBox.TabIndex = 8;
+            // 
+            // imageDrawBindingSource
+            // 
+            this.imageDrawBindingSource.DataSource = typeof(Core.Manipulators.ImageDraw);
             // 
             // DrawingDialog
             // 
