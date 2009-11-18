@@ -50,6 +50,7 @@
             this.contrastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drawingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -71,7 +72,6 @@
             this.DrawToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.drawingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -180,14 +180,14 @@
             // rotateToolStripMenuItem
             // 
             this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.rotateToolStripMenuItem.Text = "Rotate";
             this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
             // 
             // resizeToolStripMenuItem
             // 
             this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.resizeToolStripMenuItem.Text = "Resize";
             this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
             // 
@@ -202,7 +202,7 @@
             this.toolStripSeparator2,
             this.invertToolStripMenuItem});
             this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
-            this.filterToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.filterToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.filterToolStripMenuItem.Text = "Filters";
             // 
             // grayscaleToolStripMenuItem1
@@ -249,6 +249,14 @@
             this.invertToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
+            // 
+            // drawingToolStripMenuItem
+            // 
+            this.drawingToolStripMenuItem.Name = "drawingToolStripMenuItem";
+            this.drawingToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.drawingToolStripMenuItem.Text = "Drawing";
+            this.drawingToolStripMenuItem.ToolTipText = "Setup for Drawing Feature";
+            this.drawingToolStripMenuItem.Click += new System.EventHandler(this.drawingToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -443,21 +451,13 @@
             // 
             // PictureBox
             // 
-            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.PictureBox.Location = new System.Drawing.Point(3, 0);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(1005, 649);
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
-            // 
-            // drawingToolStripMenuItem
-            // 
-            this.drawingToolStripMenuItem.Name = "drawingToolStripMenuItem";
-            this.drawingToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.drawingToolStripMenuItem.Text = "Drawing";
-            this.drawingToolStripMenuItem.ToolTipText = "Setup for Drawing Feature";
-            this.drawingToolStripMenuItem.Click += new System.EventHandler(this.drawingToolStripMenuItem_Click);
             // 
             // ShoppedGui
             // 

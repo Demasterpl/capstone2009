@@ -12,7 +12,7 @@ namespace Core.Manipulators
      * 
      * @param LineColor The color of the line to be drawn.
      * @param LineThickness How wide the line to be drawn will be.
-     * @param LineShape The shape of the line (i.e. rounded, square, etc.)
+     * @param LineShape The shape of the line (i.e. Circle, square, etc.)
      * @param Enabled Holds whether or not the drawing functionality is enabled.
      * @param _lineShapeTypes The private backing field for LineShapeTypes (can be set).
      * @param LineShapeTypes The public-facing list of possible line shapes (read-only).
@@ -39,7 +39,7 @@ namespace Core.Manipulators
         /**
          * Default constructor that uses default values.
          */
-        public ImageDraw() : this(Color.Black, 25, new List<String> {"Square", "Rounded", "Line"}, "Square", false)
+        public ImageDraw() : this(Color.Black, 25, new List<String> {"Square", "Circle", "Line"}, "Square", false)
         { }
 
         /**
@@ -91,13 +91,12 @@ namespace Core.Manipulators
                         case "Square":
                             g.FillRectangle(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
                             break;
-                        case "Rounded":
+                        case "Circle":
                             g.FillEllipse(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
                             break;
                         case "Line":
-                            g.DrawLine(new Pen(LineColor), InitialPoint, DestinationPoint);
+                            g.DrawLine(new Pen(LineColor, LineThickness), InitialPoint, DestinationPoint);
                             break;
-
                     }
 
                     return tempImage;
