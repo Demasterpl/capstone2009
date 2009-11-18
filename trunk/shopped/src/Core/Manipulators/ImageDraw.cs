@@ -42,7 +42,7 @@ namespace Core.Manipulators
         /**
          * Default constructor that uses default values.
          */
-        public ImageDraw() : this(Color.Black, 25, 25, 25, 25, new List<String> {"Square", "Rectangle", "Triangle", "Circle", "Line"}, "Square", false)
+        public ImageDraw() : this(Color.Black, 5, 25, 25, 25, new List<String> {"Square", "Rectangle", "Triangle", "Circle", "Line"}, "Line", false)
         { }
 
         /**
@@ -80,7 +80,6 @@ namespace Core.Manipulators
          */
         public Image DrawShapeOnImage(Image image, MouseEventArgs mouse)
         {
-
             if (mouse.Button == MouseButtons.Left && Enabled == true)
             {            
                 var tempImage = new Bitmap(image);

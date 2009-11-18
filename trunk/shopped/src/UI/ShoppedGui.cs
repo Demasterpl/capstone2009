@@ -48,9 +48,6 @@ namespace UI
             undoToolStripMenuItem.Enabled = false;
             saveImageButton.Enabled = false;
             savePictureToolStripMenuItem.Enabled = false;
-            grayscaleToolStripMenuItem1.Enabled = false;
-            sepiaToolStripMenuItem.Enabled = false;
-            brightnessToolStripMenuItem.Enabled = false;
             FilterToolStripButton.Enabled = false;
             UndoToolStripButton.Enabled = false;
             RedoToolStripButton.Enabled = false;
@@ -121,12 +118,7 @@ namespace UI
             viewToolStripMenuItem.Enabled = true;
             saveImageButton.Enabled = true;
             savePictureToolStripMenuItem.Enabled = true;
-            grayscaleToolStripMenuItem1.Enabled = true;
-            sepiaToolStripMenuItem.Enabled = true;
-            brightnessToolStripMenuItem.Enabled = true;
             FilterToolStripButton.Enabled = true;
-            UndoToolStripButton.Enabled = true;
-            RedoToolStripButton.Enabled = true;
             ResizeToolStripButton.Enabled = true;
             RotateToolStripButton.Enabled = true;
             ZoomToolStripButton.Enabled = true;
@@ -134,12 +126,68 @@ namespace UI
         }
 
         /**
-         * Handles the event of clicking the Tools->Rotate menu item. Displays the RotateDialog windows form,
-         * obtains the value to rotate from the form, then rotates the image according to the rotate value.
+         * Handles the event of clicking the Tools->Grayscale menu item.
          */
-        private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void grayscaleMenuItem_Click(object sender, EventArgs e)
         {
-            RotateImage();
+            ApplyGrayscaleFilterToImage();
+        }
+
+        private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplyGrayscaleFilterToImage();
+        }
+
+        /**
+        * Handles the event of clicking the Tools->Sepia menu item.
+        */
+        private void sepiaMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplySepiaFilterToImage();
+        }
+
+        private void sepiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplySepiaFilterToImage();
+        }
+
+        /**
+        * Handles the event of clicking the Tools->Invert menu item.
+        */
+        private void invertMenuItem_Click(object sender, EventArgs e)
+        {
+            InvertImage();
+        }
+
+        private void invertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InvertImage();
+        }
+
+        /**
+        * Handles the event of clicking the Tools->Brightness menu item.
+        */
+        private void brightnessMenuItem_Click(object sender, EventArgs e)
+        {
+            AdjustBrightness();
+        }
+
+        private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdjustBrightness();
+        }
+
+        /**
+        * Handles the event of clicking the Tools->Contrast menu item.
+        */
+        private void contrastMenuItem_Click(object sender, EventArgs e)
+        {
+            AdjustContrast();
+        }
+
+        private void contrastToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdjustContrast();
         }
 
         /**
@@ -149,6 +197,22 @@ namespace UI
         private void zoomImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ZoomImage();
+        }
+
+       /**
+        * Handles the event of clicking the Zoom Image button.
+        */
+        private void ZoomToolStripButton_Click(object sender, EventArgs e)
+        {
+            ZoomImage();
+        }
+
+        /**
+        * Handles the event of clicking the Resize Image button.
+        */
+        private void ResizeToolStripButton_Click(object sender, EventArgs e)
+        {
+            ResizeImage();
         }
 
         /**
@@ -161,11 +225,27 @@ namespace UI
         }
 
         /**
+        * Handles the event of clicking the Undo button.
+        */
+        private void UndoToolStripButton_Click(object sender, EventArgs e)
+        {
+            SetPictureBoxOnUndo();
+        }
+
+        /**
          * Handles the event of clicking the Edit->Undo menu item.
          */
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPictureBoxOnUndo();
+        }
+
+        /**
+        * Handles the event of clicking the Redo button.
+        */
+        private void RedoToolStripButton_Click(object sender, EventArgs e)
+        {
+            SetPictureBoxOnRedo();
         }
 
         /**
@@ -177,12 +257,20 @@ namespace UI
         }
 
         /**
-         * Handles the event of clicking the Tools->Grayscale menu item.
-         */
-        private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
+        * Handles the event of clicking the Rotate Image button.
+        */
+        private void RotateToolStripButton_Click(object sender, EventArgs e)
         {
-            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
-            UpdatePictureBoxInfo(string.Format("Convert Grayscale"));
+            RotateImage();
+        }
+
+        /**
+         * Handles the event of clicking the Tools->Rotate menu item. Displays the RotateDialog windows form,
+         * obtains the value to rotate from the form, then rotates the image according to the rotate value.
+         */
+        private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RotateImage();
         }
 
         /**
@@ -194,7 +282,7 @@ namespace UI
             {
                 DrawOnPictureBox(e);
             }
-                
+
             SetAdditionalInfo();
         }
 
@@ -214,7 +302,7 @@ namespace UI
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             _shoppedGuiHelper.ImageDraw.SetInitialPoint(e.X, e.Y);
-            
+
         }
 
         private void PictureBox_MouseWheelScroll(object sender, MouseEventArgs e)
@@ -226,79 +314,41 @@ namespace UI
         }
 
         /**
-        * Handles the event of clicking the Tools->Sepia menu item.
-        */
-        private void sepiaToolStripMenuItem_Click(object sender, EventArgs e)
+         * Handles the event of the user selecting "Drawing" from the Tools menu. Opens up a 
+         * DrawingDialog and sets the values to ImageDraw object accordingly.
+         */
+        private void drawingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepia(_shoppedGuiHelper.CurrentImage);
-            UpdatePictureBoxInfo(string.Format("Convert Sepia"));
+            DrawingDialog drawingDialog = new DrawingDialog(new ImageDraw(_shoppedGuiHelper.ImageDraw));
+
+            do
+            {
+                drawingDialog.ShowDialog();
+            } while (drawingDialog.DialogResult == DialogResult.Retry);
+
+            if (drawingDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.ImageDraw = drawingDialog.ImageDraw;
+            }
         }
 
         /**
-        * Handles the event of clicking the Tools->Invert menu item.
-        */
-        private void invertToolStripMenuItem_Click(object sender, EventArgs e)
+         * Handles the event of the Draw button being clicked in the GUI. Sets the tooltip text according
+         * to the current toggle state and sets the toggle state.
+         */
+        private void DrawToolStripButton_Click(object sender, EventArgs e)
         {
-            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Invert.InvertColors(_shoppedGuiHelper.CurrentImage);
-            UpdatePictureBoxInfo(string.Format("Invert Colors"));
-        }
-
-        /**
-        * Handles the event of clicking the Tools->Brightness menu item.
-        */
-        private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AdjustBrightness();
-        }
-
-        /**
-        * Handles the event of clicking the Tools->Contrast menu item.
-        */
-        private void contrastToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AdjustContrast();
-        }
-
-        /**
-        * Handles the event of clicking the Zoom Image button.
-        */
-        private void ZoomToolStripButton_Click(object sender, EventArgs e)
-        {
-            ZoomImage();
-        }
-
-        /**
-        * Handles the event of clicking the Resize Image button.
-        */
-        private void ResizeToolStripButton_Click(object sender, EventArgs e)
-        {
-            ResizeImage();
-        }
-
-        /**
-        * Handles the event of clicking the Undo button.
-        */
-        private void UndoToolStripButton_Click(object sender, EventArgs e)
-        {
-            SetPictureBoxOnUndo();
-        }
-
-        /**
-        * Handles the event of clicking the Redo button.
-        */
-        private void RedoToolStripButton_Click(object sender, EventArgs e)
-        {
-            SetPictureBoxOnRedo();
-        }
-
-        /**
-        * Handles the event of clicking the Rotate Image button.
-        */
-        private void RotateToolStripButton_Click(object sender, EventArgs e)
-        {
-            RotateImage();
-        }
-
+            if (DrawToolStripButton.Checked == true)
+            {
+                DrawToolStripButton.Text = "Disable Drawing";
+            }
+            else
+            {
+                DrawToolStripButton.Text = "Enable Drawing";
+            }
+            _shoppedGuiHelper.ImageDraw.ToggleEnabledState();
+        }        
+        
         /**
          * Pops up a dialog box for the user to input a number to rotate the picture by.
          * Calls RotateImage of ShoppedGuiHelper and updates the Gui with the new image.
@@ -415,41 +465,24 @@ namespace UI
             }
         }
 
-        /**
-         * Handles the event of the user selecting "Drawing" from the Tools menu. Opens up a 
-         * DrawingDialog and sets the values to ImageDraw object accordingly.
-         */
-        private void drawingToolStripMenuItem_Click(object sender, EventArgs e)
-        {            
-            DrawingDialog drawingDialog = new DrawingDialog(new ImageDraw(_shoppedGuiHelper.ImageDraw));
-
-            do
-            {
-                drawingDialog.ShowDialog();
-            } while (drawingDialog.DialogResult == DialogResult.Retry);
-
-            if (drawingDialog.DialogResult == DialogResult.OK)
-            {
-                _shoppedGuiHelper.ImageDraw = drawingDialog.ImageDraw;
-            }
-        }
-
-        /**
-         * Handles the event of the Draw button being clicked in the GUI. Sets the tooltip text according
-         * to the current toggle state and sets the toggle state.
-         */
-        private void DrawToolStripButton_Click(object sender, EventArgs e)
+        private void ApplyGrayscaleFilterToImage()
         {
-            if (DrawToolStripButton.Checked == true)
-            {
-                DrawToolStripButton.Text = "Disable Drawing";
-            }
-            else
-            {
-                DrawToolStripButton.Text = "Enable Drawing";
-            }
-            _shoppedGuiHelper.ImageDraw.ToggleEnabledState();
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(string.Format("Convert Grayscale"));
         }
+
+        private void ApplySepiaFilterToImage()
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepia(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(string.Format("Convert Sepia"));
+        }
+
+        private void InvertImage()
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Invert.InvertColors(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(string.Format("Invert Colors"));
+        }
+
 
         /**
          * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo

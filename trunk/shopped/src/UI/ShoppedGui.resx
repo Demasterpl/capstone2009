@@ -148,16 +148,16 @@
   <data name="saveImageButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIjSURBVDhPlZLda1JhHMeFbvsTgt13GTLqtn+gy6hGhaUz
-        z5tm04nN5kEtxwwHuhyyOts5Wmm+btOaaeayZRQ1tuiNJGrqbnZXFGR9O+foPF10oT/4wMPD83x+L/xU
-        w/poQq0V0MH5p8dR4bf6Hw5qne09hs7c+iWh1kYXVNIh86yFnWs27HisaLnG0GLNaDpNaF5h0Jyg0LAT
-        aNj0aFh12B47j+1L58Ct1uWksiD5tImtoX3YPKDqm5v3P3UEUlnxta/Y5UPYXbzRN3PLHxTB7fIXDBqz
-        mXeKgC9+RrvdRr1e7wsp2UziTUcgTVoayKBx/e6mIpjPf5T/91uBVK038loRhJbeD1oAXAsvuwJxeYKp
-        t9BMrcEw7gNFG/8PI94zJoxa/RhhH2Jy/rkimLm3BY3rgfwxFoshk8kgl8uhUCigXC6jUqnI53Q6DYqi
-        MTKxjMtz64pg+s4GzrJ5MEYzSqUSSJKUqVarKBaLsiyZTCIajcpJTtqzGA8+2RMImBIHcnpyBUaTGbVa
-        rSfIZrOIx+PgeR7hcBiBQAAkxeCELQWz/7EicHEvoGFXwIiCfD7fE3Ach1AoBL/fD6/XC6fTCUIUHLcm
-        QE8XuwJdZP0Yk/phDz4SW7gIQRDg8XjAsix8Ph/cbjccDgcsFgtomgZB0tC7lnDh6mp3Ew2x/WodvzF8
-        ivtJSL1TRjkLQTIwiI9lCKoHQZA4Mjr77bA+8v2QdvHVX3jP2SHs6H3RAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIjSURBVDhPlZLfa1JhGMeFbvsTgt13GTLqqj+hy6hGhaUz
+        zy/NphObzoNajhkOdDlk5XaOVpo/t2nNNHPZMooaW7SKJGrqbnZXFGR9O+foPF10oQ984OXlfT/PDx7F
+        sDaaUKp5dLD/6XGc/638h8Nqe3ufoXO3f4ko1dEFhXjIPG9h97oFu24zWs4xtFgjmg4DmnYGzQkKDSuB
+        hkWLhlmDnbGL2LlyAeHVupRUEiSfNbE1dACbhxR9c+vBp45ALCu+9hV7XBB7izf7Zm75gyy4U/6CQWM2
+        sy0LuOJntNtt1Ov1vhCTzSTedgTipMWBDBo37m3Kgvn8R+l/vxWI1Xoib2RBcOn9oAXAufCqKxCWJ5B6
+        B9XUGnTjXlC0/v8wwj1jwKjZhxH2ESbnX8iCmftbUDkfSh9jsRgymQxyuRwKhQLK5TIqlYp0TqfToCga
+        IxPLuDq3Lgum727gPJsHozeiVCqBJEmJarWKYrEoyZLJJKLRqJTktDWL8cDTfQGPKWEgZydXoDcYUavV
+        eoJsNot4PA6O4xAKheD3+0FSDE5ZUjD6nsgCZ/glVOwKGEGQz+d7gnA4jGAwCJ/PB4/HA4fDAUIQnDQn
+        QE8XuwJNZP0Ek/phDTwWWrgMnufhdrvBsiy8Xi9cLhdsNhtMJhNomgZB0tA6l3Dp2mp3E3Wxg0oNtzF8
+        JvyTEHun9FIWgmSgEx5LEFQPgiBxbHT221Ft5PsR9eLrv+qF2PQTfbGRAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="UndoToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
