@@ -43,13 +43,13 @@
             this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.grayscaleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grayscaleMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sepiaMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.brightnessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contrastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brightnessMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contrastMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.invertMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.drawingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +68,7 @@
             this.sepiaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.brightnessToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contrastToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.invertToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DrawToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
@@ -194,61 +194,61 @@
             // filterToolStripMenuItem
             // 
             this.filterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.grayscaleToolStripMenuItem1,
-            this.sepiaToolStripMenuItem,
+            this.grayscaleMenuItem,
+            this.sepiaMenuItem,
             this.toolStripSeparator1,
-            this.brightnessToolStripMenuItem,
-            this.contrastToolStripMenuItem,
+            this.brightnessMenuItem,
+            this.contrastMenuItem,
             this.toolStripSeparator2,
-            this.invertToolStripMenuItem});
+            this.invertMenuItem});
             this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
             this.filterToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.filterToolStripMenuItem.Text = "Filters";
             // 
-            // grayscaleToolStripMenuItem1
+            // grayscaleMenuItem
             // 
-            this.grayscaleToolStripMenuItem1.Name = "grayscaleToolStripMenuItem1";
-            this.grayscaleToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
-            this.grayscaleToolStripMenuItem1.Text = "Grayscale";
-            this.grayscaleToolStripMenuItem1.Click += new System.EventHandler(this.grayscaleToolStripMenuItem_Click);
+            this.grayscaleMenuItem.Name = "grayscaleMenuItem";
+            this.grayscaleMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.grayscaleMenuItem.Text = "Grayscale";
+            this.grayscaleMenuItem.Click += new System.EventHandler(this.grayscaleMenuItem_Click);
             // 
-            // sepiaToolStripMenuItem
+            // sepiaMenuItem
             // 
-            this.sepiaToolStripMenuItem.Name = "sepiaToolStripMenuItem";
-            this.sepiaToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.sepiaToolStripMenuItem.Text = "Sepia";
-            this.sepiaToolStripMenuItem.Click += new System.EventHandler(this.sepiaToolStripMenuItem_Click);
+            this.sepiaMenuItem.Name = "sepiaMenuItem";
+            this.sepiaMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.sepiaMenuItem.Text = "Sepia";
+            this.sepiaMenuItem.Click += new System.EventHandler(this.sepiaMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(126, 6);
             // 
-            // brightnessToolStripMenuItem
+            // brightnessMenuItem
             // 
-            this.brightnessToolStripMenuItem.Name = "brightnessToolStripMenuItem";
-            this.brightnessToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.brightnessToolStripMenuItem.Text = "Brightness";
-            this.brightnessToolStripMenuItem.Click += new System.EventHandler(this.brightnessToolStripMenuItem_Click);
+            this.brightnessMenuItem.Name = "brightnessMenuItem";
+            this.brightnessMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.brightnessMenuItem.Text = "Brightness";
+            this.brightnessMenuItem.Click += new System.EventHandler(this.brightnessMenuItem_Click);
             // 
-            // contrastToolStripMenuItem
+            // contrastMenuItem
             // 
-            this.contrastToolStripMenuItem.Name = "contrastToolStripMenuItem";
-            this.contrastToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.contrastToolStripMenuItem.Text = "Contrast";
-            this.contrastToolStripMenuItem.Click += new System.EventHandler(this.contrastToolStripMenuItem_Click);
+            this.contrastMenuItem.Name = "contrastMenuItem";
+            this.contrastMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.contrastMenuItem.Text = "Contrast";
+            this.contrastMenuItem.Click += new System.EventHandler(this.contrastMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(126, 6);
             // 
-            // invertToolStripMenuItem
+            // invertMenuItem
             // 
-            this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.invertToolStripMenuItem.Text = "Invert";
-            this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
+            this.invertMenuItem.Name = "invertMenuItem";
+            this.invertMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.invertMenuItem.Text = "Invert";
+            this.invertMenuItem.Click += new System.EventHandler(this.invertMenuItem_Click);
             // 
             // drawingToolStripMenuItem
             // 
@@ -389,7 +389,7 @@
             this.sepiaToolStripMenuItem1,
             this.brightnessToolStripMenuItem1,
             this.contrastToolStripMenuItem1,
-            this.invertToolStripMenuItem1});
+            this.invertToolStripMenuItem});
             this.FilterToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("FilterToolStripButton.Image")));
             this.FilterToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FilterToolStripButton.Name = "FilterToolStripButton";
@@ -401,30 +401,35 @@
             this.grayscaleToolStripMenuItem.Name = "grayscaleToolStripMenuItem";
             this.grayscaleToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.grayscaleToolStripMenuItem.Text = "Grayscale";
+            this.grayscaleToolStripMenuItem.Click += new System.EventHandler(this.grayscaleToolStripMenuItem_Click);
             // 
             // sepiaToolStripMenuItem1
             // 
             this.sepiaToolStripMenuItem1.Name = "sepiaToolStripMenuItem1";
             this.sepiaToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
             this.sepiaToolStripMenuItem1.Text = "Sepia";
+            this.sepiaToolStripMenuItem1.Click += new System.EventHandler(this.sepiaToolStripMenuItem_Click);
             // 
             // brightnessToolStripMenuItem1
             // 
             this.brightnessToolStripMenuItem1.Name = "brightnessToolStripMenuItem1";
             this.brightnessToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
             this.brightnessToolStripMenuItem1.Text = "Brightness";
+            this.brightnessToolStripMenuItem1.Click += new System.EventHandler(this.brightnessToolStripMenuItem_Click);
             // 
             // contrastToolStripMenuItem1
             // 
             this.contrastToolStripMenuItem1.Name = "contrastToolStripMenuItem1";
             this.contrastToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
             this.contrastToolStripMenuItem1.Text = "Contrast";
+            this.contrastToolStripMenuItem1.Click += new System.EventHandler(this.contrastToolStripMenuItem_Click);
             // 
-            // invertToolStripMenuItem1
+            // invertToolStripMenuItem
             // 
-            this.invertToolStripMenuItem1.Name = "invertToolStripMenuItem1";
-            this.invertToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
-            this.invertToolStripMenuItem1.Text = "Invert";
+            this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.invertToolStripMenuItem.Text = "Invert";
+            this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
             // DrawToolStripButton
             // 
@@ -451,7 +456,7 @@
             // 
             // PictureBox
             // 
-            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
             this.PictureBox.Location = new System.Drawing.Point(3, 0);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(1005, 649);
@@ -512,11 +517,11 @@
         private System.Windows.Forms.ToolStripMenuItem zoomImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem grayscaleToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem sepiaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem invertToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem brightnessToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem contrastToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grayscaleMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sepiaMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem invertMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brightnessMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contrastMenuItem;
         private System.Windows.Forms.ToolStripButton RedoToolStripButton;
         private System.Windows.Forms.ToolStripButton UndoToolStripButton;
         private System.Windows.Forms.ToolStripButton RotateToolStripButton;
@@ -529,7 +534,7 @@
         private System.Windows.Forms.ToolStripMenuItem sepiaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem brightnessToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem contrastToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem invertToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem invertToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton DrawToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem drawingToolStripMenuItem;
     }
