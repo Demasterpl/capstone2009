@@ -420,9 +420,13 @@ namespace UI
          * DrawingDialog and sets the values to ImageDraw object accordingly.
          */
         private void drawingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        {            
             DrawingDialog drawingDialog = new DrawingDialog(new ImageDraw(_shoppedGuiHelper.ImageDraw));
-            drawingDialog.ShowDialog();
+
+            do
+            {
+                drawingDialog.ShowDialog();
+            } while (drawingDialog.DialogResult == DialogResult.Retry);
 
             if (drawingDialog.DialogResult == DialogResult.OK)
             {

@@ -21,6 +21,9 @@ namespace Core.Manipulators
     {
         public Color LineColor { get; set; }
         public int LineThickness { get; set; }
+        public int ShapeHeight { get; set; }
+        public int ShapeWidth { get; set; }
+        public int ShapeRadius { get; set; }
         public string CurrentLineShape { get; set; }
         public bool Enabled { get; set; }
         public Point InitialPoint { get; set; }
@@ -39,24 +42,28 @@ namespace Core.Manipulators
         /**
          * Default constructor that uses default values.
          */
-        public ImageDraw() : this(Color.Black, 25, new List<String> {"Square", "Circle", "Line"}, "Square", false)
+        public ImageDraw() : this(Color.Black, 25, 25, 25, 25, new List<String> {"Square", "Rectangle", "Triangle", "Circle", "Line"}, "Square", false)
         { }
 
         /**
          * Constructor that takes in an ImageDraw object as a parameter.
          */
         public ImageDraw(ImageDraw imageDraw) 
-            : this(imageDraw.LineColor, imageDraw.LineThickness, imageDraw.LineShapeTypes, 
-                    imageDraw.CurrentLineShape, imageDraw.Enabled)
+            : this(imageDraw.LineColor, imageDraw.LineThickness, imageDraw.ShapeHeight, imageDraw.ShapeWidth, imageDraw.ShapeRadius, 
+                    imageDraw.LineShapeTypes, imageDraw.CurrentLineShape, imageDraw.Enabled)
         { }
 
         /**
          * The constructor that is called on by all others in ImageDraw, this sets the properties values.
          */
-        public ImageDraw(Color lineColor, int lineThickness, List<string> lineShapes, string lineShape, bool enabled)
+        public ImageDraw(Color lineColor, int lineThickness, int shapeHeight, int shapeWidth, int shapeRadius, 
+            List<string> lineShapes, string lineShape, bool enabled)
         {
             LineColor = lineColor;
             LineThickness = lineThickness;
+            ShapeHeight = shapeHeight;
+            ShapeWidth = shapeWidth;
+            ShapeRadius = shapeRadius;
             _lineShapeTypes = lineShapes;
             CurrentLineShape = lineShape;
             Enabled = enabled;
@@ -81,18 +88,25 @@ namespace Core.Manipulators
                 {
                     var x = mouse.X;
                     var y = mouse.Y;
-                    var centerLine = LineThickness / 2;
-
-                    var upperLeftX = x - centerLine;
-                    var upperLeftY = y - centerLine;
 
                     switch (CurrentLineShape)
                     {
                         case "Square":
-                            g.FillRectangle(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
+                            g.FillRectangle(new SolidBrush(LineColor), x - ShapeHeight / 2, y - ShapeHeight / 2, ShapeHeight, ShapeHeight);
+                            break;
+                        case "Rectangle":
+                            g.FillRectangle(new SolidBrush(LineColor), x - ShapeWidth / 2, y - ShapeHeight / 2, ShapeWidth, ShapeHeight);
+                            break;
+                        case "Triangle":
+                            g.FillPolygon(new SolidBrush(LineColor), new Point[] 
+                                 {
+                                     new Point(x, y - ShapeHeight / 2), 
+                                     new Point(x - ShapeWidth / 2, y + ShapeHeight / 2),
+                                     new Point(x + ShapeWidth / 2, y + ShapeHeight / 2),
+                                 });
                             break;
                         case "Circle":
-                            g.FillEllipse(new SolidBrush(LineColor), upperLeftX, upperLeftY, LineThickness, LineThickness);
+                            g.FillEllipse(new SolidBrush(LineColor), x - ShapeRadius, y - ShapeRadius, 2 * ShapeRadius, 2 * ShapeRadius);
                             break;
                         case "Line":
                             g.DrawLine(new Pen(LineColor, LineThickness), InitialPoint, DestinationPoint);
@@ -102,7 +116,6 @@ namespace Core.Manipulators
                     return tempImage;
                 }
             }
-
             return image;
         }
 
