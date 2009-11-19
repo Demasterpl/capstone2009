@@ -15,7 +15,7 @@ namespace Tests
             Bitmap image = new Bitmap(800, 600);
 
             ImageResize imageResize = new ImageResize();
-            PictureBoxImage pictureBoxImage = new PictureBoxImage
+            ShoppedImage shoppedImage = new ShoppedImage
             {
                 CurrentHeight = image.Height,
                 CurrentWidth = image.Width,
@@ -25,13 +25,13 @@ namespace Tests
                 CurrentImage = image,
             };
 
-            pictureBoxImage = imageResize.ResizeImage(pictureBoxImage, RESIZELEVEL);
+            shoppedImage = imageResize.ResizeImage(shoppedImage, RESIZELEVEL);
 
-            Assert.AreEqual(image.Height * 2.0, pictureBoxImage.CurrentHeight);
-            Assert.AreEqual(image.Width * 2.0, pictureBoxImage.CurrentWidth);
-            Assert.AreEqual(1.0f, pictureBoxImage.ZoomLevel);
-            Assert.AreEqual(RESIZELEVEL, pictureBoxImage.ResizeLevel);
-            Assert.AreEqual(0.0f, pictureBoxImage.DegreesRotated);
+            Assert.AreEqual(image.Height * 2.0, shoppedImage.CurrentHeight);
+            Assert.AreEqual(image.Width * 2.0, shoppedImage.CurrentWidth);
+            Assert.AreEqual(1.0f, shoppedImage.ZoomLevel);
+            Assert.AreEqual(RESIZELEVEL, shoppedImage.ResizeLevel);
+            Assert.AreEqual(0.0f, shoppedImage.DegreesRotated);
         }
     }
 }

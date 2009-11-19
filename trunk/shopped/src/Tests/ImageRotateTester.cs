@@ -9,13 +9,13 @@ namespace Tests
     public class ImageRotateTester
     {
         [Test]
-        public void RotateImageSetsPictureBoxImagePropertiesToNewRotatedValues()
+        public void RotateImageSetsshoppedImagePropertiesToNewRotatedValues()
         {
             const float ROTATEDEG = 90.0f;
             Bitmap image = new Bitmap(800, 600);
 
             ImageRotate imageRotate = new ImageRotate();
-            PictureBoxImage pictureBoxImage = new PictureBoxImage 
+            ShoppedImage shoppedImage = new ShoppedImage 
             {
                 CurrentHeight = image.Height,
                 CurrentWidth = image.Width, 
@@ -25,13 +25,13 @@ namespace Tests
                 CurrentImage = image,
             };
 
-            pictureBoxImage = imageRotate.RotateImageByAngle(pictureBoxImage, ROTATEDEG);
+            shoppedImage = imageRotate.RotateImageByAngle(shoppedImage, ROTATEDEG);
 
-            Assert.AreEqual(image.Width, pictureBoxImage.CurrentHeight);
-            Assert.AreEqual(image.Height, pictureBoxImage.CurrentWidth);
-            Assert.AreEqual(1.0f, pictureBoxImage.ZoomLevel);
-            Assert.AreEqual(1.0f, pictureBoxImage.ResizeLevel);
-            Assert.AreEqual(ROTATEDEG, pictureBoxImage.DegreesRotated);
+            Assert.AreEqual(image.Width, shoppedImage.CurrentHeight);
+            Assert.AreEqual(image.Height, shoppedImage.CurrentWidth);
+            Assert.AreEqual(1.0f, shoppedImage.ZoomLevel);
+            Assert.AreEqual(1.0f, shoppedImage.ResizeLevel);
+            Assert.AreEqual(ROTATEDEG, shoppedImage.DegreesRotated);
         }
     }
 }

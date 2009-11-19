@@ -8,7 +8,9 @@ namespace Core
     /**
      * Manages the list of ImageHistoryItems (to do undo and redo) as well as carry out the undo and redo operations.
      * 
-     * @param ImageRevisions A list of ImageHistoryItem objects (which contain an Image object and a string detailing the operation).
+     * @param ImageRevisions A list of ImageHistoryItem objects (which contain a ShoppedImage object and a string detailing the operation performed).
+     * @param _currentRevision Keeps track of where we are currently in the ImageRevisions list.
+     * @param _logger Writes debug statements to file for testing purposes.
      */
     public class ImageHistory
     {
@@ -16,6 +18,9 @@ namespace Core
         private int _currentRevision;
         private static Logger _logger = LogManager.GetCurrentClassLogger(); 
 
+        /**
+         * Default Constructor.
+         */
         public ImageHistory()
         {
             ImageRevisions = new List<ImageHistoryItem>();
@@ -24,10 +29,10 @@ namespace Core
 
         /**
          * Appends the Image object and string passed in to the end of the ImageRevisions list.
-         * @param image The image to add to the list
-         * @param operation A string detailing what operation was just performed
+         * @param image The ShoppedImage object to add to the list.
+         * @param operation A string detailing what operation was just performed.
          */
-        public void AddImageToImageHistory(PictureBoxImage image, string operation)
+        public void AddImageToImageHistory(ShoppedImage image, string operation)
         {
             //_currentRevision is somewhere in middle of list, need to delete items beyond current image
             if (RedoIsPossible())
@@ -45,7 +50,7 @@ namespace Core
          * Attempts an undo operation by checking if an object exists before the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
-        public PictureBoxImage Undo()
+        public ShoppedImage Undo()
         {
             if (UndoIsPossible())
             {
@@ -62,7 +67,7 @@ namespace Core
          * Attempts a redo operation by checking if an object exists after the CurrentRevision iterator, then returning that
          * ImageHistoryItem node if it does exist.
          */
-        public PictureBoxImage Redo()
+        public ShoppedImage Redo()
         {
 
             if (RedoIsPossible())
@@ -78,7 +83,7 @@ namespace Core
 
         /**
          * Returns the number of ImageHistoryItem objects on the ImageRevisions list.
-         * @return ImageRevisions.Count() The current number of items in the list.
+         * @return The current number of items in the list.
          */
         public int GetNumberOfImagesInHistory()
         {
@@ -87,7 +92,7 @@ namespace Core
 
         /**
          * Returns the value of the iterator (essentially where we are in the ImageRevisions list).
-         * @return CurrentRevision The value of the iterator for the list.
+         * @return The value of the iterator for the list.
          */
         public int GetCurrentRevision()
         {
@@ -96,7 +101,7 @@ namespace Core
 
         /**
          * Returns whether or not there exists an image to redo in the history.
-         * @return bool Whether or not ImageHistory can perform a redo
+         * @return Whether or not ImageHistory can perform a redo
          */
         public bool RedoIsPossible()
         {
@@ -106,7 +111,7 @@ namespace Core
         /**
          * Returns whether or not there exists an image to undo to in the history.
          * 
-         * @return bool Whether or not ImageHistory can perform a undo.
+         * @return Whether or not ImageHistory can perform a undo.
          */
         public bool UndoIsPossible()
         {
@@ -116,7 +121,7 @@ namespace Core
         /**
          * Returns the tooltip for the next item in the history.
          * 
-         * @return string The tooltip for the next item.
+         * @return The tooltip for the next item.
          */
         public string GetRedoToolTip()
         {
@@ -131,7 +136,7 @@ namespace Core
         /**
          * Returns the tooltip for the previous item in the history.
          * 
-         * @return string The tooltip for the previous item.
+         * @return The tooltip for the previous item.
          */
         public string GetUndoToolTip()
         {

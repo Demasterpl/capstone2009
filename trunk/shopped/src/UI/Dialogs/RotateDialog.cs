@@ -36,18 +36,21 @@ namespace UI.Dialogs
 
         }
 
-        private void RotateDialog_Load(object sender, EventArgs e)
-        {
-
-        }
 
         /**
          * Once the user hits the "Rotate Image" button, this grabs the value from the dialog box.
          */
-
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            RotateDegrees = float.Parse(RotateTextBox.Text);
+            try
+            {
+                RotateDegrees = float.Parse(RotateTextBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Invalid input. Must be integer value");
+                DialogResult = DialogResult.Retry;
+            }
         }
 
     }

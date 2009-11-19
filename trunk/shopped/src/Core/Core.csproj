@@ -62,9 +62,8 @@
     <Compile Include="Manipulators\ImageDraw.cs" />
     <Compile Include="Manipulators\ImageResize.cs" />
     <Compile Include="Manipulators\ImageRotate.cs" />
-    <Compile Include="Images\PictureBoxImage.cs" />
+    <Compile Include="Images\ShoppedImage.cs" />
     <Compile Include="Manipulators\ImageZoom.cs" />
-    <Compile Include="Interfaces\IFileOperations.cs" />
     <Compile Include="Filters\Invert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Filters\Sepia.cs" />

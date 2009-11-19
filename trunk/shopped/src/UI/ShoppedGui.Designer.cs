@@ -69,7 +69,6 @@
             this.brightnessToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.contrastToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DrawToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.MenuStrip.SuspendLayout();
@@ -180,14 +179,14 @@
             // rotateToolStripMenuItem
             // 
             this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
-            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.rotateToolStripMenuItem.Text = "Rotate";
             this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
             // 
             // resizeToolStripMenuItem
             // 
             this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
-            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.resizeToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.resizeToolStripMenuItem.Text = "Resize";
             this.resizeToolStripMenuItem.Click += new System.EventHandler(this.resizeToolStripMenuItem_Click);
             // 
@@ -202,7 +201,7 @@
             this.toolStripSeparator2,
             this.invertMenuItem});
             this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
-            this.filterToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.filterToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.filterToolStripMenuItem.Text = "Filters";
             // 
             // grayscaleMenuItem
@@ -253,8 +252,8 @@
             // drawingToolStripMenuItem
             // 
             this.drawingToolStripMenuItem.Name = "drawingToolStripMenuItem";
-            this.drawingToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.drawingToolStripMenuItem.Text = "Drawing";
+            this.drawingToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.drawingToolStripMenuItem.Text = "Drawing Properties";
             this.drawingToolStripMenuItem.ToolTipText = "Setup for Drawing Feature";
             this.drawingToolStripMenuItem.Click += new System.EventHandler(this.drawingToolStripMenuItem_Click);
             // 
@@ -299,8 +298,7 @@
             this.RotateToolStripButton,
             this.ZoomToolStripButton,
             this.ResizeToolStripButton,
-            this.FilterToolStripButton,
-            this.DrawToolStripButton});
+            this.FilterToolStripButton});
             this.ToolStrip.Location = new System.Drawing.Point(0, 24);
             this.ToolStrip.Name = "ToolStrip";
             this.ToolStrip.Size = new System.Drawing.Size(1008, 25);
@@ -431,17 +429,6 @@
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
-            // DrawToolStripButton
-            // 
-            this.DrawToolStripButton.CheckOnClick = true;
-            this.DrawToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DrawToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DrawToolStripButton.Image")));
-            this.DrawToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DrawToolStripButton.Name = "DrawToolStripButton";
-            this.DrawToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.DrawToolStripButton.Text = "Enable Drawing";
-            this.DrawToolStripButton.Click += new System.EventHandler(this.DrawToolStripButton_Click);
-            // 
             // PictureBoxPanel
             // 
             this.PictureBoxPanel.AutoScroll = true;
@@ -535,7 +522,6 @@
         private System.Windows.Forms.ToolStripMenuItem brightnessToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem contrastToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem invertToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton DrawToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem drawingToolStripMenuItem;
     }
 }

@@ -4,30 +4,32 @@ using Core.Images;
 
 namespace Core.Manipulators
 {
+    /**
+     * Handles the rotating of an image.
+     */
     public class ImageRotate
     {
         /**
          *  Given a certain angle (in degrees), this method will take the CurrentImage object and rotate
          *  it by the given angle.
          *  
-         *  @param angle The angle (in degrees) to rotate the image
-         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
-         * @return A PictureBoxImage object with the appropriate properties set by this method.
+         * @param angle The angle (in degrees) to rotate the image
+         * @param shoppedImage The ShoppedImage object in the current context of Shopped GUI.
+         * @return A ShoppedImage object with the appropriate properties set by this method.
          */
-
-        public PictureBoxImage RotateImageByAngle(PictureBoxImage pictureBoxImage, float angle)
+        public ShoppedImage RotateImageByAngle(ShoppedImage shoppedImage, float angle)
         {
-            if (pictureBoxImage == null)
+            if (shoppedImage == null)
             {
                 throw new ArgumentNullException("image");
             }
 
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            ShoppedImage newShoppedImage = new ShoppedImage(shoppedImage);
 
             const double pi2 = Math.PI/2.0;
 
-            int oldWidth = newPictureBoxImage.CurrentImage.Width;
-            int oldHeight = newPictureBoxImage.CurrentImage.Height;
+            int oldWidth = newShoppedImage.CurrentImage.Width;
+            int oldHeight = newShoppedImage.CurrentImage.Height;
 
             // Convert degrees to radians
             double theta = angle*Math.PI/180.0;
@@ -128,21 +130,15 @@ namespace Core.Manipulators
                                  };
                 }
 
-                g.DrawImage(newPictureBoxImage.CurrentImage, points);
+                g.DrawImage(newShoppedImage.CurrentImage, points);
             }
 
-            newPictureBoxImage.CurrentImage = rotatedBmp;
-            newPictureBoxImage.CurrentWidth = rotatedBmp.Width;
-            newPictureBoxImage.CurrentHeight = rotatedBmp.Height;
-            newPictureBoxImage.DegreesRotated = angle;
+            newShoppedImage.CurrentImage = rotatedBmp;
+            newShoppedImage.CurrentWidth = rotatedBmp.Width;
+            newShoppedImage.CurrentHeight = rotatedBmp.Height;
+            newShoppedImage.DegreesRotated = angle;
 
-            //if (newPictureBoxImage.ZoomLevel == 1.0f)
-            //{
-            //    newPictureBoxImage.UnzoomedHeight = rotatedBmp.Height;
-            //    newPictureBoxImage.UnzoomedWidth = rotatedBmp.Width;
-            //}
-
-            return newPictureBoxImage;
+            return newShoppedImage;
         }
     }
 }

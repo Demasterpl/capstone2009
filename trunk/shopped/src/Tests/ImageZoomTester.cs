@@ -12,7 +12,7 @@ namespace Tests
         //    Bitmap image = new Bitmap(800, 600);
 
         //    ImageZoom imageZoom = new ImageZoom();
-        //    PictureBoxImage pictureBoxImage = new PictureBoxImage
+        //    shoppedImage shoppedImage = new shoppedImage
         //    {
         //        CurrentHeight = image.Height,
         //        CurrentWidth = image.Width,
@@ -25,15 +25,15 @@ namespace Tests
         //        UnzoomedImage = image,
         //    };
 
-        //    pictureBoxImage = imageZoom.ZoomImage(pictureBoxImage, ZOOMLEVEL);
+        //    shoppedImage = imageZoom.ZoomImage(shoppedImage, ZOOMLEVEL);
 
-        //    Assert.AreEqual(image.Height * 2.0, pictureBoxImage.CurrentHeight);
-        //    Assert.AreEqual(image.Width * 2.0, pictureBoxImage.CurrentWidth);
-        //    Assert.AreEqual(image.Height, pictureBoxImage.UnzoomedHeight);
-        //    Assert.AreEqual(image.Width, pictureBoxImage.UnzoomedWidth);
-        //    Assert.AreEqual(ZOOMLEVEL, pictureBoxImage.ZoomLevel);
-        //    Assert.AreEqual(1.0f, pictureBoxImage.ResizeLevel);
-        //    Assert.AreEqual(0.0f, pictureBoxImage.DegreesRotated);
+        //    Assert.AreEqual(image.Height * 2.0, shoppedImage.CurrentHeight);
+        //    Assert.AreEqual(image.Width * 2.0, shoppedImage.CurrentWidth);
+        //    Assert.AreEqual(image.Height, shoppedImage.UnzoomedHeight);
+        //    Assert.AreEqual(image.Width, shoppedImage.UnzoomedWidth);
+        //    Assert.AreEqual(ZOOMLEVEL, shoppedImage.ZoomLevel);
+        //    Assert.AreEqual(1.0f, shoppedImage.ResizeLevel);
+        //    Assert.AreEqual(0.0f, shoppedImage.DegreesRotated);
         //}
 
         //[Test]
@@ -43,7 +43,7 @@ namespace Tests
         //    Bitmap image = new Bitmap(800, 600);
 
         //    ImageZoom imageZoom = new ImageZoom();
-        //    PictureBoxImage pictureBoxImage = new PictureBoxImage
+        //    shoppedImage shoppedImage = new shoppedImage
         //    {
         //        CurrentHeight = image.Height,
         //        CurrentWidth = image.Width,
@@ -56,12 +56,12 @@ namespace Tests
         //        UnzoomedImage = image,
         //    };
 
-        //    pictureBoxImage = imageZoom.ZoomImage(pictureBoxImage, RESIZELEVEL);
+        //    shoppedImage = imageZoom.ZoomImage(shoppedImage, RESIZELEVEL);
 
-        //    Assert.AreNotEqual(pictureBoxImage.CurrentHeight, pictureBoxImage.UnzoomedHeight);
-        //    Assert.AreNotEqual(pictureBoxImage.CurrentWidth, pictureBoxImage.UnzoomedWidth);
-        //    Assert.AreNotEqual(pictureBoxImage.CurrentImage.Height, pictureBoxImage.UnzoomedImage.Height);
-        //    Assert.AreNotEqual(pictureBoxImage.CurrentImage.Width, pictureBoxImage.UnzoomedImage.Width);
+        //    Assert.AreNotEqual(shoppedImage.CurrentHeight, shoppedImage.UnzoomedHeight);
+        //    Assert.AreNotEqual(shoppedImage.CurrentWidth, shoppedImage.UnzoomedWidth);
+        //    Assert.AreNotEqual(shoppedImage.CurrentImage.Height, shoppedImage.UnzoomedImage.Height);
+        //    Assert.AreNotEqual(shoppedImage.CurrentImage.Width, shoppedImage.UnzoomedImage.Width);
         //}
 
     }

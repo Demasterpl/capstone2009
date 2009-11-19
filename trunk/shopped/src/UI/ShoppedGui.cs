@@ -21,6 +21,10 @@ namespace UI
         private ShoppedGuiHelper _shoppedGuiHelper;
         private static Logger _logger = LogManager.GetCurrentClassLogger();
 
+        /**
+         * Default constructor. Initializes the GUI and adds custom handlers to handle the mouse events
+         * in the GUI.
+         */
         public ShoppedGui()
         {
             InitializeComponent();
@@ -31,7 +35,7 @@ namespace UI
             PictureBox.MouseUp += new MouseEventHandler(PictureBox_MouseUp);
             PictureBox.MouseDown += new MouseEventHandler(PictureBox_MouseDown);
             PictureBox.MouseMove += new MouseEventHandler(PictureBox_MouseMove);
-            this.MouseWheel += new MouseEventHandler(PictureBox_MouseWheelScroll);
+            MouseWheel += new MouseEventHandler(PictureBox_MouseWheelScroll);
         }
 
         /**
@@ -54,7 +58,6 @@ namespace UI
             ResizeToolStripButton.Enabled = false;
             RotateToolStripButton.Enabled = false;
             ZoomToolStripButton.Enabled = false;
-            DrawToolStripButton.Enabled = false;
         }
 
         /**
@@ -122,7 +125,6 @@ namespace UI
             ResizeToolStripButton.Enabled = true;
             RotateToolStripButton.Enabled = true;
             ZoomToolStripButton.Enabled = true;
-            DrawToolStripButton.Enabled = true;
         }
 
         /**
@@ -133,12 +135,15 @@ namespace UI
             ApplyGrayscaleFilterToImage();
         }
 
+        /**
+         * Handles the event of clicking the Grayscale toolstrip button.
+         */
         private void grayscaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ApplyGrayscaleFilterToImage();
         }
 
-        /**
+       /**
         * Handles the event of clicking the Tools->Sepia menu item.
         */
         private void sepiaMenuItem_Click(object sender, EventArgs e)
@@ -146,12 +151,15 @@ namespace UI
             ApplySepiaFilterToImage();
         }
 
+       /**
+        * Handles the event of clicking the Sepia toolstrip button.
+        */
         private void sepiaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ApplySepiaFilterToImage();
         }
 
-        /**
+       /**
         * Handles the event of clicking the Tools->Invert menu item.
         */
         private void invertMenuItem_Click(object sender, EventArgs e)
@@ -159,12 +167,15 @@ namespace UI
             InvertImage();
         }
 
+       /**
+        * Handles the event of clicking the Invert toolstrip button.
+        */
         private void invertToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InvertImage();
         }
 
-        /**
+       /**
         * Handles the event of clicking the Tools->Brightness menu item.
         */
         private void brightnessMenuItem_Click(object sender, EventArgs e)
@@ -172,12 +183,15 @@ namespace UI
             AdjustBrightness();
         }
 
+       /**
+        * Handles the event of clicking the Brightness toolstrip button.
+        */
         private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AdjustBrightness();
         }
 
-        /**
+       /**
         * Handles the event of clicking the Tools->Contrast menu item.
         */
         private void contrastMenuItem_Click(object sender, EventArgs e)
@@ -185,6 +199,9 @@ namespace UI
             AdjustContrast();
         }
 
+       /**
+        * Handles the event of clicking the Contrast toolstrip button. 
+        */
         private void contrastToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AdjustContrast();
@@ -287,7 +304,7 @@ namespace UI
         }
 
         /**
-         * Handles the event of the the mouse button being pressed down on the PictureBox.
+         * Handles the event of a mouse button being released on the PictureBox.
          */
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
@@ -299,12 +316,18 @@ namespace UI
             }
         }
 
+        /**
+         * Handles the event of a mouse button being pressed on the PictureBox.
+         */
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             _shoppedGuiHelper.ImageDraw.SetInitialPoint(e.X, e.Y);
 
         }
 
+        /**
+         * Handles the event of the mouse scroll wheel being used on the PictureBox.
+         */
         private void PictureBox_MouseWheelScroll(object sender, MouseEventArgs e)
         {
             if (PictureBox.Image != null)
@@ -331,23 +354,6 @@ namespace UI
                 _shoppedGuiHelper.ImageDraw = drawingDialog.ImageDraw;
             }
         }
-
-        /**
-         * Handles the event of the Draw button being clicked in the GUI. Sets the tooltip text according
-         * to the current toggle state and sets the toggle state.
-         */
-        private void DrawToolStripButton_Click(object sender, EventArgs e)
-        {
-            if (DrawToolStripButton.Checked == true)
-            {
-                DrawToolStripButton.Text = "Disable Drawing";
-            }
-            else
-            {
-                DrawToolStripButton.Text = "Enable Drawing";
-            }
-            _shoppedGuiHelper.ImageDraw.ToggleEnabledState();
-        }        
         
         /**
          * Pops up a dialog box for the user to input a number to rotate the picture by.
@@ -356,7 +362,11 @@ namespace UI
         private void RotateImage()
         {
             RotateDialog rotateDialog = new RotateDialog(_shoppedGuiHelper.CurrentImage.ZoomLevel);
-            rotateDialog.ShowDialog();
+
+            do
+            {
+                rotateDialog.ShowDialog();
+            } while (rotateDialog.DialogResult == DialogResult.Retry);
 
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
@@ -388,6 +398,10 @@ namespace UI
             }
         }
 
+        /**
+         * Detects the scroll wheel movement on the mouse and translates that into
+         * zooming the image in the GUI 5% in or out.
+         */
         private void ZoomImageOnScroll(int mouseWheelDelta)
         {
             if (PictureBox.Image != null)
@@ -438,7 +452,11 @@ namespace UI
         private void AdjustContrast()
         {
             ContrastDialog contrastDialog = new ContrastDialog();
-            contrastDialog.ShowDialog();
+
+            do
+            {
+                contrastDialog.ShowDialog();
+            } while (contrastDialog.DialogResult == DialogResult.Retry);
 
             if (contrastDialog.DialogResult == DialogResult.OK)
             {
@@ -455,7 +473,11 @@ namespace UI
         private void AdjustBrightness()
         {
             BrightnessDialog brightnessDialog = new BrightnessDialog();
-            brightnessDialog.ShowDialog();
+
+            do
+            {
+                brightnessDialog.ShowDialog();
+            } while (brightnessDialog.DialogResult == DialogResult.Retry);
 
             if (brightnessDialog.DialogResult == DialogResult.OK)
             {
@@ -465,24 +487,32 @@ namespace UI
             }
         }
 
+        /**
+         * Makes the call to ShoppedGuiHelper to apply the grayscale filter on the current image.
+         */
         private void ApplyGrayscaleFilterToImage()
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Convert Grayscale"));
         }
 
+        /**
+         * Makes the call to ShoppedGuiHelper to apply the sepia filter on the current image.
+         */
         private void ApplySepiaFilterToImage()
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepia(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Convert Sepia"));
         }
 
+        /**
+         * Makes the call to ShoppedGuiHelper to apply the invert image filter on the current image.
+         */
         private void InvertImage()
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Invert.InvertColors(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Invert Colors"));
         }
-
 
         /**
          * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo
@@ -587,11 +617,10 @@ namespace UI
         /**
          * Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently
          * displayed) to that Image object.
-         * 
          */
         public void SetPictureBoxOnUndo()
         {
-            _shoppedGuiHelper.CurrentImage = new PictureBoxImage(_shoppedGuiHelper.ImageHistory.Undo());
+            _shoppedGuiHelper.CurrentImage = new ShoppedImage(_shoppedGuiHelper.ImageHistory.Undo());
             _logger.Debug("Image being set to PictureBox: " + _shoppedGuiHelper.CurrentImage.ToString());
             PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
             SetAdditionalInfo();
@@ -601,11 +630,10 @@ namespace UI
         /**
          * Given an Image object from the ImageHistory class, set the ShoppedGUI PictureBox (image being currently
          * displayed) to that Image object.
-         * 
          */
         public void SetPictureBoxOnRedo()
         {
-            _shoppedGuiHelper.CurrentImage = new PictureBoxImage(_shoppedGuiHelper.ImageHistory.Redo());
+            _shoppedGuiHelper.CurrentImage = new ShoppedImage(_shoppedGuiHelper.ImageHistory.Redo());
             _logger.Debug("Image being set to PictureBox: " + _shoppedGuiHelper.CurrentImage.ToString());
             PictureBox.Image = _shoppedGuiHelper.CurrentImage.CurrentImage;
             SetAdditionalInfo();

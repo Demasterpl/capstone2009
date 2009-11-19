@@ -35,6 +35,7 @@ namespace UI.Dialogs
             SetTextBoxValues();
 
             lineStyleComboBox.Items.AddRange(imageDraw.LineShapeTypes.ToArray());
+            DrawingEnabledCheckBox.Checked = imageDraw.Enabled;
 
             //Set index of drop-down list based on line shape being currently used.
             lineStyleComboBox.SelectedIndex = lineStyleComboBox.Items.IndexOf(ImageDraw.CurrentLineShape);
@@ -62,10 +63,19 @@ namespace UI.Dialogs
 
             if (AllTextBoxesHaveValidInput())
             {
-                ImageDraw.LineThickness = Convert.ToInt32(ThicknessTextBox.Text);
-                ImageDraw.ShapeHeight = Convert.ToInt32(HeightTextBox.Text);
-                ImageDraw.ShapeWidth = Convert.ToInt32(WidthTextBox.Text);
-                ImageDraw.ShapeRadius = Convert.ToInt32(RadiusTextBox.Text);
+                try
+                {
+                    ImageDraw.LineThickness = Convert.ToInt32(ThicknessTextBox.Text);
+                    ImageDraw.ShapeHeight = Convert.ToInt32(HeightTextBox.Text);
+                    ImageDraw.ShapeWidth = Convert.ToInt32(WidthTextBox.Text);
+                    ImageDraw.ShapeRadius = Convert.ToInt32(RadiusTextBox.Text);
+                    ImageDraw.Enabled = DrawingEnabledCheckBox.Checked;
+                }
+                catch
+                {
+                    MessageBox.Show("Invalid input. Must be positive integer value");
+                    DialogResult = DialogResult.Retry;
+                }
             }
             else
             {
@@ -75,6 +85,11 @@ namespace UI.Dialogs
 
         }
 
+        /**
+         * Makes sure that each textbox has a positive integer value inside it.
+         * 
+         * @return Whether or not the above statement is true.
+         */
         private bool AllTextBoxesHaveValidInput()
         {
             return (Convert.ToInt32(ThicknessTextBox.Text) > 0) &&
@@ -83,6 +98,9 @@ namespace UI.Dialogs
                 (Convert.ToInt32(RadiusTextBox.Text) > 0);
         }
 
+        /**
+         * Grabs the property values from the ImageDraw object and sets the textboxes.
+         */
         private void SetTextBoxValues()
         {
             colorTextBox.Text = ImageDraw.LineColor.ToString();

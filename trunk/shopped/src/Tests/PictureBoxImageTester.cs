@@ -4,16 +4,16 @@ using Core.Images;
 namespace Tests
 {
     [TestFixture]
-    public class PictureBoxImageTester
+    public class shoppedImageTester
     {
         [Test]
         public void CanCreate()
         {
-            new PictureBoxImage();
+            new ShoppedImage();
         }
 
         [Test]
-        public void CanSetPictureBoxImageProperties()
+        public void CanSetshoppedImageProperties()
         {
             const int HEIGHT = 5;
             const int WIDTH = 10;
@@ -22,7 +22,7 @@ namespace Tests
             const float RESIZE = .56f;
 
 
-            PictureBoxImage image = new PictureBoxImage
+            ShoppedImage image = new ShoppedImage
             {
                 CurrentHeight = HEIGHT,
                 CurrentWidth = WIDTH,

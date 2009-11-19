@@ -10,10 +10,12 @@ namespace Core.Images
      * @param CurrentHeight Contains the height of the loaded image.
      * @param CurrentWidth Contains the width of the loaded image.
      * @param DegreesRotated Contains how many degrees the image is currently rotated.
+     * @param ZoomLevel How far the image is zoomed in or out (1.0f = 100%).
+     * @param ResizeLevel The difference in size the resized image is from original (1.0f = 100%)
+     * @param BrightnessLevel The level of brightness of the image (-255 to 255)
      * @param CurrentImage Image object that holds the actual Image object.
      */
-
-    public class PictureBoxImage
+    public class ShoppedImage
     {
         public string FileName { get; set; }
         public int CurrentHeight { get; set; }
@@ -24,9 +26,9 @@ namespace Core.Images
         public int BrightnessLevel { get; set; }
         public Image CurrentImage { get; set; }
 
-        public PictureBoxImage() { }
+        public ShoppedImage() { }
 
-        public PictureBoxImage(string fileName, int height, int width, Image image)
+        public ShoppedImage(string fileName, int height, int width, Image image)
         {
             FileName = fileName;
             CurrentHeight = height;
@@ -36,7 +38,7 @@ namespace Core.Images
             CurrentImage = image;
         }
 
-        public PictureBoxImage(PictureBoxImage original)
+        public ShoppedImage(ShoppedImage original)
         {
                 CurrentHeight = original.CurrentHeight;
                 CurrentImage = original.CurrentImage;
