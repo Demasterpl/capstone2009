@@ -9,23 +9,19 @@ namespace Core.Manipulators
     public class Contrast
     {
         /**
-         * A generic clamp class that make sure the RBG values lie in the specified
+         * A clamp class that make sure the RBG values lie in the specified
          * range. If it is greater than the max value, it is replaced by the max value.
          * 
          * @param value The value being compared
          * @param max The maximum allowed value
          * @param min The minimum allowed value
          */
-        public static T Clamp<T>(T value, T max, T min)
-            where T : System.IComparable<T>
-         {
-            T result = value;
-            if (value.CompareTo(max) > 0)
-                result = max;
-            if (value.CompareTo(min) < 0)
-                result = min;
-            return result;
-        } 
+        private static int Clamp(int Value, int Max, int Min)
+        {
+            Value = Value > Max ? Max : Value;
+            Value = Value < Min ? Min : Value;
+            return Value;
+        }
 
         /**
         * A filter that will change the contrast of an image.
