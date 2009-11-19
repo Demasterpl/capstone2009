@@ -6,18 +6,16 @@ namespace Core.Filters
 {
     public class Sepia
     {
-
         /**
          * A filter that will make an Image object sepia.
          * 
-         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
-         * @return A PictureBoxImage object with the appropriate properties set by this method.
+         * @param shoppedImage The ShoppedImage object in the current context of Shopped GUI.
+         * @return A ShoppedImage object with the appropriate properties set by this method.
          */
-
-        public PictureBoxImage MakeSepia(PictureBoxImage pictureBoxImage)
+        public ShoppedImage MakeSepia(ShoppedImage shoppedImage)
         {
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
-            Bitmap sepiaBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            ShoppedImage newShoppedImage = new ShoppedImage(shoppedImage);
+            Bitmap sepiaBmp = new Bitmap(newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height);
             Graphics g = Graphics.FromImage(sepiaBmp);
 
             ColorMatrix colorMatrix = new ColorMatrix( 
@@ -32,15 +30,15 @@ namespace Core.Filters
 
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
-            g.DrawImage(newPictureBoxImage.CurrentImage,
-                new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),
-                    0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height,
+            g.DrawImage(newShoppedImage.CurrentImage,
+                new Rectangle(0, 0, newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height),
+                    0, 0, newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height,
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = sepiaBmp;
+            newShoppedImage.CurrentImage = sepiaBmp;
 
-            return newPictureBoxImage;
+            return newShoppedImage;
         }
     }
 }

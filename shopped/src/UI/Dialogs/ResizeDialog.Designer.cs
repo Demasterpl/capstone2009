@@ -32,6 +32,7 @@
             this.ResizeButton = new System.Windows.Forms.Button();
             this.ResizeTextBox = new System.Windows.Forms.TextBox();
             this.ZoomWarningLabel = new System.Windows.Forms.Label();
+            this.CancelResize = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -46,7 +47,7 @@
             // ResizeButton
             // 
             this.ResizeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.ResizeButton.Location = new System.Drawing.Point(92, 95);
+            this.ResizeButton.Location = new System.Drawing.Point(46, 91);
             this.ResizeButton.Name = "ResizeButton";
             this.ResizeButton.Size = new System.Drawing.Size(75, 23);
             this.ResizeButton.TabIndex = 1;
@@ -71,18 +72,29 @@
             this.ZoomWarningLabel.TabIndex = 3;
             this.ZoomWarningLabel.Text = "Note: This will zoom image to 100%";
             // 
+            // CancelResize
+            // 
+            this.CancelResize.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CancelResize.Location = new System.Drawing.Point(141, 91);
+            this.CancelResize.Name = "CancelResize";
+            this.CancelResize.Size = new System.Drawing.Size(75, 23);
+            this.CancelResize.TabIndex = 4;
+            this.CancelResize.Text = "Cancel";
+            this.CancelResize.UseVisualStyleBackColor = true;
+            // 
             // ResizeDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(268, 158);
+            this.Controls.Add(this.CancelResize);
             this.Controls.Add(this.ZoomWarningLabel);
             this.Controls.Add(this.ResizeTextBox);
             this.Controls.Add(this.ResizeButton);
             this.Controls.Add(this.label1);
             this.Name = "ResizeDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ResizeDialog";
+            this.Text = "Resize Image";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +106,6 @@
         private System.Windows.Forms.Button ResizeButton;
         private System.Windows.Forms.TextBox ResizeTextBox;
         private System.Windows.Forms.Label ZoomWarningLabel;
+        private System.Windows.Forms.Button CancelResize;
     }
 }

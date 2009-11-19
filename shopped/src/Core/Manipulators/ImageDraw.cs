@@ -12,8 +12,13 @@ namespace Core.Manipulators
      * 
      * @param LineColor The color of the line to be drawn.
      * @param LineThickness How wide the line to be drawn will be.
-     * @param LineShape The shape of the line (i.e. Circle, square, etc.)
+     * @param ShapeHeight The height of a given shape to be drawn.
+     * @param ShapeWidth The Width of a given shape to be drawn.
+     * @param ShapeRadius The Radius of a circle to be drawn.
+     * @param CurrentLineShape Holds the current shape to be drawn (Square, Rectangle, Triangle, Circle, Line).
      * @param Enabled Holds whether or not the drawing functionality is enabled.
+     * @param InitialPoint The x and y coordinates of the mouse for the start point of a line draw.
+     * @param DestinationPoint The x and y coordinates of the mouse for the end point of a line draw.
      * @param _lineShapeTypes The private backing field for LineShapeTypes (can be set).
      * @param LineShapeTypes The public-facing list of possible line shapes (read-only).
      */
@@ -118,28 +123,23 @@ namespace Core.Manipulators
             return image;
         }
 
-
-
         /**
-         * Called upon when the Draw button is clicked in the GUI and sets the Enabled property accordingly.
+         * Sets the initial point for Line draw based on mouse position.
+         * 
+         * @param xCoordinate The X-value of where the mouse cursor is on screen.
+         * @param yCoordinate The Y-value of where the mouse cursor is on screen.
          */
-        public void ToggleEnabledState()
-        {
-            if (Enabled == true)
-            {
-                Enabled = false;
-            }
-            else
-            {
-                Enabled = true;
-            }
-        }
-
         public void SetInitialPoint(int xCoordinate, int yCoordinate)
         {
             InitialPoint = new Point(xCoordinate, yCoordinate);
         }
 
+        /**
+         * Sets the destination point for Line draw based on mouse position.
+         * 
+         * @param xCoordinate The X-value of where the mouse cursor is on screen.
+         * @param yCoordinate The Y-value of where the mouse cursor is on screen.
+         */
         public void SetDestinationPoint(int xCoordinate, int yCoordinate)
         {
             DestinationPoint = new Point(xCoordinate, yCoordinate);

@@ -45,13 +45,15 @@
             this.RadiusLabel = new System.Windows.Forms.Label();
             this.RadiusTextBox = new System.Windows.Forms.TextBox();
             this.imageDrawBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.DrawingEnabledLabel = new System.Windows.Forms.Label();
+            this.DrawingEnabledCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.imageDrawBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lineColorLabel
             // 
             this.lineColorLabel.AutoSize = true;
-            this.lineColorLabel.Location = new System.Drawing.Point(13, 45);
+            this.lineColorLabel.Location = new System.Drawing.Point(13, 49);
             this.lineColorLabel.Name = "lineColorLabel";
             this.lineColorLabel.Size = new System.Drawing.Size(54, 13);
             this.lineColorLabel.TabIndex = 0;
@@ -59,7 +61,7 @@
             // 
             // lineColorButton
             // 
-            this.lineColorButton.Location = new System.Drawing.Point(138, 63);
+            this.lineColorButton.Location = new System.Drawing.Point(138, 72);
             this.lineColorButton.Name = "lineColorButton";
             this.lineColorButton.Size = new System.Drawing.Size(118, 23);
             this.lineColorButton.TabIndex = 1;
@@ -125,7 +127,7 @@
             // 
             // colorTextBox
             // 
-            this.colorTextBox.Location = new System.Drawing.Point(138, 37);
+            this.colorTextBox.Location = new System.Drawing.Point(139, 46);
             this.colorTextBox.Name = "colorTextBox";
             this.colorTextBox.ReadOnly = true;
             this.colorTextBox.Size = new System.Drawing.Size(117, 20);
@@ -186,11 +188,31 @@
             // 
             this.imageDrawBindingSource.DataSource = typeof(Core.Manipulators.ImageDraw);
             // 
+            // DrawingEnabledLabel
+            // 
+            this.DrawingEnabledLabel.AutoSize = true;
+            this.DrawingEnabledLabel.Location = new System.Drawing.Point(13, 18);
+            this.DrawingEnabledLabel.Name = "DrawingEnabledLabel";
+            this.DrawingEnabledLabel.Size = new System.Drawing.Size(88, 13);
+            this.DrawingEnabledLabel.TabIndex = 15;
+            this.DrawingEnabledLabel.Text = "Drawing Enabled";
+            // 
+            // DrawingEnabledCheckBox
+            // 
+            this.DrawingEnabledCheckBox.AutoSize = true;
+            this.DrawingEnabledCheckBox.Location = new System.Drawing.Point(139, 18);
+            this.DrawingEnabledCheckBox.Name = "DrawingEnabledCheckBox";
+            this.DrawingEnabledCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.DrawingEnabledCheckBox.TabIndex = 16;
+            this.DrawingEnabledCheckBox.UseVisualStyleBackColor = true;
+            // 
             // DrawingDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 346);
+            this.Controls.Add(this.DrawingEnabledCheckBox);
+            this.Controls.Add(this.DrawingEnabledLabel);
             this.Controls.Add(this.RadiusTextBox);
             this.Controls.Add(this.RadiusLabel);
             this.Controls.Add(this.WidthTextBox);
@@ -233,5 +255,7 @@
         private System.Windows.Forms.TextBox WidthTextBox;
         private System.Windows.Forms.Label RadiusLabel;
         private System.Windows.Forms.TextBox RadiusTextBox;
+        private System.Windows.Forms.Label DrawingEnabledLabel;
+        private System.Windows.Forms.CheckBox DrawingEnabledCheckBox;
     }
 }

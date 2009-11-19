@@ -2,27 +2,25 @@
 
 namespace Core.Manipulators
 {
+    /**
+     * Handles the zooming in and out of an image.
+     */
     public class ImageZoom
     {
-        public ImageZoom()
-        {
-        }
-
         /**
          * Zooms the image in the Shopped GUI to the specified zoom level.
          * 
          * @param zoom The amount of zoom to use on the image (1.0f == 100%).
-         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
-         * @return A PictureBoxImage object with the appropriate properties set by this method.
+         * @param image The image to be zoomed.
+         * @return The zoomed Image object.
          */
-
-        public Image ZoomImage(Image pictureBox, float zoom)
+        public Image ZoomImage(Image image, float zoom)
         {
-            pictureBox = new Bitmap(pictureBox, 
-                (int)(pictureBox.Width * zoom),
-                (int)(pictureBox.Height * zoom));
+            image = new Bitmap(image, 
+                (int)(image.Width * zoom),
+                (int)(image.Height * zoom));
 
-            return pictureBox;          
+            return image;          
         }
     }
 }

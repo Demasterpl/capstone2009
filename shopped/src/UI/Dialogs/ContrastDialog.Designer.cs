@@ -58,6 +58,7 @@
             // ContrastTextBox
             // 
             this.ContrastTextBox.Location = new System.Drawing.Point(162, 39);
+            this.ContrastTextBox.MaxLength = 4;
             this.ContrastTextBox.Name = "ContrastTextBox";
             this.ContrastTextBox.Size = new System.Drawing.Size(58, 20);
             this.ContrastTextBox.TabIndex = 2;

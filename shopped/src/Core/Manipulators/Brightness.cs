@@ -9,15 +9,14 @@ namespace Core.Manipulators
        /**
          * A filter that will change the brightness of an image.
          * 
-         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
-         * @return A PictureBoxImage object with the appropriate properties set by this method.
+         * @param shoppedImage The ShoppedImage object in the current context of Shopped GUI
+         * @return A ShoppedImage object with the appropriate properties set by this method.
          */
-
-        public PictureBoxImage AdjustBrightness(PictureBoxImage pictureBoxImage, float brightnessLevel)
+        public ShoppedImage AdjustBrightness(ShoppedImage shoppedImage, float brightnessLevel)
         {
-            PictureBoxImage newPictureBoxImage = new PictureBoxImage(pictureBoxImage);
+            ShoppedImage newShoppedImage = new ShoppedImage(shoppedImage);
             float finalValue = brightnessLevel / 255.0f;
-            Bitmap brightnessBmp = new Bitmap(newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height);
+            Bitmap brightnessBmp = new Bitmap(newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height);
             Graphics g = Graphics.FromImage(brightnessBmp);
 
             ColorMatrix colorMatrix = new ColorMatrix(
@@ -32,15 +31,15 @@ namespace Core.Manipulators
 
             ImageAttributes attributes = new ImageAttributes();
             attributes.SetColorMatrix(colorMatrix);
-            g.DrawImage(newPictureBoxImage.CurrentImage,
-                new Rectangle(0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height),
-                    0, 0, newPictureBoxImage.CurrentImage.Width, newPictureBoxImage.CurrentImage.Height,
+            g.DrawImage(newShoppedImage.CurrentImage,
+                new Rectangle(0, 0, newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height),
+                    0, 0, newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height,
                     GraphicsUnit.Pixel, attributes);
             g.Dispose();
 
-            newPictureBoxImage.CurrentImage = brightnessBmp;
+            newShoppedImage.CurrentImage = brightnessBmp;
 
-            return newPictureBoxImage;
+            return newShoppedImage;
         }
     }
 }

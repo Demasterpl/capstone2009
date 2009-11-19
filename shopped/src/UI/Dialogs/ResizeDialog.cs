@@ -37,10 +37,18 @@ namespace UI.Dialogs
         /**
          * Once the user hits the "Resize Image" button, this grabs the value from the dialog box.
          */
-
         private void ResizeButton_Click(object sender, EventArgs e)
         {
-            ResizeLevel = float.Parse(ResizeTextBox.Text) / 100.0f;
+            try
+            {
+                ResizeLevel = float.Parse(ResizeTextBox.Text) / 100.0f;
+            }
+            catch
+            {
+                MessageBox.Show("Resize level must be positive, greater than 5% and less than 200%");
+                DialogResult = DialogResult.Retry;
+            }
+
             if (!IsValidResizeLevel())
             {
                 MessageBox.Show("Resize level must be positive, greater than 5% and less than 200%");
@@ -48,6 +56,9 @@ namespace UI.Dialogs
             }
         }
 
+        /**
+         * Checks if the user's input is within the bounds of allowable resize values.
+         */
         private bool IsValidResizeLevel()
         {
             return ResizeLevel > 0.05f && ResizeLevel < 2.0f;

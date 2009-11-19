@@ -38,9 +38,9 @@ namespace Tests
         [Test]
         public void CanAddImageToImageHistory()
         {
-            PictureBoxImage pictureBoxImage = new PictureBoxImage();
+            ShoppedImage shoppedImage = new ShoppedImage();
 
-            _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
+            _imageHistory.AddImageToImageHistory(shoppedImage, "Testing Image");
 
             Assert.AreEqual(1, _imageHistory.ImageRevisions.Count());
         }
@@ -49,15 +49,15 @@ namespace Tests
         public void DescriptionGivenToImageHistoryItemIsSetProperly()
         {
             const string message = "Testing Image";
-            PictureBoxImage pictureBoxImage = new PictureBoxImage();
+            ShoppedImage shoppedImage = new ShoppedImage();
 
-            _imageHistory.AddImageToImageHistory(pictureBoxImage, message);
+            _imageHistory.AddImageToImageHistory(shoppedImage, message);
 
             Assert.AreEqual(message, _imageHistory.ImageRevisions.First().OperationPerformed);
         }
 
         [Test]
-        public void ImageAddedToImageHistoryIsIdenticalToPictureBoxImage()
+        public void ImageAddedToImageHistoryIsIdenticalToshoppedImage()
         {
             int currentHeight = 800;
             int currentWidth = 600;
@@ -66,7 +66,7 @@ namespace Tests
             float resizelevel = 1.0f;
 
 
-            PictureBoxImage pictureBoxImage = new PictureBoxImage
+            ShoppedImage shoppedImage = new ShoppedImage
             {
                 CurrentImage = image,
                 CurrentHeight = currentHeight,
@@ -75,7 +75,7 @@ namespace Tests
                 ResizeLevel = resizelevel,
             };
 
-            _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
+            _imageHistory.AddImageToImageHistory(shoppedImage, "Testing Image");
 
             Assert.AreEqual(currentHeight, _imageHistory.ImageRevisions.First().Image.CurrentHeight);
             Assert.AreEqual(currentWidth, _imageHistory.ImageRevisions.First().Image.CurrentWidth);
@@ -95,7 +95,7 @@ namespace Tests
             float resizelevel = 1.0f;
 
 
-            PictureBoxImage pictureBoxImage = new PictureBoxImage
+            ShoppedImage shoppedImage = new ShoppedImage
             {
                 CurrentImage = image,
                 CurrentHeight = currentHeight,
@@ -104,9 +104,9 @@ namespace Tests
                 ResizeLevel = resizelevel,
             };
 
-            _imageHistory.AddImageToImageHistory(pictureBoxImage, "Testing Image");
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy Image so I can Undo");
-            PictureBoxImage undoImage = _imageHistory.Undo();
+            _imageHistory.AddImageToImageHistory(shoppedImage, "Testing Image");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Dummy Image so I can Undo");
+            ShoppedImage undoImage = _imageHistory.Undo();
 
             Assert.AreEqual(currentHeight, undoImage.CurrentHeight);
             Assert.AreEqual(currentWidth, undoImage.CurrentWidth);
@@ -125,7 +125,7 @@ namespace Tests
             float resizelevel = 1.0f;
 
 
-            PictureBoxImage pictureBoxImage = new PictureBoxImage
+            ShoppedImage shoppedImage = new ShoppedImage
             {
                 CurrentImage = image,
                 CurrentHeight = currentHeight,
@@ -134,10 +134,10 @@ namespace Tests
                 ResizeLevel = resizelevel,
             };
 
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
-            _imageHistory.AddImageToImageHistory(pictureBoxImage, "Image we're testing");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Dummy image so I can undo/redo");
+            _imageHistory.AddImageToImageHistory(shoppedImage, "Image we're testing");
             _imageHistory.Undo();
-            PictureBoxImage redoImage = _imageHistory.Redo();
+            ShoppedImage redoImage = _imageHistory.Redo();
 
             Assert.AreEqual(currentHeight, redoImage.CurrentHeight);
             Assert.AreEqual(currentWidth, redoImage.CurrentWidth);
@@ -155,7 +155,7 @@ namespace Tests
         [Test]
         public void GetCurrentRevisionIsZeroAtFirstImageAdded()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Only one image here");
 
             Assert.AreEqual(0, _imageHistory.GetCurrentRevision());
         }
@@ -163,7 +163,7 @@ namespace Tests
         [Test]
         public void GetCurrentRevisionIsZeroAfterUndoThenRedo()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Only one image here");
             _imageHistory.Undo();
             _imageHistory.Redo();
 
@@ -181,8 +181,8 @@ namespace Tests
         [Test]
         public void UndoIsPossibleOnImageHistoryWithTwoImagesInHistory()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Dummy image so I can undo/redo");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Only one image here");
             bool isPossible = _imageHistory.UndoIsPossible();
 
             Assert.AreEqual(true, isPossible);
@@ -191,7 +191,7 @@ namespace Tests
         [Test]
         public void UndoIsNotPossibleOnImageHistoryWhenIteratorAtLowerBound()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Only one image here");
             _imageHistory.Undo();
             bool isPossible = _imageHistory.UndoIsPossible();
 
@@ -201,7 +201,7 @@ namespace Tests
         [Test]
         public void RedoIsNotPossibleOnEmptyImageHistory()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Only one image here");
             bool isPossible = _imageHistory.RedoIsPossible();
 
             Assert.AreEqual(false, isPossible);
@@ -210,8 +210,8 @@ namespace Tests
         [Test]
         public void RedoIsPossibleOnImageHistoryWhenIteratorIsBeforeLastImageInHistory()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Dummy image so I can undo/redo");
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Dummy image so I can undo/redo");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Only one image here");
             _imageHistory.Undo();
 
             bool isPossible = _imageHistory.RedoIsPossible();
@@ -222,7 +222,7 @@ namespace Tests
         [Test]
         public void RedoIsNotPossibleOnImageHistoryWhenIteratorAtRightBound()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Only one image here");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Only one image here");
 
             bool isPossible = _imageHistory.RedoIsPossible();
 
@@ -232,13 +232,13 @@ namespace Tests
         [Test]
         public void OperationPerformedOnMiddleOfImageHistoryListRemovesImagesAfter()
         {
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "First Image");
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Second Image");
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Third Image");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "First Image");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Second Image");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Third Image");
 
             _imageHistory.Undo();
             _imageHistory.Undo();
-            _imageHistory.AddImageToImageHistory(new PictureBoxImage(), "Middle operation");
+            _imageHistory.AddImageToImageHistory(new ShoppedImage(), "Middle operation");
 
             Assert.AreEqual(1, _imageHistory.GetCurrentRevision());
             Assert.AreEqual(2, _imageHistory.GetNumberOfImagesInHistory());

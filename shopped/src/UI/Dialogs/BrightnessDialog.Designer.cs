@@ -58,7 +58,9 @@
             // BrightnessTextBox
             // 
             this.BrightnessTextBox.Location = new System.Drawing.Point(162, 39);
+            this.BrightnessTextBox.MaxLength = 4;
             this.BrightnessTextBox.Name = "BrightnessTextBox";
+            this.BrightnessTextBox.ShortcutsEnabled = false;
             this.BrightnessTextBox.Size = new System.Drawing.Size(58, 20);
             this.BrightnessTextBox.TabIndex = 2;
             // 

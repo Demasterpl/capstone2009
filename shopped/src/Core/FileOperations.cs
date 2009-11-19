@@ -1,35 +1,34 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Core.Interfaces;
 using Core.Images;
 
 namespace Core
 {
-    public class FileOperations : IFileOperations
+    /**
+     * Handles the opening and saving of images from file.
+     */
+    public class FileOperations
     {
         /**  
-         *  Opens a file dialog to select an image, then opens the file inside the Shopped main GUI.
+         * Opens a file dialog to select an image, then opens the file inside the Shopped main GUI.
          *  
-         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
-         * @return A PictureBoxImage object with the appropriate properties set by this method.
+         * @return A shoppedImage object with the opened image inside it.
          */
-
-        public PictureBoxImage OpenFile()
+        public ShoppedImage OpenFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
              {
                  InitialDirectory = "c:\\"
              };
 
-
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     var openedImage = new Bitmap(openFileDialog.OpenFile());
-                    PictureBoxImage pictureBoxImage = new PictureBoxImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);            
-                    return pictureBoxImage;
+                    ShoppedImage shoppedImage = new ShoppedImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);            
+                    return shoppedImage;
                 }
                 catch (Exception ex)
                 {
@@ -41,20 +40,18 @@ namespace Core
         }
 
         /**  
-         *  Opens a save file dialog to save the image that is open in the Shopped main GUI.
+         * Opens a save file dialog to save the image that is open in the Shopped main GUI.
          *  
-         * @param pictureBoxImage The PictureBoxImage object in the current context of Shopped GUI
+         * @param shoppedImage The shoppedImage object in the current context of Shopped GUI that we will save.
          */
-
-        public void SaveFile(PictureBoxImage pictureBoxImage)
+        public void SaveFile(ShoppedImage shoppedImage)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
              {
-                 FileName = pictureBoxImage.FileName,
+                 FileName = shoppedImage.FileName,
                  Filter = "JPEG (*.jpeg)|*.jpeg| Bitmap (*.bmp)|*.bmp"
              };
             
-
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 //Image to save is JPEG
@@ -62,7 +59,7 @@ namespace Core
                 {
                     try
                     {
-                        pictureBoxImage.CurrentImage.Save(saveFileDialog.FileName);
+                        shoppedImage.CurrentImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
@@ -75,7 +72,7 @@ namespace Core
                 {
                     try
                     {
-                        pictureBoxImage.CurrentImage.Save(saveFileDialog.FileName);
+                        shoppedImage.CurrentImage.Save(saveFileDialog.FileName);
                     }
                     catch (Exception exception)
                     {
