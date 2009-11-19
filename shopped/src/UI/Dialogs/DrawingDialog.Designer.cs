@@ -82,6 +82,7 @@
             // ThicknessTextBox
             // 
             this.ThicknessTextBox.Location = new System.Drawing.Point(138, 181);
+            this.ThicknessTextBox.MaxLength = 4;
             this.ThicknessTextBox.Name = "ThicknessTextBox";
             this.ThicknessTextBox.Size = new System.Drawing.Size(118, 20);
             this.ThicknessTextBox.TabIndex = 3;
@@ -146,6 +147,7 @@
             // HeightTextBox
             // 
             this.HeightTextBox.Location = new System.Drawing.Point(137, 211);
+            this.HeightTextBox.MaxLength = 4;
             this.HeightTextBox.Name = "HeightTextBox";
             this.HeightTextBox.Size = new System.Drawing.Size(118, 20);
             this.HeightTextBox.TabIndex = 10;
@@ -163,6 +165,7 @@
             // WidthTextBox
             // 
             this.WidthTextBox.Location = new System.Drawing.Point(137, 242);
+            this.WidthTextBox.MaxLength = 4;
             this.WidthTextBox.Name = "WidthTextBox";
             this.WidthTextBox.Size = new System.Drawing.Size(118, 20);
             this.WidthTextBox.TabIndex = 12;
@@ -180,6 +183,7 @@
             // RadiusTextBox
             // 
             this.RadiusTextBox.Location = new System.Drawing.Point(137, 273);
+            this.RadiusTextBox.MaxLength = 4;
             this.RadiusTextBox.Name = "RadiusTextBox";
             this.RadiusTextBox.Size = new System.Drawing.Size(118, 20);
             this.RadiusTextBox.TabIndex = 14;

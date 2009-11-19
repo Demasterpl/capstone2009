@@ -92,10 +92,22 @@ namespace UI.Dialogs
          */
         private bool AllTextBoxesHaveValidInput()
         {
+            try
+            {
+                Convert.ToInt32(ThicknessTextBox.Text);
+                Convert.ToInt32(HeightTextBox.Text);
+                Convert.ToInt32(WidthTextBox.Text);
+                Convert.ToInt32(RadiusTextBox.Text);
+            }
+            catch
+            {
+                return false;
+            }
+
             return (Convert.ToInt32(ThicknessTextBox.Text) > 0) &&
-                (Convert.ToInt32(HeightTextBox.Text) > 0) &&
-                (Convert.ToInt32(WidthTextBox.Text) > 0) &&
-                (Convert.ToInt32(RadiusTextBox.Text) > 0);
+                    (Convert.ToInt32(HeightTextBox.Text) > 0) &&
+                    (Convert.ToInt32(WidthTextBox.Text) > 0) &&
+                    (Convert.ToInt32(RadiusTextBox.Text) > 0);
         }
 
         /**
