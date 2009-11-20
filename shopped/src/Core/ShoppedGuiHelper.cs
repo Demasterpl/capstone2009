@@ -24,6 +24,7 @@ namespace Core
         public Brightness Brightness { get; set; }
         public Contrast Contrast { get; set; }
         public ImageDraw ImageDraw { get; set; }
+        public Gamma Gamma { get; set; }
 
         /**
          * The default constructor. Works by newing up all the properties of ShoppedGuiHelper and passing them
@@ -32,7 +33,8 @@ namespace Core
         public ShoppedGuiHelper()
             : this(new ShoppedImage(), new ImageRotate(), new FileOperations(), 
             new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), 
-            new Sepia(), new Invert(), new Brightness(), new Contrast(), new ImageDraw())
+            new Sepia(), new Invert(), new Brightness(), new Contrast(), new ImageDraw(),
+            new Gamma())
         { }
 
         /**
@@ -41,7 +43,8 @@ namespace Core
         public ShoppedGuiHelper(ShoppedImage shoppedImage, 
             ImageRotate imageRotate, FileOperations fileOperation, ImageHistory imageHistory, 
             ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, 
-            Invert invert, Brightness brightness, Contrast contrast, ImageDraw imageDraw)
+            Invert invert, Brightness brightness, Contrast contrast, ImageDraw imageDraw,
+            Gamma gamma)
         {
             CurrentImage = shoppedImage;
             ImageRotate = imageRotate;
@@ -55,6 +58,7 @@ namespace Core
             Brightness = brightness;
             Contrast = contrast;
             ImageDraw = imageDraw;
+            Gamma = gamma;
         }
 
         /**
@@ -130,6 +134,19 @@ namespace Core
         {
             CurrentImage = Brightness.AdjustBrightness(CurrentImage, amount);
         }
+
+        /**
+         * Handles the call from the GUI to adjust the gamma of an image.
+         * 
+         * @param RedLevel The amount to adjust the red gamma by.
+         * @param GreenLevel The amount to adjust the green gamma by.
+         * @param BlueLevel The amount to adjust the blue gamma by.
+         */
+        public void AdjustGamma(float RedLevel, float GreenLevel, float BlueLevel)
+        {
+            CurrentImage = Gamma.AdjustGamma(CurrentImage, RedLevel, GreenLevel, BlueLevel);
+        }
+
 
         /**
          * Called after a drawing event occurred in the gui. Checks if the image is different

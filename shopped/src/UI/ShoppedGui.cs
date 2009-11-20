@@ -58,6 +58,7 @@ namespace UI
             ResizeToolStripButton.Enabled = false;
             RotateToolStripButton.Enabled = false;
             ZoomToolStripButton.Enabled = false;
+            gammaToolStripMenuItem.Enabled = false;
         }
 
         /**
@@ -125,6 +126,7 @@ namespace UI
             ResizeToolStripButton.Enabled = true;
             RotateToolStripButton.Enabled = true;
             ZoomToolStripButton.Enabled = true;
+            gammaToolStripMenuItem.Enabled = true;
         }
 
         /**
@@ -205,6 +207,22 @@ namespace UI
         private void contrastToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AdjustContrast();
+        }
+
+       /**
+        * Handles the event of clicking the Tools->Gamma menu item.
+        */
+        private void gammaMenuItem_Click(object sender, EventArgs e)
+        {
+            AdjustGamma();
+        }
+
+        /**
+         * Handles the event of clicking the Gamma toolstrip button. 
+         */
+        private void gammaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdjustGamma();
         }
 
         /**
@@ -483,6 +501,25 @@ namespace UI
             {
                 _shoppedGuiHelper.AdjustBrightness(brightnessDialog.BrightnessLevel);
                 UpdatePictureBoxInfo(string.Format("Brightness {0}%", brightnessDialog.BrightnessLevel));
+                PictureBox.Refresh();
+            }
+        }
+        /**
+         * Pops up a dialog box for the user to input a number adjust image gamma.
+         * Calls AdjustBrightness of ShoppedGuiHelper and updates the Gui with the new image.
+         */
+        private void AdjustGamma()
+        {
+            GammaDialog gammaDialog = new GammaDialog();
+            do
+            {
+                gammaDialog.ShowDialog();
+            } while (gammaDialog.DialogResult == DialogResult.Retry);
+
+            if (gammaDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.AdjustGamma(gammaDialog.RedLevel, gammaDialog.GreenLevel, gammaDialog.BlueLevel);
+                UpdatePictureBoxInfo(string.Format("Gamma Adjusted"));
                 PictureBox.Refresh();
             }
         }

@@ -87,6 +87,12 @@
     <Compile Include="Dialogs\DrawingDialog.Designer.cs">
       <DependentUpon>DrawingDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\GammaDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\GammaDialog.Designer.cs">
+      <DependentUpon>GammaDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\ResizeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\DrawingDialog.resx">
       <DependentUpon>DrawingDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\GammaDialog.resx">
+      <DependentUpon>GammaDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\ResizeDialog.resx">
       <DependentUpon>ResizeDialog.cs</DependentUpon>
