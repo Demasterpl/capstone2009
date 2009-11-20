@@ -27,6 +27,7 @@ namespace Core.Manipulators
         * A filter that will change the contrast of an image.
         * 
         * @param shoppedImage The ShoppedImage object in the current context of Shopped GUI
+        * @param contrastLevel The level of contrast the image will be adjusted by
         * @return A ShoppedImage object with the appropriate properties set by this method.
         */  
         public ShoppedImage AdjustContrast(ShoppedImage shoppedImage, float contrastLevel)
