@@ -1,0 +1,34 @@
+To Fix:
+Exception for opening a file that is NOT a picture
+Rotate Image (50, then -50)
+
+rotate:
+Double Check Padding area
+Double Check the if/else in rotation code
+
+filters:
+find out how our built-in filters "work"
+
+undo/redo:
+fine?
+
+drawing:
+fine?
+
+Picturebox.stretchimage
+http://bytes.com/topic/c-sharp/answers/267784-zoom-image-c-pocket-pc
+
+Gamma sauce:
+http://www.gutgames.com/post/Adjusting-the-Gamma-of-an-Image-Using-C.aspx
+
+Aforge gamma:
+http://www.aforgenet.com/framework/docs/html/1d05dbb9-0551-ac55-d3b1-f226c8cf7eff.htm
+
+Aforge GaussianBlur:
+http://www.aforgenet.com/framework/docs/html/f074e0dd-865c-fd5f-ba0a-80e336a0eaea.htm
+
+Aforge GaussianSharpen:
+http://www.aforgenet.com/framework/docs/html/4600a4d7-825b-138f-5c31-249a10335b26.htm
+
+Aforge Homepage:
+http://code.google.com/p/aforge/
