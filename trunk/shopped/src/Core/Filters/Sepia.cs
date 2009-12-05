@@ -40,5 +40,44 @@ namespace Core.Filters
 
             return newShoppedImage;
         }
+
+        public ShoppedImage MakeSepiaTraditional(ShoppedImage shoppedImage)
+        {
+            ShoppedImage newShoppedImage = new ShoppedImage(shoppedImage);
+
+            Bitmap grayscaletBmp = new Bitmap(newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(grayscaletBmp);
+
+            g.DrawImage(newShoppedImage.CurrentImage,
+                        new Rectangle(0, 0, newShoppedImage.CurrentImage.Width,
+                                      newShoppedImage.CurrentImage.Height),
+                        new Rectangle(0, 0, newShoppedImage.CurrentImage.Width,
+                                      newShoppedImage.CurrentImage.Height), GraphicsUnit.Pixel);
+            g.Dispose();
+
+            for (int x = 0; x < newShoppedImage.CurrentImage.Width; ++x)
+            {
+                for (int y = 0; y < newShoppedImage.CurrentImage.Height; ++y)
+                {
+                    Color pixel = grayscaletBmp.GetPixel(x, y);
+                    int redSepia = (int)((pixel.R * 0.393) + (pixel.G * 0.769) + (pixel.B * 0.189));
+                    int greenSepia = (int)((pixel.R * 0.349) + (pixel.G * 0.686) + (pixel.B * 0.168));
+                    int blueSepia = (int)((pixel.R * 0.272) + (pixel.G * 0.534) + (pixel.B * 0.131));
+                    Color sepiaColor = Color.FromArgb(Clamp(redSepia, 255, 0), Clamp(greenSepia, 255, 0), Clamp(blueSepia, 255, 0));
+                    grayscaletBmp.SetPixel(x, y, sepiaColor);
+                }
+            }
+
+            newShoppedImage.CurrentImage = grayscaletBmp;
+            return newShoppedImage;
+        }
+        
+        private static int Clamp(int Value, int Max, int Min)
+        {
+            Value = Value > Max ? Max : Value;
+            Value = Value < Min ? Min : Value;
+            return Value;
+        }
+
     }
 }
