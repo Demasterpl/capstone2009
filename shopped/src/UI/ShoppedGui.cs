@@ -144,6 +144,14 @@ namespace UI
         {
             ApplyGrayscaleFilterToImage();
         }
+ 
+        /** 
+         * Handles the event of clicking on the Tools->Traditional Grayscale menu item.
+         */
+        private void traditionalGrayscaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplyGrayscaleTraditionalFilterToImage();
+        }
 
        /**
         * Handles the event of clicking the Tools->Sepia menu item.
@@ -160,9 +168,16 @@ namespace UI
         {
             ApplySepiaFilterToImage();
         }
+        /**
+         * Handles the event of clicking on the Traditional Sepia toolstrip button
+         */
+        private void traditionalSepiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ApplySepiaFilterTraditionalToImage();
+        }
 
        /**
-        * Handles the event of clicking the Tools->Invert menu item.
+        * Handles the event of clicking the Tools->ColorMatrix Invert menu item.
         */
         private void invertMenuItem_Click(object sender, EventArgs e)
         {
@@ -170,11 +185,19 @@ namespace UI
         }
 
        /**
-        * Handles the event of clicking the Invert toolstrip button.
+        * Handles the event of clicking the ColorMatrix Invert toolstrip button.
         */
         private void invertToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InvertImage();
+           InvertImage();
+        }
+
+        /**
+         * Handles the event of clicking the Traditional Invert toolstrip button.
+         */ 
+        private void traditionalInvertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InvertImageTraditional();
         }
 
        /**
@@ -532,24 +555,51 @@ namespace UI
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscale(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Convert Grayscale"));
         }
+        /**
+         * Makes the call to the ShoppedGuiHelper to apply the traditional grayscale filter on the current image.
+         */
+        private void ApplyGrayscaleTraditionalFilterToImage()
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Grayscale.MakeGrayscaleTraditional(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(string.Format("Convert Grayscale"));
+
+        }
 
         /**
-         * Makes the call to ShoppedGuiHelper to apply the sepia filter on the current image.
+         * Makes the call to ShoppedGuiHelper to apply the sepia filter using a ColorMatrix on the current image.
          */
         private void ApplySepiaFilterToImage()
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepia(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Convert Sepia"));
         }
+        /**
+         * Makes the call to ShoppedGuiHelper to apply the traditional sepia filter on the current image.
+         */
+        private void ApplySepiaFilterTraditionalToImage()
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Sepia.MakeSepiaTraditional(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(string.Format("Convert Sepia"));
+        }
 
         /**
-         * Makes the call to ShoppedGuiHelper to apply the invert image filter on the current image.
+         * Makes the call to ShoppedGuiHelper to apply the invert image filter on the current image using a Color Matrix.
          */
         private void InvertImage()
         {
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Invert.InvertColors(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo(string.Format("Invert Colors"));
         }
+
+        /**
+         * Makes the call to ShoppedGuiHelper to apply the invert image filter on the current image pixel by pixel.
+         */
+        private void InvertImageTraditional()
+        {
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.Invert.InvertColorsByPixel(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo(string.Format("Invert Colors"));
+        }
+
 
         /**
          * Called upon when the event of clicking Undo/Redo in the Shopped GUI, this will enable or disable the Undo/Redo
