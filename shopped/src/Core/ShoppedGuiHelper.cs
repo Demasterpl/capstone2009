@@ -142,7 +142,7 @@ namespace Core
          * @param GreenLevel The amount to adjust the green gamma by.
          * @param BlueLevel The amount to adjust the blue gamma by.
          */
-        public void AdjustGamma(float RedLevel, float GreenLevel, float BlueLevel)
+        public void AdjustGamma(double RedLevel, double GreenLevel, double BlueLevel)
         {
             CurrentImage = Gamma.AdjustGamma(CurrentImage, RedLevel, GreenLevel, BlueLevel);
         }

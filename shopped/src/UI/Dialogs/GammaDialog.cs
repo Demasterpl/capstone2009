@@ -1,43 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace UI.Dialogs
 {
     public partial class GammaDialog : Form
     {
-        public float RedLevel;
-        public float BlueLevel;
-        public float GreenLevel;
-
         public GammaDialog()
         {
             InitializeComponent();
+            AcceptButton.DialogResult = DialogResult.OK;
         }
 
-        private void AcceptButton_Click(object sender, EventArgs e)
+        public double RedComponent
         {
-            RedLevel = float.Parse(RedTextBox.Text);
-            BlueLevel = float.Parse(BlueTextBox.Text);
-            GreenLevel = float.Parse(GreenTextBox.Text);
-
-            if (!IsValidLevels())
+            get
             {
-                MessageBox.Show("Invalid level. Each value must be between 0.2 and 5.0");
-                DialogResult = DialogResult.Retry;
+                if (string.IsNullOrEmpty(GreenTextBox.Text))
+                    RedTextBox.Text = "0";
+                return Convert.ToDouble(GreenTextBox.Text);
             }
+            set { RedTextBox.Text = value.ToString(); }
         }
 
-        private bool IsValidLevels()
+        public double GreenComponent
         {
-            return ((RedLevel >= 0.2f && RedLevel <= 5.0f) &&
-            (BlueLevel >= 0.2f && BlueLevel <= 5.0f) &&
-            (GreenLevel >= 0.2f && GreenLevel <= 5.0f));
+            get
+            {
+                if (string.IsNullOrEmpty(GreenTextBox.Text))
+                    GreenTextBox.Text = "0";
+                return Convert.ToDouble(GreenTextBox.Text);
+            }
+            set { GreenTextBox.Text = value.ToString(); }
+        }
+
+        public double BlueComponent
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(BlueTextBox.Text))
+                    BlueTextBox.Text = "0";
+                return Convert.ToDouble(BlueTextBox.Text);
+            }
+            set { BlueTextBox.Text = value.ToString(); }
         }
     }
 }
