@@ -537,11 +537,12 @@ namespace UI
             do
             {
                 gammaDialog.ShowDialog();
-            } while (gammaDialog.DialogResult == DialogResult.Retry);
+            } 
+            while (gammaDialog.DialogResult == DialogResult.Retry);
 
             if (gammaDialog.DialogResult == DialogResult.OK)
             {
-                _shoppedGuiHelper.AdjustGamma(gammaDialog.RedLevel, gammaDialog.GreenLevel, gammaDialog.BlueLevel);
+                _shoppedGuiHelper.AdjustGamma(gammaDialog.RedComponent, gammaDialog.GreenComponent, gammaDialog.BlueComponent);
                 UpdatePictureBoxInfo(string.Format("Gamma Adjusted"));
                 PictureBox.Refresh();
             }

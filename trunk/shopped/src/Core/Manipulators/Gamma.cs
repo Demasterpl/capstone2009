@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using Core.Images;
 
 namespace Core.Manipulators
@@ -34,12 +35,12 @@ namespace Core.Manipulators
         */
 
         public ShoppedImage AdjustGamma(ShoppedImage shoppedImage,
-            float RedLevel, float GreenLevel, float BlueLevel)
+            double RedLevel, double GreenLevel, double BlueLevel)
         {
             ShoppedImage newShoppedImage = new ShoppedImage(shoppedImage);
-            Bitmap contrastBmp = new Bitmap(newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height);
-            
-            Graphics g = Graphics.FromImage(contrastBmp);
+            Bitmap gammaBmp = new Bitmap(newShoppedImage.CurrentImage.Width, newShoppedImage.CurrentImage.Height);
+            Graphics g = Graphics.FromImage(gammaBmp);
+
             g.DrawImage(newShoppedImage.CurrentImage,
                         new Rectangle(0, 0, newShoppedImage.CurrentImage.Width,
                                       newShoppedImage.CurrentImage.Height),
@@ -47,30 +48,30 @@ namespace Core.Manipulators
                                       newShoppedImage.CurrentImage.Height), GraphicsUnit.Pixel);
             g.Dispose();
 
-            int[] RedRamp = new int[256];
-            int[] GreenRamp = new int[256];
-            int[] BlueRamp = new int[256];
-            for (int x = 0; x < 256; ++x)
+            byte[] redGamma = CreateGammaArray(RedLevel);
+            byte[] greenGamma = CreateGammaArray(GreenLevel);
+            byte[] blueGamma = CreateGammaArray(BlueLevel);
+            for (int i = 0; i < gammaBmp.Width; i++)
             {
-                RedRamp[x] = Clamp((int)((255.0 * System.Math.Pow(x / 255.0, 1.0 / RedLevel)) + 0.5), 255, 0);
-                GreenRamp[x] = Clamp((int)((255.0 * System.Math.Pow(x / 255.0, 1.0 / GreenLevel)) + 0.5), 255, 0);
-                BlueRamp[x] = Clamp((int)((255.0 * System.Math.Pow(x / 255.0, 1.0 / BlueLevel)) + 0.5), 255, 0);
-            }
-
-            for (int x = 0; x < contrastBmp.Width; ++x)
-            {
-                for (int y = 0; y < contrastBmp.Height; ++y)
+                for (int j = 0; j < gammaBmp.Height; j++)
                 {
-                    Color Pixel = contrastBmp.GetPixel(x, y);
-                    int Red = RedRamp[Pixel.R];
-                    int Green = GreenRamp[Pixel.G];
-                    int Blue = BlueRamp[Pixel.B];
-                    contrastBmp.SetPixel(x, y, Color.FromArgb(Red, Green, Blue));
+                    Color pixel = gammaBmp.GetPixel(i, j);
+                    gammaBmp.SetPixel(i, j, Color.FromArgb(Clamp(redGamma[pixel.R], 255, 0), Clamp(greenGamma[pixel.G], 255, 0), Clamp(blueGamma[pixel.B], 255, 0)));
                 }
             }
 
-            newShoppedImage.CurrentImage = contrastBmp;
+            newShoppedImage.CurrentImage = (Bitmap)gammaBmp.Clone();
             return newShoppedImage;
+        }
+
+        private byte[] CreateGammaArray(double color)
+        {
+            byte[] gammaArray = new byte[256];
+            for (int i = 0; i < 256; ++i)
+            {
+                gammaArray[i] = (byte)Math.Min(255, (int)((255.0 * Math.Pow(i / 255.0, 1.0 / color)) + 0.5));
+            }
+            return gammaArray;
         }
     }
 }
