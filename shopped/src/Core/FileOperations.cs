@@ -27,15 +27,16 @@ namespace Core
                 try
                 {
                     var openedImage = new Bitmap(openFileDialog.OpenFile());
-                    ShoppedImage shoppedImage = new ShoppedImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);            
+                    ShoppedImage shoppedImage = new ShoppedImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);
                     return shoppedImage;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                    return null;
                 }
-
             }
+
             return null;
         }
 

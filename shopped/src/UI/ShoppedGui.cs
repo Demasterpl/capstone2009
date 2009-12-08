@@ -6,6 +6,8 @@ using System.Drawing;
 using NLog;
 using UI.Dialogs;
 using Core.Manipulators;
+using System.Threading;
+using System.ComponentModel;
 
 namespace UI
 {
@@ -336,12 +338,15 @@ namespace UI
          */
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (PictureBox.Image != null && _shoppedGuiHelper.ImageDraw.CurrentLineShape == "Line")
+            if (PictureBox.Image != null)
             {
-                DrawOnPictureBox(e);
-            }
+                if (_shoppedGuiHelper.ImageDraw.CurrentLineShape == "Line")
+                {
+                    DrawOnPictureBox(e);
+                }
 
-            SetAdditionalInfo();
+                SetAdditionalInfo();
+            }
         }
 
         /**
@@ -363,7 +368,6 @@ namespace UI
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             _shoppedGuiHelper.ImageDraw.SetInitialPoint(e.X, e.Y);
-
         }
 
         /**
@@ -394,6 +398,29 @@ namespace UI
             {
                 _shoppedGuiHelper.ImageDraw = drawingDialog.ImageDraw;
             }
+        }
+
+
+        private void zoom2xToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _shoppedGuiHelper.ImageDraw.Enabled = false;
+            var previousCursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
+
+            //var panelImage = new Bitmap(PictureBoxPanel.Width, PictureBoxPanel.Height);
+
+            //for (int x = 0; x < panelImage.Width; ++x)
+            //{
+            //    for (int y = 0; y < panelImage.Height; ++y)
+            //    {
+            //        panelImage.SetPixel(x, y, (PictureBox.Image as Bitmap).GetPixel(x,y));
+            //    }
+            //}
+
+            _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage2x(_shoppedGuiHelper.CurrentImage);
+            UpdatePictureBoxInfo("Zoomed Image by 2x");
+            this.Cursor = previousCursor;
+            SetAdditionalInfo();
         }
         
         /**
@@ -633,6 +660,7 @@ namespace UI
                 _shoppedGuiHelper.CurrentImage.FileName,
                 GetPixelColor(),
                 GetCoordinates());
+            GC.Collect();
         }
 
         /**

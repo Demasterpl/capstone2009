@@ -75,6 +75,7 @@
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.zoom2xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -157,7 +158,8 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zoomImageToolStripMenuItem});
+            this.zoomImageToolStripMenuItem,
+            this.zoom2xToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -165,7 +167,7 @@
             // zoomImageToolStripMenuItem
             // 
             this.zoomImageToolStripMenuItem.Name = "zoomImageToolStripMenuItem";
-            this.zoomImageToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.zoomImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.zoomImageToolStripMenuItem.Text = "Zoom Image";
             this.zoomImageToolStripMenuItem.Click += new System.EventHandler(this.zoomImageToolStripMenuItem_Click);
             // 
@@ -487,6 +489,13 @@
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             // 
+            // zoom2xToolStripMenuItem
+            // 
+            this.zoom2xToolStripMenuItem.Name = "zoom2xToolStripMenuItem";
+            this.zoom2xToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zoom2xToolStripMenuItem.Text = "Zoom 2x";
+            this.zoom2xToolStripMenuItem.Click += new System.EventHandler(this.zoom2xToolStripMenuItem_Click);
+            // 
             // ShoppedGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -563,5 +572,6 @@
         private System.Windows.Forms.ToolStripMenuItem traditionalInvertToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem traditionalGrayscaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem traditionalSepiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoom2xToolStripMenuItem;
     }
 }
