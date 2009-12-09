@@ -64,6 +64,7 @@
     <Compile Include="Manipulators\ImageResize.cs" />
     <Compile Include="Manipulators\ImageRotate.cs" />
     <Compile Include="Images\ShoppedImage.cs" />
+    <Compile Include="Manipulators\ImageTrim.cs" />
     <Compile Include="Manipulators\ImageZoom.cs" />
     <Compile Include="Filters\Invert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

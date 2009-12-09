@@ -407,16 +407,6 @@ namespace UI
             var previousCursor = this.Cursor;
             this.Cursor = Cursors.WaitCursor;
 
-            //var panelImage = new Bitmap(PictureBoxPanel.Width, PictureBoxPanel.Height);
-
-            //for (int x = 0; x < panelImage.Width; ++x)
-            //{
-            //    for (int y = 0; y < panelImage.Height; ++y)
-            //    {
-            //        panelImage.SetPixel(x, y, (PictureBox.Image as Bitmap).GetPixel(x,y));
-            //    }
-            //}
-
             _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImage2x(_shoppedGuiHelper.CurrentImage);
             UpdatePictureBoxInfo("Zoomed Image by 2x");
             this.Cursor = previousCursor;
@@ -438,7 +428,12 @@ namespace UI
 
             if (rotateDialog.DialogResult == DialogResult.OK)
             {
+                var previousCursor = this.Cursor;
+                this.Cursor = Cursors.WaitCursor;
+
                 _shoppedGuiHelper.RotateImage(rotateDialog.RotateDegrees);
+
+                this.Cursor = previousCursor;
 
                 UpdatePictureBoxInfo(string.Format("Rotate {0} deg", rotateDialog.RotateDegrees % 360.0f));
                 PictureBox.Refresh();
