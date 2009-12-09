@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Core.Images;
+using System.Drawing.Imaging;
 
 namespace Core.Manipulators
 {
@@ -9,6 +10,13 @@ namespace Core.Manipulators
      */
     public class ImageRotate
     {
+        private readonly ImageTrim _imageTrim;
+
+        public ImageRotate()
+        {
+            _imageTrim = new ImageTrim();
+        }
+
         /**
          *  Given a certain angle (in degrees), this method will take the CurrentImage object and rotate
          *  it by the given angle.
@@ -71,8 +79,29 @@ namespace Core.Manipulators
             int nWidth = (int) Math.Ceiling(newWidth);
             int nHeight = (int) Math.Ceiling(newHeight);
 
-            Bitmap rotatedBmp = new Bitmap(nWidth, nHeight);
+            var rotatedBmp = new Bitmap(nWidth, nHeight);
 
+            //var setAlpha = Graphics.FromImage(rotatedBmp);
+
+            //var colorMatrix = new ColorMatrix(
+            //    new[]
+            //        {
+            //            new float[] {1, 0, 0, 0, 0},
+            //            new float[] {0, 1, 0, 0, 0},
+            //            new float[] {0, 0, 1, 0, 0},
+            //            new float[] {0, 0, 0, 0, 0},
+            //            new float[] {0, 0, 0, 0, 1}
+            //        });
+
+            //var attributes = new ImageAttributes();
+            //attributes.SetColorMatrix(colorMatrix);
+            //setAlpha.DrawImage(rotatedBmp,
+            //    new Rectangle(0, 0, rotatedBmp.Width, rotatedBmp.Height),
+            //        0, 0, rotatedBmp.Width, rotatedBmp.Height,
+            //        GraphicsUnit.Pixel, attributes);
+            //setAlpha.Dispose();
+
+            
             using (Graphics g = Graphics.FromImage(rotatedBmp))
             {
                 // This array will be used to pass in the three points that 
@@ -130,12 +159,17 @@ namespace Core.Manipulators
                                  };
                 }
 
+
                 g.DrawImage(newShoppedImage.CurrentImage, points);
+
             }
 
-            newShoppedImage.CurrentImage = rotatedBmp;
-            newShoppedImage.CurrentWidth = rotatedBmp.Width;
-            newShoppedImage.CurrentHeight = rotatedBmp.Height;
+            //Trim off the excess whitespace that is created sometimes by doing multiple rotations
+            var trimmedImage = _imageTrim.TrimImage(rotatedBmp);
+
+            newShoppedImage.CurrentImage = trimmedImage;
+            newShoppedImage.CurrentWidth = trimmedImage.Width;
+            newShoppedImage.CurrentHeight = trimmedImage.Height;
             newShoppedImage.DegreesRotated = angle;
 
             return newShoppedImage;
