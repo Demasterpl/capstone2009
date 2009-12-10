@@ -76,6 +76,12 @@
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
+            this.traditionalGrayscaleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.traditionalSepiaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.gammaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.traditionalInvertToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -429,10 +435,16 @@
             this.FilterToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.FilterToolStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.grayscaleToolStripMenuItem,
+            this.traditionalGrayscaleToolStripMenuItem1,
             this.sepiaToolStripMenuItem1,
+            this.traditionalSepiaToolStripMenuItem1,
+            this.toolStripSeparator3,
             this.brightnessToolStripMenuItem1,
             this.contrastToolStripMenuItem1,
-            this.invertToolStripMenuItem});
+            this.gammaToolStripMenuItem1,
+            this.toolStripSeparator4,
+            this.invertToolStripMenuItem,
+            this.traditionalInvertToolStripMenuItem1});
             this.FilterToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("FilterToolStripButton.Image")));
             this.FilterToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.FilterToolStripButton.Name = "FilterToolStripButton";
@@ -442,35 +454,35 @@
             // grayscaleToolStripMenuItem
             // 
             this.grayscaleToolStripMenuItem.Name = "grayscaleToolStripMenuItem";
-            this.grayscaleToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.grayscaleToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.grayscaleToolStripMenuItem.Text = "Grayscale";
             this.grayscaleToolStripMenuItem.Click += new System.EventHandler(this.grayscaleToolStripMenuItem_Click);
             // 
             // sepiaToolStripMenuItem1
             // 
             this.sepiaToolStripMenuItem1.Name = "sepiaToolStripMenuItem1";
-            this.sepiaToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
+            this.sepiaToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
             this.sepiaToolStripMenuItem1.Text = "Sepia";
             this.sepiaToolStripMenuItem1.Click += new System.EventHandler(this.sepiaToolStripMenuItem_Click);
             // 
             // brightnessToolStripMenuItem1
             // 
             this.brightnessToolStripMenuItem1.Name = "brightnessToolStripMenuItem1";
-            this.brightnessToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
+            this.brightnessToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
             this.brightnessToolStripMenuItem1.Text = "Brightness";
             this.brightnessToolStripMenuItem1.Click += new System.EventHandler(this.brightnessToolStripMenuItem_Click);
             // 
             // contrastToolStripMenuItem1
             // 
             this.contrastToolStripMenuItem1.Name = "contrastToolStripMenuItem1";
-            this.contrastToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
+            this.contrastToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
             this.contrastToolStripMenuItem1.Text = "Contrast";
             this.contrastToolStripMenuItem1.Click += new System.EventHandler(this.contrastToolStripMenuItem_Click);
             // 
             // invertToolStripMenuItem
             // 
             this.invertToolStripMenuItem.Name = "invertToolStripMenuItem";
-            this.invertToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.invertToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.invertToolStripMenuItem.Text = "Invert";
             this.invertToolStripMenuItem.Click += new System.EventHandler(this.invertToolStripMenuItem_Click);
             // 
@@ -495,6 +507,44 @@
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
+            // 
+            // traditionalGrayscaleToolStripMenuItem1
+            // 
+            this.traditionalGrayscaleToolStripMenuItem1.Name = "traditionalGrayscaleToolStripMenuItem1";
+            this.traditionalGrayscaleToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.traditionalGrayscaleToolStripMenuItem1.Text = "Traditional Grayscale";
+            this.traditionalGrayscaleToolStripMenuItem1.Click += new System.EventHandler(this.traditionalGrayscaleToolStripMenuItem1_Click);
+            // 
+            // traditionalSepiaToolStripMenuItem1
+            // 
+            this.traditionalSepiaToolStripMenuItem1.Name = "traditionalSepiaToolStripMenuItem1";
+            this.traditionalSepiaToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.traditionalSepiaToolStripMenuItem1.Text = "Traditional Sepia";
+            this.traditionalSepiaToolStripMenuItem1.Click += new System.EventHandler(this.traditionalSepiaToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(181, 6);
+            // 
+            // gammaToolStripMenuItem1
+            // 
+            this.gammaToolStripMenuItem1.Name = "gammaToolStripMenuItem1";
+            this.gammaToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.gammaToolStripMenuItem1.Text = "Gamma";
+            this.gammaToolStripMenuItem1.Click += new System.EventHandler(this.gammaToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(181, 6);
+            // 
+            // traditionalInvertToolStripMenuItem1
+            // 
+            this.traditionalInvertToolStripMenuItem1.Name = "traditionalInvertToolStripMenuItem1";
+            this.traditionalInvertToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+            this.traditionalInvertToolStripMenuItem1.Text = "Traditional Invert";
+            this.traditionalInvertToolStripMenuItem1.Click += new System.EventHandler(this.traditionalInvertToolStripMenuItem1_Click);
             // 
             // ShoppedGui
             // 
@@ -573,5 +623,11 @@
         private System.Windows.Forms.ToolStripMenuItem traditionalGrayscaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem traditionalSepiaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zoom2xToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem traditionalGrayscaleToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem traditionalSepiaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem gammaToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem traditionalInvertToolStripMenuItem1;
     }
 }

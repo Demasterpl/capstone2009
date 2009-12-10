@@ -867,5 +867,25 @@ namespace UI
                 PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
             }
         }
+
+        private void traditionalGrayscaleToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ApplyGrayscaleTraditionalFilterToImage();
+        }
+
+        private void traditionalSepiaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ApplySepiaFilterTraditionalToImage();
+        }
+
+        private void gammaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AdjustGamma();
+        }
+
+        private void traditionalInvertToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            InvertImageTraditional();
+        }
     }
 }
