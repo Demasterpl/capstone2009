@@ -77,7 +77,9 @@ namespace UI
          */
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Developed Fall 2009 at Kent State University\nGroup 4\n\n\nGreg Beca\nAndy Vanek\nDaniel Sheaffer","About Us");
+            AboutShoppedDialog aboutDialog = new AboutShoppedDialog();
+
+            aboutDialog.ShowDialog();
         }
 
         /**
@@ -345,6 +347,11 @@ namespace UI
                     DrawOnPictureBox(e);
                 }
 
+                if (e.Button == MouseButtons.Right)
+                {
+                    DrawSelectionBox(e);
+                }
+
                 SetAdditionalInfo();
             }
         }
@@ -354,11 +361,19 @@ namespace UI
          */
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            if (_shoppedGuiHelper.ImageDraw.Enabled == true)
+            if (PictureBox.Image != null)
             {
-                DrawOnPictureBox(e);
-                _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
-                SetUndoAndRedo();
+                if (_shoppedGuiHelper.ImageDraw.Enabled == true)
+                {
+                    DrawOnPictureBox(e);
+                    _shoppedGuiHelper.CommitDrawingToCurrentImage(PictureBox.Image);
+                    SetUndoAndRedo();
+                }
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    PromptSelectionZoom();
+                }
             }
         }
 
@@ -367,7 +382,18 @@ namespace UI
          */
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            _shoppedGuiHelper.ImageDraw.SetInitialPoint(e.X, e.Y);
+            if (PictureBox.Image != null)
+            {
+                if (_shoppedGuiHelper.ImageDraw.Enabled == true && e.Button == MouseButtons.Left)
+                {
+                    _shoppedGuiHelper.ImageDraw.SetInitialPoint(e.X, e.Y);
+                }
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    _shoppedGuiHelper.ImageZoom.SetInitialPoint(e.X, e.Y);
+                }
+            }
         }
 
         /**
@@ -655,7 +681,6 @@ namespace UI
                 _shoppedGuiHelper.CurrentImage.FileName,
                 GetPixelColor(),
                 GetCoordinates());
-            GC.Collect();
         }
 
         /**
@@ -723,6 +748,8 @@ namespace UI
             _shoppedGuiHelper.ImageHistory.AddImageToImageHistory(_shoppedGuiHelper.CurrentImage, operation);
             SetAdditionalInfo();
             SetUndoAndRedo();
+
+            GC.Collect();
         }
 
         /**
@@ -765,6 +792,59 @@ namespace UI
                 _shoppedGuiHelper.ImageDraw.SetInitialPoint(_shoppedGuiHelper.ImageDraw.DestinationPoint.X, _shoppedGuiHelper.ImageDraw.DestinationPoint.Y);
                 SetUndoAndRedo();
                 PictureBox.Refresh();
+            }
+        }
+
+        /**
+         * Draws a selection box on the PictureBox object based on the two coordinates stored
+         * in the ImageZoom object.
+         * 
+         */
+        private void DrawSelectionBox(MouseEventArgs e)
+        {
+            PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
+
+            _shoppedGuiHelper.ImageZoom.SetDestinationPoint(e.X, e.Y);
+
+            var initPoint = _shoppedGuiHelper.ImageZoom.initialPoint;
+            var destPoint = _shoppedGuiHelper.ImageZoom.destinationPoint;
+
+            //Orient the coordinates correctly based on positions of two points
+            var leftX = initPoint.X < destPoint.X ? initPoint.X : destPoint.X;
+            var topY = initPoint.Y < destPoint.Y ? initPoint.Y : destPoint.Y;
+            var rightX = initPoint.X > destPoint.X ? initPoint.X : destPoint.X;
+            var bottomY = initPoint.Y > destPoint.Y ? initPoint.Y : destPoint.Y;
+
+            using (var g = Graphics.FromImage(PictureBox.Image))
+            {
+                g.DrawRectangle(new Pen(Color.Crimson, 3), new Rectangle(leftX, topY, rightX - leftX, bottomY - topY));
+            }
+
+            PictureBox.Refresh();
+        }
+
+        /**
+         * Prompts user as to whether or not they want to zoom the selection they made in the PictureBox.
+         */
+        private void PromptSelectionZoom()
+        {
+            var zoomDialog = new Zoom2xDialog();
+            zoomDialog.ShowDialog();
+
+            if (zoomDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.ImageDraw.Enabled = false;
+                var previousCursor = this.Cursor;
+                this.Cursor = Cursors.WaitCursor;
+
+                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImageSelection2x(_shoppedGuiHelper.CurrentImage);
+                UpdatePictureBoxInfo("Zoomed Selection by 2x");
+                this.Cursor = previousCursor;
+                SetAdditionalInfo();
+            }
+            else
+            {
+                PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
             }
         }
     }
