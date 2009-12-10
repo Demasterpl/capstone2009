@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace UI.Dialogs
 {
-    public partial class Zoom2xDialog : Form
+    public partial class SelectionBoxDialog : Form
     {
-        public Zoom2xDialog()
+        public SelectionBoxDialog()
         {
             InitializeComponent();
         }

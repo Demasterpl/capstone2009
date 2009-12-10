@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using Core.Images;
 
 namespace Core.Manipulators
 {
@@ -17,8 +18,6 @@ namespace Core.Manipulators
      * @param ShapeRadius The Radius of a circle to be drawn.
      * @param CurrentLineShape Holds the current shape to be drawn (Square, Rectangle, Triangle, Circle, Line).
      * @param Enabled Holds whether or not the drawing functionality is enabled.
-     * @param InitialPoint The x and y coordinates of the mouse for the start point of a line draw.
-     * @param DestinationPoint The x and y coordinates of the mouse for the end point of a line draw.
      * @param _lineShapeTypes The private backing field for LineShapeTypes (can be set).
      * @param LineShapeTypes The public-facing list of possible line shapes (read-only).
      */
@@ -31,8 +30,6 @@ namespace Core.Manipulators
         public int ShapeRadius { get; set; }
         public string CurrentLineShape { get; set; }
         public bool Enabled { get; set; }
-        public Point InitialPoint { get; set; }
-        public Point DestinationPoint { get; set; }
 
         // Want the public-facing List to be read-only, so we need private backing field here.
         private List<string> _lineShapeTypes { get; set; }
@@ -83,66 +80,41 @@ namespace Core.Manipulators
          * 
          * @return The new image that has been drawn on.
          */
-        public Image DrawShapeOnImage(Image image, MouseEventArgs mouse)
-        {
-            if (mouse.Button == MouseButtons.Left && Enabled == true)
-            {            
-                var tempImage = new Bitmap(image);
-                using (var g = Graphics.FromImage(tempImage))
+        public Image DrawShapeOnImage(Image image, SelectionBox selectionBox)
+        {          
+            var tempImage = new Bitmap(image);
+            using (var g = Graphics.FromImage(tempImage))
+            {
+                var x = selectionBox.DestinationPoint.X;
+                var y = selectionBox.DestinationPoint.Y;
+
+                switch (CurrentLineShape)
                 {
-                    var x = mouse.X;
-                    var y = mouse.Y;
-
-                    switch (CurrentLineShape)
-                    {
-                        case "Square":
-                            g.FillRectangle(new SolidBrush(LineColor), x - ShapeHeight / 2, y - ShapeHeight / 2, ShapeHeight, ShapeHeight);
-                            break;
-                        case "Rectangle":
-                            g.FillRectangle(new SolidBrush(LineColor), x - ShapeWidth / 2, y - ShapeHeight / 2, ShapeWidth, ShapeHeight);
-                            break;
-                        case "Triangle":
-                            g.FillPolygon(new SolidBrush(LineColor), new Point[] 
-                                 {
-                                     new Point(x, y - ShapeHeight / 2), 
-                                     new Point(x - ShapeWidth / 2, y + ShapeHeight / 2),
-                                     new Point(x + ShapeWidth / 2, y + ShapeHeight / 2),
-                                 });
-                            break;
-                        case "Circle":
-                            g.FillEllipse(new SolidBrush(LineColor), x - ShapeRadius, y - ShapeRadius, 2 * ShapeRadius, 2 * ShapeRadius);
-                            break;
-                        case "Line":
-                            g.DrawLine(new Pen(LineColor, LineThickness), InitialPoint, DestinationPoint);
-                            break;
-                    }
-
-                    return tempImage;
+                    case "Square":
+                        g.FillRectangle(new SolidBrush(LineColor), x - ShapeHeight / 2, y - ShapeHeight / 2, ShapeHeight, ShapeHeight);
+                        break;
+                    case "Rectangle":
+                        g.FillRectangle(new SolidBrush(LineColor), x - ShapeWidth / 2, y - ShapeHeight / 2, ShapeWidth, ShapeHeight);
+                        break;
+                    case "Triangle":
+                        g.FillPolygon(new SolidBrush(LineColor), new Point[] 
+                             {
+                                 new Point(x, y - ShapeHeight / 2), 
+                                 new Point(x - ShapeWidth / 2, y + ShapeHeight / 2),
+                                 new Point(x + ShapeWidth / 2, y + ShapeHeight / 2),
+                             });
+                        break;
+                    case "Circle":
+                        g.FillEllipse(new SolidBrush(LineColor), x - ShapeRadius, y - ShapeRadius, 2 * ShapeRadius, 2 * ShapeRadius);
+                        break;
+                    case "Line":
+                        g.DrawLine(new Pen(LineColor, LineThickness), selectionBox.InitialPoint, selectionBox.DestinationPoint);
+                        break;
                 }
+
+                return tempImage;
             }
-            return image;
         }
 
-        /**
-         * Sets the initial point for Line draw based on mouse position.
-         * 
-         * @param xCoordinate The X-value of where the mouse cursor is on screen.
-         * @param yCoordinate The Y-value of where the mouse cursor is on screen.
-         */
-        public void SetInitialPoint(int xCoordinate, int yCoordinate)
-        {
-            InitialPoint = new Point(xCoordinate, yCoordinate);
-        }
-
-        /**
-         * Sets the destination point for Line draw based on mouse position.
-         * 
-         * @param xCoordinate The X-value of where the mouse cursor is on screen.
-         * @param yCoordinate The Y-value of where the mouse cursor is on screen.
-         */
-        public void SetDestinationPoint(int xCoordinate, int yCoordinate)
-        {
-            DestinationPoint = new Point(xCoordinate, yCoordinate);
-        }
     }
 }

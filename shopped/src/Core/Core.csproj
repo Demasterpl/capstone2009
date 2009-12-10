@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Images\SelectionBox.cs" />
     <Compile Include="Manipulators\Brightness.cs" />
     <Compile Include="Manipulators\Contrast.cs" />
     <Compile Include="FileOperations.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="ImageHistory.cs" />
     <Compile Include="ImageHistoryItem.cs" />
     <Compile Include="Manipulators\Gamma.cs" />
+    <Compile Include="Manipulators\ImageCrop.cs" />
     <Compile Include="Manipulators\ImageDraw.cs" />
     <Compile Include="Manipulators\ImageResize.cs" />
     <Compile Include="Manipulators\ImageRotate.cs" />
