@@ -810,11 +810,14 @@ namespace UI
 
             _shoppedGuiHelper.SelectionBox.SetDestinationPoint(e.X, e.Y, PictureBox.Image.Width, PictureBox.Image.Height);
 
-            PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
+            if(_shoppedGuiHelper.SelectionBox.IsMinimumSize())
+            {
+                PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
 
-            PictureBox.Image = new Bitmap(_shoppedGuiHelper.SelectionBox.DrawSelectionBox(PictureBox.Image as Bitmap));
+                PictureBox.Image = new Bitmap(_shoppedGuiHelper.SelectionBox.DrawSelectionBox(PictureBox.Image as Bitmap));
 
-            PictureBox.Refresh();
+                PictureBox.Refresh();
+            }
         }
 
         /**
