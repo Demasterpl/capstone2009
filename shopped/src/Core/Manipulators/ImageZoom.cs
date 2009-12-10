@@ -12,6 +12,15 @@ namespace Core.Manipulators
      */
     public class ImageZoom
     {
+        public Point initialPoint;
+        public Point destinationPoint;
+
+        public ImageZoom()
+        {
+            initialPoint = new Point();
+            destinationPoint = new Point();
+        }
+
         /**
          * Zooms the image in the Shopped GUI to the specified zoom level.
          * 
@@ -52,5 +61,59 @@ namespace Core.Manipulators
 
             return newShoppedImage;
         }
+
+        public ShoppedImage ZoomImageSelection2x(ShoppedImage shoppedImage)
+        {
+            var selectionHeight = GetSelectionHeight();
+            var selectionWidth = GetSelectionWidth();
+            var leftX = initialPoint.X < destinationPoint.X ? initialPoint.X : destinationPoint.X;
+            var topY = initialPoint.Y < destinationPoint.Y ? initialPoint.Y : destinationPoint.Y;
+
+            var selectedImage = new Bitmap(selectionWidth, selectionHeight);
+
+            for (int x = 0; x < selectionWidth; ++x)
+            {
+                for (int y = 0; y < selectionHeight; ++y)
+                {
+                    selectedImage.SetPixel(x, y, (shoppedImage.CurrentImage as Bitmap).GetPixel(x + leftX, y + topY));
+                }
+            }
+            
+            var newShoppedImage = new ShoppedImage(shoppedImage);
+
+            newShoppedImage.CurrentImage = new Bitmap(selectedImage);
+
+            return ZoomImage2x(newShoppedImage);
+        }
+
+        private int GetSelectionWidth()
+        {
+            var leftX = initialPoint.X < destinationPoint.X ? initialPoint.X : destinationPoint.X;
+            var rightX = initialPoint.X > destinationPoint.X ? initialPoint.X : destinationPoint.X;
+
+            return rightX - leftX;
+        }
+
+        private int GetSelectionHeight()
+        {
+            var topY = initialPoint.Y < destinationPoint.Y ? initialPoint.Y : destinationPoint.Y;
+            var bottomY = initialPoint.Y > destinationPoint.Y ? initialPoint.Y : destinationPoint.Y;
+
+            return bottomY - topY;
+        }
+
+        public void SetInitialPoint(int x, int y)
+        {
+            initialPoint.X = x;
+            initialPoint.Y = y;
+        }
+
+        public void SetDestinationPoint(int x, int y)
+        {
+            destinationPoint.X = x;
+            destinationPoint.Y = y;
+        }
+
+
     }
 }

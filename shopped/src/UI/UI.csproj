@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs\AboutShoppedDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\AboutShoppedDialog.Designer.cs">
+      <DependentUpon>AboutShoppedDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\BrightnessDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,12 @@
     <Compile Include="Dialogs\RotateDialog.Designer.cs">
       <DependentUpon>RotateDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Zoom2xDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Zoom2xDialog.Designer.cs">
+      <DependentUpon>Zoom2xDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShoppedGui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +125,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Dialogs\AboutShoppedDialog.resx">
+      <DependentUpon>AboutShoppedDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\BrightnessDialog.resx">
       <DependentUpon>BrightnessDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,6 +147,9 @@
     <EmbeddedResource Include="Dialogs\RotateDialog.resx">
       <DependentUpon>RotateDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Zoom2xDialog.resx">
+      <DependentUpon>Zoom2xDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShoppedGui.resx">
       <DependentUpon>ShoppedGui.cs</DependentUpon>

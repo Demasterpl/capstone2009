@@ -39,6 +39,7 @@
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zoomImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoom2xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,7 +76,6 @@
             this.invertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PictureBoxPanel = new System.Windows.Forms.Panel();
             this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.zoom2xToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.ToolStrip.SuspendLayout();
@@ -167,9 +167,16 @@
             // zoomImageToolStripMenuItem
             // 
             this.zoomImageToolStripMenuItem.Name = "zoomImageToolStripMenuItem";
-            this.zoomImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zoomImageToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.zoomImageToolStripMenuItem.Text = "Zoom Image";
             this.zoomImageToolStripMenuItem.Click += new System.EventHandler(this.zoomImageToolStripMenuItem_Click);
+            // 
+            // zoom2xToolStripMenuItem
+            // 
+            this.zoom2xToolStripMenuItem.Name = "zoom2xToolStripMenuItem";
+            this.zoom2xToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.zoom2xToolStripMenuItem.Text = "Zoom 2x";
+            this.zoom2xToolStripMenuItem.Click += new System.EventHandler(this.zoom2xToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -481,20 +488,13 @@
             // 
             // PictureBox
             // 
-            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.PictureBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.PictureBox.Location = new System.Drawing.Point(3, 0);
             this.PictureBox.Name = "PictureBox";
             this.PictureBox.Size = new System.Drawing.Size(1005, 649);
             this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
-            // 
-            // zoom2xToolStripMenuItem
-            // 
-            this.zoom2xToolStripMenuItem.Name = "zoom2xToolStripMenuItem";
-            this.zoom2xToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.zoom2xToolStripMenuItem.Text = "Zoom 2x";
-            this.zoom2xToolStripMenuItem.Click += new System.EventHandler(this.zoom2xToolStripMenuItem_Click);
             // 
             // ShoppedGui
             // 
