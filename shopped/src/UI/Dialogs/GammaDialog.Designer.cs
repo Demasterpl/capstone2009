@@ -122,6 +122,7 @@
             this.Controls.Add(this.InstructionLabel);
             this.Controls.Add(this.AcceptButton);
             this.Name = "GammaDialog";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "GammaDialog";
             this.ResumeLayout(false);
             this.PerformLayout();
