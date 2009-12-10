@@ -29,6 +29,8 @@ namespace Core.Manipulators
             var newShoppedImage = new ShoppedImage(shoppedImage);
 
             newShoppedImage.CurrentImage = new Bitmap(selectedImage);
+            newShoppedImage.CurrentHeight = selectedImage.Height;
+            newShoppedImage.CurrentWidth = selectedImage.Width;
 
             return newShoppedImage;
         }

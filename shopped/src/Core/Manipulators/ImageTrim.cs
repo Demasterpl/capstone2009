@@ -65,7 +65,7 @@ namespace Core.Manipulators
                 {
                     if (originalImage.GetPixel(x, y).A != 0)
                     {
-                        return x + 1;
+                        return x;
                     }
                 }
             }
@@ -90,7 +90,7 @@ namespace Core.Manipulators
                 {
                     if (originalImage.GetPixel(x, y).A != 0)
                     {
-                        return x - 1;
+                        return x;
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace Core.Manipulators
                 {
                     if (originalImage.GetPixel(x, y).A != 0)
                     {
-                        return y + 1;
+                        return y;
                     }
                 }
             }
@@ -140,7 +140,7 @@ namespace Core.Manipulators
                 {
                     if (originalImage.GetPixel(x, y).A != 0)
                     {
-                        return y - 1;
+                        return y;
                     }
                 }
             }
