@@ -24,7 +24,11 @@ namespace Core
         public Brightness Brightness { get; set; }
         public Contrast Contrast { get; set; }
         public ImageDraw ImageDraw { get; set; }
+        public ImageCrop ImageCrop { get; set; }
         public Gamma Gamma { get; set; }
+        public SelectionBox SelectionBox;
+
+
 
         /**
          * The default constructor. Works by newing up all the properties of ShoppedGuiHelper and passing them
@@ -34,7 +38,7 @@ namespace Core
             : this(new ShoppedImage(), new ImageRotate(), new FileOperations(), 
             new ImageHistory(), new ImageZoom(), new ImageResize(), new Grayscale(), 
             new Sepia(), new Invert(), new Brightness(), new Contrast(), new ImageDraw(),
-            new Gamma())
+            new Gamma(), new SelectionBox(), new ImageCrop())
         { }
 
         /**
@@ -44,7 +48,7 @@ namespace Core
             ImageRotate imageRotate, FileOperations fileOperation, ImageHistory imageHistory, 
             ImageZoom imageZoom, ImageResize imageResize, Grayscale grayscale, Sepia sepia, 
             Invert invert, Brightness brightness, Contrast contrast, ImageDraw imageDraw,
-            Gamma gamma)
+            Gamma gamma, SelectionBox selectionBox, ImageCrop imageCrop)
         {
             CurrentImage = shoppedImage;
             ImageRotate = imageRotate;
@@ -59,6 +63,8 @@ namespace Core
             Contrast = contrast;
             ImageDraw = imageDraw;
             Gamma = gamma;
+            SelectionBox = selectionBox;
+            ImageCrop = imageCrop;
         }
 
         /**

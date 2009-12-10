@@ -111,11 +111,11 @@
     <Compile Include="Dialogs\RotateDialog.Designer.cs">
       <DependentUpon>RotateDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\Zoom2xDialog.cs">
+    <Compile Include="Dialogs\SelectionBoxDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialogs\Zoom2xDialog.Designer.cs">
-      <DependentUpon>Zoom2xDialog.cs</DependentUpon>
+    <Compile Include="Dialogs\SelectionBoxDialog.Designer.cs">
+      <DependentUpon>SelectionBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ShoppedGui.cs">
       <SubType>Form</SubType>
@@ -148,8 +148,8 @@
       <DependentUpon>RotateDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialogs\Zoom2xDialog.resx">
-      <DependentUpon>Zoom2xDialog.cs</DependentUpon>
+    <EmbeddedResource Include="Dialogs\SelectionBoxDialog.resx">
+      <DependentUpon>SelectionBoxDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShoppedGui.resx">
       <DependentUpon>ShoppedGui.cs</DependentUpon>

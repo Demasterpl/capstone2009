@@ -342,7 +342,8 @@ namespace UI
         {
             if (PictureBox.Image != null)
             {
-                if (_shoppedGuiHelper.ImageDraw.CurrentLineShape == "Line")
+                _shoppedGuiHelper.SelectionBox.SetDestinationPoint(e.X, e.Y, PictureBox.Image.Width, PictureBox.Image.Height);
+                if (_shoppedGuiHelper.ImageDraw.CurrentLineShape == "Line" && _shoppedGuiHelper.ImageDraw.Enabled == true)
                 {
                     DrawOnPictureBox(e);
                 }
@@ -372,7 +373,14 @@ namespace UI
 
                 if (e.Button == MouseButtons.Right)
                 {
-                    PromptSelectionZoom();
+                    if (_shoppedGuiHelper.SelectionBox.IsMinimumSize())
+                    {
+                        PromptSelectionZoom();
+                    }
+                    else
+                    {
+                        PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
+                    }
                 }
             }
         }
@@ -384,15 +392,7 @@ namespace UI
         {
             if (PictureBox.Image != null)
             {
-                if (_shoppedGuiHelper.ImageDraw.Enabled == true && e.Button == MouseButtons.Left)
-                {
-                    _shoppedGuiHelper.ImageDraw.SetInitialPoint(e.X, e.Y);
-                }
-
-                if (e.Button == MouseButtons.Right)
-                {
-                    _shoppedGuiHelper.ImageZoom.SetInitialPoint(e.X, e.Y);
-                }
+                _shoppedGuiHelper.SelectionBox.SetInitialPoint(e.X, e.Y, PictureBox.Image.Width, PictureBox.Image.Height);
             }
         }
 
@@ -787,9 +787,14 @@ namespace UI
         {
             if (PictureBox.Image != null && mouse.Button == MouseButtons.Left)
             {
-                _shoppedGuiHelper.ImageDraw.SetDestinationPoint(mouse.X, mouse.Y);
-                PictureBox.Image = _shoppedGuiHelper.ImageDraw.DrawShapeOnImage(PictureBox.Image, mouse);
-                _shoppedGuiHelper.ImageDraw.SetInitialPoint(_shoppedGuiHelper.ImageDraw.DestinationPoint.X, _shoppedGuiHelper.ImageDraw.DestinationPoint.Y);
+                PictureBox.Image =
+                    _shoppedGuiHelper.ImageDraw.DrawShapeOnImage(PictureBox.Image, _shoppedGuiHelper.SelectionBox);
+
+                _shoppedGuiHelper.SelectionBox.SetInitialPoint(
+                    _shoppedGuiHelper.SelectionBox.DestinationPoint.X, 
+                    _shoppedGuiHelper.SelectionBox.DestinationPoint.Y,
+                    PictureBox.Image.Width,
+                    PictureBox.Image.Height);
                 SetUndoAndRedo();
                 PictureBox.Refresh();
             }
@@ -802,23 +807,12 @@ namespace UI
          */
         private void DrawSelectionBox(MouseEventArgs e)
         {
+
+            _shoppedGuiHelper.SelectionBox.SetDestinationPoint(e.X, e.Y, PictureBox.Image.Width, PictureBox.Image.Height);
+
             PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
 
-            _shoppedGuiHelper.ImageZoom.SetDestinationPoint(e.X, e.Y);
-
-            var initPoint = _shoppedGuiHelper.ImageZoom.initialPoint;
-            var destPoint = _shoppedGuiHelper.ImageZoom.destinationPoint;
-
-            //Orient the coordinates correctly based on positions of two points
-            var leftX = initPoint.X < destPoint.X ? initPoint.X : destPoint.X;
-            var topY = initPoint.Y < destPoint.Y ? initPoint.Y : destPoint.Y;
-            var rightX = initPoint.X > destPoint.X ? initPoint.X : destPoint.X;
-            var bottomY = initPoint.Y > destPoint.Y ? initPoint.Y : destPoint.Y;
-
-            using (var g = Graphics.FromImage(PictureBox.Image))
-            {
-                g.DrawRectangle(new Pen(Color.Crimson, 3), new Rectangle(leftX, topY, rightX - leftX, bottomY - topY));
-            }
+            PictureBox.Image = new Bitmap(_shoppedGuiHelper.SelectionBox.DrawSelectionBox(PictureBox.Image as Bitmap));
 
             PictureBox.Refresh();
         }
@@ -828,19 +822,42 @@ namespace UI
          */
         private void PromptSelectionZoom()
         {
-            var zoomDialog = new Zoom2xDialog();
-            zoomDialog.ShowDialog();
+            var selectionDialog = new SelectionBoxDialog();
+            selectionDialog.ShowDialog();
 
-            if (zoomDialog.DialogResult == DialogResult.OK)
+            if (selectionDialog.DialogResult == DialogResult.Yes)
             {
                 _shoppedGuiHelper.ImageDraw.Enabled = false;
                 var previousCursor = this.Cursor;
                 this.Cursor = Cursors.WaitCursor;
 
-                _shoppedGuiHelper.CurrentImage = _shoppedGuiHelper.ImageZoom.ZoomImageSelection2x(_shoppedGuiHelper.CurrentImage);
+                _shoppedGuiHelper.CurrentImage =
+                    _shoppedGuiHelper.ImageCrop.CropImage(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.SelectionBox);
+
+                _shoppedGuiHelper.CurrentImage = 
+                    _shoppedGuiHelper.ImageZoom.ZoomImage2x(_shoppedGuiHelper.CurrentImage);
+
                 UpdatePictureBoxInfo("Zoomed Selection by 2x");
                 this.Cursor = previousCursor;
                 SetAdditionalInfo();
+            }
+            if (selectionDialog.DialogResult == DialogResult.OK)
+            {
+                _shoppedGuiHelper.ImageDraw.Enabled = false;
+                var previousCursor = this.Cursor;
+                this.Cursor = Cursors.WaitCursor;
+
+                _shoppedGuiHelper.CurrentImage =
+                    _shoppedGuiHelper.ImageCrop.CropImage(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.SelectionBox);
+
+                UpdatePictureBoxInfo("Cropped Image to Selection");
+                this.Cursor = previousCursor;
+                SetAdditionalInfo();
+            }
+            if (selectionDialog.DialogResult == DialogResult.No)
+            {
+                Clipboard.SetData(DataFormats.Bitmap, new Bitmap(_shoppedGuiHelper.ImageCrop.CropImage(_shoppedGuiHelper.CurrentImage, _shoppedGuiHelper.SelectionBox).CurrentImage));
+                PictureBox.Image = new Bitmap(_shoppedGuiHelper.CurrentImage.CurrentImage);
             }
             else
             {
