@@ -30,9 +30,9 @@ namespace Core
                     ShoppedImage shoppedImage = new ShoppedImage(System.IO.Path.GetFileName(openFileDialog.FileName), openedImage.Height, openedImage.Width, openedImage);
                     return shoppedImage;
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show("Error: Could not read file from disk. Original error: " + ex.Message);
+                    MessageBox.Show("Error: Could not read file from disk. File is either corrupt or is an incorrect format.");
                     return null;
                 }
             }
