@@ -1,0 +1,1 @@
+We are creating a basic image editor/viewer for our Capstone project. The program is pretty much a combination of Microsoft Paint and Microsoft Office Picture Manager. The Code is written entirely in C# and uses the Windows Forms project template for the GUI.
